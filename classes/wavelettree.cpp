@@ -76,7 +76,6 @@ public:
 
     bool is_right = (val >= bound);
 
-    // ここのRankのposを変えます
     int rank = childs[is_right]->Rank(val, bitRank(is_right, pos));
     if(rank == -1)
       return bitRank(is_right, pos);
@@ -92,7 +91,6 @@ public:
     
     bool is_right = (val >= bound);
 
-    // 順方向にいろいろする
     int sele = childs[is_right]->Select(val, num);
     if(sele == -1)
       return bitSelect(is_right, num);
@@ -114,6 +112,38 @@ public:
       return value;
     bool is_right = !(bitRank(0, en) != bitRank(0, st));
     return childs[is_right]->rangeMin(bitRank(is_right, st), bitRank(is_right, en));
+  }
+
+  // [st,en)でnum+1番目に大きい値
+  ll rangeKthMax(int st, int en, int num){
+    if(en - st <= num)return LINF;
+
+    if(childs.empty())
+      return value;
+
+    // 範囲内に1が含まれる個数
+    int diff = bitRank(1, en) - bitRank(1, st);
+    bool is_right = (diff > num);
+    if(!is_right)
+      num -= diff;
+
+    return childs[is_right]->rangeKthMax(bitRank(is_right, st), bitRank(is_right, en), num);
+  }
+
+  // [st,en)でnum+1番目に小さい値
+  ll rangeKthMin(int st, int en, int num){
+    if(en - st <= num)return LINF;
+
+    if(childs.empty())
+      return value;
+
+    // 範囲内に0が含まれる個数
+    int diff = bitRank(0, en) - bitRank(0, st);
+    bool is_right = !(diff > num);
+    if(is_right)
+      num -= diff;
+
+    return childs[is_right]->rangeKthMin(bitRank(is_right, st), bitRank(is_right, en), num);
   }
 
 };

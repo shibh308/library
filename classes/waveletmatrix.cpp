@@ -76,10 +76,9 @@ public:
 	int a;
 	T maxvalue;
 	std::vector<std::shared_ptr<BitVector>> bitvector;
-	vector<T> v;
 	vector<int> indexes;
 
-	WaveletMatrix(int size, vector<T> inp, int defsize= -1) : n(size), v(inp), a(defsize){
+	WaveletMatrix(int size, vector<T> inp, int defsize= -1) : n(size), a(defsize){
 
 		// 値は全て正の値である前提で扱う
 		REP(i,n)
@@ -169,7 +168,7 @@ public:
 				k -= count;
 			}
 		}
-		return indexes[st];
+		// return indexes[st];
 		return value;
 	}
 
@@ -190,13 +189,14 @@ public:
 				break;
 			bool flag = value & (1LL << (a - i - 1));
 			int count = bitvector[i]->rank(st, en, true);
+			int bef_st = st;
 			if(flag){
 				retval += (en - st) - count;
 				st = bitvector[i]->zerocount() + bitvector[i]->rank(0, st, true);
 				en = st + count;
 			}else{
 				st = bitvector[i]->rank(0, st, false);
-				en = st + (en - st) - count;
+				en = st + (en - bef_st) - count;
 			}
 		}
 		return retval;
@@ -209,4 +209,3 @@ public:
 	}
 
 };
-

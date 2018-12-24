@@ -19,7 +19,7 @@ using namespace std;
 #define REP(i,n) for(int i=0;i<(n);++i)
 #define REPR(i,n) for(int i=n;i>=0;i--)
 
-#define FOREACH(x,a) for(auto& (x) : (a) )
+#define FOREACH(x,a) for(auto&& (x) : (a) )
 
 #define WFA(d,v) REP(k,v)REP(i,v)REP(j,v)d[i][j]=min(d[i][j],d[i][k]+d[k][j])
 

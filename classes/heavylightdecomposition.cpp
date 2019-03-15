@@ -1,10 +1,10 @@
 class HeavyLightDecomposition{
 public:
     int n;
-    vector<V> g;
-    V rev, in, out, nxt, rin, size, depth;
+    vector<vector<int>> g;
+    vector<int> rev, in, out, nxt, rin, size, depth;
 
-    HeavyLightDecomposition(vector<V>& inp) :
+    HeavyLightDecomposition(vector<vector<int>>& inp) :
         n(inp.size()),
         g(n),
         rev(n, 0),
@@ -52,24 +52,24 @@ public:
         dfs_hld(0);
     }
 
-    P subtree(int x){
+    pair<int,int> subtree(int x){
         return make_pair(in[x], out[x]);
     }
 
-    V subtree_path(int x){
-        return V(next(rin.begin(), in[x]), next(rin.begin(), out[x]));
+    vector<int> subtree_path(int x){
+        return vector<int>(next(rin.begin(), in[x]), next(rin.begin(), out[x]));
     }
 
-    P subsegment(int x){
+    pair<int,int> subsegment(int x){
         return make_pair(in[nxt[x]], in[x] + 1);
     }
 
-    V subsegment_path(int x){
-        return V(next(rin.begin(), in[nxt[x]]), next(rin.begin(), in[x] + 1));
+    vector<int> subsegment_path(int x){
+        return vector<int>(next(rin.begin(), in[nxt[x]]), next(rin.begin(), in[x] + 1));
     }
 
-    vector<P> root_path_query(int x){
-        vector<P> ret;
+    vector<pair<int,int>> root_path_query(int x){
+        vector<pair<int,int>> ret;
         ret.emplace_back(subsegment(x));
         while(ret.back().first)
             ret.emplace_back(subsegment(rev[rin[ret.back().first]]));
@@ -93,11 +93,11 @@ public:
         return depth[x] < depth[y] ? x : y;
     }
  
-    pair<vector<P>,vector<P>> two_point_path(ll x, ll y){
+    pair<vector<pair<int,int>>,vector<pair<int,int>>> two_point_path(ll x, ll y){
         ll z = lca(x, y);
-        P z_par = subsegment(z);
+        pair<int,int> z_par = subsegment(z);
  
-        vector<P> ret_x;
+        vector<pair<int,int>> ret_x;
         ret_x.emplace_back(subsegment(x));
 
         while(ret_x.back().first != z_par.first)
@@ -105,7 +105,7 @@ public:
 
         ret_x.back().first = in[z];
  
-        vector<P> ret_y;
+        vector<pair<int,int>> ret_y;
         ret_y.emplace_back(subsegment(y));
 
         while(ret_y.back().first != z_par.first)
@@ -113,7 +113,7 @@ public:
 
         ret_y.back().first = in[z] + 1;
 
-        return mp(ret_x, ret_y);
+        return make_pair(ret_x, ret_y);
     }
  
 

@@ -1,17 +1,17 @@
-V scc(vector<V> edges){
+vector<int> scc(vector<vector<int>>& edges){
 	int n = edges.size();
-    vector<V> rev(n);
+    vector<vector<int>> rev(n);
 
-    ll ans = 0;
+    int ans = 0;
 
-    REP(i,n)
-		FOREACH(xx,edges[i])
-			rev[xx].pb(i);
+	for(int i = 0; i < n; ++i)
+		for(auto& x : edges[i])
+			rev[x].emplace_back(i);
 
-    V dfs_num(n, -1);
-    V flag(n, 0);
-    ll num = 0;
-    function<void(ll)> dfs = [&](ll pos){
+    vector<i64> dfs_num(n, -1);
+    vector<i64> flag(n, 0);
+    int num = 0;
+    function<void(int)> dfs = [&](int pos){
         flag[pos] = 1;
 		for(auto& xx : edges[pos])
 			if(!flag[xx]){
@@ -20,26 +20,26 @@ V scc(vector<V> edges){
         dfs_num[pos] = num++;
     };
 
-    REP(i,n)
+	for(int i = 0; i < n; ++i)
         if(!flag[i])
             dfs(i);
 
-	V dfs_inv(n);
-    REP(i,n)
+	vector<int> dfs_inv(n);
+	for(int i = 0; i < n; ++i)
 		dfs_inv[n - 1 - dfs_num[i]] = i;
 
     num = 0;
 
-    V scc_vec(n, -1);
+    vector<int> scc_vec(n, -1);
 
-    function<void(ll)> rdfs = [&](ll pos){
+    function<void(int)> rdfs = [&](int pos){
         scc_vec[pos] = num;
         for(auto t : rev[pos])
             if(scc_vec[t] == -1)
                 rdfs(t);
     };
 
-	REP(i, n)
+	for(int i = 0; i < n; ++i)
         if(scc_vec[dfs_inv[i]] == -1){
             rdfs(dfs_inv[i]);
             ++num;

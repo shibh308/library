@@ -7,7 +7,7 @@ struct Compression{
         compvec.erase(unique(compvec.begin(), compvec.end()), compvec.end());
     }
     int Index(T val){//圧縮を元に対応するインデックスを返す
-        auto it = lower_bound(ALL(compvec), val);
+        auto it = lower_bound(compvec.begin(), compvec.end(), val);
         return (*it == val ? distance(compvec.begin(), it) : -1);
     }
 };

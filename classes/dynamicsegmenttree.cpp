@@ -14,7 +14,7 @@ struct Segtree{
 
 	i64 n;
 	function<T(T, T)> f;
-	const T op;
+	T op;
 	SegNode* root;
 
 	Segtree(int n_, function<T(T, T)> f, T op) : f(f), op(op){

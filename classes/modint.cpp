@@ -16,12 +16,12 @@ struct ModInt{
     ModInt operator%(const ModInt& y) const{ModInt x = *this; return x %= y;}
 
     friend ostream& operator<<(ostream& stream, const ModInt<mod>& x){
-        stream << x;
+        stream << *x;
         return stream;
     }
 
     friend ostream& operator>>(ostream& stream, const ModInt<mod>& x){
-        stream >> x;
+        stream >> *x;
         return stream;
     }
 

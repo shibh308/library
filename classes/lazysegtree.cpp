@@ -1,8 +1,8 @@
 template<typename T, typename U>
 struct Segtree{
-    const int n;
-    const T op_t;
-    const U op_u;
+    int n;
+    T op_t;
+    U op_u;
     vector<T> elm;
     vector<U> lazy;
     vector<int> length;

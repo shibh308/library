@@ -27,6 +27,26 @@ struct Segtree{
         }
     }
 
+    Segtree(int n, vector<T> init, function<T(T, T)> f, function<T(T, U, int)> g, function<U(U, U)> h, T op_t = T(), U op_u = U()) :
+        n(n),
+        op_t(op_t),
+        op_u(op_u),
+        elm(2 * n),
+        lazy(2 * n, op_u),
+        length(2 * n, 0),
+        f(f),
+        g(g),
+        h(h)
+    {
+        for(int i = 0; i < n; ++i)
+            elm[i + n] = init[i];
+
+        for(int i = n - 1; i > 0; --i){
+            elm[i] = f(elm[2 * i], elm[2 * i + 1]);
+            length[i] = length[2 * i] + 1;
+        }
+    }
+
     vector<int> get_list(int x, int y){
 
         vector<int> ret_list;

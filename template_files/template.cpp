@@ -16,7 +16,7 @@ struct Range{
         const T step, last;
         const T& operator*(){return value;}
         iterator(T value, T step, T last) :
-            value(value),
+            value(step < static_cast<T>(0) ? max(last, value) : min(last, value)),
             step(step),
             last(last)
         {
@@ -172,7 +172,7 @@ signed main(){
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
 
-	// code template (2019/03/15)
+	// code template (2019/03/23)
 
 }
 

@@ -5,10 +5,10 @@ struct ModInt{
     ModInt() : p(0){}
     ModInt(i64 x){p = x >= 0 ? x % mod : x + (-x + mod - 1) / mod * mod;}
 
-    ModInt& operator+=(const ModInt& y){p = (p + *y) % mod; return *this;}
-    ModInt& operator-=(const ModInt& y){p = (p - *y + mod) % mod; return *this;}
+    ModInt& operator+=(const ModInt& y){p = p + *y - ((p + *y) >= mod ? mod : 0); return *this;}
+    ModInt& operator-=(const ModInt& y){p = p - *y + (p - *y < 0 ? mod : 0); return *this;}
     ModInt& operator*=(const ModInt& y){p = (p * *y) % mod; return *this;}
-    ModInt& operator%=(const ModInt& y){p %= *y; return *this;}
+    ModInt& operator%=(const ModInt& y){if(y)p %= *y; return *this;}
 
     ModInt operator+(const ModInt& y) const{ModInt x = *this; return x += y;}
     ModInt operator-(const ModInt& y) const{ModInt x = *this; return x -= y;}
@@ -37,3 +37,4 @@ struct ModInt{
 };
 
 using mint = ModInt<>;
+

@@ -20,7 +20,7 @@ public:
             depth[pos]=dep;
             for(auto ed : inp[pos])
                 if(depth[ed] == -1){
-                    g[pos].pb(ed);
+                    g[pos].emplace_back(ed);
                     rev[ed] = pos;
                     dfs_ed(ed, dep + 1);
                 }
@@ -92,11 +92,11 @@ public:
 
         return depth[x] < depth[y] ? x : y;
     }
- 
-    pair<vector<pair<int,int>>,vector<pair<int,int>>> two_point_path(ll x, ll y){
-        ll z = lca(x, y);
+
+    pair<vector<pair<int,int>>,vector<pair<int,int>>> two_point_path(i64 x, i64 y){
+        i64 z = lca(x, y);
         pair<int,int> z_par = subsegment(z);
- 
+
         vector<pair<int,int>> ret_x;
         ret_x.emplace_back(subsegment(x));
 
@@ -104,7 +104,7 @@ public:
             ret_x.emplace_back(subsegment(rev[rin[ret_x.back().first]]));
 
         ret_x.back().first = in[z];
- 
+
         vector<pair<int,int>> ret_y;
         ret_y.emplace_back(subsegment(y));
 
@@ -115,7 +115,7 @@ public:
 
         return make_pair(ret_x, ret_y);
     }
- 
+
 
 };
 

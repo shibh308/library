@@ -101,18 +101,18 @@ struct Segtree{
         for(int i = index_list.size() - 1; i >= 0; --i)
             eval(index_list[i]);
 
-        T val = op_t;
+        T l = op_t, r = op_t;
         for(x += n, y += n - 1; x <= y; x >>= 1, y >>= 1){
             if(x & 1){
                 eval(x);
-                val = f(val, elm[x++]);
+                l = f(l, elm[x++]);
             }
             if(!(y & 1)){
                 eval(y);
-                val = f(val, elm[y--]);
+                r = f(elm[y--], r);
             }
         }
-        return val;
+        return f(l, r);
     }
 };
 

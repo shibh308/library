@@ -16,7 +16,7 @@ struct Segtree{
     Segtree(int n, vector<T> init, function<T(T, T)> f, T op = T()) :
         n(n),
         op(op),
-		elm(2 * n),
+        elm(2 * n),
         f(f)
     {
         for(int i = 0; i < n; ++i)
@@ -40,14 +40,14 @@ struct Segtree{
     }
 
     T get(int x, int y) const{
-        T val = op;
+        T l = op, r = op;
         for(x += n, y += n - 1; x <= y; x >>= 1, y >>= 1){
             if(x & 1)
-                val = f(val, elm[x++]);
+                l = f(l, elm[x++]);
             if(!(y & 1))
-                val = f(val, elm[y--]);
+                r = f(elm[y--], r);
         }
-        return val;
+        return f(l, r);
     }
 };
 

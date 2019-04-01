@@ -11,6 +11,8 @@ struct Segtree{
         elm(2 * n, init),
         f(f)
     {
+        for(int i = n - 1; i >= 1; --i)
+            elm[i] = f(elm[2 * i], elm[2 * i + 1]);
     }
 
     Segtree(int n, vector<T> init, function<T(T, T)> f, T op = T()) :

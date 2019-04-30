@@ -8,7 +8,6 @@ const i64 MOD = 1e9+7;
 
 const i64 INF = 1e18+7;
 
-// pythonのrangeのような範囲for文用のclass for(const auto& i : Range<>(10)) のように書く
 template <typename T = i64>
 struct Range{
     struct iterator{
@@ -44,7 +43,6 @@ struct Range{
     iterator end(){return iterator(last, step, last);}
 };
 
-// lambda式を用いた再帰
 template <typename F>
 struct FixPoint{
     const F _f;
@@ -61,7 +59,6 @@ static decltype(auto) makeRec(F&& f){
     return FixPoint<F>(forward<F>(f));
 }
 
-// 多次元vectorの一斉初期化 makeVector<i64, 0>(a, b, ...)のように書く
 template <typename T, T Value = T()>
 vector<T> makeVector(size_t x){
     return vector<T>(x, T(Value));
@@ -72,7 +69,6 @@ auto makeVector(size_t x, Types... args){
     return vector<decltype(makeVector<T, Value>(args...))>(x, makeVector<T, Value>(args...));
 }
 
-// 最大値を更新し、更新できた時にはtrueを返す
 template <typename T = i64>
 bool chmax(T& a, T b){
     if(a < b){
@@ -82,7 +78,6 @@ bool chmax(T& a, T b){
     return false;
 }
 
-// 同様に最小値を更新する
 template <typename T = i64>
 bool chmin(T& a, T b){
     if(a > b){
@@ -92,10 +87,8 @@ bool chmin(T& a, T b){
     return false;
 }
 
-// 行数と変数名、値をclogに表示するデバッグ用print
 #define dump(x) fprintf(stderr, "line =%4d, name =%7s , ", __LINE__, #x); clog << "value = " << x << endl;
 
-// 同様の配列向けデバッグ用print
 #define vecdump(x) fprintf(stderr, "line =%4d, name =%7s\n", __LINE__, #x); _dump_macro(x);
 
 void _dump(int, string& x){
@@ -121,7 +114,6 @@ void _dump_macro(T& x){
     _dump(0, x);
 }
 
-// input用の関数群
 void _input(int, string& x){
     cin >> x;
 }
@@ -172,7 +164,7 @@ signed main(){
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(20);
 
-	// code template (2019/03/23)
+    // code template (2019/04/30)
 
 }
 

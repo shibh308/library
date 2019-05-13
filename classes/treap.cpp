@@ -1,355 +1,380 @@
-using value_type = i64;
-
-struct Node;
-using np = Node*;
-
+template <typename T, typename U = int>
 struct Node{
 
-	static np nil;
+    using np = Node<T, U>*;
 
-	value_type val;
-	uint32_t pri;
-	np l = nil;
-	np r = nil;
+    static np nil;
 
-	int size;
-	value_type sum;
+    T val;
+    U lazy;
+    uint32_t pri;
 
-	bool lazy_flag = false;
+    int size;
+    T sum;
 
-	value_type lazy_val = value_type();
+    np l = nil;
+    np r = nil;
 
-	Node() : val(0), pri(rndpri()), size(1), sum(0), l(nil), r(nil){}
-	Node(value_type v) : val(v), pri(rndpri()), size(1), sum(v), l(nil), r(nil){}
-	Node(value_type v, uint32_t p) : val(v), pri(p), size(1), sum(v), l(nil), r(nil){}
+    Node(T v, U OU = U()) : val(v), lazy(OU), pri(rndpri()), size(1), sum(v), l(nil), r(nil){}
+    Node(T v, U OU, uint32_t p) : val(v), lazy(OU), pri(p), size(1), sum(v), l(nil), r(nil){}
 
-	static uint32_t rndpri() {
-		static uint32_t x = 123456789, y = 362436069, z = 521288629, w = time(0);
-		uint32_t t = x ^ (x << 11);
-		x = y;
-		y = z;
-		z = w;
-		w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));
-		return max<uint32_t>(1, w & 0x3FFFFFFF);
-	}
+    static uint32_t rndpri() {
+        static uint32_t x = 123456789, y = 362436069, z = 521288629, w = time(0);
+        uint32_t t = x ^ (x << 11);
+        x = y;
+        y = z;
+        z = w;
+        w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));
+        return max<uint32_t>(1, w & 0x3FFFFFFF);
+    }
 };
 
-np Node::nil = new Node(value_type(), 0);
 
+template <typename T, typename U = int>
 class Treap{
 
-public:
-
-	np root;
-
-	Treap() : root(Node::nil){}
-
-	Treap(value_type val) : root(new Node (val)){}
-
-	// イテレータが指す[st,en)の範囲で初期化する
-	Treap(vector<value_type>::iterator st, vector<value_type>::iterator en) : root(Node::nil){
-		while(st != en){
-			root = _merge(root, new Node(*st));
-			++st;
-		}
-	}
-
-	// 配列で初期化する
-	Treap(vector<value_type> v) : root(Node::nil){
-		for(auto& xx : v)
-			root = _merge(root, new Node(xx));
-	}
-
-	~Treap(){
-		clear();
-	}
-
-
-protected:
-
-	int _size(np x){return x == Node::nil ? 0 : x->size;}
-	value_type _sum(np x){return x == Node::nil ? 0 : x->sum;}
-
-	np _update(np x){
-
-		if(x == Node::nil)
-			return x;
-
-		_push(x);
-		_push(x->l);
-		_push(x->r);
-
-		x->size = _size(x->l) + _size(x->r) + 1;
-		x->sum = _sum(x->l) + _sum(x->r) + x->val;
-		return x;
-	}
-
-	void _push(np x){
-		if(!x->lazy_flag)
-			return ;
-
-		x->val += x->lazy_val;
-		x->sum += x->size * x->lazy_val;
-
-		if(x->l != Node::nil){
-			x->l->lazy_flag = true;
-			x->l->lazy_val += x->lazy_val;
-		}
-		if(x->r != Node::nil){
-			x->r->lazy_flag = true;
-			x->r->lazy_val += x->lazy_val;
-		}
-
-		x->lazy_val = 0;
-		x->lazy_flag = false;
-
-	}
-
-	np _merge(np l, np r){
-		if(l == Node::nil || r == Node::nil)
-			return l == Node::nil ? r : l;
-
-		if(l->pri > r->pri){
-			l->r = _merge(l->r, r);
-			return _update(l);
-		}else{
-			r->l = _merge(l, r->l);
-			return _update(r);
-		}
-	}
-
-	pair<np,np> _split(np x, int k){
-		if(x == Node::nil)
-			return make_pair(Node::nil, Node::nil);
-
-		if(k <= _size(x->l)){
-			pair<np,np> s = _split(x->l, k);
-			x->l = s.second;
-			return make_pair(s.first, _update(x));
-
-		}else{
-			pair<np,np> s = _split(x->r, k - _size(x->l) - 1);
-			x->r = s.first;
-			return make_pair(_update(x), s.second);
-		}
-	}
-
-	np _insert(np x, int k, value_type val){
-		np l,r;
-		tie(l, r) = _split(x, k);
-		return _merge(_merge(l, new Node(val)), r);
-	}
-
-	np _erase(np x, int k){
-		np l,r,m;
-		tie(l, r) = _split(x, k);
-		tie(m, r) = _split(r, 1);
-		return _merge(l, r);
-	}
-
-	void _set(np x, int k, value_type val){
-		_update(x);
-
-		if(k < _size(x->l))
-			_set(x->l, k, val);
-		else if(_size(x->l) == k)
-			x->val = val;
-		else
-			_set(x->r, k - _size(x->l) - 1, val);
-
-		_update(x);
-	}
-
-	void _add(np x, int k, value_type val){
-		_update(x);
-
-		if(k < _size(x->l))
-			_add(x->l, k, val);
-		else if(_size(x->l) == k)
-			x->val += val;
-		else
-			_add(x->r, k - _size(x->l) - 1, val);
-
-		_update(x);
-	}
-
-	void _add(np x, int l, int r, value_type val){
-		_update(x);
-
-		if(x == Node::nil)
-			return ;
-		l = max(l, 0);
-		r = min(r, _size(x));
-
-		int sl = _size(x->l);
-
-		if(l >= r)
-			return ;
-
-		if (l == 0 && r == _size(x)){
-			x->lazy_flag = true;
-			x->lazy_val += val;
-		}
-		else{
-			if(l <= sl && sl < r)
-				x->val += val;
-
-			_add(x->l, l, r, val);
-			_add(x->r, l - sl - 1, r - sl - 1, val);
-		}
-
-		_update(x);
-	}
-
-	value_type _get(np x, int k){
-
-		_update(x);
-
-		if(k < _size(x->l))
-			return _get(x->l, k);
-		else if(_size(x->l) == k)
-			return x->val;
-		else
-			return _get(x->r, k - _size(x->l) - 1);
-	}
-
-	value_type _rangesum(np x, int l, int r){
-		_update(x);
-
-		l = max(l, 0);
-		r = min(r, _size(x));
-		if(l >= r)
-			return 0;
-		if(l == 0 && r == _size(x))
-			return _sum(x);
-		value_type retval(0);
-		int sl = _size(x->l);
-		retval += _rangesum(x->l, l, r);
-		retval += _rangesum(x->r, l - sl - 1, r - sl - 1);
-		if(l <= sl && sl < r)
-			retval += x->val;
-		return retval;
-	}
-
-	int _lowerbound(np x, value_type val){
-		_update(x);
-
-		if(x == Node::nil)
-			return 0;
-		if(val <= x->val)
-			return _lowerbound(x->l, val);
-		else
-			return _lowerbound(x->r,val) + _size(x->l) + 1;
-	}
-
-	int _upperbound(np x, value_type val){
-		_update(x);
-
-		if(x == Node::nil)
-			return 0;
-		if(val < x->val)
-			return _upperbound(x->l, val);
-		else
-			return _upperbound(x->r,val) + _size(x->l) + 1;
-	}
-
-	np _insert(np x, value_type val){
-		return _insert(x, _lowerbound(x, val), val);
-	}
-
-	void _clear(np x){
-		if(x->l != Node::nil){
-			_clear(x->l);
-			delete(x->l);
-			x->l = Node::nil;
-		}
-		if(x->r != Node::nil){
-			_clear(x->r);
-			delete(x->r);
-			x->r = Node::nil;
-		}
-	}
+    using nt = Node<T, U>;
+    using np = nt*;
+    using F = function<T(T, T)>;
+    using G = function<T(T, U, int)>;
+    using H = function<U(U, U)>;
 
 public:
 
-	void push_front(value_type val){
-		root = _merge(new Node(val), root);
-	}
+    np root;
+    bool is_list;
+    F f;
+    G g;
+    H h;
+    T OT;
+    U OU;
 
-	void push_back(value_type val){
-		root = _merge(root, new Node(val));
-	}
+    Treap(bool is_list, F f, G g, H h, T OT, U OU) : root(nt::nil), is_list(is_list), f(f), g(g), h(h), OT(OT), OU(OU){}
 
-	void pop_front(){
-		root = _split(root, 1).second;
-	}
+    Treap(T val, bool is_list, F f, G g, H h, T OT, U OU) : root(new nt(val)), is_list(is_list), f(f), g(g), h(h), OT(OT), OU(OU){}
 
-	void pop_back(){
-		root = _split(root, _size(root) - 1).first;
-	}
+    // 配列で初期化する
+    Treap(vector<T> v, bool is_list, F f, G g, H h, T OT, U OU) : root(nt::nil), is_list(is_list), f(f), g(g), h(h), OT(OT), OU(OU){
+        for(auto& xx : v)
+            root = _merge(root, new nt(xx, OU));
+    }
 
-	// rootを含めたサイズの出力
-	int size(){
-		return (root == Node::nil ? 0 : root->size);
-	}
+    static Treap make(bool is_list, F f = [](T x, T){return x;}, T OT = T(), G g = [](auto x, auto, auto){return x;}, H h = [](auto x, auto){return x;}, U OU = U()){
+        assert(nt::nil != nullptr);
+        return Treap(is_list, f, g, h, OT, OU);
+    }
 
-	// [l, r)の総和 (同様の実装でRMQ等も可能)
-	value_type rangesum(int l, int r){
-		return _rangesum(root, l, r);
-	}
+    static Treap make(T val, bool is_list, F f = [](auto x, auto){return x;}, T OT = T(), G g = [](auto x, auto, auto){return x;}, H h = [](auto x, auto){return x;}, U OU = U()){
+        assert(nt::nil != nullptr);
+        return Treap(val, is_list, f, g, h, OT, OU);
+    }
 
-	// k番目への代入
-	void set(int k, value_type val){
-		return _set(root, k, val);
-	}
+    static Treap make(vector<T> val, bool is_list, F f = [](auto x, auto){return x;}, T OT = T(), G g = [](auto x, auto, auto){return x;}, H h = [](auto x, auto){return x;}, U OU = U()){
+        assert(nt::nil != nullptr);
+        return Treap(val, is_list, f, g, h, OT, OU);
+    }
 
-	// k番目への加算
-	void add(int k, value_type val){
-		return _add(root, k, val);
-	}
+    ~Treap(){
+        clear();
+        if(root != nt::nil)
+            delete root;
+    }
 
-	// [l, r)への一様加算
-	void add(int l, int r, value_type val){
-		return _add(root, l, r, val);
-	}
+    int _size(np x){return x == nt::nil ? 0 : x->size;}
+    T _sum(np x){return x == nt::nil ? OT : x->sum;}
 
-	// k番目の取得
-	value_type get(int k){
-		return _get(root, k);
-	}
+    np _update(np x){
 
-	// k番目への挿入
-	void insert(int k, value_type val){
-		root = _insert(root, k, val);
-	}
+        if(x == nt::nil)
+            return x;
 
-	// 適切な位置への挿入
-	void insert(value_type val){
-		root = _insert(root, val);
-	}
+        if(is_list){
+            _push(x);
+            _push(x->l);
+            _push(x->r);
+            x->sum = f(f(_sum(x->l), x->val), _sum(x->r));
+        }
 
-	// val <= get(k) となるような最小のk
-	int lowerbound(value_type val){
-		return _lowerbound(root, val);
-	}
+        x->size = _size(x->l) + _size(x->r) + 1;
+        return x;
+    }
 
-	// val < get(k) となるような最小のk
-	int upperbound(value_type val){
-		return _upperbound(root, val);
-	}
+    void _push(np x){
+        if(x->lazy == OU)
+            return ;
 
-	// k番目の要素削除
-	void erase(int k){
-		root = _erase(root, k);
-	}
+        x->sum = g(x->sum, x->lazy, x->size);
+        x->val = g(x->val, x->lazy, 1);
 
-	// 要素の全削除
-	void clear(){
-		if(root != Node::nil){
-			_clear(root);
-			delete(root);
-			root = Node::nil;
-		}
-	}
+        if(x->l != nt::nil)
+            x->l->lazy = h(x->l->lazy, x->lazy);
+        if(x->r != nt::nil)
+            x->r->lazy = h(x->r->lazy, x->lazy);
+
+        x->lazy = OU;
+
+    }
+
+    np _merge(np l, np r){
+        if(l == nt::nil || r ==nt::nil)
+            return l == nt::nil ? r : l;
+
+        if(l->pri > r->pri){
+            l->r = _merge(l->r, r);
+            return _update(l);
+        }else{
+            r->l = _merge(l, r->l);
+            return _update(r);
+        }
+    }
+
+    pair<np,np> _split(np x, int k){
+        if(x == nt::nil)
+            return make_pair(nt::nil, nt::nil);
+
+        assert(0 <= k && k <= _size(x));
+
+        if(k <= _size(x->l)){
+            pair<np, np> s = _split(x->l, k);
+            x->l = s.second;
+            return make_pair(s.first, _update(x));
+
+        }else{
+            pair<np, np> s = _split(x->r, k - _size(x->l) - 1);
+            x->r = s.first;
+            return make_pair(_update(x), s.second);
+        }
+    }
+
+    np _insert(np x, int k, T val){
+        np l, r;
+        tie(l, r) = _split(x, k);
+        return _merge(_merge(l, new nt(val, OU)), r);
+    }
+
+    np _erase(np x, int k){
+        np l, r, m;
+        tie(l, r) = _split(x, k);
+        tie(m, r) = _split(r, 1);
+        if(m != nt::nil)
+            delete m;
+        return _merge(l, r);
+    }
+
+    void _set(np x, int k, T val){
+        _update(x);
+
+        if(k < _size(x->l))
+            _set(x->l, k, val);
+        else if(_size(x->l) == k)
+            x->val = val;
+        else
+            _set(x->r, k - _size(x->l) - 1, val);
+
+        _update(x);
+    }
+
+    void _add(np x, int l, int r, U val){
+        assert(is_list);
+        _update(x);
+
+        if(x == nt::nil)
+            return ;
+        l = max(l, 0);
+        r = min(r, _size(x));
+
+        int sl = _size(x->l);
+
+        if(l >= r)
+            return ;
+
+        if (l == 0 && r == _size(x)){
+            x->lazy = h(x->lazy, val);
+        }
+        else{
+            if(l <= sl && sl < r)
+                x->val = g(x->val, val, 1);
+
+            _add(x->l, l, r, val);
+            _add(x->r, l - sl - 1, r - sl - 1, val);
+        }
+
+        _update(x);
+    }
+
+    np _getnode(np x, int k){
+
+        _update(x);
+
+        assert(0 <= k && k < _size(x));
+
+        if(k < _size(x->l))
+            return _getnode(x->l, k);
+        else if(_size(x->l) == k)
+            return x;
+        else
+            return _getnode(x->r, k - _size(x->l) - 1);
+    }
+
+    T _get(np x, int k){
+        return _getnode(x, k)->val;
+    }
+
+    T _rangesum(np x, int l, int r){
+        _update(x);
+
+        l = max(l, 0);
+        r = min(r, _size(x));
+        if(l >= r)
+            return OT;
+        if(l == 0 && r == _size(x))
+            return _sum(x);
+
+        int sl = _size(x->l);
+        T ret = (l <= sl && sl < r ? x->val : OT);
+        ret = f(_rangesum(x->l, l, r), ret);
+        ret = f(ret, _rangesum(x->r, l - sl - 1, r - sl - 1));
+        return ret;
+    }
+
+    int _lowerbound(np x, T val){
+        _update(x);
+
+        if(x == nt::nil)
+            return 0;
+        if(val <= x->val)
+            return _lowerbound(x->l, val);
+        else
+            return _lowerbound(x->r,val) + _size(x->l) + 1;
+    }
+
+    int _upperbound(np x, T val){
+        _update(x);
+
+        if(x == nt::nil)
+            return 0;
+        if(val < x->val)
+            return _upperbound(x->l, val);
+        else
+            return _upperbound(x->r,val) + _size(x->l) + 1;
+    }
+
+    np _insert(np x, T val){
+        return _insert(x, _lowerbound(x, val), val);
+    }
+
+    void _clear(np x){
+        if(x->l != nt::nil){
+            _clear(x->l);
+            delete(x->l);
+            x->l = nt::nil;
+        }
+        if(x->r != nt::nil){
+            _clear(x->r);
+            delete(x->r);
+            x->r = nt::nil;
+        }
+    }
+
+    void push_front(T val){
+        root = _merge(new nt(val, OU), root);
+    }
+
+    void push_back(T val){
+        root = _merge(root, new nt(val, OU));
+    }
+
+    void pop_front(){
+        root = _split(root, 1).second;
+    }
+
+    void pop_back(){
+        root = _split(root, _size(root) - 1).first;
+    }
+
+    // [0, k)と[k, size)に分割して, [k, size)側を返す
+    Treap split_left(int k){
+        np p;
+        tie(root, p) = _split(root, k);
+        return decltype(this)(f, g, h, p);
+    }
+
+    // [0, k)と[k, size)に分割して, [0, k)側を返す
+    Treap split_right(int k){
+        np p;
+        tie(p, root) = _split(root, k);
+        return decltype(this)(f, g, h, p);
+    }
+
+    // rootを含めたサイズの出力
+    int size(){
+        return (root == nt::nil ? 0 : root->size);
+    }
+
+    // k番目への代入
+    void set(int k, T val){
+        return _set(root, k, val);
+    }
+
+    // k番目への加算
+    void add(int k, U val){
+        assert(is_list);
+        return _add(root, k, k + 1, val);
+    }
+
+    // [l, r)への一様加算
+    void add(int l, int r, U val){
+        assert(is_list);
+        return _add(root, l, r, val);
+    }
+
+    // k番目の取得
+    T get(int k){
+        return _get(root, k);
+    }
+
+    // [l, r)の総和 (同様の実装でRMQ等も可能)
+    T get(int l, int r){
+        return _rangesum(root, l, r);
+    }
+
+    // k番目への挿入
+    void insert(int k, T val){
+        assert(is_list);
+        root = _insert(root, k, val);
+    }
+
+    // 適切な位置への挿入
+    void insert(T val){
+        root = _insert(root, val);
+    }
+
+    // val <= get(k) となるような最小のk
+    int lowerbound(T val){
+        return _lowerbound(root, val);
+    }
+
+    // val < get(k) となるような最小のk
+    int upperbound(T val){
+        return _upperbound(root, val);
+    }
+
+    // k番目の要素削除
+    void erase(int k){
+        root = _erase(root, k);
+    }
+
+    // 要素の全削除
+    void clear(){
+        if(root != nt::nil){
+            _clear(root);
+            delete(root);
+            root = nt::nil;
+        }
+    }
 };
 
+const i64 val = 0;
+const i64 op = -1e9;
+using node_type = Node<i64, i64>;
+template<> node_type* node_type::nil = new node_type(0, op, 0);

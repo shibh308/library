@@ -2,8 +2,6 @@ vector<int> scc(vector<vector<int>>& edges){
 	int n = edges.size();
     vector<vector<int>> rev(n);
 
-    int ans = 0;
-
 	for(int i = 0; i < n; ++i)
 		for(auto& x : edges[i])
 			rev[x].emplace_back(i);

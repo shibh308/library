@@ -92,10 +92,10 @@ public:
             _push(x);
             _push(x->l);
             _push(x->r);
-            x->sum = f(f(_sum(x->l), x->val), _sum(x->r));
         }
 
-        x->size = _size(x->l) + _size(x->r) + 1;
+		x->sum = f(f(_sum(x->l), x->val), _sum(x->r));
+		x->size = _size(x->l) + _size(x->r) + 1;
         return x;
     }
 

@@ -1,4 +1,6 @@
 auto ncr = [&fact, &inv](int n, int r){
-	return fact[n] * inv[r] % MOD * inv[n - r] % MOD;
+	if(n < 0 || r < 0 || n < r)
+		return mint(0);
+	return fact[n] * inv[r] inv[n - r];
 };
 

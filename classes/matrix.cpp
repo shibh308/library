@@ -25,7 +25,7 @@ struct Matrix{
         return v[i * h + j];
     };
 
-    Matrix pow(T x){
+    Matrix pow(i64 x){
         assert(h == w);
         auto mat = x & 1 ? *this : makeUnit(h);
         auto u = *this;

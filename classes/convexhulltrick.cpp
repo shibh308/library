@@ -27,35 +27,35 @@ struct ConvexHullTrick{
     {
     }
 
-    Node* _insert(Node* p, T low, T high, Elm f){
+    Node* _insert(Node* p, T st, T en, Elm f){
         if(!p)
             return new Node(f);
-        if(p->f(low) <= f(low) && p->f(high) <= f(high))
+        if(p->f(st) <= f(st) && p->f(en) <= f(en))
             return p;
-        if(p->f(low) >= f(low) && p->f(high) >= f(high)){
+        if(p->f(st) >= f(st) && p->f(en) >= f(en)){
             p->f = f;
             return p;
         }
-        T mid = (low + high) / 2;
+        T mid = (st + en) / 2;
         if(p->f(mid) > f(mid))
             swap(p->f, f);
-        if(p->f(low) >= f(low))
-            p->l = _insert(p->l, low, mid, f);
+        if(p->f(st) >= f(st))
+            p->l = _insert(p->l, st, mid, f);
         else
-            p->r = _insert(p->r, mid, high, f);
+            p->r = _insert(p->r, mid, en, f);
         return p;
     }
 
-    U _query(Node* p, T low, T high, T x){
+    U _query(Node* p, T st, T en, T x){
         if(!p)
             return _inf;
-        if(low == high)
+        if(st == en)
             return p->f(x);
-        T mid = (low + high) / 2;
+        T mid = (st + en) / 2;
         if(x <= mid)
-            return min(p->f(x), _query(p->l, low, mid, x));
+            return min(p->f(x), _query(p->l, st, mid, x));
         else
-            return min(p->f(x), _query(p->r, mid, high, x));
+            return min(p->f(x), _query(p->r, mid, en, x));
     }
 
     void insert(Elm f){

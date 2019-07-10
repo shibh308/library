@@ -25,7 +25,9 @@ struct RollingHash{
         }
     };
 
-    pair_type get(int l, int r){
+    pair_type get(int l = 0, int r = -1){
+        if(r == -1)
+            r = len;
         assert(l <= r);
         assert(r <= len);
         auto l_cut = make_pair(v[r].first - v[l].first,

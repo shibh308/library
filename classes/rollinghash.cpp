@@ -33,7 +33,7 @@ struct RollingHash{
         auto l_cut = make_pair(v[r].first - v[l].first,
                                v[r].second - v[l].second);
         return make_pair(l_cut.first * inv[l].first,
-                         l_cut.second * inv[r].second);
+                         l_cut.second * inv[l].second);
     }
 
     pair_type connect(pair_type l, pair_type r, int l_len){

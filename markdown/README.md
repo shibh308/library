@@ -364,7 +364,8 @@ struct Segtree{
 
     SegNode* root;
 
-    Segtree(int n_, function<T(T, T)> f, function<T(T, U, int)> g, function<U(U, U)> h, T op_t, U op_u) : f(f), g(g), h(h), op_t(op_t), op_u(op_u){
+    Segtree(int n_, function<T(T, T)> f, function<T(T, U, int)> g, function<U(U, U)> h, T op_t, U op_u) :
+        f(f), g(g), h(h), op_t(op_t), op_u(op_u){
         for(n = 1; n < n_; n <<= 1);
         root = new SegNode(op_t, op_u);
     }
@@ -662,7 +663,8 @@ struct Segtree{
     function<T(T, U, int)> g;
     function<U(U, U)> h;
 
-    Segtree(int n, T init, function<T(T, T)> f, function<T(T, U, int)> g, function<U(U, U)> h, T op_t = T(), U op_u = U()) :
+    Segtree(int n, T init, function<T(T, T)> f, function<T(T, U, int)> g, function<U(U, U)> h,
+            T op_t = T(), U op_u = U()) :
         n(n),
         op_t(op_t),
         op_u(op_u),
@@ -679,7 +681,8 @@ struct Segtree{
         }
     }
 
-    Segtree(int n, vector<T> init, function<T(T, T)> f, function<T(T, U, int)> g, function<U(U, U)> h, T op_t = T(), U op_u = U()) :
+    Segtree(int n, vector<T> init, function<T(T, T)> f, function<T(T, U, int)> g,
+            function<U(U, U)> h, T op_t = T(), U op_u = U()) :
         n(n),
         op_t(op_t),
         op_u(op_u),
@@ -915,7 +918,8 @@ struct Segtree{
 
     shared_ptr<SegNode> root;
 
-    Segtree(int n_, function<T(T, T)> f, function<T(T, U, int)> g, function<U(U, U)> h, T op_t, U op_u) : f(f), g(g), h(h), op_t(op_t), op_u(op_u){
+    Segtree(int n_, function<T(T, T)> f, function<T(T, U, int)> g, function<U(U, U)> h, T op_t, U op_u) :
+    f(f), g(g), h(h), op_t(op_t), op_u(op_u){
         for(n = 1; n < n_; n <<= 1);
         root = make_shared<SegNode>(op_t, op_u);
     }
@@ -1074,8 +1078,10 @@ struct RollingHash{
 };
 
 using RH = RollingHash<MOD, MOD + 2, 10007>;
-template<> vector<pair<ModInt<MOD>, ModInt<MOD + 2>>> RH::power = {make_pair(ModInt<MOD>(1), ModInt<MOD + 2>(1))};
-template<> vector<pair<ModInt<MOD>, ModInt<MOD + 2>>> RH::inv = {make_pair(ModInt<MOD>(1), ModInt<MOD + 2>(1))};
+template<>
+vector<pair<ModInt<MOD>, ModInt<MOD + 2>>> RH::power = {make_pair(ModInt<MOD>(1), ModInt<MOD + 2>(1))};
+template<>
+vector<pair<ModInt<MOD>, ModInt<MOD + 2>>> RH::inv = {make_pair(ModInt<MOD>(1), ModInt<MOD + 2>(1))};
 
 ```
 
@@ -1191,27 +1197,33 @@ public:
     T OT;
     U OU;
 
-    Treap(bool is_list, F f, G g, H h, T OT, U OU) : root(nt::nil), is_list(is_list), f(f), g(g), h(h), OT(OT), OU(OU){}
+    Treap(bool is_list, F f, G g, H h, T OT, U OU) : root(nt::nil), is_list(is_list),
+    f(f), g(g), h(h), OT(OT), OU(OU){}
 
-    Treap(T val, bool is_list, F f, G g, H h, T OT, U OU) : root(new nt(val)), is_list(is_list), f(f), g(g), h(h), OT(OT), OU(OU){}
+    Treap(T val, bool is_list, F f, G g, H h, T OT, U OU) : root(new nt(val)), is_list(is_list),
+    f(f), g(g), h(h), OT(OT), OU(OU){}
 
     // 配列で初期化する
-    Treap(vector<T> v, bool is_list, F f, G g, H h, T OT, U OU) : root(nt::nil), is_list(is_list), f(f), g(g), h(h), OT(OT), OU(OU){
+    Treap(vector<T> v, bool is_list, F f, G g, H h, T OT, U OU) : root(nt::nil), is_list(is_list),
+    f(f), g(g), h(h), OT(OT), OU(OU){
         for(auto& xx : v)
             root = _merge(root, new nt(xx, OU));
     }
 
-    static Treap make(bool is_list, F f = [](T x, T){return x;}, T OT = T(), G g = [](auto x, auto, auto){return x;}, H h = [](auto x, auto){return x;}, U OU = U()){
+    static Treap make(bool is_list, F f = [](T x, T){return x;}, T OT = T(),
+    G g = [](auto x, auto, auto){return x;}, H h = [](auto x, auto){return x;}, U OU = U()){
         assert(nt::nil != nullptr);
         return Treap(is_list, f, g, h, OT, OU);
     }
 
-    static Treap make(T val, bool is_list, F f = [](auto x, auto){return x;}, T OT = T(), G g = [](auto x, auto, auto){return x;}, H h = [](auto x, auto){return x;}, U OU = U()){
+    static Treap make(T val, bool is_list, F f = [](auto x, auto){return x;}, T OT = T(),
+    G g = [](auto x, auto, auto){return x;}, H h = [](auto x, auto){return x;}, U OU = U()){
         assert(nt::nil != nullptr);
         return Treap(val, is_list, f, g, h, OT, OU);
     }
 
-    static Treap make(vector<T> val, bool is_list, F f = [](auto x, auto){return x;}, T OT = T(), G g = [](auto x, auto, auto){return x;}, H h = [](auto x, auto){return x;}, U OU = U()){
+    static Treap make(vector<T> val, bool is_list, F f = [](auto x, auto){return x;}, T OT = T(),
+    G g = [](auto x, auto, auto){return x;}, H h = [](auto x, auto){return x;}, U OU = U()){
         assert(nt::nil != nullptr);
         return Treap(val, is_list, f, g, h, OT, OU);
     }
@@ -1532,7 +1544,8 @@ struct Trie{
         int val, len, cnt, exist_cnt;
         // 子のindex, 子の(indexの)一覧
         vector<int> next, exist;
-        Node(int val = -1, int len = 0, bool back = false) : val(val), len(len), cnt(0), exist_cnt(back), next(size, -1){}
+        Node(int val = -1, int len = 0, bool back = false) : val(val), len(len), cnt(0),
+        exist_cnt(back), next(size, -1){}
     };
 
     vector<Node> nodes;
@@ -1560,7 +1573,8 @@ struct Trie{
 
     // (sの部分文字列, s, sを部分文字列に含む文字列)に対して関数を実行する
     // ラムダ内でtrie.nodes[idx].exist_cntを判定する事で, 挿入された文字列そのもの以外判定しなくなる
-    void query(string& s, function<void(int, string&)> f, bool from_prefix, bool correct, bool to_prefix, int str_index = 0){
+    void query(string& s, function<void(int, string&)> f, bool from_prefix, bool correct,
+               bool to_prefix, int str_index = 0){
         int pos = 0, idx = str_index;
         string str;
         while(idx != s.size()){

@@ -1,5 +1,5 @@
 auto calc_fact = [mpow]{
-	constexpr int N = 1e7;
+	constexpr int N = 2e6;
 	vector<mint> fact(N + 1, 1);
 	vector<mint> inv(N + 1, 1);
 	for(int i = 1; i < N; ++i){

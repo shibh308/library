@@ -1,17 +1,4 @@
 # functions
-## modpow
-```C++
-auto mpow = [&](mint x, i64 y){
-	mint z = x;
-	mint val = y & 1 ? x : mint(1);
-	while(z *= z, y >>= 1)
-		if(y & 1)
-			val *= z;
-	return val;
-};
-
-```
-
 ## calcfact
 ```C++
 auto calc_fact = [mpow]{
@@ -26,6 +13,71 @@ auto calc_fact = [mpow]{
 };
 vector<mint> fact, inv;
 tie(fact, inv) = calc_fact();
+
+```
+
+## divisor
+```C++
+auto divisor = [](i64 x){
+	int sq = sqrt(x) + 1;
+	vector<int> ret;
+	for(i64 i = 1; i < sq; ++i)
+		if(!(x % i)){
+			ret.emplace_back(i);
+			if(i * i != x)
+				ret.emplace_back(x / i);
+		}
+	sort(ret.begin(), ret.end());
+	return ret;
+};
+
+```
+
+## eratosthenes
+```C++
+auto eratosthenes = []{
+	constexpr int N = 2e6;
+	bitset<N> not_prime(3);
+	for(int i = 2; i < N; ++i)
+		if(!not_prime[i])
+			for(int j = 2 * i; j < N; j += i)
+				not_prime.set(j);
+	return not_prime;
+};
+
+```
+
+## factoring
+```C++
+auto factoring = [](i64 x){
+	int sq = sqrt(x) + 1;
+	vector<int> ret;
+	if(x == 1){
+		ret.emplace_back(1);
+		return ret;
+	}
+	for(i64 i = 2; i < sq; ++i)
+		while(x % i == 0){
+			ret.emplace_back(i);
+			x /= i;
+		}
+	if(x != 1)
+		ret.emplace_back(x);
+	return ret;
+};
+
+```
+
+## modpow
+```C++
+auto mpow = [](auto x, i64 y){
+	auto z = x;
+	decltype(x) val = y & 1 ? x : decltype(x)(1);
+	while(z *= z, y >>= 1)
+		if(y & 1)
+			val *= z;
+	return val;
+};
 
 ```
 
@@ -44,37 +96,38 @@ auto ncr = [&fact, &inv](int n, int r){
 auto nhr = [ncr](int n, int r){
 	return ncr(n + r - 1, r);
 };
+
 ```
 
 ## scc
 ```C++
 vector<int> scc(vector<vector<int>>& edges){
-	int n = edges.size();
+    int n = edges.size();
     vector<vector<int>> rev(n);
 
-	for(int i = 0; i < n; ++i)
-		for(auto& x : edges[i])
-			rev[x].emplace_back(i);
+    for(int i = 0; i < n; ++i)
+        for(auto& x : edges[i])
+            rev[x].emplace_back(i);
 
     vector<i64> dfs_num(n, -1);
     vector<i64> flag(n, 0);
     int num = 0;
     function<void(int)> dfs = [&](int pos){
         flag[pos] = 1;
-		for(auto& xx : edges[pos])
-			if(!flag[xx]){
-				dfs(xx);
+        for(auto& xx : edges[pos])
+            if(!flag[xx]){
+                dfs(xx);
         }
         dfs_num[pos] = num++;
     };
 
-	for(int i = 0; i < n; ++i)
+    for(int i = 0; i < n; ++i)
         if(!flag[i])
             dfs(i);
 
-	vector<int> dfs_inv(n);
-	for(int i = 0; i < n; ++i)
-		dfs_inv[n - 1 - dfs_num[i]] = i;
+    vector<int> dfs_inv(n);
+    for(int i = 0; i < n; ++i)
+        dfs_inv[n - 1 - dfs_num[i]] = i;
 
     num = 0;
 
@@ -87,19 +140,19 @@ vector<int> scc(vector<vector<int>>& edges){
                 rdfs(t);
     };
 
-	for(int i = 0; i < n; ++i)
+    for(int i = 0; i < n; ++i)
         if(scc_vec[dfs_inv[i]] == -1){
             rdfs(dfs_inv[i]);
             ++num;
         }
 
-	return scc_vec;
+    return scc_vec;
 }
 
 ```
 
 # classes
-## BIT
+## BinaryIndexedTree
 ```C++
 template <typename T>
 struct BIT{
@@ -123,194 +176,267 @@ struct BIT{
 
 ```
 
-## Segtree
+## Compression
 ```C++
 template<typename T>
-struct Segtree{
-    int n;
-    T op;
-    vector<T> elm;
-    function<T(T, T)> f;
-
-    Segtree(int n, T init, function<T(T, T)> f, T op = T()) :
-        n(n),
-        op(op),
-        elm(2 * n, init),
-        f(f)
-    {
-        for(int i = n - 1; i >= 1; --i)
-            elm[i] = f(elm[2 * i], elm[2 * i + 1]);
+struct Compression{
+    vector<T> compvec;
+    Compression(vector<T>& inp){//圧縮する
+        compvec = inp;
+        sort(compvec.begin(), compvec.end());
+        compvec.erase(unique(compvec.begin(), compvec.end()), compvec.end());
     }
-
-    Segtree(int n, vector<T> init, function<T(T, T)> f, T op = T()) :
-        n(n),
-        op(op),
-        elm(2 * n),
-        f(f)
-    {
-        for(int i = 0; i < n; ++i)
-            elm[i + n] = init[i];
-        for(int i = n - 1; i >= 1; --i)
-            elm[i] = f(elm[2 * i], elm[2 * i + 1]);
+    int Index(T val){//圧縮を元に対応するインデックスを返す
+        auto it = lower_bound(compvec.begin(), compvec.end(), val);
+        return distance(compvec.begin(), it);
     }
-
-    void set(int x, T val){
-        x += n;
-        elm[x] = val;
-        while(x >>= 1)
-            elm[x] = f(elm[2 * x], elm[2 * x + 1]);
-    }
-
-    void update(int x, T val){
-        x += n;
-        elm[x] = f(val, elm[x]);
-        while(x >>= 1)
-            elm[x] = f(elm[2 * x], elm[2 * x + 1]);
-    }
-
-    T get(int x, int y) const{
-        T l = op, r = op;
-        for(x += n, y += n - 1; x <= y; x >>= 1, y >>= 1){
-            if(x & 1)
-                l = f(l, elm[x++]);
-            if(!(y & 1))
-                r = f(elm[y--], r);
-        }
-        return f(l, r);
+    vector<T>& operator*(){
+        return compvec;
     }
 };
 
 ```
 
-## LazySegtree
+## ConvexHullTrick
+```C++
+template <typename T, typename U>
+struct ConvexHullTrick{
+    // 任意の2関数で共有点が高々1個ならElmの中身を適切に変えれば通る
+
+    struct Elm{
+        T a, b;
+        U operator()(T x){
+            return a * x + b;
+        }
+    };
+
+    struct Node{
+        Elm f;
+        Node* l;
+        Node* r;
+        Node(Elm elm) : f(elm), l(nullptr), r(nullptr){}
+    };
+
+    U _min, _max, _inf;
+    Node* root;
+
+    ConvexHullTrick(U _min, U _max, U _inf) :
+        _min(_min),
+        _max(_max),
+        _inf(_inf),
+        root(nullptr)
+    {
+    }
+
+    Node* _insert(Node* p, T st, T en, Elm f){
+        if(!p)
+            return new Node(f);
+        if(p->f(st) <= f(st) && p->f(en) <= f(en))
+            return p;
+        if(p->f(st) >= f(st) && p->f(en) >= f(en)){
+            p->f = f;
+            return p;
+        }
+        T mid = (st + en) / 2;
+        if(p->f(mid) > f(mid))
+            swap(p->f, f);
+        if(p->f(st) >= f(st))
+            p->l = _insert(p->l, st, mid, f);
+        else
+            p->r = _insert(p->r, mid, en, f);
+        return p;
+    }
+
+    U _query(Node* p, T st, T en, T x){
+        if(!p)
+            return _inf;
+        if(st == en)
+            return p->f(x);
+        T mid = (st + en) / 2;
+        if(x <= mid)
+            return min(p->f(x), _query(p->l, st, mid, x));
+        else
+            return min(p->f(x), _query(p->r, mid, en, x));
+    }
+
+    void insert(Elm f){
+        root = _insert(root, _min, _max, f);
+    }
+
+    U query(T x){
+        return _query(root, _min, _max, x);
+    }
+};
+
+```
+
+## Dinic
+```C++
+template <typename T>
+struct Dinic{
+    struct Edge{
+        int to, rev;
+        T cap;
+        Edge(int to, T cap, int rev) : to(to), rev(rev), cap(cap){}
+    };
+
+    vector<vector<Edge>> edges;
+    T _inf;
+    vector<T> min_cost;
+    vector<int> cnt;
+
+    Dinic(int n) : edges(n), _inf(numeric_limits<T>::max()){}
+
+    void add(int from, int to, T cap){
+        edges[from].emplace_back(to, cap, static_cast<T>(edges[to].size()));
+        edges[to].emplace_back(from, 0, static_cast<T>(edges[from].size()) - 1);
+    }
+
+    bool bfs(int s, int t){
+        min_cost.assign(edges.size(), -1);
+        queue<int> que;
+        min_cost[s] = 0;
+        que.emplace(s);
+        while(!que.empty() && min_cost[t] == -1){
+            int x = que.front();
+            que.pop();
+            for(auto& ed : edges[x])
+                if(ed.cap > 0 && min_cost[ed.to] == -1){
+                    min_cost[ed.to] = min_cost[x] + 1;
+                    que.emplace(ed.to);
+                }
+        }
+        return min_cost[t] != -1;
+    }
+
+    T dfs(int idx, int t, T flow){
+        if(idx == t)
+            return flow;
+        for(int i = cnt[idx]; i < edges[idx].size(); ++i){
+            auto& ed = edges[idx][i];
+            if(ed.cap > 0 && min_cost[idx] < min_cost[ed.to]){
+                T res = dfs(ed.to, t, min(flow, ed.cap));
+                if(res > 0){
+                    ed.cap -= res;
+                    edges[ed.to][ed.rev].cap += res;
+                    return res;
+                }
+            }
+        }
+        return 0;
+    }
+
+    T solve(int s, int t){
+        T flow = 0;
+        while(bfs(s, t)){
+            cnt.assign(edges.size(), 0);
+            T f = 0;
+            while((f = dfs(s, t, _inf)) > 0)
+                flow += f;
+        }
+        return flow;
+    }
+
+};
+
+```
+
+## DynamicLazySegmentTree
 ```C++
 template<typename T, typename U>
 struct Segtree{
-    int n;
-    T op_t;
-    U op_u;
-    vector<T> elm;
-    vector<U> lazy;
-    vector<int> length;
+
+    struct SegNode{
+        T val;
+        U lazy;
+
+        SegNode* l;
+        SegNode* r;
+        SegNode(T val, U lazy) : val(val), lazy(lazy), l(nullptr), r(nullptr){}
+    };
+
+    i64 n;
     function<T(T, T)> f;
     function<T(T, U, int)> g;
     function<U(U, U)> h;
+    T op_t;
+    U op_u;
 
-    Segtree(int n, T init, function<T(T, T)> f, function<T(T, U, int)> g, function<U(U, U)> h, T op_t = T(), U op_u = U()) :
-        n(n),
-        op_t(op_t),
-        op_u(op_u),
-        elm(2 * n, init),
-        lazy(2 * n, op_u),
-        length(2 * n, 0),
-        f(f),
-        g(g),
-        h(h)
-    {
-        for(int i = n - 1; i > 0; --i){
-            elm[i] = f(elm[2 * i], elm[2 * i + 1]);
-            length[i] = length[2 * i] + 1;
+    SegNode* root;
+
+    Segtree(int n_, function<T(T, T)> f, function<T(T, U, int)> g, function<U(U, U)> h, T op_t, U op_u) : f(f), g(g), h(h), op_t(op_t), op_u(op_u){
+        for(n = 1; n < n_; n <<= 1);
+        root = new SegNode(op_t, op_u);
+    }
+
+    SegNode* getl(SegNode* node){
+        return node->l ? node->l : node->l = new SegNode(op_t, op_u);
+    }
+
+    SegNode* getr(SegNode* node){
+        return node->r ? node->r : node->r = new SegNode(op_t, op_u);
+    }
+
+    void eval(SegNode* node, i64 len){
+        node->val = g(node->val, node->lazy, len);
+        getl(node);
+        node->l->lazy = h(node->l->lazy, node->lazy);
+        getr(node);
+        node->r->lazy = h(node->r->lazy, node->lazy);
+        node->lazy = op_u;
+    }
+
+    void update(i64 x, i64 y, U val, SegNode* node = nullptr, i64 l = 0, i64 r = 0){
+        if(node == nullptr){
+            node = root;
+            r = n;
+        }
+        eval(node, r - l);
+        if(r <= x || y <= l)
+            return ;
+        if(x <= l && r <= y){
+            node->lazy = h(node->lazy, val);
+            eval(node, r - l);
+        }else{
+            i64 mid = (l + r) >> 1;
+            update(x, y, val, getl(node), l, mid);
+            update(x, y, val, getr(node), mid, r);
+            node->val = f(node->l->val, node->r->val);
         }
     }
 
-    Segtree(int n, vector<T> init, function<T(T, T)> f, function<T(T, U, int)> g, function<U(U, U)> h, T op_t = T(), U op_u = U()) :
-        n(n),
-        op_t(op_t),
-        op_u(op_u),
-        elm(2 * n),
-        lazy(2 * n, op_u),
-        length(2 * n, 0),
-        f(f),
-        g(g),
-        h(h)
-    {
-        for(int i = 0; i < n; ++i)
-            elm[i + n] = init[i];
-
-        for(int i = n - 1; i > 0; --i){
-            elm[i] = f(elm[2 * i], elm[2 * i + 1]);
-            length[i] = length[2 * i] + 1;
+    T get(i64 x, i64 y, SegNode* node = nullptr, i64 l = 0, i64 r = 0){
+        if(node	== nullptr){
+            node = root;
+            r = n;
         }
+
+        if(r <= x || y <= l)
+            return op_t;
+        eval(node, r - l);
+        if(x <= l && r <= y)
+            return node->val;
+
+        i64 val_l = op_t, val_r = op_t;
+        i64 mid = (l + r) >> 1;
+
+        if(node->l)
+            val_l = get(x, y, node->l, l, mid);
+        if(node->r)
+            val_r = get(x, y, node->r, mid, r);
+        return f(val_l, val_r);
     }
 
-    vector<int> get_list(int x, int y){
-
-        vector<int> ret_list;
-        for(x += n, y += n - 1; x; x >>= 1, y >>= 1){
-            ret_list.emplace_back(x);
-            if(x != y)
-                ret_list.emplace_back(y);
-        }
-
-        return ret_list;
-    }
-
-    void eval(int x){
-
-        elm[x] = g(elm[x], lazy[x], 1 << length[x]);
-        if(x < n){
-            lazy[2 * x] = h(lazy[2 * x], lazy[x]);
-            lazy[2 * x + 1] = h(lazy[2 * x + 1], lazy[x]);
-        }
-        lazy[x] = op_u;
-    }
-
-    void update(int x, int y, U val){
-
-        vector<int> index_list = get_list(x, y);
-        for(int i = index_list.size() - 1; i >= 0; --i)
-            eval(index_list[i]);
-
-        for(x += n, y += n - 1; x <= y; x >>= 1, y >>= 1){
-            if(x & 1){
-                lazy[x] = h(lazy[x], val);
-                eval(x++);
-            }
-            if(!(y & 1)){
-                lazy[y] = h(lazy[y], val);
-                eval(y--);
-            }
-        }
-
-        for(auto index : index_list){
-            if(index < n){
-                eval(2 * index);
-                eval(2 * index + 1);
-                elm[index] = f(elm[2 * index], elm[2 * index + 1]);
-            }
-        }
-    }
-
-    T get(int x, int y){
-
-        vector<int> index_list = get_list(x, y);
-        for(int i = index_list.size() - 1; i >= 0; --i)
-            eval(index_list[i]);
-
-        T l = op_t, r = op_t;
-        for(x += n, y += n - 1; x <= y; x >>= 1, y >>= 1){
-            if(x & 1){
-                eval(x);
-                l = f(l, elm[x++]);
-            }
-            if(!(y & 1)){
-                eval(y);
-                r = f(elm[y--], r);
-            }
-        }
-        return f(l, r);
-    }
 };
 
 ```
 
-## DynamicSegtree
+## DynamicSegmentTree
 ```C++
 template <typename T>
 struct Segtree{
 
     struct SegNode;
-    SegNode* nil;
 
     struct SegNode{
         T val;
@@ -327,7 +453,6 @@ struct Segtree{
 
     Segtree(int n_, function<T(T, T)> f, T op) : f(f), op(op){
         for(n = 1; n < n_; n <<= 1);
-        nil = new SegNode(op);
         root = new SegNode(op);
     }
 
@@ -398,7 +523,7 @@ struct Segtree{
 
 ```
 
-## HLD
+## HeavyLightDecomposition
 ```C++
 class HeavyLightDecomposition{
 public:
@@ -523,107 +648,125 @@ public:
 
 ```
 
-## UnionFind
+## LazySegmentTree
 ```C++
-struct UnionFind{
-    vector<int> par;
-    int count;
-    UnionFind(int n) : par(n, -1), count(0){}
-    int Find(int x){return par[x] < 0 ? x : Find(par[x]);}
-    int Size(int x){return par[x] < 0 ? -par[x] : Size(par[x]);}
-    bool Unite(int x, int y){
-        x = Find(x);
-        y = Find(y);
-        if(x == y)
-            return false;
-        if(par[x] > par[y])
-            swap(x, y);
-        par[x] += par[y];
-        par[y] = x;
-        return ++count;
+template<typename T, typename U>
+struct Segtree{
+    int n;
+    T op_t;
+    U op_u;
+    vector<T> elm;
+    vector<U> lazy;
+    vector<int> length;
+    function<T(T, T)> f;
+    function<T(T, U, int)> g;
+    function<U(U, U)> h;
+
+    Segtree(int n, T init, function<T(T, T)> f, function<T(T, U, int)> g, function<U(U, U)> h, T op_t = T(), U op_u = U()) :
+        n(n),
+        op_t(op_t),
+        op_u(op_u),
+        elm(2 * n, init),
+        lazy(2 * n, op_u),
+        length(2 * n, 0),
+        f(f),
+        g(g),
+        h(h)
+    {
+        for(int i = n - 1; i > 0; --i){
+            elm[i] = f(elm[2 * i], elm[2 * i + 1]);
+            length[i] = length[2 * i] + 1;
+        }
+    }
+
+    Segtree(int n, vector<T> init, function<T(T, T)> f, function<T(T, U, int)> g, function<U(U, U)> h, T op_t = T(), U op_u = U()) :
+        n(n),
+        op_t(op_t),
+        op_u(op_u),
+        elm(2 * n),
+        lazy(2 * n, op_u),
+        length(2 * n, 0),
+        f(f),
+        g(g),
+        h(h)
+    {
+        for(int i = 0; i < n; ++i)
+            elm[i + n] = init[i];
+
+        for(int i = n - 1; i > 0; --i){
+            elm[i] = f(elm[2 * i], elm[2 * i + 1]);
+            length[i] = length[2 * i] + 1;
+        }
+    }
+
+    vector<int> get_list(int x, int y){
+
+        vector<int> ret_list;
+        for(x += n, y += n - 1; x; x >>= 1, y >>= 1){
+            ret_list.emplace_back(x);
+            if(x != y)
+                ret_list.emplace_back(y);
+        }
+
+        return ret_list;
+    }
+
+    void eval(int x){
+
+        elm[x] = g(elm[x], lazy[x], 1 << length[x]);
+        if(x < n){
+            lazy[2 * x] = h(lazy[2 * x], lazy[x]);
+            lazy[2 * x + 1] = h(lazy[2 * x + 1], lazy[x]);
+        }
+        lazy[x] = op_u;
+    }
+
+    void update(int x, int y, U val){
+
+        vector<int> index_list = get_list(x, y);
+        for(int i = index_list.size() - 1; i >= 0; --i)
+            eval(index_list[i]);
+
+        for(x += n, y += n - 1; x <= y; x >>= 1, y >>= 1){
+            if(x & 1){
+                lazy[x] = h(lazy[x], val);
+                eval(x++);
+            }
+            if(!(y & 1)){
+                lazy[y] = h(lazy[y], val);
+                eval(y--);
+            }
+        }
+
+        for(auto index : index_list){
+            if(index < n){
+                eval(2 * index);
+                eval(2 * index + 1);
+                elm[index] = f(elm[2 * index], elm[2 * index + 1]);
+            }
+        }
+    }
+
+    T get(int x, int y){
+
+        vector<int> index_list = get_list(x, y);
+        for(int i = index_list.size() - 1; i >= 0; --i)
+            eval(index_list[i]);
+
+        T l = op_t, r = op_t;
+        for(x += n, y += n - 1; x <= y; x >>= 1, y >>= 1){
+            if(x & 1){
+                eval(x);
+                l = f(l, elm[x++]);
+            }
+            if(!(y & 1)){
+                eval(y);
+                r = f(elm[y--], r);
+            }
+        }
+        return f(l, r);
     }
 };
-
-```
-
-## RectangleSum
-```C++
-struct RectangleSum{//O(HW)で初期化してO(1)で長方形の和を出す(半開区間)
-    vector<vector<i64>> sum;
-    int h, w;
-    RectangleSum(vector<vector<i64>>& v) :
-        h(v.size()),
-        w(v[0].size()),
-        sum(v)
-    {}
-
-    // 半開区間で設定する事に注意する
-    void set(int sx, int sy, int ex, int ey, i64 val){
-        sum[sx][sy] += val;
-        sum[sx][ey] -= val;
-        sum[ex][sy] -= val;
-        sum[ex][ey] += val;
-    }
-
-    void run(){
-
-        for(int i = 0; i < h + 1; ++i)
-            for(int j = 0; j < w; ++j)
-                sum[i][j + 1] += sum[i][j];
-
-        for(int j = 0; j < w + 1; ++j)
-            for(int i = 0; i < h; ++i)
-                sum[i + 1][j] += sum[i][j];
-    }
-
-    i64 getSum(int sx, int sy, int ex, int ey){
-        return sum[ex][ey] + sum[sx][sy] - sum[sx][ey] - sum[ex][sy];
-    }
-};
-
-```
-
-## Modint
-```C++
-template <i64 mod = MOD>
-struct ModInt{
-    i64 p;
-
-    ModInt() : p(0){}
-    ModInt(i64 x){p = x >= 0 ? x % mod : x + (-x + mod - 1) / mod * mod;}
-
-    ModInt& operator+=(const ModInt& y){p = p + *y - ((p + *y) >= mod ? mod : 0); return *this;}
-    ModInt& operator-=(const ModInt& y){p = p - *y + (p - *y < 0 ? mod : 0); return *this;}
-    ModInt& operator*=(const ModInt& y){p = (p * *y) % mod; return *this;}
-    ModInt& operator%=(const ModInt& y){if(y)p %= *y; return *this;}
-
-    ModInt operator+(const ModInt& y) const{ModInt x = *this; return x += y;}
-    ModInt operator-(const ModInt& y) const{ModInt x = *this; return x -= y;}
-    ModInt operator*(const ModInt& y) const{ModInt x = *this; return x *= y;}
-    ModInt operator%(const ModInt& y) const{ModInt x = *this; return x %= y;}
-
-    friend ostream& operator<<(ostream& stream, const ModInt<mod>& x){
-        stream << *x;
-        return stream;
-    }
-
-    friend ostream& operator>>(ostream& stream, const ModInt<mod>& x){
-        stream >> *x;
-        return stream;
-    }
-
-    ModInt& operator++(){p = (p + 1) % mod; return *this;}
-    ModInt& operator--(){p = (p - 1 + mod) % mod; return *this;}
-
-    bool operator==(const ModInt& y) const{return p == *y;}
-    bool operator!=(const ModInt& y) const{return p != *y;}
-
-    const i64& operator*() const{return p;}
-    i64& operator*(){return p;}
-
-};
-
-using mint = ModInt<>;
 
 ```
 
@@ -700,6 +843,297 @@ struct Matrix{
     Matrix operator-(const Matrix& mat){return Matrix(*this) -= mat;}
     Matrix operator%(const T mod){return Matrix(*this) %= mod;}
     Matrix& operator*=(const Matrix& mat){return *this = *this * mat;}
+};
+
+```
+
+## ModInt
+```C++
+template <i64 mod = MOD>
+struct ModInt{
+    i64 p;
+
+    ModInt() : p(0){}
+    ModInt(i64 x){p = x >= 0 ? x % mod : x + (-x + mod - 1) / mod * mod;}
+
+    ModInt& operator+=(const ModInt& y){p = p + *y - ((p + *y) >= mod ? mod : 0); return *this;}
+    ModInt& operator-=(const ModInt& y){p = p - *y + (p - *y < 0 ? mod : 0); return *this;}
+    ModInt& operator*=(const ModInt& y){p = (p * *y) % mod; return *this;}
+    ModInt& operator%=(const ModInt& y){if(y)p %= *y; return *this;}
+
+    ModInt operator+(const ModInt& y) const{ModInt x = *this; return x += y;}
+    ModInt operator-(const ModInt& y) const{ModInt x = *this; return x -= y;}
+    ModInt operator*(const ModInt& y) const{ModInt x = *this; return x *= y;}
+    ModInt operator%(const ModInt& y) const{ModInt x = *this; return x %= y;}
+
+    friend ostream& operator<<(ostream& stream, const ModInt<mod>& x){
+        stream << *x;
+        return stream;
+    }
+
+    friend ostream& operator>>(ostream& stream, const ModInt<mod>& x){
+        stream >> *x;
+        return stream;
+    }
+
+    ModInt& operator++(){p = (p + 1) % mod; return *this;}
+    ModInt& operator--(){p = (p - 1 + mod) % mod; return *this;}
+
+    bool operator==(const ModInt& y) const{return p == *y;}
+    bool operator!=(const ModInt& y) const{return p != *y;}
+
+    const i64& operator*() const{return p;}
+    i64& operator*(){return p;}
+
+};
+
+using mint = ModInt<>;
+
+```
+
+## PersistentDynamicLazySegmentTree
+```C++
+template<typename T, typename U>
+struct Segtree{
+
+    struct SegNode{
+        T val;
+        U lazy;
+
+        shared_ptr<SegNode> l;
+        shared_ptr<SegNode> r;
+        SegNode(T val, U lazy) : val(val), lazy(lazy), l(nullptr), r(nullptr){}
+    };
+
+    i64 n;
+    shared_ptr<SegNode> nil;
+    function<T(T, T)> f;
+    function<T(T, U, int)> g;
+    function<U(U, U)> h;
+    T op_t;
+    U op_u;
+
+    shared_ptr<SegNode> root;
+
+    Segtree(int n_, function<T(T, T)> f, function<T(T, U, int)> g, function<U(U, U)> h, T op_t, U op_u) : f(f), g(g), h(h), op_t(op_t), op_u(op_u){
+        for(n = 1; n < n_; n <<= 1);
+        root = make_shared<SegNode>(op_t, op_u);
+    }
+
+    void eval(shared_ptr<SegNode> node, i64 len, bool make = true){
+        node->val = g(node->val, node->lazy, len);
+        if(make){
+            node->l = node->l ? make_shared<SegNode>(*node->l) : make_shared<SegNode>(op_t, op_u);
+            node->r = node->r ? make_shared<SegNode>(*node->r) : make_shared<SegNode>(op_t, op_u);
+        }
+        node->l->lazy = h(node->l->lazy, node->lazy);
+        node->r->lazy = h(node->r->lazy, node->lazy);
+        node->lazy = op_u;
+    }
+
+    // if root -> make new node      -> eval(make child)
+    void update(i64 x, i64 y, U val, shared_ptr<SegNode> node = nullptr, i64 l = -1, i64 r = -1){
+        bool root_flag = (node == nullptr);
+        if(root_flag){
+            root = make_shared<SegNode>(*root);
+            node = root;
+        }
+        if(l == -1){
+            l = 0;
+            r = n;
+        }
+        eval(node, r - l);
+        if(r <= x || y <= l)
+            return ;
+        if(x <= l && r <= y){
+            node->lazy = h(node->lazy, val);
+            eval(node, r - l, false);
+        }else{
+            eval(node, r - l);
+            i64 mid = (l + r) >> 1;
+            update(x, y, val, node->l, l, mid);
+            update(x, y, val, node->r, mid, r);
+            node->val = f(node->l->val, node->r->val);
+        }
+        return ;
+    }
+
+    T get(i64 x, i64 y, shared_ptr<SegNode> node = nullptr, i64 l = -1, i64 r = -1){
+        bool root_flag = (node == nullptr);
+        if(root_flag){
+            root = make_shared<SegNode>(*root);
+            node = root;
+        }
+        if(l == -1){
+            l = 0;
+            r = n;
+        }
+
+        if(r <= x || y <= l)
+            return op_t;
+        eval(node, r - l);
+        if(x <= l && r <= y)
+            return node->val;
+
+        i64 val_l = op_t, val_r = op_t;
+        i64 mid = (l + r) >> 1;
+
+        if(node->l)
+            val_l = get(x, y, node->l, l, mid);
+        if(node->r)
+            val_r = get(x, y, node->r, mid, r);
+
+        return f(val_l, val_r);
+    }
+
+};
+
+```
+
+## RectangleSum
+```C++
+struct RectangleSum{//O(HW)で初期化してO(1)で長方形の和を出す(半開区間)
+    vector<vector<i64>> sum;
+    int h, w;
+    RectangleSum(vector<vector<i64>>& v) :
+        h(v.size()),
+        w(v[0].size()),
+        sum(v)
+    {}
+
+    // 半開区間で設定する事に注意する
+    void set(int sx, int sy, int ex, int ey, i64 val){
+        sum[sx][sy] += val;
+        sum[sx][ey] -= val;
+        sum[ex][sy] -= val;
+        sum[ex][ey] += val;
+    }
+
+    void run(){
+
+        for(int i = 0; i < h + 1; ++i)
+            for(int j = 0; j < w; ++j)
+                sum[i][j + 1] += sum[i][j];
+
+        for(int j = 0; j < w + 1; ++j)
+            for(int i = 0; i < h; ++i)
+                sum[i + 1][j] += sum[i][j];
+    }
+
+    i64 getSum(int sx, int sy, int ex, int ey){
+        return sum[ex][ey] + sum[sx][sy] - sum[sx][ey] - sum[ex][sy];
+    }
+};
+
+```
+
+## RollingHash
+```C++
+template <i64 mod1 = MOD, i64 mod2 = MOD + 2, i64 base = 10007, typename T = string>
+struct RollingHash{
+
+    using mint1 = ModInt<mod1>;
+    using mint2 = ModInt<mod2>;
+    using pair_type = pair<mint1, mint2>;
+    int len;
+    std::vector<pair_type> v;
+    static std::vector<pair_type> power, inv;
+
+    RollingHash(T s) :
+    len(s.size())
+    {
+        v.assign(1, make_pair(mint1(0), mint2(0)));
+        for(int i = 0; i < len; ++i){
+            auto c = s[i];
+            v.emplace_back(v.back().first + power[i].first * c,
+                           v.back().second + power[i].second * c);
+            if(static_cast<int>(power.size()) == i + 1){
+                power.emplace_back(power.back().first * base,
+                                   power.back().second * base);
+                inv.emplace_back(mpow<mint1>(power.back().first, mod1 - 2),
+                                 mpow<mint2>(power.back().second, mod2 - 2));
+            }
+        }
+    };
+
+    pair_type get(int l = 0, int r = -1){
+        if(r == -1)
+            r = len;
+        assert(l <= r);
+        assert(r <= len);
+        auto l_cut = make_pair(v[r].first - v[l].first,
+                               v[r].second - v[l].second);
+        return make_pair(l_cut.first * inv[l].first,
+                         l_cut.second * inv[l].second);
+    }
+
+    pair_type connect(pair_type l, pair_type r, int l_len){
+        return make_pair(l.first + power[l_len].first * r.first,
+                         l.second + power[l_len].second * r.second);
+    }
+};
+
+using RH = RollingHash<MOD, MOD + 2, 10007>;
+template<> vector<pair<ModInt<MOD>, ModInt<MOD + 2>>> RH::power = {make_pair(ModInt<MOD>(1), ModInt<MOD + 2>(1))};
+template<> vector<pair<ModInt<MOD>, ModInt<MOD + 2>>> RH::inv = {make_pair(ModInt<MOD>(1), ModInt<MOD + 2>(1))};
+
+```
+
+## SegmentTree
+```C++
+template<typename T>
+struct Segtree{
+    int n;
+    T op;
+    vector<T> elm;
+    function<T(T, T)> f;
+
+    Segtree(int n, T init, function<T(T, T)> f, T op = T()) :
+        n(n),
+        op(op),
+        elm(2 * n, init),
+        f(f)
+    {
+        for(int i = n - 1; i >= 1; --i)
+            elm[i] = f(elm[2 * i], elm[2 * i + 1]);
+    }
+
+    Segtree(int n, vector<T> init, function<T(T, T)> f, T op = T()) :
+        n(n),
+        op(op),
+        elm(2 * n),
+        f(f)
+    {
+        for(int i = 0; i < n; ++i)
+            elm[i + n] = init[i];
+        for(int i = n - 1; i >= 1; --i)
+            elm[i] = f(elm[2 * i], elm[2 * i + 1]);
+    }
+
+    void set(int x, T val){
+        x += n;
+        elm[x] = val;
+        while(x >>= 1)
+            elm[x] = f(elm[2 * x], elm[2 * x + 1]);
+    }
+
+    void update(int x, T val){
+        x += n;
+        elm[x] = f(val, elm[x]);
+        while(x >>= 1)
+            elm[x] = f(elm[2 * x], elm[2 * x + 1]);
+    }
+
+    T get(int x, int y) const{
+        T l = op, r = op;
+        for(x += n, y += n - 1; x <= y; x >>= 1, y >>= 1){
+            if(x & 1)
+                l = f(l, elm[x++]);
+            if(!(y & 1))
+                r = f(elm[y--], r);
+        }
+        return f(l, r);
+    }
 };
 
 ```
@@ -1086,5 +1520,98 @@ const i64 val = 0;
 const i64 op = -1e9;
 using node_type = Node<i64, i64>;
 template<> node_type* node_type::nil = new node_type(0, op, 0);
+
+```
+
+## TrieTree
+```C++
+template <int size = 26, int start = 'a'>
+struct Trie{
+    struct Node{
+        // 値, prefixに含む文字列の数, 文字列の数
+        int val, len, cnt, exist_cnt;
+        // 子のindex, 子の(indexの)一覧
+        vector<int> next, exist;
+        Node(int val = -1, int len = 0, bool back = false) : val(val), len(len), cnt(0), exist_cnt(back), next(size, -1){}
+    };
+
+    vector<Node> nodes;
+    Trie() : nodes(1){}
+
+    int insert(string& s, int str_index = 0){
+        int pos = 0, idx = str_index;
+        while(idx != s.size()){
+            ++nodes[pos].cnt;
+            int c = s[idx] - start;
+            assert(c < size);
+
+            if(nodes[pos].next[c] == -1){
+                nodes[pos].next[c] = nodes.size();
+                nodes[pos].exist.emplace_back(nodes.size());
+                nodes.emplace_back(c, nodes[pos].len + 1);
+            }
+            pos = nodes[pos].next[c];
+            ++idx;
+        }
+        ++nodes[pos].cnt;
+        ++nodes[pos].exist_cnt;
+        return pos;
+    }
+
+    // (sの部分文字列, s, sを部分文字列に含む文字列)に対して関数を実行する
+    // ラムダ内でtrie.nodes[idx].exist_cntを判定する事で, 挿入された文字列そのもの以外判定しなくなる
+    void query(string& s, function<void(int, string&)> f, bool from_prefix, bool correct, bool to_prefix, int str_index = 0){
+        int pos = 0, idx = str_index;
+        string str;
+        while(idx != s.size()){
+            if(from_prefix)
+                f(pos, str);
+            int c = s[idx] - start;
+            assert(c < size);
+
+            if(nodes[pos].next[c] == -1)
+                return ;
+            pos = nodes[pos].next[c];
+            str += static_cast<char>(nodes[pos].val + start);
+            ++idx;
+        }
+        if(correct)
+            f(pos, str);
+        function<void(int)> dfs = [&](int pos){
+            for(auto& next : nodes[pos].exist){
+                char c = nodes[next].val + start;
+                if(to_prefix)
+                    f(pos, str);
+                str += c;
+                dfs(next);
+                str.pop_back();
+            }
+        };
+        dfs(pos);
+    }
+};
+
+```
+
+## UnionFind
+```C++
+struct UnionFind{
+    vector<int> par;
+    int count;
+    UnionFind(int n) : par(n, -1), count(0){}
+    int Find(int x){return par[x] < 0 ? x : Find(par[x]);}
+    int Size(int x){return par[x] < 0 ? -par[x] : Size(par[x]);}
+    bool Unite(int x, int y){
+        x = Find(x);
+        y = Find(y);
+        if(x == y)
+            return false;
+        if(par[x] > par[y])
+            swap(x, y);
+        par[x] += par[y];
+        par[y] = x;
+        return ++count;
+    }
+};
 
 ```

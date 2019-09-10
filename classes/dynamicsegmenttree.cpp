@@ -2,7 +2,6 @@ template <typename T>
 struct Segtree{
 
     struct SegNode;
-    SegNode* nil;
 
     struct SegNode{
         T val;
@@ -19,7 +18,6 @@ struct Segtree{
 
     Segtree(int n_, function<T(T, T)> f, T op) : f(f), op(op){
         for(n = 1; n < n_; n <<= 1);
-        nil = new SegNode(op);
         root = new SegNode(op);
     }
 

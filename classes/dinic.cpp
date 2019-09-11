@@ -14,8 +14,8 @@ struct Dinic{
     Dinic(int n) : edges(n), _inf(numeric_limits<T>::max()){}
 
     void add(int from, int to, T cap){
-        edges[from].emplace_back(to, cap, static_cast<T>(edges[to].size()));
-        edges[to].emplace_back(from, 0, static_cast<T>(edges[from].size()) - 1);
+        edges[from].emplace_back(to, cap, static_cast<int>(edges[to].size()));
+        edges[to].emplace_back(from, 0, static_cast<int>(edges[from].size()) - 1);
     }
 
     bool bfs(int s, int t){

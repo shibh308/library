@@ -773,6 +773,56 @@ struct Segtree{
 
 ```
 
+## LowLink
+```C++
+struct LowLink{
+    vector<vector<int>>& edges;
+    // 関節点
+    vector<int> art;
+    vector<pair<int,int>> bridge;
+
+    vector<int> used, ord, low;
+    int k;
+
+    void dfs(int idx, int par){
+        ord[idx] = k++;
+        low[idx] = ord[idx];
+        bool is_art = false;
+        int cnt = 0;
+        for(auto& to : edges[idx]){
+            if(ord[to] == -1){
+                ++cnt;
+                dfs(to, idx);
+                low[idx] = min(low[idx], low[to]);
+                is_art |= par != -1 && low[to] >= ord[idx];
+                if(ord[idx] < low[to])
+                    bridge.emplace_back(idx, to);
+            }else if(to != par)
+                low[idx] = min(low[idx], ord[to]);
+        }
+        is_art |= (par == -1 && cnt > 1);
+        if(is_art)
+            art.emplace_back(idx);
+    }
+
+    LowLink(vector<vector<int>>& edges) :
+        edges(edges),
+        ord(edges.size(), -1),
+        low(edges.size(), 0),
+        k(0)
+    {
+        for(int i = 0; i < edges.size(); ++i)
+            if(ord[i] == -1)
+                dfs(i, -1);
+        for(auto& b : bridge)
+            b = make_pair(min(b.first, b.second), max(b.first, b.second));
+        sort(art.begin(), art.end());
+        sort(bridge.begin(), bridge.end());
+    }
+};
+
+```
+
 ## Matrix
 ```C++
 template <typename T>
@@ -990,6 +1040,79 @@ struct Segtree{
         return f(val_l, val_r);
     }
 
+};
+
+```
+
+## PrimalDual
+```C++
+template <typename T, typename U>
+struct PrimalDual{
+    struct Edge{
+        int to, rev;
+        U cap;
+        T cost;
+        Edge(int to, U cap, T cost, int rev) :
+            to(to), rev(rev), cap(cap), cost(cost){}
+    };
+    vector<vector<Edge>> edges;
+    T _inf;
+    vector<T> potential, min_cost;
+    vector<int> prev_v, prev_e;
+
+    PrimalDual(int n) : edges(n), _inf(numeric_limits<T>::max()){}
+
+    void add(int from, int to, U cap, T cost){
+        edges[from].emplace_back(to, cap, cost, static_cast<int>(edges[to].size()));
+        edges[to].emplace_back(from, 0, -cost, static_cast<int>(edges[from].size()) - 1);
+    }
+
+    T solve(int s, int t, U flow){
+        int n = edges.size();
+        T ret = 0;
+        priority_queue<pair<T,int>, vector<pair<T,int>>, greater<pair<T,int>>> que;
+        potential.assign(n, 0);
+        prev_v.assign(n, -1);
+        prev_e.assign(n, -1);
+        while(flow > 0){
+            min_cost.assign(n, _inf);
+            que.emplace(0, s);
+            min_cost[s] = 0;
+            while(!que.empty()){
+                T fl;
+                int pos;
+                tie(fl, pos) = que.top();
+                que.pop();
+                if(min_cost[pos] != fl)
+                    continue;
+                for(int i = 0; i < edges[pos].size(); ++i){
+                    auto& ed = edges[pos][i];
+                    T nex = fl + ed.cost + potential[pos] - potential[ed.to];
+                    if(ed.cap > 0 && min_cost[ed.to] > nex){
+                        min_cost[ed.to] = nex;
+                        prev_v[ed.to] = pos;
+                        prev_e[ed.to] = i;
+                        que.emplace(min_cost[ed.to], ed.to);
+                    }
+                }
+            }
+            if(min_cost[t] == _inf)
+                return -1;
+            for(int i = 0; i < n; ++i)
+                potential[i] += min_cost[i];
+            T add_flow = flow;
+            for(int x = t; x != s; x = prev_v[x])
+                add_flow = min(add_flow, edges[prev_v[x]][prev_e[x]].cap);
+            flow -= add_flow;
+            ret += add_flow * potential[t];
+            for(int x = t; x != s; x = prev_v[x]){
+                auto& ed = edges[prev_v[x]][prev_e[x]];
+                ed.cap -= add_flow;
+                edges[x][ed.rev].cap += add_flow;
+            }
+        }
+        return ret;
+    }
 };
 
 ```

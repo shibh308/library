@@ -17,13 +17,13 @@ struct RectangleSum{//O(HW)で初期化してO(1)で長方形の和を出す(半
 
     void run(){
 
+        for(int i = 0; i < h; ++i)
+            for(int j = 0; j < w + 1; ++j)
+                sum[i + 1][j] += sum[i][j];
+
         for(int i = 0; i < h + 1; ++i)
             for(int j = 0; j < w; ++j)
                 sum[i][j + 1] += sum[i][j];
-
-        for(int j = 0; j < w + 1; ++j)
-            for(int i = 0; i < h; ++i)
-                sum[i + 1][j] += sum[i][j];
     }
 
     i64 getSum(int sx, int sy, int ex, int ey){

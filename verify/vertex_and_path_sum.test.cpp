@@ -8,30 +8,6 @@ using i64 = long;
 #include "../lib/classes/heavylightdecomposition.cpp"
 
 
-const i64 MOD = 1e9 + 7;
-const i64 INF = i64(1e18) + 7;
-
-
-template <typename T>
-bool chmin(T& x, T y){
-    if(x > y){
-        x = y;
-        return true;
-    }
-    return false;
-}
-
-template <typename T>
-bool chmax(T& x, T y){
-    if(x < y){
-        x = y;
-        return true;
-    }
-    return false;
-}
-
-
-
 signed main(){
 
     int n, q;

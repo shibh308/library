@@ -71,7 +71,7 @@ signed main(){
             for(auto& p : r){
                 sum += seg.get(p.first, p.second);
             }
-            printf("%d\n", sum);
+            printf("%lld\n", sum);
         }
     }
 

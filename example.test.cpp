@@ -6,6 +6,8 @@
 #define ALL(x) std::begin(x), std::end(x)
 using namespace std;
 
+// update file test
+
 int main() {
     int n; cin >> n;
     vector<int> s(n);

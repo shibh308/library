@@ -9,7 +9,7 @@ template = '  <template name="{{ name }}" value="{{ code }}" discription="" toRe
 
 def create():
     dics = []
-    pathes = glob.glob("*/*.cpp")
+    pathes = sorted(glob.glob("functions/*.cpp")) + sorted(glob.glob("classes/*.cpp"))
     for load_path in pathes:
         with open(load_path, 'r') as f:
             name = os.path.splitext(load_path.split('/')[-1])[0]

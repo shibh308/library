@@ -4,8 +4,8 @@
 using namespace std;
 using i64 = long;
 
-#include "../../library/lib/classes/segtree.cpp"
-#include "../../library/lib/classes/heavylightdecomposition.cpp"
+#include "../lib/classes/segtree.cpp"
+#include "../lib/classes/heavylightdecomposition.cpp"
 
 
 const i64 MOD = 1e9 + 7;

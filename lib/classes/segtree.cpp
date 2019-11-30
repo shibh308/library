@@ -36,7 +36,7 @@ struct Segtree{
 
     void update(int x, T val){
         x += n;
-        elm[x] = f(val, elm[x]);
+        elm[x] = f(elm[x], val);
         while(x >>= 1)
             elm[x] = f(elm[2 * x], elm[2 * x + 1]);
     }

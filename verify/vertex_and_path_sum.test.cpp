@@ -35,17 +35,17 @@ bool chmax(T& x, T y){
 signed main(){
 
     int n, q;
-    cin >> n >> q;
+    scanf("%d%d", &n, &q);
     vector<i64> a(n);
     for(auto& x : a)
-        cin >> x;
+        scanf("%d", &x);
     vector<int> u(n - 1), v(n - 1);
     for(int i = 0; i < n - 1; ++i)
-        cin >> u[i] >> v[i];
+        scanf("%d%d", &u[i], &v[i]);
     vector<tuple<int,int,int>> querys;
     for(int i = 0; i < q; ++i){
         int a, b, c;
-        cin >> a >> b >> c;
+        scanf("%d%d%d", &a, &b, &c);
         querys.emplace_back(a, b, c);
     }
     Segtree<i64> seg(n, a, [](auto x, auto y){return x + y;}, 0L);
@@ -71,7 +71,7 @@ signed main(){
             for(auto& p : r){
                 sum += seg.get(p.first, p.second);
             }
-            cout << sum << endl;
+            printf("%d\n", sum);
         }
     }
 

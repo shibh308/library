@@ -48,13 +48,15 @@ signed main(){
         scanf("%d%d%d", &a, &b, &c);
         querys.emplace_back(a, b, c);
     }
-    Segtree<i64> seg(n, a, [](auto x, auto y){return x + y;}, 0L);
+    Segtree<i64> seg(n, 0, [](auto x, auto y){return x + y;}, 0L);
     vector<vector<int>> edges(n);
     for(int i = 0; i < n - 1; ++i) {
         edges[u[i]].emplace_back(v[i]);
         edges[v[i]].emplace_back(u[i]);
     }
     HeavyLightDecomposition hld(edges);
+    for(int i = 0; i < n; ++i)
+        seg.set(hld.in[i], a[i]);
 
     for(auto& query : querys){
         int a, b, c;

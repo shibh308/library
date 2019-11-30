@@ -1,6 +1,9 @@
 name: verify
 
-on: push
+on:
+  push:
+    paths:
+      - '**/*.cpp'
 
 jobs:
   build:
@@ -13,9 +16,14 @@ jobs:
       uses: actions/setup-python@v1
 
     - name: Install dependencies
-      run: pip3 install -U git+https://github.com/kmyk/online-judge-verify-helper.git@v1
+      run: pip3 install -U git+https://github.com/kmyk/online-judge-verify-helper.git@v1 jinja2
 
     - name: Run tests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: oj-verify run
+
+    - name: Make Snippets
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: ./make_snippets.sh

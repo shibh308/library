@@ -16,7 +16,7 @@ jobs:
       uses: actions/setup-python@v1
 
     - name: Install dependencies
-      run: pip3 install -U git+https://github.com/kmyk/online-judge-verify-helper.git@v1 jinja2
+      run: pip3 install -U online-judge-verify-helper jinja2
 
     - name: Run tests and make docs
       env:

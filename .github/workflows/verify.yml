@@ -18,6 +18,11 @@ jobs:
     - name: Install dependencies
       run: pip3 install -U online-judge-verify-helper jinja2
 
+    - name: Make Snippets
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: ./test/make_snippets.sh
+
     - name: Run tests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -27,8 +32,3 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: oj-verify docs
-
-    - name: Make Snippets
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: ./test/make_snippets.sh

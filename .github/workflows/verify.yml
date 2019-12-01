@@ -18,10 +18,10 @@ jobs:
     - name: Install dependencies
       run: pip3 install -U git+https://github.com/kmyk/online-judge-verify-helper.git@v1 jinja2
 
-    - name: Run tests
+    - name: Run tests and make docs
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: oj-verify run
+      run: oj-verify all
 
     - name: Make Snippets
       env:

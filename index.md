@@ -66,7 +66,7 @@
 
 
 ## Verify Files
-* :warning: [test/example.test.cpp](verify/test/example.test.cpp.html)
+* :warning: [utils/example.test.cpp](verify/utils/example.test.cpp.html)
 * :warning: [verify/vertex_and_path_sum.test.cpp](verify/verify/vertex_and_path_sum.test.cpp.html)
 
 

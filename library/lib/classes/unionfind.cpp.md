@@ -29,6 +29,10 @@
 
 
 
+## Verified
+* :warning: [verify/unionfind.test.cpp](../../../verify/verify/unionfind.test.cpp.html)
+
+
 ## Code
 ```cpp
 struct UnionFind{

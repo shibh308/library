@@ -29,6 +29,10 @@
 
 
 
+## Verified
+* :warning: [verify/static_rmq.test.cpp](../../../verify/verify/static_rmq.test.cpp.html)
+
+
 ## Code
 ```cpp
 template <typename T>

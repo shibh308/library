@@ -30,7 +30,9 @@
 
 
 ## Verified
+* :warning: [verify/lca_hld.test.cpp](../../../verify/verify/lca_hld.test.cpp.html)
 * :warning: [verify/vertex_and_path_sum.test.cpp](../../../verify/verify/vertex_and_path_sum.test.cpp.html)
+* :warning: [verify/vertex_and_subtree_sum.test.cpp](../../../verify/verify/vertex_and_subtree_sum.test.cpp.html)
 
 
 ## Code

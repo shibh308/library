@@ -21,7 +21,7 @@ jobs:
     - name: Make Snippets
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: ./test/make_snippets.sh
+      run: ./utils/make_snippets.sh
 
     - name: Run tests
       env:

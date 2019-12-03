@@ -66,7 +66,7 @@
 
 
 ## Verify Files
-* :warning: [utils/example.test.cpp](verify/utils/example.test.cpp.html)
+* :warning: [verify/2-sat.test.cpp](verify/verify/2-sat.test.cpp.html)
 * :warning: [verify/bipartitematching.test.cpp](verify/verify/bipartitematching.test.cpp.html)
 * :warning: [verify/lca_hld.test.cpp](verify/verify/lca_hld.test.cpp.html)
 * :warning: [verify/static_rmq.test.cpp](verify/verify/static_rmq.test.cpp.html)

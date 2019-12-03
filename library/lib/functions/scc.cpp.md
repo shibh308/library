@@ -29,6 +29,10 @@
 
 
 
+## Verified
+* :warning: [verify/2-sat.test.cpp](../../../verify/verify/2-sat.test.cpp.html)
+
+
 ## Code
 ```cpp
 vector<int> scc(vector<vector<int>>& edges){

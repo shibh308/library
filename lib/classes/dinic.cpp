@@ -38,18 +38,21 @@ struct Dinic{
     T dfs(int idx, int t, T flow){
         if(idx == t)
             return flow;
-        for(int i = cnt[idx]; i < edges[idx].size(); ++i){
-            auto& ed = edges[idx][i];
+        T ret = 0;
+        while(cnt[idx] < edges[idx].size()){
+            auto& ed = edges[idx][cnt[idx]];
             if(ed.cap > 0 && min_cost[idx] < min_cost[ed.to]){
-                T res = dfs(ed.to, t, min(flow, ed.cap));
-                if(res > 0){
-                    ed.cap -= res;
-                    edges[ed.to][ed.rev].cap += res;
-                    return res;
-                }
+                T d = dfs(ed.to, t, min(flow, ed.cap));
+                ed.cap -= d;
+                edges[ed.to][ed.rev].cap += d;
+                ret += d;
+                flow -= d;
+                if(flow == 0)
+                    break;
             }
+            ++cnt[idx];
         }
-        return 0;
+        return ret;
     }
 
     T solve(int s, int t){

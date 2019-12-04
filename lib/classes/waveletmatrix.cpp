@@ -20,16 +20,15 @@ struct BitVector{
     void build(){
         l[0] = 0;
         for(int i = 1; i < m; ++i)
-            l[i] = l[i - 1] + __builtin_popcount(s[i - 1]);
+            l[i] = l[i - 1] + __builtin_popcountll(s[i - 1]);
     }
 
     // [0, r) count flag
     int rank(int r, bool flag = true){
-        --r;
         if(flag)
-            return l[i] + __builltin_popcount(s[i] & ~((1uLL << r) - 1));
+            return l[r >> 6] + __builtin_popcountll(s[r >> 6] & ((1uLL << (r & 63)) - 1));
         else
-            return r + 1 - (l[i] + __builltin_popcount(s[i] & ~((1uLL << r) - 1)));
+            return r - (l[r >> 6] + __builtin_popcountll(s[r >> 6] & ((1uLL << (r & 63)) - 1)));
     }
 
 };
@@ -39,23 +38,25 @@ struct WaveletMatrix{
     int n, m;
     vector<BitVector> b;
     vector<int> border;
-    WaveletMatrix(vector<T>& a) n(a.size()){
+    WaveletMatrix(vector<T> a) : n(a.size()){
         T max_val = *max_element(a.begin(), a.end());
         m = (max_val == 0) ? 1 : 64 - __builtin_clzll(max_val);
-        b.resize(m);
-        border.resize(n);
+        b.resize(m, BitVector(n));
+        border.resize(m);
         vector<vector<T>> v(2, vector<T>(n));
-        vector<int> cnt{0, 0};
         for(int j = m - 1; j >= 0; --j){
+            vector<int> cnt(2, 0);
             for(int i = 0; i < n; ++i){
-                bool fl = (a[i] >> j) & 1;
+                bool fl = ((a[i] >> j) & 1);
                 if(fl)
                     b[j].set(i);
-                v[++cnt[fl]] = a[i];
+                v[fl][cnt[fl]++] = a[i];
             }
-            swap(data, v[0]);
-            for(int i = 0; i < cnt[1]; ++i)
-                data[i + cnt[0]] = v[1][i];
+            swap(a, v[0]);
+            for(int i = 0; i < cnt[1]; ++i) {
+                a[i + cnt[0]] = v[1][i];
+            }
+            b[j].build();
             border[j] = cnt[0];
         }
     }
@@ -90,6 +91,8 @@ struct WaveletMatrix{
 
     // [l, r) k-th min value (k: 0-indexed)
     T kth_min(int l, int r, int k){
+        if(r - l < k)
+            return -1;
         T ret = 0;
         for(int j = m - 1; j >= 0; --j){
             int x = b[j].rank(r, false) - b[j].rank(l, false);
@@ -101,7 +104,7 @@ struct WaveletMatrix{
             r = b[j].rank(r, fl) + (fl ? border[j] : 0);
             l = b[j].rank(l, fl) + (fl ? border[j] : 0);
         }
-        return r;
+        return ret;
     }
 
     // [l, r) k-th min value (k: 0-indexed)

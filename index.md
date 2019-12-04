@@ -50,6 +50,7 @@
 * :warning: [lib/classes/treap.cpp](library/lib/classes/treap.cpp.html)
 * :warning: [lib/classes/trie.cpp](library/lib/classes/trie.cpp.html)
 * :warning: [lib/classes/unionfind.cpp](library/lib/classes/unionfind.cpp.html)
+* :warning: [lib/classes/waveletmatrix.cpp](library/lib/classes/waveletmatrix.cpp.html)
 
 
 ### lib/functions
@@ -70,6 +71,7 @@
 * :warning: [verify/bipartitematching.test.cpp](verify/verify/bipartitematching.test.cpp.html)
 * :warning: [verify/lca_hld.test.cpp](verify/verify/lca_hld.test.cpp.html)
 * :warning: [verify/static_rmq.test.cpp](verify/verify/static_rmq.test.cpp.html)
+* :warning: [verify/static_rmq_wm.test.cpp](verify/verify/static_rmq_wm.test.cpp.html)
 * :warning: [verify/unionfind.test.cpp](verify/verify/unionfind.test.cpp.html)
 * :warning: [verify/vertex_and_path_sum.test.cpp](verify/verify/vertex_and_path_sum.test.cpp.html)
 * :warning: [verify/vertex_and_subtree_sum.test.cpp](verify/verify/vertex_and_subtree_sum.test.cpp.html)

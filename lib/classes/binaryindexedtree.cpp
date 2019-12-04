@@ -12,6 +12,11 @@ struct BIT{
         return val;
     }
 
+    // [l, r)
+    T sum(int l, int r){
+        return sum(r) - sum(l);
+    }
+
     void add(int x, T val){
         for(++x; x < elm.size(); x += x & -x)
             elm[x] += val;

@@ -73,6 +73,7 @@
 * :warning: [verify/rmq_raq.test.cpp](verify/verify/rmq_raq.test.cpp.html)
 * :warning: [verify/rmq_raq_dynamic.test.cpp](verify/verify/rmq_raq_dynamic.test.cpp.html)
 * :warning: [verify/rmq_raq_persistent.test.cpp](verify/verify/rmq_raq_persistent.test.cpp.html)
+* :warning: [verify/rsq_bit.test.cpp](verify/verify/rsq_bit.test.cpp.html)
 * :warning: [verify/static_rmq.test.cpp](verify/verify/static_rmq.test.cpp.html)
 * :warning: [verify/static_rmq_wm.test.cpp](verify/verify/static_rmq_wm.test.cpp.html)
 * :warning: [verify/unionfind.test.cpp](verify/verify/unionfind.test.cpp.html)

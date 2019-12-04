@@ -29,6 +29,10 @@
 
 
 
+## Verified
+* :warning: [verify/rsq_bit.test.cpp](../../../verify/verify/rsq_bit.test.cpp.html)
+
+
 ## Code
 ```cpp
 template <typename T>
@@ -43,6 +47,11 @@ struct BIT{
         for(; x > 0; x -= x & -x)
             val += elm[x];
         return val;
+    }
+
+    // [l, r)
+    T sum(int l, int r){
+        return sum(r) - sum(l);
     }
 
     void add(int x, T val){

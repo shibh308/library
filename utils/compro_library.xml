@@ -49,7 +49,7 @@
       <option name="cpp" value="true" />
     </context>
   </template>
-  <template name="binaryindexedtree" value="template &lt;typename T&gt;&#10;struct BIT{&#10;    vector&lt;T&gt; elm;&#10;    BIT(int n, T init = T()) : elm(n + 1, init){&#10;    }&#10;&#10;    // [0, x)&#10;    T sum(int x){&#10;        T val = 0;&#10;        for(; x &gt; 0; x -= x &amp; -x)&#10;            val += elm[x];&#10;        return val;&#10;    }&#10;&#10;    void add(int x, T val){&#10;        for(++x; x &lt; elm.size(); x += x &amp; -x)&#10;            elm[x] += val;&#10;    }&#10;};&#10;&#10;" discription="" toReformat="false" toShortenFQNames="true">
+  <template name="binaryindexedtree" value="template &lt;typename T&gt;&#10;struct BIT{&#10;    vector&lt;T&gt; elm;&#10;    BIT(int n, T init = T()) : elm(n + 1, init){&#10;    }&#10;&#10;    // [0, x)&#10;    T sum(int x){&#10;        T val = 0;&#10;        for(; x &gt; 0; x -= x &amp; -x)&#10;            val += elm[x];&#10;        return val;&#10;    }&#10;&#10;    // [l, r)&#10;    T sum(int l, int r){&#10;        return sum(r) - sum(l);&#10;    }&#10;&#10;    void add(int x, T val){&#10;        for(++x; x &lt; elm.size(); x += x &amp; -x)&#10;            elm[x] += val;&#10;    }&#10;};&#10;&#10;" discription="" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="cpp" value="true" />
     </context>

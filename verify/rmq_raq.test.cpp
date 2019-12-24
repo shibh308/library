@@ -10,6 +10,7 @@ using i64 = long;
 signed main() {
     int n, q;
     cin >> n >> q;
+
     Segtree<int,int> seg(n, 0, [](auto x, auto y){return min(x, y);}, [](auto x, auto y, int){return x + y;}, [](auto x, auto y){return x + y;}, 1e9, 0);
     for(int i = 0; i < q; ++i){
         int ty;

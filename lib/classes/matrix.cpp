@@ -22,7 +22,7 @@ struct Matrix{
 
     T& at(int i, int j){
         assert(0 <= i && i <= h && 0 <= j && j < w);
-        return v[i * h + j];
+        return v[i * w + j];
     };
 
     Matrix pow(i64 x){

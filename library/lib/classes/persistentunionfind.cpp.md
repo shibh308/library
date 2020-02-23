@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: lib/classes/persistentunionfind.cpp
+# :heavy_check_mark: lib/classes/persistentunionfind.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,11 @@ layout: default
     - Last commit date: 2020-02-24 09:13:36+09:00
 
 
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../../verify/verify/persistentunionfind.test.cpp.html">verify/persistentunionfind.test.cpp</a>
 
 
 ## Code

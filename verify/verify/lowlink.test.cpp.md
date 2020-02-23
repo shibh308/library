@@ -25,13 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: verify/lowlink.text.cpp
+# :heavy_check_mark: verify/lowlink.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/lowlink.text.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-01-05 00:12:30+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/verify/lowlink.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-02-24 09:29:47+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0415">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0415</a>

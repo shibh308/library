@@ -58,7 +58,7 @@ layout: default
 * :warning: <a href="library/lib/classes/matrix.cpp.html">lib/classes/matrix.cpp</a>
 * :warning: <a href="library/lib/classes/modint.cpp.html">lib/classes/modint.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/persistentdynamiclazysegmenttree.cpp.html">lib/classes/persistentdynamiclazysegmenttree.cpp</a>
-* :warning: <a href="library/lib/classes/persistentunionfind.cpp.html">lib/classes/persistentunionfind.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/persistentunionfind.cpp.html">lib/classes/persistentunionfind.cpp</a>
 * :warning: <a href="library/lib/classes/primaldual.cpp.html">lib/classes/primaldual.cpp</a>
 * :warning: <a href="library/lib/classes/rectanglesum.cpp.html">lib/classes/rectanglesum.cpp</a>
 * :warning: <a href="library/lib/classes/rollinghash.cpp.html">lib/classes/rollinghash.cpp</a>
@@ -85,18 +85,13 @@ layout: default
 * :x: <a href="library/lib/functions/scc.cpp.html">lib/functions/scc.cpp</a>
 
 
-<div id="e8418d1d706cd73548f9f16f1d55ad6e"></div>
-
-### verify
-
-* :warning: <a href="library/verify/lowlink.text.cpp.html">verify/lowlink.text.cpp</a>
-
-
 ## Verify Files
 
 * :x: <a href="verify/verify/2-sat.test.cpp.html">verify/2-sat.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/bipartitematching.test.cpp.html">verify/bipartitematching.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/lca_hld.test.cpp.html">verify/lca_hld.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/lowlink.test.cpp.html">verify/lowlink.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/persistentunionfind.test.cpp.html">verify/persistentunionfind.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rmq_raq.test.cpp.html">verify/rmq_raq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rmq_raq_dynamic.test.cpp.html">verify/rmq_raq_dynamic.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rmq_raq_persistent.test.cpp.html">verify/rmq_raq_persistent.test.cpp</a>

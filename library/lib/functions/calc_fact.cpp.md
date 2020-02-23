@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 <!-- mathjax config similar to math.stackexchange -->
 <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -22,14 +26,20 @@
 
 
 # :warning: lib/functions/calc_fact.cpp
-* category: lib/functions
 
+<a href="../../../index.html">Back to top page</a>
 
-[Back to top page](../../../index.html)
+* category: <a href="../../../index.html#abc4d0f7246596dc1cbcc6b77896a2fc">lib/functions</a>
+* <a href="{{ site.github.repository_url }}/blob/master/lib/functions/calc_fact.cpp">View this file on GitHub</a>
+    - Last commit date: 2019-11-30 20:08:52+09:00
+
 
 
 
 ## Code
+
+<a id="unbundled"></a>
+{% raw %}
 ```cpp
 auto calc_fact = [mpow]{
 	constexpr int N = 2e6;
@@ -46,6 +56,28 @@ tie(fact, inv) = calc_fact();
 
 
 ```
+{% endraw %}
 
-[Back to top page](../../../index.html)
+<a id="bundled"></a>
+{% raw %}
+```cpp
+#line 1 "lib/functions/calc_fact.cpp"
+auto calc_fact = [mpow]{
+	constexpr int N = 2e6;
+	vector<mint> fact(N + 1, 1);
+	vector<mint> inv(N + 1, 1);
+	for(int i = 1; i < N; ++i){
+		fact[i + 1] = fact[i] * (i + 1);
+		inv[i + 1] = mpow(fact[i + 1], MOD - 2);
+	}
+	return make_pair(fact, inv);
+};
+vector<mint> fact, inv;
+tie(fact, inv) = calc_fact();
+
+
+```
+{% endraw %}
+
+<a href="../../../index.html">Back to top page</a>
 

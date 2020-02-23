@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 <!-- mathjax config similar to math.stackexchange -->
 <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -22,14 +26,20 @@
 
 
 # :warning: lib/functions/divisor.cpp
-* category: lib/functions
 
+<a href="../../../index.html">Back to top page</a>
 
-[Back to top page](../../../index.html)
+* category: <a href="../../../index.html#abc4d0f7246596dc1cbcc6b77896a2fc">lib/functions</a>
+* <a href="{{ site.github.repository_url }}/blob/master/lib/functions/divisor.cpp">View this file on GitHub</a>
+    - Last commit date: 2019-11-30 20:08:52+09:00
+
 
 
 
 ## Code
+
+<a id="unbundled"></a>
+{% raw %}
 ```cpp
 auto divisor = [](i64 x){
 	int sq = sqrt(x) + 1;
@@ -46,6 +56,28 @@ auto divisor = [](i64 x){
 
 
 ```
+{% endraw %}
 
-[Back to top page](../../../index.html)
+<a id="bundled"></a>
+{% raw %}
+```cpp
+#line 1 "lib/functions/divisor.cpp"
+auto divisor = [](i64 x){
+	int sq = sqrt(x) + 1;
+	vector<int> ret;
+	for(i64 i = 1; i < sq; ++i)
+		if(!(x % i)){
+			ret.emplace_back(i);
+			if(i * i != x)
+				ret.emplace_back(x / i);
+		}
+	sort(ret.begin(), ret.end());
+	return ret;
+};
+
+
+```
+{% endraw %}
+
+<a href="../../../index.html">Back to top page</a>
 

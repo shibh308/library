@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 <!-- mathjax config similar to math.stackexchange -->
 <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -22,14 +26,20 @@
 
 
 # :warning: lib/functions/nhr.cpp
-* category: lib/functions
 
+<a href="../../../index.html">Back to top page</a>
 
-[Back to top page](../../../index.html)
+* category: <a href="../../../index.html#abc4d0f7246596dc1cbcc6b77896a2fc">lib/functions</a>
+* <a href="{{ site.github.repository_url }}/blob/master/lib/functions/nhr.cpp">View this file on GitHub</a>
+    - Last commit date: 2019-11-30 20:08:52+09:00
+
 
 
 
 ## Code
+
+<a id="unbundled"></a>
+{% raw %}
 ```cpp
 auto nhr = [ncr](int n, int r){
 	return ncr(n + r - 1, r);
@@ -37,6 +47,19 @@ auto nhr = [ncr](int n, int r){
 
 
 ```
+{% endraw %}
 
-[Back to top page](../../../index.html)
+<a id="bundled"></a>
+{% raw %}
+```cpp
+#line 1 "lib/functions/nhr.cpp"
+auto nhr = [ncr](int n, int r){
+	return ncr(n + r - 1, r);
+};
+
+
+```
+{% endraw %}
+
+<a href="../../../index.html">Back to top page</a>
 

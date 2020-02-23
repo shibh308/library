@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 <!-- mathjax config similar to math.stackexchange -->
 <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -22,14 +26,20 @@
 
 
 # :warning: lib/classes/lowlink.cpp
-* category: lib/classes
 
+<a href="../../../index.html">Back to top page</a>
 
-[Back to top page](../../../index.html)
+* category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
+* <a href="{{ site.github.repository_url }}/blob/master/lib/classes/lowlink.cpp">View this file on GitHub</a>
+    - Last commit date: 2019-11-30 20:08:52+09:00
+
 
 
 
 ## Code
+
+<a id="unbundled"></a>
+{% raw %}
 ```cpp
 struct LowLink{
     vector<vector<int>>& edges;
@@ -79,6 +89,61 @@ struct LowLink{
 
 
 ```
+{% endraw %}
 
-[Back to top page](../../../index.html)
+<a id="bundled"></a>
+{% raw %}
+```cpp
+#line 1 "lib/classes/lowlink.cpp"
+struct LowLink{
+    vector<vector<int>>& edges;
+    // 関節点
+    vector<int> art;
+    vector<pair<int,int>> bridge;
+
+    vector<int> used, ord, low;
+    int k;
+
+    void dfs(int idx, int par){
+        ord[idx] = k++;
+        low[idx] = ord[idx];
+        bool is_art = false;
+        int cnt = 0;
+        for(auto& to : edges[idx]){
+            if(ord[to] == -1){
+                ++cnt;
+                dfs(to, idx);
+                low[idx] = min(low[idx], low[to]);
+                is_art |= par != -1 && low[to] >= ord[idx];
+                if(ord[idx] < low[to])
+                    bridge.emplace_back(idx, to);
+            }else if(to != par)
+                low[idx] = min(low[idx], ord[to]);
+        }
+        is_art |= (par == -1 && cnt > 1);
+        if(is_art)
+            art.emplace_back(idx);
+    }
+
+    LowLink(vector<vector<int>>& edges) :
+        edges(edges),
+        ord(edges.size(), -1),
+        low(edges.size(), 0),
+        k(0)
+    {
+        for(int i = 0; i < edges.size(); ++i)
+            if(ord[i] == -1)
+                dfs(i, -1);
+        for(auto& b : bridge)
+            b = make_pair(min(b.first, b.second), max(b.first, b.second));
+        sort(art.begin(), art.end());
+        sort(bridge.begin(), bridge.end());
+    }
+};
+
+
+```
+{% endraw %}
+
+<a href="../../../index.html">Back to top page</a>
 

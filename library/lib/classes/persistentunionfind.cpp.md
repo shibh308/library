@@ -25,20 +25,15 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: lib/classes/unionfind.cpp
+# :warning: lib/classes/persistentunionfind.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
-* <a href="{{ site.github.repository_url }}/blob/master/lib/classes/unionfind.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-11-30 20:08:52+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/lib/classes/persistentunionfind.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-02-24 09:13:36+09:00
 
 
-
-
-## Verified with
-
-* :heavy_check_mark: <a href="../../../verify/verify/unionfind.test.cpp.html">verify/unionfind.test.cpp</a>
 
 
 ## Code
@@ -47,21 +42,26 @@ layout: default
 {% raw %}
 ```cpp
 struct UnionFind{
-    vector<int> par;
+    vector<int> par, time;
     int count;
-    UnionFind(int n) : par(n, -1), count(0){}
-    int Find(int x){return par[x] < 0 ? x : Find(par[x]);}
+    UnionFind(int n) : par(n, -1), time(n, MOD), count(0){}
+    // [0, t]の間に併合されたかどうか
+    int Find(int x, int t){return par[x] < 0 || time[x] > t ? x : Find(par[x], t);}
     int Size(int x){return par[x] < 0 ? -par[x] : Size(par[x]);}
-    bool Unite(int x, int y){
-        x = Find(x);
-        y = Find(y);
+    // 現在のcount+1のタイミングで併合された事にする
+    // Unite失敗時もcountが増えるので注意
+    int Unite(int x, int y){
+        x = Find(x, MOD + 1);
+        y = Find(y, MOD + 1);
+        ++count;
         if(x == y)
-            return false;
+            return 0;
         if(par[x] > par[y])
             swap(x, y);
         par[x] += par[y];
         par[y] = x;
-        return ++count;
+        time[y] = count;
+        return count;
     }
 };
 
@@ -72,23 +72,28 @@ struct UnionFind{
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "lib/classes/unionfind.cpp"
+#line 1 "lib/classes/persistentunionfind.cpp"
 struct UnionFind{
-    vector<int> par;
+    vector<int> par, time;
     int count;
-    UnionFind(int n) : par(n, -1), count(0){}
-    int Find(int x){return par[x] < 0 ? x : Find(par[x]);}
+    UnionFind(int n) : par(n, -1), time(n, MOD), count(0){}
+    // [0, t]の間に併合されたかどうか
+    int Find(int x, int t){return par[x] < 0 || time[x] > t ? x : Find(par[x], t);}
     int Size(int x){return par[x] < 0 ? -par[x] : Size(par[x]);}
-    bool Unite(int x, int y){
-        x = Find(x);
-        y = Find(y);
+    // 現在のcount+1のタイミングで併合された事にする
+    // Unite失敗時もcountが増えるので注意
+    int Unite(int x, int y){
+        x = Find(x, MOD + 1);
+        y = Find(y, MOD + 1);
+        ++count;
         if(x == y)
-            return false;
+            return 0;
         if(par[x] > par[y])
             swap(x, y);
         par[x] += par[y];
         par[y] = x;
-        return ++count;
+        time[y] = count;
+        return count;
     }
 };
 

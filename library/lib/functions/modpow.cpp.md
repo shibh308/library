@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 <!-- mathjax config similar to math.stackexchange -->
 <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -22,14 +26,20 @@
 
 
 # :warning: lib/functions/modpow.cpp
-* category: lib/functions
 
+<a href="../../../index.html">Back to top page</a>
 
-[Back to top page](../../../index.html)
+* category: <a href="../../../index.html#abc4d0f7246596dc1cbcc6b77896a2fc">lib/functions</a>
+* <a href="{{ site.github.repository_url }}/blob/master/lib/functions/modpow.cpp">View this file on GitHub</a>
+    - Last commit date: 2019-11-30 20:08:52+09:00
+
 
 
 
 ## Code
+
+<a id="unbundled"></a>
+{% raw %}
 ```cpp
 auto mpow = [](auto x, i64 y){
 	auto z = x;
@@ -42,6 +52,24 @@ auto mpow = [](auto x, i64 y){
 
 
 ```
+{% endraw %}
 
-[Back to top page](../../../index.html)
+<a id="bundled"></a>
+{% raw %}
+```cpp
+#line 1 "lib/functions/modpow.cpp"
+auto mpow = [](auto x, i64 y){
+	auto z = x;
+	decltype(x) val = y & 1 ? x : decltype(x)(1);
+	while(z *= z, y >>= 1)
+		if(y & 1)
+			val *= z;
+	return val;
+};
+
+
+```
+{% endraw %}
+
+<a href="../../../index.html">Back to top page</a>
 

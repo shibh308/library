@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 <!-- mathjax config similar to math.stackexchange -->
 <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -22,14 +26,20 @@
 
 
 # :warning: lib/classes/compression.cpp
-* category: lib/classes
 
+<a href="../../../index.html">Back to top page</a>
 
-[Back to top page](../../../index.html)
+* category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
+* <a href="{{ site.github.repository_url }}/blob/master/lib/classes/compression.cpp">View this file on GitHub</a>
+    - Last commit date: 2019-11-30 20:08:52+09:00
+
 
 
 
 ## Code
+
+<a id="unbundled"></a>
+{% raw %}
 ```cpp
 template<typename T>
 struct Compression{
@@ -50,6 +60,32 @@ struct Compression{
 
 
 ```
+{% endraw %}
 
-[Back to top page](../../../index.html)
+<a id="bundled"></a>
+{% raw %}
+```cpp
+#line 1 "lib/classes/compression.cpp"
+template<typename T>
+struct Compression{
+    vector<T> compvec;
+    Compression(vector<T>& inp){//圧縮する
+        compvec = inp;
+        sort(compvec.begin(), compvec.end());
+        compvec.erase(unique(compvec.begin(), compvec.end()), compvec.end());
+    }
+    int Index(T val){//圧縮を元に対応するインデックスを返す
+        auto it = lower_bound(compvec.begin(), compvec.end(), val);
+        return distance(compvec.begin(), it);
+    }
+    vector<T>& operator*(){
+        return compvec;
+    }
+};
+
+
+```
+{% endraw %}
+
+<a href="../../../index.html">Back to top page</a>
 

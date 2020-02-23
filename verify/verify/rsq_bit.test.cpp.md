@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 <!-- mathjax config similar to math.stackexchange -->
 <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
@@ -21,19 +25,26 @@
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: verify/rsq_bit.test.cpp
+# :heavy_check_mark: verify/rsq_bit.test.cpp
+
+<a href="../../index.html">Back to top page</a>
+
+* <a href="{{ site.github.repository_url }}/blob/master/verify/rsq_bit.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2019-12-05 03:16:14+09:00
 
 
-[Back to top page](../../index.html)
-
-* see: [https://judge.yosupo.jp/problem/point_add_range_sum](https://judge.yosupo.jp/problem/point_add_range_sum)
+* see: <a href="https://judge.yosupo.jp/problem/point_add_range_sum">https://judge.yosupo.jp/problem/point_add_range_sum</a>
 
 
-## Dependencies
-* :warning: [lib/classes/binaryindexedtree.cpp](../../library/lib/classes/binaryindexedtree.cpp.html)
+## Depends on
+
+* :heavy_check_mark: <a href="../../library/lib/classes/binaryindexedtree.cpp.html">lib/classes/binaryindexedtree.cpp</a>
 
 
 ## Code
+
+<a id="unbundled"></a>
+{% raw %}
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 
@@ -69,6 +80,73 @@ signed main() {
 
 
 ```
+{% endraw %}
 
-[Back to top page](../../index.html)
+<a id="bundled"></a>
+{% raw %}
+```cpp
+#line 1 "verify/rsq_bit.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
+
+#include <bits/stdc++.h>
+using namespace std;
+using i64 = long;
+
+#line 1 "verify/../lib/classes/binaryindexedtree.cpp"
+template <typename T>
+struct BIT{
+    vector<T> elm;
+    BIT(int n, T init = T()) : elm(n + 1, init){
+    }
+
+    // [0, x)
+    T sum(int x){
+        T val = 0;
+        for(; x > 0; x -= x & -x)
+            val += elm[x];
+        return val;
+    }
+
+    // [l, r)
+    T sum(int l, int r){
+        return sum(r) - sum(l);
+    }
+
+    void add(int x, T val){
+        for(++x; x < elm.size(); x += x & -x)
+            elm[x] += val;
+    }
+};
+
+#line 8 "verify/rsq_bit.test.cpp"
+
+
+signed main() {
+
+    int n, q;
+    scanf("%d%d", &n, &q);
+
+    BIT<i64> b(n);
+    for(int i = 0; i < n; ++i){
+        int a;
+        cin >> a;
+        b.add(i, a);
+    }
+    for(int i = 0; i < q; ++i){
+        int t, a, c;
+        cin >> t >> a >> c;
+        if(t == 0){
+            b.add(a, c);
+        }
+        else{
+            cout << b.sum(a, c) << endl;
+        }
+    }
+}
+
+
+```
+{% endraw %}
+
+<a href="../../index.html">Back to top page</a>
 

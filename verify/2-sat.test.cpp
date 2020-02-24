@@ -1,5 +1,4 @@
-// #define PROBLEM "https://judge.yosupo.jp/problem/two_sat"
-// https://judge.yosupo.jp/submission/1776
+#define PROBLEM "https://judge.yosupo.jp/problem/two_sat"
 
 #include <bits/stdc++.h>
 using namespace std;

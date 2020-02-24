@@ -2,13 +2,12 @@
 #include "bits/stdc++.h"
 
 using namespace std;
-
-#include "../lib/functions/scc.cpp"
-#include "../lib/functions/scc_dag.cpp"
-
 using i64 = long long;
 
 const i64 MOD = 1e9 + 7;
+
+#include "../lib/functions/scc.cpp"
+#include "../lib/functions/scc_dag.cpp"
 
 
 template <typename T>

@@ -1,0 +1,13 @@
+{
+"verify/bipartitematching.test.cpp": "2019-12-04 00:43:23 +0900",
+"verify/lca_hld.test.cpp": "2019-12-04 00:43:23 +0900",
+"verify/rmq_raq.test.cpp": "2019-12-24 23:40:56 +0900",
+"verify/rmq_raq_dynamic.test.cpp": "2019-12-05 02:54:01 +0900",
+"verify/rmq_raq_persistent.test.cpp": "2019-12-05 02:54:01 +0900",
+"verify/rsq_bit.test.cpp": "2019-12-05 03:16:14 +0900",
+"verify/static_rmq.test.cpp": "2019-12-04 00:43:23 +0900",
+"verify/static_rmq_wm.test.cpp": "2019-12-05 02:12:16 +0900",
+"verify/unionfind.test.cpp": "2019-12-04 00:43:23 +0900",
+"verify/vertex_and_path_sum.test.cpp": "2019-11-30 22:46:18 +0900",
+"verify/vertex_and_subtree_sum.test.cpp": "2019-12-04 00:43:23 +0900"
+}

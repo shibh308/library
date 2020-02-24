@@ -83,6 +83,7 @@ layout: default
 * :warning: <a href="library/lib/functions/ncr.cpp.html">lib/functions/ncr.cpp</a>
 * :warning: <a href="library/lib/functions/nhr.cpp.html">lib/functions/nhr.cpp</a>
 * :x: <a href="library/lib/functions/scc.cpp.html">lib/functions/scc.cpp</a>
+* :warning: <a href="library/lib/functions/scc_dag.cpp.html">lib/functions/scc_dag.cpp</a>
 
 
 ## Verify Files

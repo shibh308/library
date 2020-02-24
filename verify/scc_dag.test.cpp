@@ -1,9 +1,10 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=3075"
-#include "../lib/functions/scc.cpp"
-#include "../lib/functions/scc_dag.cpp"
 #include "bits/stdc++.h"
 
 using namespace std;
+
+#include "../lib/functions/scc.cpp"
+#include "../lib/functions/scc_dag.cpp"
 
 using i64 = long long;
 

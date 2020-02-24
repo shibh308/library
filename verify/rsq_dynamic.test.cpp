@@ -4,7 +4,6 @@
 using namespace std;
 using i64 = long;
 
-#include "../lib/classes/binaryindexedtree.cpp"
 #include "../lib/classes/dynamicsegmenttree.cpp"
 
 

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/rollinghash.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-11-30 20:08:52+09:00
+    - Last commit date: 2020-02-25 16:29:43+09:00
 
 
 
@@ -62,8 +62,8 @@ struct RollingHash{
             if(static_cast<int>(power.size()) == i + 1){
                 power.emplace_back(power.back().first * base,
                                    power.back().second * base);
-                inv.emplace_back(mpow<mint1>(power.back().first, mod1 - 2),
-                                 mpow<mint2>(power.back().second, mod2 - 2));
+                inv.emplace_back(mpow(power.back().first, mod1 - 2),
+                                 mpow(power.back().second, mod2 - 2));
             }
         }
     };
@@ -118,8 +118,8 @@ struct RollingHash{
             if(static_cast<int>(power.size()) == i + 1){
                 power.emplace_back(power.back().first * base,
                                    power.back().second * base);
-                inv.emplace_back(mpow<mint1>(power.back().first, mod1 - 2),
-                                 mpow<mint2>(power.back().second, mod2 - 2));
+                inv.emplace_back(mpow(power.back().first, mod1 - 2),
+                                 mpow(power.back().second, mod2 - 2));
             }
         }
     };

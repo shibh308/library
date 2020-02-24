@@ -38,7 +38,7 @@ layout: default
 
 ### lib
 
-* :warning: <a href="library/lib/geometry.cpp.html">lib/geometry.cpp</a>
+* :heavy_check_mark: <a href="library/lib/geometry.cpp.html">lib/geometry.cpp</a>
 
 
 <div id="1a2816715ae26fbd9c4a8d3f916105a3"></div>
@@ -102,6 +102,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/scc_dag.test.cpp.html">verify/scc_dag.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/static_rmq.test.cpp.html">verify/static_rmq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/static_rmq_wm.test.cpp.html">verify/static_rmq_wm.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/tangent_lines.test.cpp.html">verify/tangent_lines.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/unionfind.test.cpp.html">verify/unionfind.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/vertex_and_path_sum.test.cpp.html">verify/vertex_and_path_sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/vertex_and_subtree_sum.test.cpp.html">verify/vertex_and_subtree_sum.test.cpp</a>

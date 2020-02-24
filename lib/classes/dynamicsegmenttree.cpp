@@ -60,6 +60,33 @@ struct Segtree{
         }
     }
 
+    void update(i64 x, T val){
+        assert(0 <= x && x < n);
+
+        SegNode* node = root;
+        stack<SegNode*> nodes;
+        i64 l = 0, r = n;
+
+        while(r - l > 1){
+            nodes.push(node);
+            i64 mid = (l + r) >> 1;
+
+            if(x < mid){
+                node = getl(node, x);
+                r = mid;
+            }else{
+                node = getr(node, x);
+                l = mid;
+            }
+        }
+
+        node->val = f(node->val, val);
+        while(!nodes.empty()){
+            eval(nodes.top());
+            nodes.pop();
+        }
+    }
+
     T get(i64 x, i64 y, SegNode* node = nullptr, i64 l = 0,  i64 r = 0){
 
         if(node == nullptr){

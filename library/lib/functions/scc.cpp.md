@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: lib/functions/scc.cpp
+# :heavy_check_mark: lib/functions/scc.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../../verify/verify/2-sat.test.cpp.html">verify/2-sat.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/verify/2-sat.test.cpp.html">verify/2-sat.test.cpp</a>
 
 
 ## Code

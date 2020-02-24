@@ -82,13 +82,13 @@ layout: default
 * :warning: <a href="library/lib/functions/modpow.cpp.html">lib/functions/modpow.cpp</a>
 * :warning: <a href="library/lib/functions/ncr.cpp.html">lib/functions/ncr.cpp</a>
 * :warning: <a href="library/lib/functions/nhr.cpp.html">lib/functions/nhr.cpp</a>
-* :x: <a href="library/lib/functions/scc.cpp.html">lib/functions/scc.cpp</a>
+* :heavy_check_mark: <a href="library/lib/functions/scc.cpp.html">lib/functions/scc.cpp</a>
 * :warning: <a href="library/lib/functions/scc_dag.cpp.html">lib/functions/scc_dag.cpp</a>
 
 
 ## Verify Files
 
-* :x: <a href="verify/verify/2-sat.test.cpp.html">verify/2-sat.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/2-sat.test.cpp.html">verify/2-sat.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/bipartitematching.test.cpp.html">verify/bipartitematching.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/lca_hld.test.cpp.html">verify/lca_hld.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/lowlink.test.cpp.html">verify/lowlink.test.cpp</a>

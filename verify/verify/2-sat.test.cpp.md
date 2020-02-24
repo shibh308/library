@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: verify/2-sat.test.cpp
+# :heavy_check_mark: verify/2-sat.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/verify/2-sat.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-04 01:33:57+09:00
+    - Last commit date: 2020-02-24 19:54:34+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/two_sat">https://judge.yosupo.jp/problem/two_sat</a>
@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../library/lib/functions/scc.cpp.html">lib/functions/scc.cpp</a>
+* :heavy_check_mark: <a href="../../library/lib/functions/scc.cpp.html">lib/functions/scc.cpp</a>
 
 
 ## Code
@@ -46,8 +46,7 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-// #define PROBLEM "https://judge.yosupo.jp/problem/two_sat"
-// https://judge.yosupo.jp/submission/1776
+#define PROBLEM "https://judge.yosupo.jp/problem/two_sat"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -112,8 +111,7 @@ signed main() {
 {% raw %}
 ```cpp
 #line 1 "verify/2-sat.test.cpp"
-// #define PROBLEM "https://judge.yosupo.jp/problem/two_sat"
-// https://judge.yosupo.jp/submission/1776
+#define PROBLEM "https://judge.yosupo.jp/problem/two_sat"
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -167,7 +165,7 @@ vector<int> scc(vector<vector<int>>& edges){
 
     return scc_vec;
 }
-#line 9 "verify/2-sat.test.cpp"
+#line 8 "verify/2-sat.test.cpp"
 
 
 signed main() {

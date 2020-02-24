@@ -51,7 +51,7 @@ layout: default
 * :heavy_check_mark: <a href="library/lib/classes/dinic.cpp.html">lib/classes/dinic.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/disjointsparsetable.cpp.html">lib/classes/disjointsparsetable.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/dynamiclazysegmenttree.cpp.html">lib/classes/dynamiclazysegmenttree.cpp</a>
-* :warning: <a href="library/lib/classes/dynamicsegmenttree.cpp.html">lib/classes/dynamicsegmenttree.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/dynamicsegmenttree.cpp.html">lib/classes/dynamicsegmenttree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/heavylightdecomposition.cpp.html">lib/classes/heavylightdecomposition.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/lazysegtree.cpp.html">lib/classes/lazysegtree.cpp</a>
 * :warning: <a href="library/lib/classes/lowlink.cpp.html">lib/classes/lowlink.cpp</a>
@@ -97,6 +97,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/rmq_raq_dynamic.test.cpp.html">verify/rmq_raq_dynamic.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rmq_raq_persistent.test.cpp.html">verify/rmq_raq_persistent.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rsq_bit.test.cpp.html">verify/rsq_bit.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/rsq_dynamic.test.cpp.html">verify/rsq_dynamic.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/scc_dag.test.cpp.html">verify/scc_dag.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/static_rmq.test.cpp.html">verify/static_rmq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/static_rmq_wm.test.cpp.html">verify/static_rmq_wm.test.cpp</a>

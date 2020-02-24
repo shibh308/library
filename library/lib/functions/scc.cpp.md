@@ -39,6 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/verify/2-sat.test.cpp.html">verify/2-sat.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/verify/scc_dag.test.cpp.html">verify/scc_dag.test.cpp</a>
 
 
 ## Code

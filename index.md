@@ -83,7 +83,7 @@ layout: default
 * :warning: <a href="library/lib/functions/ncr.cpp.html">lib/functions/ncr.cpp</a>
 * :warning: <a href="library/lib/functions/nhr.cpp.html">lib/functions/nhr.cpp</a>
 * :heavy_check_mark: <a href="library/lib/functions/scc.cpp.html">lib/functions/scc.cpp</a>
-* :warning: <a href="library/lib/functions/scc_dag.cpp.html">lib/functions/scc_dag.cpp</a>
+* :heavy_check_mark: <a href="library/lib/functions/scc_dag.cpp.html">lib/functions/scc_dag.cpp</a>
 
 
 ## Verify Files
@@ -97,6 +97,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/rmq_raq_dynamic.test.cpp.html">verify/rmq_raq_dynamic.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rmq_raq_persistent.test.cpp.html">verify/rmq_raq_persistent.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rsq_bit.test.cpp.html">verify/rsq_bit.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/scc_dag.test.cpp.html">verify/scc_dag.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/static_rmq.test.cpp.html">verify/static_rmq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/static_rmq_wm.test.cpp.html">verify/static_rmq_wm.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/unionfind.test.cpp.html">verify/unionfind.test.cpp</a>

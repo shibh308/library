@@ -19,8 +19,8 @@ struct RollingHash{
             if(static_cast<int>(power.size()) == i + 1){
                 power.emplace_back(power.back().first * base,
                                    power.back().second * base);
-                inv.emplace_back(mpow<mint1>(power.back().first, mod1 - 2),
-                                 mpow<mint2>(power.back().second, mod2 - 2));
+                inv.emplace_back(mpow(power.back().first, mod1 - 2),
+                                 mpow(power.back().second, mod2 - 2));
             }
         }
     };

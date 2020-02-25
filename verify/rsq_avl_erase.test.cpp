@@ -16,20 +16,20 @@ signed main(){
     auto root = avl.nil;
     for(int i = 0; i < n; ++i){
         int a;
-        cin >> a;
+        scanf("%d", &a);
         root = avl.insert(root, i, a);
     }
 
     vector<int> t(q), a(q), c(q);
     for(int i = 0; i < q; ++i)
-        cin >> t[i] >> a[i] >> c[i];
+        scanf("%d%d%d", &t[i], &a[i], &c[i]);
     for(int i = 0; i < q; ++i){
         if(t[i] == 0){
             i64 res = avl.getNode(root, a[i])->val;
             root = avl.erase(root, a[i], false);
             root = avl.insert(root, a[i], res + c[i]);
         }else{
-            cout << avl.get(root, a[i], c[i]) << endl;
+            printf("%lld\n", avl.get(root, a[i], c[i]));
         }
     }
 

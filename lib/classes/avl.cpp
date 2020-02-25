@@ -13,7 +13,6 @@ struct AVL{
     T op;
     NodePtr nil;
 
-
     AVL(function<T(T, T)> f, T op) : f(f), op(op){
         nil = new Node<T>(op, nullptr);
         nil->size = 0;
@@ -22,7 +21,8 @@ struct AVL{
         nil->c[1] = nil;
     }
 
-    int balance_factor(NodePtr x, bool inv){return (x->c[0]->height - x->c[1]->height) * (inv ? -1 : 1);}
+    template <bool inv>
+    int balance_factor(NodePtr x){return (x->c[0]->height - x->c[1]->height) * (inv ? -1 : 1);}
     void _update(NodePtr x){
         if(x == nil)
             return;
@@ -30,7 +30,8 @@ struct AVL{
         x->height = max(x->c[0]->height, x->c[1]->height) + 1;
         x->sum = f(f(x->c[0]->sum, x->val), x->c[1]->sum);
     }
-    NodePtr rotate(NodePtr x, bool is_right){
+    template <bool is_right>
+    NodePtr rotate(NodePtr x){
         NodePtr new_root = x->c[1 ^ is_right];
         x->c[1 ^ is_right] = new_root->c[0 ^ is_right];
         new_root->c[0 ^ is_right] = x;
@@ -38,17 +39,18 @@ struct AVL{
         _update(new_root);
         return new_root;
     }
-    NodePtr _balance(NodePtr x, bool inv){
-        if(balance_factor(x, inv) == 2){
-            if(balance_factor(x->c[0 ^ inv], inv) < 0)
-                x->c[0 ^ inv] = rotate(x->c[0 ^ inv], inv);
-            x = rotate(x, 1 ^ inv);
+    template <bool inv>
+    NodePtr _balance(NodePtr x){
+        if(balance_factor<inv>(x) == 2){
+            if(balance_factor<inv>(x->c[0 ^ inv]) < 0)
+                x->c[0 ^ inv] = rotate<inv>(x->c[0 ^ inv]);
+            x = rotate<1 ^ inv>(x);
         }
         return x;
     }
     NodePtr balance(NodePtr x){
-        for(int i = 0; i < 2; ++i)
-            x = _balance(x, i);
+        x = _balance<false>(x);
+        x = _balance<true>(x);
         _update(x);
         return x;
     }

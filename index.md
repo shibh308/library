@@ -45,6 +45,7 @@ layout: default
 
 ### lib/classes
 
+* :heavy_check_mark: <a href="library/lib/classes/avl.cpp.html">lib/classes/avl.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/binaryindexedtree.cpp.html">lib/classes/binaryindexedtree.cpp</a>
 * :warning: <a href="library/lib/classes/compression.cpp.html">lib/classes/compression.cpp</a>
 * :warning: <a href="library/lib/classes/convexhulltrick.cpp.html">lib/classes/convexhulltrick.cpp</a>
@@ -97,6 +98,8 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/rmq_raq.test.cpp.html">verify/rmq_raq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rmq_raq_dynamic.test.cpp.html">verify/rmq_raq_dynamic.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rmq_raq_persistent.test.cpp.html">verify/rmq_raq_persistent.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/rsq_avl.test.cpp.html">verify/rsq_avl.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/rsq_avl_erase.test.cpp.html">verify/rsq_avl_erase.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rsq_bit.test.cpp.html">verify/rsq_bit.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rsq_dynamic.test.cpp.html">verify/rsq_dynamic.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/scc_dag.test.cpp.html">verify/scc_dag.test.cpp</a>

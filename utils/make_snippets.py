@@ -14,7 +14,7 @@ def create():
         with open(load_path, 'r') as f:
             name = os.path.splitext(load_path.split('/')[-1])[0]
             s = f.read()
-            dics.append({"name": escape(name), "code": escape(s).replace('\n', '&#10;')})
+            dics.append({"name": escape(name), "code": escape(s).replace('\n', '&#10;').replace('"', '&quot;')})
     
     with open(save_path, 'w') as f:
         f.write('<templateSet group="compro_library">\n')

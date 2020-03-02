@@ -47,6 +47,7 @@ layout: default
 
 * :heavy_check_mark: <a href="library/lib/classes/avl.cpp.html">lib/classes/avl.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/binaryindexedtree.cpp.html">lib/classes/binaryindexedtree.cpp</a>
+* :warning: <a href="library/lib/classes/binarylifting.cpp.html">lib/classes/binarylifting.cpp</a>
 * :warning: <a href="library/lib/classes/compression.cpp.html">lib/classes/compression.cpp</a>
 * :warning: <a href="library/lib/classes/convexhulltrick.cpp.html">lib/classes/convexhulltrick.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/dinic.cpp.html">lib/classes/dinic.cpp</a>
@@ -85,6 +86,7 @@ layout: default
 * :warning: <a href="library/lib/functions/nhr.cpp.html">lib/functions/nhr.cpp</a>
 * :heavy_check_mark: <a href="library/lib/functions/scc.cpp.html">lib/functions/scc.cpp</a>
 * :heavy_check_mark: <a href="library/lib/functions/scc_dag.cpp.html">lib/functions/scc_dag.cpp</a>
+* :warning: <a href="library/lib/functions/twoedgeconnectedcomponents_tree.cpp.html">lib/functions/twoedgeconnectedcomponents_tree.cpp</a>
 
 
 ## Verify Files

@@ -71,8 +71,8 @@ struct Segtree{
 
     void update(int x, int y, U val){
 
-		if(x == y)
-			return;
+        if(x == y)
+            return;
         vector<int> index_list = get_list(x, y);
         for(int i = index_list.size() - 1; i >= 0; --i)
             eval(index_list[i]);

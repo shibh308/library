@@ -3,6 +3,7 @@
 "verify/bipartitematching.test.cpp": "2019-12-04 00:43:23 +0900",
 "verify/lca_hld.test.cpp": "2019-12-04 00:43:23 +0900",
 "verify/lowlink.test.cpp": "2020-02-24 09:29:47 +0900",
+"verify/lowlink_tree.test.cpp": "2020-03-03 11:11:00 +0900",
 "verify/matrix.test.cpp": "2020-02-25 08:21:06 +0900",
 "verify/persistentunionfind.test.cpp": "2020-02-24 09:29:30 +0900",
 "verify/rmq_raq.test.cpp": "2020-03-02 00:09:43 +0900",

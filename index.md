@@ -82,6 +82,7 @@ layout: default
 * :warning: <a href="library/lib/functions/factoring.cpp.html">lib/functions/factoring.cpp</a>
 * :warning: <a href="library/lib/functions/gcd.cpp.html">lib/functions/gcd.cpp</a>
 * :warning: <a href="library/lib/functions/lcm.cpp.html">lib/functions/lcm.cpp</a>
+* :heavy_check_mark: <a href="library/lib/functions/mo_query.cpp.html">lib/functions/mo_query.cpp</a>
 * :warning: <a href="library/lib/functions/modpow.cpp.html">lib/functions/modpow.cpp</a>
 * :warning: <a href="library/lib/functions/ncr.cpp.html">lib/functions/ncr.cpp</a>
 * :warning: <a href="library/lib/functions/nhr.cpp.html">lib/functions/nhr.cpp</a>
@@ -99,6 +100,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/lowlink_tree.test.cpp.html">verify/lowlink_tree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/matrix.test.cpp.html">verify/matrix.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/mo.test.cpp.html">verify/mo.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/mo_query.test.cpp.html">verify/mo_query.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/persistentunionfind.test.cpp.html">verify/persistentunionfind.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rmq_raq.test.cpp.html">verify/rmq_raq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rmq_raq_dynamic.test.cpp.html">verify/rmq_raq_dynamic.test.cpp</a>

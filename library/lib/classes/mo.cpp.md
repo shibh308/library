@@ -39,6 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/verify/mo.test.cpp.html">verify/mo.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/verify/mo_query.test.cpp.html">verify/mo_query.test.cpp</a>
 
 
 ## Code

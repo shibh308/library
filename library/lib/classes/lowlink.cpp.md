@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: lib/classes/lowlink.cpp
+# :heavy_check_mark: lib/classes/lowlink.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,11 @@ layout: default
     - Last commit date: 2019-11-30 20:08:52+09:00
 
 
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../../verify/verify/lowlink_tree.test.cpp.html">verify/lowlink_tree.test.cpp</a>
 
 
 ## Code

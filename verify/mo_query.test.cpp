@@ -28,7 +28,7 @@ bool chmax(T& x, T y){
 
 
 #include "../lib/classes/mo.cpp"
-#include "../lib/functions/mo_query.cpp
+#include "../lib/functions/mo_query.cpp"
 
 
 signed main(){

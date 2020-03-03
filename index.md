@@ -58,6 +58,7 @@ layout: default
 * :heavy_check_mark: <a href="library/lib/classes/lazysegtree.cpp.html">lib/classes/lazysegtree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/lowlink.cpp.html">lib/classes/lowlink.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/matrix.cpp.html">lib/classes/matrix.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/mo.cpp.html">lib/classes/mo.cpp</a>
 * :warning: <a href="library/lib/classes/modint.cpp.html">lib/classes/modint.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/persistentdynamiclazysegmenttree.cpp.html">lib/classes/persistentdynamiclazysegmenttree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/persistentunionfind.cpp.html">lib/classes/persistentunionfind.cpp</a>
@@ -97,6 +98,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/lowlink.test.cpp.html">verify/lowlink.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/lowlink_tree.test.cpp.html">verify/lowlink_tree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/matrix.test.cpp.html">verify/matrix.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/mo.test.cpp.html">verify/mo.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/persistentunionfind.test.cpp.html">verify/persistentunionfind.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rmq_raq.test.cpp.html">verify/rmq_raq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rmq_raq_dynamic.test.cpp.html">verify/rmq_raq_dynamic.test.cpp</a>

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/binarylifting.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-02 22:53:16+09:00
+    - Last commit date: 2020-03-04 14:48:14+09:00
 
 
 
@@ -44,15 +44,17 @@ layout: default
 struct BinaryLifting{
     int n;
     vector<vector<int>> next;
+    vector<int> par;
+    vector<vector<int>> childs;
     vector<int> depth;
 
-    BinaryLifting(vector<vector<int>>& edges, int root = 0) : n(edges.size()), depth(n, -1){
-        vector<int> par(n, -1);
+    BinaryLifting(vector<vector<int>>& edges, int root = 0) : n(edges.size()), depth(n, -1), par(n, -1), childs(n){
         function<void(int)> dfs = [&](int x){
             for(auto y : edges[x])
                 if(depth[y] == -1){
                     depth[y] = depth[x] + 1;
                     par[y] = x;
+                    childs[x].push_back(y);
                     dfs(y);
                 }
         };
@@ -110,15 +112,17 @@ struct BinaryLifting{
 struct BinaryLifting{
     int n;
     vector<vector<int>> next;
+    vector<int> par;
+    vector<vector<int>> childs;
     vector<int> depth;
 
-    BinaryLifting(vector<vector<int>>& edges, int root = 0) : n(edges.size()), depth(n, -1){
-        vector<int> par(n, -1);
+    BinaryLifting(vector<vector<int>>& edges, int root = 0) : n(edges.size()), depth(n, -1), par(n, -1), childs(n){
         function<void(int)> dfs = [&](int x){
             for(auto y : edges[x])
                 if(depth[y] == -1){
                     depth[y] = depth[x] + 1;
                     par[y] = x;
+                    childs[x].push_back(y);
                     dfs(y);
                 }
         };

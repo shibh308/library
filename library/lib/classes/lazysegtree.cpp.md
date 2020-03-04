@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/lazysegtree.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-02 00:09:43+09:00
+    - Last commit date: 2020-03-03 20:41:12+09:00
 
 
 
@@ -119,8 +119,8 @@ struct Segtree{
 
     void update(int x, int y, U val){
 
-		if(x == y)
-			return;
+        if(x == y)
+            return;
         vector<int> index_list = get_list(x, y);
         for(int i = index_list.size() - 1; i >= 0; --i)
             eval(index_list[i]);
@@ -247,8 +247,8 @@ struct Segtree{
 
     void update(int x, int y, U val){
 
-		if(x == y)
-			return;
+        if(x == y)
+            return;
         vector<int> index_list = get_list(x, y);
         for(int i = index_list.size() - 1; i >= 0; --i)
             eval(index_list[i]);

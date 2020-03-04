@@ -88,6 +88,7 @@ layout: default
 * :warning: <a href="library/lib/functions/nhr.cpp.html">lib/functions/nhr.cpp</a>
 * :heavy_check_mark: <a href="library/lib/functions/scc.cpp.html">lib/functions/scc.cpp</a>
 * :heavy_check_mark: <a href="library/lib/functions/scc_dag.cpp.html">lib/functions/scc_dag.cpp</a>
+* :warning: <a href="library/lib/functions/simple_graph.cpp.html">lib/functions/simple_graph.cpp</a>
 * :heavy_check_mark: <a href="library/lib/functions/twoedgeconnectedcomponents_tree.cpp.html">lib/functions/twoedgeconnectedcomponents_tree.cpp</a>
 
 

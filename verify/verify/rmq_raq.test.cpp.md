@@ -30,7 +30,7 @@ layout: default
 <a href="../../index.html">Back to top page</a>
 
 * <a href="{{ site.github.repository_url }}/blob/master/verify/rmq_raq.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-02 00:09:43+09:00
+    - Last commit date: 2020-03-03 20:41:12+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H</a>
@@ -163,8 +163,8 @@ struct Segtree{
 
     void update(int x, int y, U val){
 
-		if(x == y)
-			return;
+        if(x == y)
+            return;
         vector<int> index_list = get_list(x, y);
         for(int i = index_list.size() - 1; i >= 0; --i)
             eval(index_list[i]);

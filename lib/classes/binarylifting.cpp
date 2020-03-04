@@ -1,15 +1,17 @@
 struct BinaryLifting{
     int n;
     vector<vector<int>> next;
+    vector<int> par;
+    vector<vector<int>> childs;
     vector<int> depth;
 
-    BinaryLifting(vector<vector<int>>& edges, int root = 0) : n(edges.size()), depth(n, -1){
-        vector<int> par(n, -1);
+    BinaryLifting(vector<vector<int>>& edges, int root = 0) : n(edges.size()), depth(n, -1), par(n, -1), childs(n){
         function<void(int)> dfs = [&](int x){
             for(auto y : edges[x])
                 if(depth[y] == -1){
                     depth[y] = depth[x] + 1;
                     par[y] = x;
+                    childs[x].push_back(y);
                     dfs(y);
                 }
         };

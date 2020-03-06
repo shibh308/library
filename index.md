@@ -54,6 +54,7 @@ layout: default
 * :heavy_check_mark: <a href="library/lib/classes/disjointsparsetable.cpp.html">lib/classes/disjointsparsetable.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/dynamiclazysegmenttree.cpp.html">lib/classes/dynamiclazysegmenttree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/dynamicsegmenttree.cpp.html">lib/classes/dynamicsegmenttree.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/eulertour.cpp.html">lib/classes/eulertour.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/heavylightdecomposition.cpp.html">lib/classes/heavylightdecomposition.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/lazysegtree.cpp.html">lib/classes/lazysegtree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/lowlink.cpp.html">lib/classes/lowlink.cpp</a>
@@ -96,6 +97,7 @@ layout: default
 
 * :heavy_check_mark: <a href="verify/verify/2-sat.test.cpp.html">verify/2-sat.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/bipartitematching.test.cpp.html">verify/bipartitematching.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/eulertour.test.cpp.html">verify/eulertour.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/lca_hld.test.cpp.html">verify/lca_hld.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/lowlink.test.cpp.html">verify/lowlink.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/lowlink_tree.test.cpp.html">verify/lowlink_tree.test.cpp</a>

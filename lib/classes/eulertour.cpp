@@ -20,5 +20,5 @@ struct EulerTour{
     pair<int,int> get_subtree(int x){
         return make_pair(in[x], out[x]);
     }
-}
+};
 

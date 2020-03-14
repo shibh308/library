@@ -39,6 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/verify/eulertour.test.cpp.html">verify/eulertour.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/verify/segtree_composite.test.cpp.html">verify/segtree_composite.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/verify/vertex_and_path_sum.test.cpp.html">verify/vertex_and_path_sum.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/verify/vertex_and_subtree_sum.test.cpp.html">verify/vertex_and_subtree_sum.test.cpp</a>
 

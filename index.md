@@ -60,7 +60,7 @@ layout: default
 * :heavy_check_mark: <a href="library/lib/classes/lowlink.cpp.html">lib/classes/lowlink.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/matrix.cpp.html">lib/classes/matrix.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/mo.cpp.html">lib/classes/mo.cpp</a>
-* :warning: <a href="library/lib/classes/modint.cpp.html">lib/classes/modint.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/modint.cpp.html">lib/classes/modint.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/persistentdynamiclazysegmenttree.cpp.html">lib/classes/persistentdynamiclazysegmenttree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/persistentunionfind.cpp.html">lib/classes/persistentunionfind.cpp</a>
 * :warning: <a href="library/lib/classes/primaldual.cpp.html">lib/classes/primaldual.cpp</a>
@@ -113,6 +113,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/rsq_bit.test.cpp.html">verify/rsq_bit.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rsq_dynamic.test.cpp.html">verify/rsq_dynamic.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/scc_dag.test.cpp.html">verify/scc_dag.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/segtree_composite.test.cpp.html">verify/segtree_composite.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/static_rmq.test.cpp.html">verify/static_rmq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/static_rmq_wm.test.cpp.html">verify/static_rmq_wm.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/tangent_lines.test.cpp.html">verify/tangent_lines.test.cpp</a>

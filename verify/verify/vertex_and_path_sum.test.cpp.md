@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../index.html">Back to top page</a>
 
+* category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/vertex_and_path_sum.test.cpp">View this file on GitHub</a>
     - Last commit date: 2019-11-30 22:46:18+09:00
 

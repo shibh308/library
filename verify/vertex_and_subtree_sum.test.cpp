@@ -4,6 +4,16 @@
 using namespace std;
 using i64 = long;
 
+template <typename T>
+bool chmax(T& x, T y){
+    if(x < y){
+        x = y;
+        return true;
+    }
+    return false;
+}
+
+
 #include "../lib/classes/heavylightdecomposition.cpp"
 #include "../lib/classes/segtree.cpp"
 

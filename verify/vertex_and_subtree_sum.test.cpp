@@ -23,7 +23,7 @@ signed main() {
     HeavyLightDecomposition hld(edges);
     Segtree<i64> seg(n, 0L, [](auto x, auto y){return x + y;}, 0L);
     for(int i = 0; i < n; ++i)
-        seg.set(hld.in[i], a[i]);
+        seg.set(hld.get_idx(i), a[i]);
     for(int i = 0; i < q; ++i){
         int t;
         cin >> t;

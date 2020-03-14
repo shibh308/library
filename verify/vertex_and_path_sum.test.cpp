@@ -2,7 +2,7 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-using i64 = long;
+using i64 = long long;
 
 #include "../lib/classes/segtree.cpp"
 #include "../lib/classes/heavylightdecomposition.cpp"
@@ -14,7 +14,7 @@ signed main(){
     scanf("%d%d", &n, &q);
     vector<i64> a(n);
     for(auto& x : a)
-        scanf("%d", &x);
+        scanf("%lld", &x);
     vector<int> u(n - 1), v(n - 1);
     for(int i = 0; i < n - 1; ++i)
         scanf("%d%d", &u[i], &v[i]);
@@ -38,7 +38,7 @@ signed main(){
         int a, b, c;
         tie(a, b, c) = query;
         if(a == 0){
-            seg.update(hld.in[b], c);
+            seg.update(hld.get_idx(b), c);
         }else{
             vector<pair<int,int>> l, r;
             tie(l, r) = hld.two_point_path(b, c);

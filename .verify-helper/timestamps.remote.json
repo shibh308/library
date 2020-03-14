@@ -2,7 +2,7 @@
 "verify/2-sat.test.cpp": "2020-02-24 19:54:34 +0900",
 "verify/bipartitematching.test.cpp": "2019-12-04 00:43:23 +0900",
 "verify/eulertour.test.cpp": "2020-03-06 18:23:18 +0900",
-"verify/lca_hld.test.cpp": "2019-12-04 00:43:23 +0900",
+"verify/lca_hld.test.cpp": "2020-03-14 13:41:21 +0900",
 "verify/lowlink.test.cpp": "2020-02-24 09:29:47 +0900",
 "verify/lowlink_tree.test.cpp": "2020-03-03 11:11:00 +0900",
 "verify/matrix.test.cpp": "2020-02-25 08:21:06 +0900",
@@ -22,6 +22,6 @@
 "verify/static_rmq_wm.test.cpp": "2019-12-05 02:12:16 +0900",
 "verify/tangent_lines.test.cpp": "2020-02-25 16:29:27 +0900",
 "verify/unionfind.test.cpp": "2019-12-04 00:43:23 +0900",
-"verify/vertex_and_path_sum.test.cpp": "2019-11-30 22:46:18 +0900",
-"verify/vertex_and_subtree_sum.test.cpp": "2019-12-04 00:43:23 +0900"
+"verify/vertex_and_path_sum.test.cpp": "2020-03-14 13:41:21 +0900",
+"verify/vertex_and_subtree_sum.test.cpp": "2020-03-14 13:41:21 +0900"
 }

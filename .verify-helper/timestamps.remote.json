@@ -17,6 +17,7 @@
 "verify/rsq_bit.test.cpp": "2019-12-05 03:16:14 +0900",
 "verify/rsq_dynamic.test.cpp": "2020-02-25 07:58:59 +0900",
 "verify/scc_dag.test.cpp": "2020-02-25 06:59:12 +0900",
+"verify/segtree_composite.test.cpp": "2020-03-14 13:02:42 +0900",
 "verify/static_rmq.test.cpp": "2019-12-04 00:43:23 +0900",
 "verify/static_rmq_wm.test.cpp": "2019-12-05 02:12:16 +0900",
 "verify/tangent_lines.test.cpp": "2020-02-25 16:29:27 +0900",

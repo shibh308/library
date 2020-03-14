@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/vertex_and_path_sum.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-11-30 22:46:18+09:00
+    - Last commit date: 2020-03-14 13:41:21+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/vertex_add_path_sum">https://judge.yosupo.jp/problem/vertex_add_path_sum</a>
@@ -52,7 +52,17 @@ layout: default
 
 #include <bits/stdc++.h>
 using namespace std;
-using i64 = long;
+using i64 = long long;
+
+template <typename T>
+bool chmax(T& x, T y){
+    if(x < y){
+        x = y;
+        return true;
+    }
+    return false;
+}
+
 
 #include "../lib/classes/segtree.cpp"
 #include "../lib/classes/heavylightdecomposition.cpp"
@@ -64,7 +74,7 @@ signed main(){
     scanf("%d%d", &n, &q);
     vector<i64> a(n);
     for(auto& x : a)
-        scanf("%d", &x);
+        scanf("%lld", &x);
     vector<int> u(n - 1), v(n - 1);
     for(int i = 0; i < n - 1; ++i)
         scanf("%d%d", &u[i], &v[i]);
@@ -88,7 +98,7 @@ signed main(){
         int a, b, c;
         tie(a, b, c) = query;
         if(a == 0){
-            seg.update(hld.in[b], c);
+            seg.update(hld.get_idx(b), c);
         }else{
             vector<pair<int,int>> l, r;
             tie(l, r) = hld.two_point_path(b, c);
@@ -117,7 +127,17 @@ signed main(){
 
 #include <bits/stdc++.h>
 using namespace std;
-using i64 = long;
+using i64 = long long;
+
+template <typename T>
+bool chmax(T& x, T y){
+    if(x < y){
+        x = y;
+        return true;
+    }
+    return false;
+}
+
 
 #line 1 "verify/../lib/classes/segtree.cpp"
 template<typename T>
@@ -176,128 +196,96 @@ struct Segtree{
 };
 
 #line 1 "verify/../lib/classes/heavylightdecomposition.cpp"
-class HeavyLightDecomposition{
-public:
+struct HeavyLightDecomposition{
     int n;
-    vector<vector<int>> g;
-    vector<int> rev, in, out, nxt, rin, size, depth;
-
-    HeavyLightDecomposition(vector<vector<int>>& inp) :
-        n(inp.size()),
-        g(n),
-        rev(n, 0),
-        in(n, 0),
-        out(n, 0),
-        nxt(n, 0),
-        rin(n, 0),
-        size(n, 0),
-        depth(n, -1)
-    {
-
-        function<void(int, int)> dfs_ed = [&](int pos, int dep){
-            depth[pos]=dep;
-            for(auto ed : inp[pos])
-                if(depth[ed] == -1){
-                    g[pos].emplace_back(ed);
-                    rev[ed] = pos;
-                    dfs_ed(ed, dep + 1);
+    vector<int> size, par, in, in_rev, heavy_root, depth, heavy_depth, out;
+    vector<vector<int>> childs;
+    HeavyLightDecomposition(vector<vector<int>>& edges, int root = 0) : n(edges.size()), size(n, 1), par(n, -2), depth(n, 0), childs(n), in(n), in_rev(n), heavy_root(n), heavy_depth(n, 0), out(n){
+        function<void(int)> swap_dfs = [&](int x){
+            int size_max = 0;
+            int max_idx = 0;
+            for(int i = 0; i < edges[x].size(); ++i){
+                int y = edges[x][i];
+                if(par[y] == -2){
+                    par[y] = x;
+                    depth[y] = depth[x] + 1;
+                    childs[x].push_back(y);
+                    swap_dfs(y);
+                    size[x] += size[y];
+                    if(chmax(size_max, size[y])){
+                        max_idx = childs[x].size() - 1;
+                    }
                 }
-        };
-        dfs_ed(0, 0);
-
-        function<void(int)> dfs_sz = [&](int v){
-            size[v] = 1;
-            for(auto &u: g[v]){
-                dfs_sz(u);
-                size[v] += size[u];
-                if(size[u] > size[g[v][0]])
-                    swap(u, g[v][0]);
+            }
+            if(max_idx){
+                swap(childs[x][0], childs[x][max_idx]);
             }
         };
-        dfs_sz(0);
+        par[root] = -1;
+        swap_dfs(root);
 
-        int t = 0;
-
-        function<void(int)> dfs_hld = [&](int v){
-            in[v] = t++;
-            rin[in[v]] = v;
-            for(auto u: g[v]){
-                nxt[u] = (u == g[v][0] ? nxt[v] : u);
-                dfs_hld(u);
+        int cnt = 0;
+        function<void(int,int)> dfs = [&](int x, int segment_root){
+            heavy_root[x] = segment_root;
+            in_rev[cnt] = x;
+            in[x] = cnt++;
+            for(int i = 0; i < childs[x].size(); ++i){
+                int y = childs[x][i];
+                if(i == 0){
+                    dfs(y, segment_root);
+                }
+                else{
+                    heavy_depth[y] = heavy_depth[segment_root] + 1;
+                    dfs(y, y);
+                }
             }
-            out[v] = t;
+            out[x] = cnt;
         };
-        dfs_hld(0);
+        dfs(root, root);
     }
-
+    int lca(int x, int y){
+        while(heavy_root[x] != heavy_root[y]){
+            if(heavy_depth[heavy_root[x]] > heavy_depth[heavy_root[y]])
+                swap(x, y);
+            y = par[heavy_root[y]];
+        }
+        return depth[x] < depth[y] ? x : y;
+    }
+    // x以下の部分木を返す
     pair<int,int> subtree(int x){
         return make_pair(in[x], out[x]);
     }
-
-    vector<int> subtree_path(int x){
-        return vector<int>(next(rin.begin(), in[x]), next(rin.begin(), out[x]));
-    }
-
-    pair<int,int> subsegment(int x){
-        return make_pair(in[nxt[x]], in[x] + 1);
-    }
-
-    vector<int> subsegment_path(int x){
-        return vector<int>(next(rin.begin(), in[nxt[x]]), next(rin.begin(), in[x] + 1));
-    }
-
-    vector<pair<int,int>> root_path_query(int x){
-        vector<pair<int,int>> ret;
-        ret.emplace_back(subsegment(x));
-        while(ret.back().first)
-            ret.emplace_back(subsegment(rev[rin[ret.back().first]]));
-
-        return ret;
-    }
-
-    int lca(int x, int y){
-
-        int sx = rin[subsegment(x).first];
-        int sy = rin[subsegment(y).first];
-        while(sx != sy){
-            if(depth[sx] > depth[sy])
-                x = rev[sx];
-            else
-                y = rev[sy];
-            sx = rin[subsegment(x).first];
-            sy = rin[subsegment(y).first];
+    // x-zのパスとy-zのパスを返す(両方とも根側に進むので注意)
+    // それぞれのHeavy-Pathは根側の方がindexが小さいので注意(可換クエリ処理で気をつける)
+    pair<vector<pair<int,int>>, vector<pair<int,int>>> two_point_path(int x, int y){
+        vector<pair<int,int>> xz, yz;
+        int z = lca(x, y);
+        while(heavy_root[x] != heavy_root[z]){
+            xz.emplace_back(in[heavy_root[x]], in[x] + 1);
+            x = par[heavy_root[x]];
         }
-
-        return depth[x] < depth[y] ? x : y;
+        while(heavy_root[y] != heavy_root[z]){
+            yz.emplace_back(in[heavy_root[y]], in[y] + 1);
+            y = par[heavy_root[y]];
+        }
+        // 辺属性にしたい場合はここをin[z] + 1, in[x] + 1にする
+        xz.emplace_back(in[z], in[x] + 1);
+        yz.emplace_back(in[z] + 1, in[y] + 1);
+        return make_pair(xz, yz);
     }
-
-    pair<vector<pair<int,int>>,vector<pair<int,int>>> two_point_path(i64 x, i64 y){
-        i64 z = lca(x, y);
-        pair<int,int> z_par = subsegment(z);
-
-        vector<pair<int,int>> ret_x;
-        ret_x.emplace_back(subsegment(x));
-
-        while(ret_x.back().first != z_par.first)
-            ret_x.emplace_back(subsegment(rev[rin[ret_x.back().first]]));
-
-        ret_x.back().first = in[z];
-
-        vector<pair<int,int>> ret_y;
-        ret_y.emplace_back(subsegment(y));
-
-        while(ret_y.back().first != z_par.first)
-            ret_y.emplace_back(subsegment(rev[rin[ret_y.back().first]]));
-
-        ret_y.back().first = in[z] + 1;
-
-        return make_pair(ret_x, ret_y);
+    // 頂点xがEuler-Tour上で何番目に位置するかを返す
+    // in[元の頂点index] = 内部でのindex
+    // in_rev[内部でのindex] = 元の頂点index
+    int get_idx(int x){
+        return in[x];
     }
-
-
+    // xが属するHeavy-Pathの深さを返す
+    int get_heavy_depth(int x){
+        return heavy_depth[heavy_root[x]];
+    }
 };
 
-#line 9 "verify/vertex_and_path_sum.test.cpp"
+#line 19 "verify/vertex_and_path_sum.test.cpp"
 
 
 signed main(){
@@ -306,7 +294,7 @@ signed main(){
     scanf("%d%d", &n, &q);
     vector<i64> a(n);
     for(auto& x : a)
-        scanf("%d", &x);
+        scanf("%lld", &x);
     vector<int> u(n - 1), v(n - 1);
     for(int i = 0; i < n - 1; ++i)
         scanf("%d%d", &u[i], &v[i]);
@@ -330,7 +318,7 @@ signed main(){
         int a, b, c;
         tie(a, b, c) = query;
         if(a == 0){
-            seg.update(hld.in[b], c);
+            seg.update(hld.get_idx(b), c);
         }else{
             vector<pair<int,int>> l, r;
             tie(l, r) = hld.two_point_path(b, c);

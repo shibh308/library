@@ -25,21 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/vertex_and_subtree_sum.test.cpp
+# :heavy_check_mark: verify/hld_composite.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/vertex_and_subtree_sum.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-14 13:41:21+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/verify/hld_composite.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-03-14 13:59:18+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/vertex_add_subtree_sum">https://judge.yosupo.jp/problem/vertex_add_subtree_sum</a>
+* see: <a href="https://judge.yosupo.jp/problem/vertex_set_path_composite">https://judge.yosupo.jp/problem/vertex_set_path_composite</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/lib/classes/heavylightdecomposition.cpp.html">lib/classes/heavylightdecomposition.cpp</a>
+* :heavy_check_mark: <a href="../../library/lib/classes/modint.cpp.html">lib/classes/modint.cpp</a>
 * :heavy_check_mark: <a href="../../library/lib/classes/segtree.cpp.html">lib/classes/segtree.cpp</a>
 
 
@@ -48,11 +49,14 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_subtree_sum"
-
+#define PROBLEM "https://judge.yosupo.jp/problem/vertex_set_path_composite"
 #include <bits/stdc++.h>
+
 using namespace std;
-using i64 = long;
+
+using i64 = long long;
+
+const i64 MOD = 998244353;
 
 template <typename T>
 bool chmax(T& x, T y){
@@ -63,40 +67,61 @@ bool chmax(T& x, T y){
     return false;
 }
 
-
 #include "../lib/classes/heavylightdecomposition.cpp"
+#include "../lib/classes/modint.cpp"
 #include "../lib/classes/segtree.cpp"
 
-signed main() {
+
+signed main(){
     int n, q;
     cin >> n >> q;
     vector<int> a(n);
-    for(auto& x : a)
-        cin >> x;
+    vector<int> b(n);
+    for(int i = 0; i < n; ++i)
+        cin >> a[i] >> b[i];
     vector<vector<int>> edges(n);
-    for(int i = 1; i < n; ++i){
-        int j;
-        cin >> j;
-        edges[i].emplace_back(j);
-        edges[j].emplace_back(i);
+    for(int i = 0; i < n - 1; ++i){
+        int u, v;
+        cin >> u >> v;
+        edges[u].push_back(v);
+        edges[v].push_back(u);
     }
     HeavyLightDecomposition hld(edges);
-    Segtree<i64> seg(n, 0L, [](auto x, auto y){return x + y;}, 0L);
+    vector<pair<mint, mint>> v(n);
     for(int i = 0; i < n; ++i)
-        seg.set(hld.get_idx(i), a[i]);
+        v[hld.get_idx(i)] = make_pair(a[i], b[i]);
+    auto func = [](auto p1, auto p2){
+        mint a = p1.first;
+        mint b = p1.second;
+        mint c = p2.first;
+        mint d = p2.second;
+        return make_pair(c * a, c * b + d);
+    };
+
+    Segtree<pair<mint,mint>> seg(n, v, func, make_pair(1, 0));
+    Segtree<pair<mint,mint>> seg_rev(n, v, [&func](auto x, auto y){return func(y, x);}, make_pair(1, 0));
     for(int i = 0; i < q; ++i){
-        int t;
-        cin >> t;
-        if(t == 0){
-            int u, x;
-            cin >> u >> x;
-            seg.update(hld.in[u], x);
+        int type;
+        cin >> type;
+        if(type == 0){
+            int p, c, d;
+            cin >> p >> c >> d;
+            seg.set(hld.get_idx(p), make_pair(c, d));
+            seg_rev.set(hld.get_idx(p), make_pair(c, d));
         }
         else{
-            int u;
-            cin >> u;
-            auto v = hld.subtree(u);
-            cout << seg.get(v.first, v.second) << endl;
+            int u, v, x;
+            cin >> u >> v >> x;
+            auto res = hld.two_point_path(u, v);
+            pair<mint,mint> l(1, 0), r(1, 0);
+            for(auto p : res.first){
+                l = func(l, seg_rev.get(p.first, p.second));
+            }
+            for(auto p : res.second){
+                r = func(seg.get(p.first, p.second), r);
+            }
+            auto ret = func(l, r);
+            cout << ret.first * x + ret.second << endl;
         }
     }
 }
@@ -108,12 +133,15 @@ signed main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify/vertex_and_subtree_sum.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_subtree_sum"
-
+#line 1 "verify/hld_composite.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/vertex_set_path_composite"
 #include <bits/stdc++.h>
+
 using namespace std;
-using i64 = long;
+
+using i64 = long long;
+
+const i64 MOD = 998244353;
 
 template <typename T>
 bool chmax(T& x, T y){
@@ -123,7 +151,6 @@ bool chmax(T& x, T y){
     }
     return false;
 }
-
 
 #line 1 "verify/../lib/classes/heavylightdecomposition.cpp"
 struct HeavyLightDecomposition{
@@ -215,6 +242,47 @@ struct HeavyLightDecomposition{
     }
 };
 
+#line 1 "verify/../lib/classes/modint.cpp"
+template <i64 mod = MOD>
+struct ModInt{
+    i64 p;
+
+    ModInt() : p(0){}
+    ModInt(i64 x){p = x >= 0 ? x % mod : x + (-x + mod - 1) / mod * mod;}
+
+    ModInt& operator+=(const ModInt& y){p = p + *y - ((p + *y) >= mod ? mod : 0); return *this;}
+    ModInt& operator-=(const ModInt& y){p = p - *y + (p - *y < 0 ? mod : 0); return *this;}
+    ModInt& operator*=(const ModInt& y){p = (p * *y) % mod; return *this;}
+    ModInt& operator%=(const ModInt& y){if(y)p %= *y; return *this;}
+
+    ModInt operator+(const ModInt& y) const{ModInt x = *this; return x += y;}
+    ModInt operator-(const ModInt& y) const{ModInt x = *this; return x -= y;}
+    ModInt operator*(const ModInt& y) const{ModInt x = *this; return x *= y;}
+    ModInt operator%(const ModInt& y) const{ModInt x = *this; return x %= y;}
+
+    friend ostream& operator<<(ostream& stream, const ModInt<mod>& x){
+        stream << *x;
+        return stream;
+    }
+
+    friend ostream& operator>>(ostream& stream, const ModInt<mod>& x){
+        stream >> *x;
+        return stream;
+    }
+
+    ModInt& operator++(){p = (p + 1) % mod; return *this;}
+    ModInt& operator--(){p = (p - 1 + mod) % mod; return *this;}
+
+    bool operator==(const ModInt& y) const{return p == *y;}
+    bool operator!=(const ModInt& y) const{return p != *y;}
+
+    const i64& operator*() const{return p;}
+    i64& operator*(){return p;}
+
+};
+
+using mint = ModInt<>;
+
 #line 1 "verify/../lib/classes/segtree.cpp"
 template<typename T>
 struct Segtree{
@@ -271,38 +339,59 @@ struct Segtree{
     }
 };
 
-#line 19 "verify/vertex_and_subtree_sum.test.cpp"
+#line 22 "verify/hld_composite.test.cpp"
 
-signed main() {
+
+signed main(){
     int n, q;
     cin >> n >> q;
     vector<int> a(n);
-    for(auto& x : a)
-        cin >> x;
+    vector<int> b(n);
+    for(int i = 0; i < n; ++i)
+        cin >> a[i] >> b[i];
     vector<vector<int>> edges(n);
-    for(int i = 1; i < n; ++i){
-        int j;
-        cin >> j;
-        edges[i].emplace_back(j);
-        edges[j].emplace_back(i);
+    for(int i = 0; i < n - 1; ++i){
+        int u, v;
+        cin >> u >> v;
+        edges[u].push_back(v);
+        edges[v].push_back(u);
     }
     HeavyLightDecomposition hld(edges);
-    Segtree<i64> seg(n, 0L, [](auto x, auto y){return x + y;}, 0L);
+    vector<pair<mint, mint>> v(n);
     for(int i = 0; i < n; ++i)
-        seg.set(hld.get_idx(i), a[i]);
+        v[hld.get_idx(i)] = make_pair(a[i], b[i]);
+    auto func = [](auto p1, auto p2){
+        mint a = p1.first;
+        mint b = p1.second;
+        mint c = p2.first;
+        mint d = p2.second;
+        return make_pair(c * a, c * b + d);
+    };
+
+    Segtree<pair<mint,mint>> seg(n, v, func, make_pair(1, 0));
+    Segtree<pair<mint,mint>> seg_rev(n, v, [&func](auto x, auto y){return func(y, x);}, make_pair(1, 0));
     for(int i = 0; i < q; ++i){
-        int t;
-        cin >> t;
-        if(t == 0){
-            int u, x;
-            cin >> u >> x;
-            seg.update(hld.in[u], x);
+        int type;
+        cin >> type;
+        if(type == 0){
+            int p, c, d;
+            cin >> p >> c >> d;
+            seg.set(hld.get_idx(p), make_pair(c, d));
+            seg_rev.set(hld.get_idx(p), make_pair(c, d));
         }
         else{
-            int u;
-            cin >> u;
-            auto v = hld.subtree(u);
-            cout << seg.get(v.first, v.second) << endl;
+            int u, v, x;
+            cin >> u >> v >> x;
+            auto res = hld.two_point_path(u, v);
+            pair<mint,mint> l(1, 0), r(1, 0);
+            for(auto p : res.first){
+                l = func(l, seg_rev.get(p.first, p.second));
+            }
+            for(auto p : res.second){
+                r = func(seg.get(p.first, p.second), r);
+            }
+            auto ret = func(l, r);
+            cout << ret.first * x + ret.second << endl;
         }
     }
 }

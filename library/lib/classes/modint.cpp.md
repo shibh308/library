@@ -38,6 +38,7 @@ layout: default
 
 ## Verified with
 
+* :heavy_check_mark: <a href="../../../verify/verify/hld_composite.test.cpp.html">verify/hld_composite.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/verify/segtree_composite.test.cpp.html">verify/segtree_composite.test.cpp</a>
 
 

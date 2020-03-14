@@ -47,7 +47,7 @@ layout: default
 
 * :heavy_check_mark: <a href="library/lib/classes/avl.cpp.html">lib/classes/avl.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/binaryindexedtree.cpp.html">lib/classes/binaryindexedtree.cpp</a>
-* :warning: <a href="library/lib/classes/binarylifting.cpp.html">lib/classes/binarylifting.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/binarylifting.cpp.html">lib/classes/binarylifting.cpp</a>
 * :warning: <a href="library/lib/classes/compression.cpp.html">lib/classes/compression.cpp</a>
 * :warning: <a href="library/lib/classes/convexhulltrick.cpp.html">lib/classes/convexhulltrick.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/dinic.cpp.html">lib/classes/dinic.cpp</a>
@@ -98,6 +98,8 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/2-sat.test.cpp.html">verify/2-sat.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/bipartitematching.test.cpp.html">verify/bipartitematching.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/eulertour.test.cpp.html">verify/eulertour.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/hld_composite.test.cpp.html">verify/hld_composite.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/lca_binarylifting.test.cpp.html">verify/lca_binarylifting.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/lca_hld.test.cpp.html">verify/lca_hld.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/lowlink.test.cpp.html">verify/lowlink.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/lowlink_tree.test.cpp.html">verify/lowlink_tree.test.cpp</a>

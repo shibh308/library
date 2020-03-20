@@ -93,7 +93,7 @@ signed main() {
 using namespace std;
 using i64 = long;
 
-#line 1 "verify/../lib/classes/dynamicsegmenttree.cpp"
+#line 1 "lib/classes/dynamicsegmenttree.cpp"
 template <typename T>
 struct Segtree{
 

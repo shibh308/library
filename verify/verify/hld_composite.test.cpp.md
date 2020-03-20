@@ -152,7 +152,7 @@ bool chmax(T& x, T y){
     return false;
 }
 
-#line 1 "verify/../lib/classes/heavylightdecomposition.cpp"
+#line 1 "lib/classes/heavylightdecomposition.cpp"
 struct HeavyLightDecomposition{
     int n;
     vector<int> size, par, in, in_rev, heavy_root, depth, heavy_depth, out;
@@ -242,7 +242,7 @@ struct HeavyLightDecomposition{
     }
 };
 
-#line 1 "verify/../lib/classes/modint.cpp"
+#line 1 "lib/classes/modint.cpp"
 template <i64 mod = MOD>
 struct ModInt{
     i64 p;
@@ -283,7 +283,7 @@ struct ModInt{
 
 using mint = ModInt<>;
 
-#line 1 "verify/../lib/classes/segtree.cpp"
+#line 1 "lib/classes/segtree.cpp"
 template<typename T>
 struct Segtree{
     int n;

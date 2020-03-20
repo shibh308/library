@@ -90,7 +90,7 @@ signed main() {
 using namespace std;
 using i64 = long;
 
-#line 1 "verify/../lib/classes/lazysegtree.cpp"
+#line 1 "lib/classes/lazysegtree.cpp"
 template<typename T, typename U>
 struct Segtree{
     int n;

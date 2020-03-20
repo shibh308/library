@@ -93,7 +93,7 @@ signed main() {
 using namespace std;
 using i64 = long;
 
-#line 1 "verify/../lib/classes/binaryindexedtree.cpp"
+#line 1 "lib/classes/binaryindexedtree.cpp"
 template <typename T>
 struct BIT{
     vector<T> elm;

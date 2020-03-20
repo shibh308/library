@@ -138,7 +138,7 @@ bool chmax(T& x, T y){
 }
 
 
-#line 1 "verify/../lib/classes/lowlink.cpp"
+#line 1 "lib/classes/lowlink.cpp"
 struct LowLink{
     vector<vector<int>>& edges;
     // 関節点
@@ -185,7 +185,7 @@ struct LowLink{
     }
 };
 
-#line 1 "verify/../lib/functions/twoedgeconnectedcomponents_tree.cpp"
+#line 1 "lib/functions/twoedgeconnectedcomponents_tree.cpp"
 struct Result{
     int group_cnt;
     vector<int> group;

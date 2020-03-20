@@ -114,7 +114,7 @@ using i64 = long long;
 
 const i64 MOD = 998244353;
 
-#line 1 "verify/../lib/classes/modint.cpp"
+#line 1 "lib/classes/modint.cpp"
 template <i64 mod = MOD>
 struct ModInt{
     i64 p;
@@ -155,7 +155,7 @@ struct ModInt{
 
 using mint = ModInt<>;
 
-#line 1 "verify/../lib/classes/segtree.cpp"
+#line 1 "lib/classes/segtree.cpp"
 template<typename T>
 struct Segtree{
     int n;

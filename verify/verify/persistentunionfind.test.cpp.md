@@ -157,7 +157,7 @@ using i64 = long;
 
 const i64 MOD = 1e9 + 7;
 
-#line 1 "verify/../lib/classes/persistentunionfind.cpp"
+#line 1 "lib/classes/persistentunionfind.cpp"
 struct UnionFind{
     vector<int> par, time;
     int count;

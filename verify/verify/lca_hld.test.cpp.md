@@ -108,7 +108,7 @@ bool chmax(T& x, T y){
 }
 
 
-#line 1 "verify/../lib/classes/heavylightdecomposition.cpp"
+#line 1 "lib/classes/heavylightdecomposition.cpp"
 struct HeavyLightDecomposition{
     int n;
     vector<int> size, par, in, in_rev, heavy_root, depth, heavy_depth, out;

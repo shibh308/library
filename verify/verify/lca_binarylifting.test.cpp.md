@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/lca_binarylifting.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-14 13:51:43+09:00
+    - Last commit date: 2020-03-20 18:12:37+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/lca">https://judge.yosupo.jp/problem/lca</a>
@@ -89,7 +89,7 @@ using namespace std;
 
 using i64 = long long;
 
-#line 1 "verify/../lib/classes/binarylifting.cpp"
+#line 1 "lib/classes/binarylifting.cpp"
 struct BinaryLifting{
     int n;
     vector<vector<int>> next;
@@ -108,9 +108,9 @@ struct BinaryLifting{
                 }
         };
         depth[root] = 0;
-        dfs(0);
+        dfs(root);
 
-        next.push_back(move(par));
+        next.push_back(par);
         for(int k = 0;; ++k){
             bool fl = false;
             next.emplace_back(n, -1);

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/binarylifting.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-03-04 14:48:14+09:00
+    - Last commit date: 2020-03-20 18:12:37+09:00
 
 
 
@@ -64,9 +64,9 @@ struct BinaryLifting{
                 }
         };
         depth[root] = 0;
-        dfs(0);
+        dfs(root);
 
-        next.push_back(move(par));
+        next.push_back(par);
         for(int k = 0;; ++k){
             bool fl = false;
             next.emplace_back(n, -1);
@@ -132,9 +132,9 @@ struct BinaryLifting{
                 }
         };
         depth[root] = 0;
-        dfs(0);
+        dfs(root);
 
-        next.push_back(move(par));
+        next.push_back(par);
         for(int k = 0;; ++k){
             bool fl = false;
             next.emplace_back(n, -1);

@@ -163,7 +163,7 @@ bool chmax(T& x, T y){
 }
 
 
-#line 1 "verify/../lib/classes/mo.cpp"
+#line 1 "lib/classes/mo.cpp"
 struct Mo{
     int l, r;
     function<void(int)> left_add, left_erase, right_add, right_erase;
@@ -184,7 +184,7 @@ struct Mo{
     }
 };
 
-#line 1 "verify/../lib/functions/mo_query.cpp"
+#line 1 "lib/functions/mo_query.cpp"
 template <typename ResultType>
 vector<ResultType> mo_query(Mo& mo, vector<pair<int,int>>& queries, function<ResultType(int)> get_func, int packet=512){
     int q = queries.size();

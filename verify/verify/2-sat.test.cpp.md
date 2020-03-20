@@ -118,7 +118,7 @@ signed main() {
 using namespace std;
 using i64 = long;
 
-#line 1 "verify/../lib/functions/scc.cpp"
+#line 1 "lib/functions/scc.cpp"
 vector<int> scc(vector<vector<int>>& edges){
     int n = edges.size();
     vector<vector<int>> rev(n);

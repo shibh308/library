@@ -145,7 +145,7 @@ using namespace std;
 using i64 = long long;
 
 
-#line 1 "verify/../lib/classes/mo.cpp"
+#line 1 "lib/classes/mo.cpp"
 struct Mo{
     int l, r;
     function<void(int)> left_add, left_erase, right_add, right_erase;

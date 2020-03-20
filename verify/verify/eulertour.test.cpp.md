@@ -107,7 +107,7 @@ using namespace std;
 
 using i64 = long long;
 
-#line 1 "verify/../lib/classes/eulertour.cpp"
+#line 1 "lib/classes/eulertour.cpp"
 struct EulerTour{
     int n;
     vector<int> in, out;
@@ -132,7 +132,7 @@ struct EulerTour{
     }
 };
 
-#line 1 "verify/../lib/classes/segtree.cpp"
+#line 1 "lib/classes/segtree.cpp"
 template<typename T>
 struct Segtree{
     int n;

@@ -86,7 +86,7 @@ signed main() {
 using namespace std;
 using i64 = long;
 
-#line 1 "verify/../lib/classes/unionfind.cpp"
+#line 1 "lib/classes/unionfind.cpp"
 struct UnionFind{
     vector<int> par;
     int count;

@@ -84,7 +84,7 @@ signed main() {
 using namespace std;
 using i64 = long;
 
-#line 1 "verify/../lib/classes/waveletmatrix.cpp"
+#line 1 "lib/classes/waveletmatrix.cpp"
 
 struct BitVector{
     int n, m;

@@ -84,7 +84,7 @@ signed main() {
 using namespace std;
 using i64 = long;
 
-#line 1 "verify/../lib/classes/disjointsparsetable.cpp"
+#line 1 "lib/classes/disjointsparsetable.cpp"
 template <typename T>
 struct DisjointSparseTable{
     function<T(T, T)> f;

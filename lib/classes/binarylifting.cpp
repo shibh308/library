@@ -16,9 +16,9 @@ struct BinaryLifting{
                 }
         };
         depth[root] = 0;
-        dfs(0);
+        dfs(root);
 
-        next.push_back(move(par));
+        next.push_back(par);
         for(int k = 0;; ++k){
             bool fl = false;
             next.emplace_back(n, -1);

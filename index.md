@@ -66,6 +66,7 @@ layout: default
 * :warning: <a href="library/lib/classes/primaldual.cpp.html">lib/classes/primaldual.cpp</a>
 * :warning: <a href="library/lib/classes/rectanglesum.cpp.html">lib/classes/rectanglesum.cpp</a>
 * :warning: <a href="library/lib/classes/rollinghash.cpp.html">lib/classes/rollinghash.cpp</a>
+* :warning: <a href="library/lib/classes/segmentset.cpp.html">lib/classes/segmentset.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/segtree.cpp.html">lib/classes/segtree.cpp</a>
 * :warning: <a href="library/lib/classes/treap.cpp.html">lib/classes/treap.cpp</a>
 * :warning: <a href="library/lib/classes/trie.cpp.html">lib/classes/trie.cpp</a>

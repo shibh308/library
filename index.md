@@ -68,6 +68,7 @@ layout: default
 * :warning: <a href="library/lib/classes/rollinghash.cpp.html">lib/classes/rollinghash.cpp</a>
 * :warning: <a href="library/lib/classes/segmentset.cpp.html">lib/classes/segmentset.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/segtree.cpp.html">lib/classes/segtree.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/skiplist.cpp.html">lib/classes/skiplist.cpp</a>
 * :warning: <a href="library/lib/classes/treap.cpp.html">lib/classes/treap.cpp</a>
 * :warning: <a href="library/lib/classes/trie.cpp.html">lib/classes/trie.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/unionfind.cpp.html">lib/classes/unionfind.cpp</a>
@@ -119,6 +120,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/rsq_dynamic.test.cpp.html">verify/rsq_dynamic.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/scc_dag.test.cpp.html">verify/scc_dag.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/segtree_composite.test.cpp.html">verify/segtree_composite.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/skiplist_composite.test.cpp.html">verify/skiplist_composite.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/static_rmq.test.cpp.html">verify/static_rmq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/static_rmq_wm.test.cpp.html">verify/static_rmq_wm.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/tangent_lines.test.cpp.html">verify/tangent_lines.test.cpp</a>

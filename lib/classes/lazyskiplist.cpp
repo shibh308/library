@@ -38,7 +38,7 @@ struct SkipList{
         return front->size[max_height] - 1;
     }
 
-    int get_val(NodePtr ptr, int height){
+    T get_val(NodePtr ptr, int height){
         return ptr->lazy[height] == op_u ? ptr->sum[height] : g(ptr->sum[height], ptr->lazy[height], ptr->size[height]);
     }
 

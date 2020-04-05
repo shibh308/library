@@ -57,6 +57,7 @@ layout: default
 * :heavy_check_mark: <a href="library/lib/classes/eulertour.cpp.html">lib/classes/eulertour.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/heavylightdecomposition.cpp.html">lib/classes/heavylightdecomposition.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/lazysegtree.cpp.html">lib/classes/lazysegtree.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/lazyskiplist.cpp.html">lib/classes/lazyskiplist.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/lowlink.cpp.html">lib/classes/lowlink.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/matrix.cpp.html">lib/classes/matrix.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/mo.cpp.html">lib/classes/mo.cpp</a>
@@ -121,6 +122,8 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/scc_dag.test.cpp.html">verify/scc_dag.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/segtree_composite.test.cpp.html">verify/segtree_composite.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/skiplist_composite.test.cpp.html">verify/skiplist_composite.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/skiplist_rmq_raq.test.cpp.html">verify/skiplist_rmq_raq.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/skiplist_rsq_raq.test.cpp.html">verify/skiplist_rsq_raq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/static_rmq.test.cpp.html">verify/static_rmq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/static_rmq_wm.test.cpp.html">verify/static_rmq_wm.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/tangent_lines.test.cpp.html">verify/tangent_lines.test.cpp</a>

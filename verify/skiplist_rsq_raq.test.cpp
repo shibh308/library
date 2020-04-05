@@ -3,6 +3,8 @@
 
 using namespace std;
 
+using i64 = long long;
+
 
 #include "../lib/classes/lazyskiplist.cpp"
 
@@ -10,7 +12,7 @@ using namespace std;
 signed main(){
     int n, q;
     cin >> n >> q;
-    SkipList<i64,i64> slist([](auto x, auto y){return x + y;}, [](auto x, auto y, int z){return x + y * z;}, [](auto x, auto y){return x + y;}, 0, 0);
+    SkipList<i64,i64> slist([](auto x, auto y){return x + y;}, [](auto x, auto y, int z){return x + y * z;}, [](auto x, auto y){return x + y;}, 0LL, 0LL);
     for(int i = 0; i < n; ++i)
         slist.insert_index(i, 0);
     for(int i = 0; i < q; ++i){

@@ -28,8 +28,8 @@ struct SkipList{
     U op_u;
 
     SkipList(function<T(T, T)> f, function<T(T, U, int)> g, function<U(U, U)> h, T op_t, U op_u) : max_height(0), f(f), g(g), h(h), op_t(op_t), op_u(op_u){
-        front = new Node(op_t, 32, op_u);
-        back = new Node(op_t, 32, op_u);
+        front = new Node(op_t, 21, op_u);
+        back = new Node(op_t, 21, op_u);
         front->next[0] = back;
         back->prev[0] = front;
     }
@@ -44,7 +44,7 @@ struct SkipList{
 
     NodePtr insert_next(NodePtr pre, T key){
         uint32_t r = max(rnd(), uint32_t(1));
-        int height = __builtin_ffs(r);
+        int height = min(__builtin_ffs(r), 20);
         while(max_height < height){
             ++max_height;
             front->size[max_height] = front->size[max_height - 1];

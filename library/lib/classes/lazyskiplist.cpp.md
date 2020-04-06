@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/lazyskiplist.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-06 02:30:51+09:00
+    - Last commit date: 2020-04-06 15:38:29+09:00
 
 
 
@@ -91,7 +91,7 @@ struct SkipList{
         return ptr->lazy[height] == op_u ? ptr->sum[height] : g(ptr->sum[height], ptr->lazy[height], ptr->size[height]);
     }
 
-    void insert_next(NodePtr pre, T key){
+    NodePtr insert_next(NodePtr pre, T key){
         uint32_t r = max(rnd(), uint32_t(1));
         int height = __builtin_ffs(r);
         while(max_height < height){
@@ -135,24 +135,26 @@ struct SkipList{
                 nex_sum = f(nex_sum, get_val(nex, i));
             }
         }
+		return node;
     }
 
     // idx番目(idx=0なら先頭)に挿入する
-    void insert_index(int idx, T key){
+    NodePtr insert_index(int idx, T key){
         NodePtr pre = access(idx - 1);
-        insert_next(pre, key);
+        return insert_next(pre, key);
     }
 
-    void insert_key(T key){
+    NodePtr insert_key(T key){
         NodePtr pre = lower_bound(key)->prev[0];
-        insert_next(pre, key);
+        return insert_next(pre, key);
     }
 
-    void erase(NodePtr target){
+    NodePtr erase(NodePtr target){
         // メモリ解放はしない(してもいいけど)
         int height = target->height;
         NodePtr pre = target->prev[0];
         NodePtr nex = target->next[0];
+		NodePtr ret = nex;
         vector<pair<NodePtr, int>> node_list = get_list(pre, target);
         for(int i = node_list.size() - 1; i >= 0; --i)
             eval(node_list[i].first, node_list[i].second);
@@ -170,17 +172,19 @@ struct SkipList{
             for(; nex->height == i + 1 && nex->next[i] != nullptr; nex = nex->next[i])
                 sum = f(sum, get_val(nex, i));
         }
+		return ret;
     }
 
-    void erase_index(int idx){
+    NodePtr erase_index(int idx){
         NodePtr target = access(idx);
-        erase(target);
+        return erase(target);
     }
-    void erase_key(T key){
+
+    NodePtr erase_key(T key){
         NodePtr target = lower_bound(key);
         if(target == back || target->sum[0] != key)
-            return;
-        erase(target);
+            return target;
+        return erase(target);
     }
 
     NodePtr lower_bound(T key){
@@ -396,7 +400,7 @@ struct SkipList{
         return ptr->lazy[height] == op_u ? ptr->sum[height] : g(ptr->sum[height], ptr->lazy[height], ptr->size[height]);
     }
 
-    void insert_next(NodePtr pre, T key){
+    NodePtr insert_next(NodePtr pre, T key){
         uint32_t r = max(rnd(), uint32_t(1));
         int height = __builtin_ffs(r);
         while(max_height < height){
@@ -440,24 +444,26 @@ struct SkipList{
                 nex_sum = f(nex_sum, get_val(nex, i));
             }
         }
+		return node;
     }
 
     // idx番目(idx=0なら先頭)に挿入する
-    void insert_index(int idx, T key){
+    NodePtr insert_index(int idx, T key){
         NodePtr pre = access(idx - 1);
-        insert_next(pre, key);
+        return insert_next(pre, key);
     }
 
-    void insert_key(T key){
+    NodePtr insert_key(T key){
         NodePtr pre = lower_bound(key)->prev[0];
-        insert_next(pre, key);
+        return insert_next(pre, key);
     }
 
-    void erase(NodePtr target){
+    NodePtr erase(NodePtr target){
         // メモリ解放はしない(してもいいけど)
         int height = target->height;
         NodePtr pre = target->prev[0];
         NodePtr nex = target->next[0];
+		NodePtr ret = nex;
         vector<pair<NodePtr, int>> node_list = get_list(pre, target);
         for(int i = node_list.size() - 1; i >= 0; --i)
             eval(node_list[i].first, node_list[i].second);
@@ -475,17 +481,19 @@ struct SkipList{
             for(; nex->height == i + 1 && nex->next[i] != nullptr; nex = nex->next[i])
                 sum = f(sum, get_val(nex, i));
         }
+		return ret;
     }
 
-    void erase_index(int idx){
+    NodePtr erase_index(int idx){
         NodePtr target = access(idx);
-        erase(target);
+        return erase(target);
     }
-    void erase_key(T key){
+
+    NodePtr erase_key(T key){
         NodePtr target = lower_bound(key);
         if(target == back || target->sum[0] != key)
-            return;
-        erase(target);
+            return target;
+        return erase(target);
     }
 
     NodePtr lower_bound(T key){

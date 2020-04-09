@@ -154,19 +154,15 @@ struct SkipList{
         T sum = op;
         int diff = r - l;
         int height_bound = 32;
-        while(diff){
-            for(int i = min(ptr->height - 1, height_bound); i >= 0; --i){
-                if(ptr->next[i] != nullptr && ptr->size[i] <= diff){
-                    sum = f(sum, ptr->sum[i]);
-                    diff -= ptr->size[i];
-                    ptr = ptr->next[i];
-                    break;
-                }
-                else
-                    height_bound = min(height_bound, i);
-            }
+        for(; ptr->size[ptr->height - 1] <= diff; ptr = ptr->next[ptr->height - 1]){
+            diff -= ptr->size[ptr->height - 1];
+            sum = f(sum, ptr->sum[ptr->height - 1]);
         }
-        assert(diff == 0);
+        for(int i = ptr->height - 2; diff; --i)
+            for(; ptr->size[i] <= diff; ptr = ptr->next[i]){
+                diff -= ptr->size[i];
+                sum = f(sum, ptr->sum[i]);
+            }
         return sum;
     }
 

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/skiplist_composite.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-03 22:06:46+09:00
+    - Last commit date: 2020-04-09 14:56:42+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/point_set_range_composite">https://judge.yosupo.jp/problem/point_set_range_composite</a>

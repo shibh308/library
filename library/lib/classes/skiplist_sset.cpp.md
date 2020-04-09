@@ -25,20 +25,15 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: lib/classes/skiplist.cpp
+# :warning: lib/classes/skiplist_sset.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
-* <a href="{{ site.github.repository_url }}/blob/master/lib/classes/skiplist.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-09 14:56:42+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/lib/classes/skiplist_sset.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-04-09 14:57:53+09:00
 
 
-
-
-## Verified with
-
-* :heavy_check_mark: <a href="../../../verify/verify/skiplist_composite.test.cpp.html">verify/skiplist_composite.test.cpp</a>
 
 
 ## Code
@@ -47,11 +42,11 @@ layout: default
 {% raw %}
 ```cpp
 template <typename T>
-struct SkipList{
+struct SSet{
 
     static uint32_t rnd(){
         static uint32_t x = 123456789, y = 362436069, z = 521288629, w = time(0);
-        uint32_t t = x ^ (x << 11);
+        uint32_t t = x ^(x << 11);
         x = y, y = z, z = w;
         w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));
         return w;
@@ -60,44 +55,42 @@ struct SkipList{
     struct Node{
         int height;
         T val;
-        vector<Node*> next, prev;
-        vector<T> sum;
+        vector<Node *> next, prev;
         vector<int> size;
-        Node(T val, int height) : val(val), height(height), next(height, nullptr), prev(height, nullptr), sum(height, val), size(height, 1){}
+        Node(T val, int height) : val(val), height(height), next(height, nullptr), prev(height, nullptr), size(height, 1){}
     };
 
     using NodePtr = Node*;
     int max_height;
     NodePtr front, back;
-    function<T(T, T)> f;
-    T op;
 
-    SkipList(function<T(T, T)> f = [](auto x, auto y){return x;}, T op = T()) : max_height(0), f(f), op(op){
-        front = new Node(op, 32);
-        back = new Node(op, 32);
-        front->next[0] = back;
-        back->prev[0] = front;
+    SSet(Node* fr = nullptr, Node* ba = nullptr) : max_height(0), front(fr), back(ba){
+        if(front == nullptr){
+            front = new Node(T(), 21);
+            back = new Node(T(), 21);
+            front->next[0] = back;
+            back->prev[0] = front;
+        }
     }
 
     int size(){
         return front->size[max_height] - 1;
     }
 
-    void insert_next(NodePtr pre, T key){
-        uint32_t r = max(rnd(), uint32_t(1));
-        int height = __builtin_ffs(r);
+    void insert_next(NodePtr pre, T key, int height = -1){
+        if(height == -1){
+            uint32_t r = max(rnd(), uint32_t(1));
+            height = min(20, __builtin_ffs(r));
+        }
         while(max_height < height){
             ++max_height;
             front->size[max_height] = front->size[max_height - 1];
             front->next[max_height] = back;
             back->prev[max_height] = front;
-            front->sum[max_height] = front->sum[max_height - 1];
         }
         NodePtr node = new Node(key, height);
 
         int pre_size = 1;
-        T pre_sum = pre->val;
-        T nex_sum = key;
         NodePtr nex = pre->next[0];
         for(int i = 0; i <= max_height; ++i){
             ++pre->size[i];
@@ -108,30 +101,15 @@ struct SkipList{
                 node->prev[i] = pre;
                 int range_size = pre->size[i];
                 pre->size[i] = pre_size;
-                pre->sum[i] = pre_sum;
                 node->size[i] = range_size - pre_size;
-                node->sum[i] = nex_sum;
             }
-            else{
-                pre->sum[i] = f(pre_sum, nex_sum);
-            }
-            for(; pre->height == i + 1 && pre->prev[i] != nullptr; pre = pre->prev[i]){
-                pre_sum = f(pre->prev[i]->sum[i], pre_sum);
+            for(; pre->height == i + 1 && pre->prev[i] != nullptr; pre = pre->prev[i])
                 pre_size += pre->prev[i]->size[i];
-            }
-            for(; nex->height == i + 1  && nex->next[i] != nullptr; nex = nex->next[i]){
-                nex_sum = f(nex_sum, nex->sum[i]);
-            }
+            for(; nex->height == i + 1 && nex->next[i] != nullptr; nex = nex->next[i]);
         }
     }
 
-    // idx番目(idx=0なら先頭)に挿入する
-    void insert_index(int idx, T key){
-        NodePtr pre = access(idx - 1);
-        insert_next(pre, key);
-    }
-
-    void insert_key(T key){
+    void insert(T key){
         NodePtr pre = lower_bound(key)->prev[0];
         insert_next(pre, key);
     }
@@ -141,19 +119,15 @@ struct SkipList{
         int height = target->height;
         NodePtr pre = target->prev[0];
         NodePtr nex = target->next[0];
-        T sum = pre->val;
         for(int i = 0; i <= max_height; ++i){
-            pre->sum[i] = sum;
             --pre->size[i];
             if(i < height){
                 pre->next[i] = nex;
                 nex->prev[i] = pre;
                 pre->size[i] += target->size[i];
             }
-            for(; pre->height == i + 1 && pre->prev[i] != nullptr; pre = pre->prev[i])
-                sum = f(pre->prev[i]->sum[i], sum);
-            for(; nex->height == i + 1 && nex->next[i] != nullptr; nex = nex->next[i])
-                sum = f(sum, nex->sum[i]);
+            for(; pre->height == i + 1 && pre->prev[i] != nullptr; pre = pre->prev[i]);
+            for(; nex->height == i + 1 && nex->next[i] != nullptr; nex = nex->next[i]);
         }
     }
 
@@ -161,6 +135,7 @@ struct SkipList{
         NodePtr target = access(idx);
         erase(target);
     }
+
     void erase_key(T key){
         NodePtr target = lower_bound(key);
         if(target == back || target->val != key)
@@ -175,18 +150,6 @@ struct SkipList{
         return pre->next[0];
     }
 
-    NodePtr upper_bound(T key){
-        NodePtr pre = front;
-        for(int i = max_height; i >= 0; --i)
-            for(; i < pre->next.size() && pre->next[i] != back && pre->next[i]->val <= key; pre = pre->next[i]);
-        return pre->next[0];
-    }
-
-    bool contains(T key){
-        NodePtr ptr = lower_bound(key);
-        return ptr != back && ptr->key == key;
-    }
-
     // 0-indexedでアクセスする
     NodePtr access(int idx){
         ++idx;
@@ -197,37 +160,59 @@ struct SkipList{
         return ptr;
     }
 
-    T get(int l, int r){
-        NodePtr ptr = access(l);
-        T sum = op;
-        int diff = r - l;
-        int height_bound = 32;
-        for(; ptr->size[ptr->height - 1] <= diff; ptr = ptr->next[ptr->height - 1]){
-            diff -= ptr->size[ptr->height - 1];
-            sum = f(sum, ptr->sum[ptr->height - 1]);
+    // [0, k), [k, n)で分割し、[k, n)を返す
+    SSet<T> split(int k){
+        int max_h = max_height;
+        NodePtr pre = access(k - 1);
+        insert_next(pre, T(), 21);
+        NodePtr l_back = pre->next[0];
+        insert_next(l_back, T(), 21);
+        NodePtr r_front = l_back->next[0];
+        NodePtr l_front = front, r_back = back;
+        for(int i = 0; i < l_back->height; ++i){
+            l_back->next[i] = nullptr;
+            r_front->prev[i] = nullptr;
+            l_back->size[i] = 1;
         }
-        for(int i = ptr->height - 2; diff; --i)
-            for(; ptr->size[i] <= diff; ptr = ptr->next[i]){
-                diff -= ptr->size[i];
-                sum = f(sum, ptr->sum[i]);
-            }
-        return sum;
+        max_height = max_h;
+        NodePtr ptr = l_back;
+        int size = 1;
+        for(int i = 0; i <= max_height; ++i){
+            ptr->size[i] = size;
+            for(; ptr->height == i + 1 && ptr->prev[i] != nullptr; ptr = ptr->prev[i])
+                size += ptr->prev[i]->size[i];
+        }
+        back = l_back;
+        SSet<T> sset(r_front, r_back);
+        sset.max_height = max_h;
+        return sset;
     }
 
-    void print(){
-        for(NodePtr node = front; node != nullptr; node = node->next[0]){
-            if(node == front || node == back)
-                printf("  null: ");
-            else
-                printf("%6lld: ", node->val);
-            for(int i = 0; i < node->height; ++i)
-                printf("%2d ", node->sum[i]);
-                // cout << node->size[i] << " ";
-            cout << endl;
+    // thisの末尾にslistを結合する
+    void merge(SSet<T>& slist){
+        while(max_height < slist.max_height){
+            ++max_height;
+            front->size[max_height] = front->size[max_height - 1];
+            front->next[max_height] = back;
+            back->prev[max_height] = front;
         }
-        cout << endl;
+        while(slist.max_height < max_height){
+            ++slist.max_height;
+            slist.front->size[slist.max_height] = slist.front->size[slist.max_height - 1];
+            slist.front->next[slist.max_height] = slist.back;
+            slist.back->prev[slist.max_height] = slist.front;
+        }
+        NodePtr a = back, b = slist.front;
+        for(int i = 0; i < back->height; ++i){
+            a->next[i] = b;
+            b->prev[i] = a;
+        }
+        back = slist.back;
+        erase(a);
+        erase(b);
     }
 };
+
 
 ```
 {% endraw %}
@@ -235,13 +220,13 @@ struct SkipList{
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "lib/classes/skiplist.cpp"
+#line 1 "lib/classes/skiplist_sset.cpp"
 template <typename T>
-struct SkipList{
+struct SSet{
 
     static uint32_t rnd(){
         static uint32_t x = 123456789, y = 362436069, z = 521288629, w = time(0);
-        uint32_t t = x ^ (x << 11);
+        uint32_t t = x ^(x << 11);
         x = y, y = z, z = w;
         w = (w ^ (w >> 19)) ^ (t ^ (t >> 8));
         return w;
@@ -250,44 +235,42 @@ struct SkipList{
     struct Node{
         int height;
         T val;
-        vector<Node*> next, prev;
-        vector<T> sum;
+        vector<Node *> next, prev;
         vector<int> size;
-        Node(T val, int height) : val(val), height(height), next(height, nullptr), prev(height, nullptr), sum(height, val), size(height, 1){}
+        Node(T val, int height) : val(val), height(height), next(height, nullptr), prev(height, nullptr), size(height, 1){}
     };
 
     using NodePtr = Node*;
     int max_height;
     NodePtr front, back;
-    function<T(T, T)> f;
-    T op;
 
-    SkipList(function<T(T, T)> f = [](auto x, auto y){return x;}, T op = T()) : max_height(0), f(f), op(op){
-        front = new Node(op, 32);
-        back = new Node(op, 32);
-        front->next[0] = back;
-        back->prev[0] = front;
+    SSet(Node* fr = nullptr, Node* ba = nullptr) : max_height(0), front(fr), back(ba){
+        if(front == nullptr){
+            front = new Node(T(), 21);
+            back = new Node(T(), 21);
+            front->next[0] = back;
+            back->prev[0] = front;
+        }
     }
 
     int size(){
         return front->size[max_height] - 1;
     }
 
-    void insert_next(NodePtr pre, T key){
-        uint32_t r = max(rnd(), uint32_t(1));
-        int height = __builtin_ffs(r);
+    void insert_next(NodePtr pre, T key, int height = -1){
+        if(height == -1){
+            uint32_t r = max(rnd(), uint32_t(1));
+            height = min(20, __builtin_ffs(r));
+        }
         while(max_height < height){
             ++max_height;
             front->size[max_height] = front->size[max_height - 1];
             front->next[max_height] = back;
             back->prev[max_height] = front;
-            front->sum[max_height] = front->sum[max_height - 1];
         }
         NodePtr node = new Node(key, height);
 
         int pre_size = 1;
-        T pre_sum = pre->val;
-        T nex_sum = key;
         NodePtr nex = pre->next[0];
         for(int i = 0; i <= max_height; ++i){
             ++pre->size[i];
@@ -298,30 +281,15 @@ struct SkipList{
                 node->prev[i] = pre;
                 int range_size = pre->size[i];
                 pre->size[i] = pre_size;
-                pre->sum[i] = pre_sum;
                 node->size[i] = range_size - pre_size;
-                node->sum[i] = nex_sum;
             }
-            else{
-                pre->sum[i] = f(pre_sum, nex_sum);
-            }
-            for(; pre->height == i + 1 && pre->prev[i] != nullptr; pre = pre->prev[i]){
-                pre_sum = f(pre->prev[i]->sum[i], pre_sum);
+            for(; pre->height == i + 1 && pre->prev[i] != nullptr; pre = pre->prev[i])
                 pre_size += pre->prev[i]->size[i];
-            }
-            for(; nex->height == i + 1  && nex->next[i] != nullptr; nex = nex->next[i]){
-                nex_sum = f(nex_sum, nex->sum[i]);
-            }
+            for(; nex->height == i + 1 && nex->next[i] != nullptr; nex = nex->next[i]);
         }
     }
 
-    // idx番目(idx=0なら先頭)に挿入する
-    void insert_index(int idx, T key){
-        NodePtr pre = access(idx - 1);
-        insert_next(pre, key);
-    }
-
-    void insert_key(T key){
+    void insert(T key){
         NodePtr pre = lower_bound(key)->prev[0];
         insert_next(pre, key);
     }
@@ -331,19 +299,15 @@ struct SkipList{
         int height = target->height;
         NodePtr pre = target->prev[0];
         NodePtr nex = target->next[0];
-        T sum = pre->val;
         for(int i = 0; i <= max_height; ++i){
-            pre->sum[i] = sum;
             --pre->size[i];
             if(i < height){
                 pre->next[i] = nex;
                 nex->prev[i] = pre;
                 pre->size[i] += target->size[i];
             }
-            for(; pre->height == i + 1 && pre->prev[i] != nullptr; pre = pre->prev[i])
-                sum = f(pre->prev[i]->sum[i], sum);
-            for(; nex->height == i + 1 && nex->next[i] != nullptr; nex = nex->next[i])
-                sum = f(sum, nex->sum[i]);
+            for(; pre->height == i + 1 && pre->prev[i] != nullptr; pre = pre->prev[i]);
+            for(; nex->height == i + 1 && nex->next[i] != nullptr; nex = nex->next[i]);
         }
     }
 
@@ -351,6 +315,7 @@ struct SkipList{
         NodePtr target = access(idx);
         erase(target);
     }
+
     void erase_key(T key){
         NodePtr target = lower_bound(key);
         if(target == back || target->val != key)
@@ -365,18 +330,6 @@ struct SkipList{
         return pre->next[0];
     }
 
-    NodePtr upper_bound(T key){
-        NodePtr pre = front;
-        for(int i = max_height; i >= 0; --i)
-            for(; i < pre->next.size() && pre->next[i] != back && pre->next[i]->val <= key; pre = pre->next[i]);
-        return pre->next[0];
-    }
-
-    bool contains(T key){
-        NodePtr ptr = lower_bound(key);
-        return ptr != back && ptr->key == key;
-    }
-
     // 0-indexedでアクセスする
     NodePtr access(int idx){
         ++idx;
@@ -387,37 +340,59 @@ struct SkipList{
         return ptr;
     }
 
-    T get(int l, int r){
-        NodePtr ptr = access(l);
-        T sum = op;
-        int diff = r - l;
-        int height_bound = 32;
-        for(; ptr->size[ptr->height - 1] <= diff; ptr = ptr->next[ptr->height - 1]){
-            diff -= ptr->size[ptr->height - 1];
-            sum = f(sum, ptr->sum[ptr->height - 1]);
+    // [0, k), [k, n)で分割し、[k, n)を返す
+    SSet<T> split(int k){
+        int max_h = max_height;
+        NodePtr pre = access(k - 1);
+        insert_next(pre, T(), 21);
+        NodePtr l_back = pre->next[0];
+        insert_next(l_back, T(), 21);
+        NodePtr r_front = l_back->next[0];
+        NodePtr l_front = front, r_back = back;
+        for(int i = 0; i < l_back->height; ++i){
+            l_back->next[i] = nullptr;
+            r_front->prev[i] = nullptr;
+            l_back->size[i] = 1;
         }
-        for(int i = ptr->height - 2; diff; --i)
-            for(; ptr->size[i] <= diff; ptr = ptr->next[i]){
-                diff -= ptr->size[i];
-                sum = f(sum, ptr->sum[i]);
-            }
-        return sum;
+        max_height = max_h;
+        NodePtr ptr = l_back;
+        int size = 1;
+        for(int i = 0; i <= max_height; ++i){
+            ptr->size[i] = size;
+            for(; ptr->height == i + 1 && ptr->prev[i] != nullptr; ptr = ptr->prev[i])
+                size += ptr->prev[i]->size[i];
+        }
+        back = l_back;
+        SSet<T> sset(r_front, r_back);
+        sset.max_height = max_h;
+        return sset;
     }
 
-    void print(){
-        for(NodePtr node = front; node != nullptr; node = node->next[0]){
-            if(node == front || node == back)
-                printf("  null: ");
-            else
-                printf("%6lld: ", node->val);
-            for(int i = 0; i < node->height; ++i)
-                printf("%2d ", node->sum[i]);
-                // cout << node->size[i] << " ";
-            cout << endl;
+    // thisの末尾にslistを結合する
+    void merge(SSet<T>& slist){
+        while(max_height < slist.max_height){
+            ++max_height;
+            front->size[max_height] = front->size[max_height - 1];
+            front->next[max_height] = back;
+            back->prev[max_height] = front;
         }
-        cout << endl;
+        while(slist.max_height < max_height){
+            ++slist.max_height;
+            slist.front->size[slist.max_height] = slist.front->size[slist.max_height - 1];
+            slist.front->next[slist.max_height] = slist.back;
+            slist.back->prev[slist.max_height] = slist.front;
+        }
+        NodePtr a = back, b = slist.front;
+        for(int i = 0; i < back->height; ++i){
+            a->next[i] = b;
+            b->prev[i] = a;
+        }
+        back = slist.back;
+        erase(a);
+        erase(b);
     }
 };
+
 
 ```
 {% endraw %}

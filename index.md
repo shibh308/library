@@ -55,6 +55,7 @@ layout: default
 * :heavy_check_mark: <a href="library/lib/classes/dynamiclazysegmenttree.cpp.html">lib/classes/dynamiclazysegmenttree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/dynamicsegmenttree.cpp.html">lib/classes/dynamicsegmenttree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/eulertour.cpp.html">lib/classes/eulertour.cpp</a>
+* :warning: <a href="library/lib/classes/hashmap.cpp.html">lib/classes/hashmap.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/heavylightdecomposition.cpp.html">lib/classes/heavylightdecomposition.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/lazysegtree.cpp.html">lib/classes/lazysegtree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/lazyskiplist.cpp.html">lib/classes/lazyskiplist.cpp</a>
@@ -70,10 +71,12 @@ layout: default
 * :warning: <a href="library/lib/classes/segmentset.cpp.html">lib/classes/segmentset.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/segtree.cpp.html">lib/classes/segtree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/skiplist.cpp.html">lib/classes/skiplist.cpp</a>
+* :warning: <a href="library/lib/classes/skiplist_sset.cpp.html">lib/classes/skiplist_sset.cpp</a>
 * :warning: <a href="library/lib/classes/treap.cpp.html">lib/classes/treap.cpp</a>
 * :warning: <a href="library/lib/classes/trie.cpp.html">lib/classes/trie.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/unionfind.cpp.html">lib/classes/unionfind.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/waveletmatrix.cpp.html">lib/classes/waveletmatrix.cpp</a>
+* :warning: <a href="library/lib/classes/xfasttrie.cpp.html">lib/classes/xfasttrie.cpp</a>
 
 
 <div id="abc4d0f7246596dc1cbcc6b77896a2fc"></div>

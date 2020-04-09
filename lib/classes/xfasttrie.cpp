@@ -13,12 +13,13 @@ struct XFastTrie{
             c[1] = nullptr;
         }
     };
+	int n;
     Node* root;
     Node* front;
     Node* back;
     vector<HashMap<T, Node*>> hashmap;
 
-    XFastTrie(){
+    XFastTrie() : n(0){
         root = new Node(0);
         front = new Node(0);
         back = new Node(0);
@@ -64,9 +65,9 @@ struct XFastTrie{
         }
         if(nex == nullptr)
             return;
+		++n;
         assert(nex == back || key < nex->val);
         assert(pre == front || pre->val < key);
-
         pre->c[1] = ptr;
         ptr->c[1] = nex;
         nex->c[0] = ptr;
@@ -136,6 +137,7 @@ struct XFastTrie{
                 break;
             ptr = ptr->c[fl];
         }
+		--n;
         delete(target);
     }
 

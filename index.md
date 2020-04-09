@@ -72,6 +72,7 @@ layout: default
 * :heavy_check_mark: <a href="library/lib/classes/segtree.cpp.html">lib/classes/segtree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/skiplist.cpp.html">lib/classes/skiplist.cpp</a>
 * :warning: <a href="library/lib/classes/skiplist_sset.cpp.html">lib/classes/skiplist_sset.cpp</a>
+* :warning: <a href="library/lib/classes/splaytree_sset.cpp.html">lib/classes/splaytree_sset.cpp</a>
 * :warning: <a href="library/lib/classes/treap.cpp.html">lib/classes/treap.cpp</a>
 * :warning: <a href="library/lib/classes/trie.cpp.html">lib/classes/trie.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/unionfind.cpp.html">lib/classes/unionfind.cpp</a>

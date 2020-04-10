@@ -1,3 +1,4 @@
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_4_C"
 #include "bits/stdc++.h"
 
 using namespace std;

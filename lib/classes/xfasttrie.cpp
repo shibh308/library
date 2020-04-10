@@ -13,7 +13,7 @@ struct XFastTrie{
             c[1] = nullptr;
         }
     };
-	int n;
+    int n;
     Node* root;
     Node* front;
     Node* back;
@@ -63,7 +63,7 @@ struct XFastTrie{
         }
         if(nex == nullptr)
             return;
-		++n;
+        ++n;
         assert(nex == back || key < nex->val);
         assert(pre == front || pre->val < key);
         pre->c[1] = ptr;
@@ -135,33 +135,18 @@ struct XFastTrie{
                 break;
             ptr = ptr->c[fl];
         }
-		--n;
+        --n;
         delete(target);
     }
 
     Node* lower_bound(T key){
         Node* ptr = root;
         int lb = W, rb = -1;
+        int mid;
+        bool fl;
+        Node* res;
         while(lb - rb > 1){
-            int mid = (lb + rb) >> 1;
-            bool fl;
-            Node* res;
-            tie(res, fl) = hashmap[mid].find(key & ~((1LL << mid) - 1));
-            if(fl)
-                ptr = res;
-            (fl ? lb : rb) = mid;
-        }
-        if(!lb)return ptr;
-        int fl = (key >> rb) & 1;
-        return fl ? ptr->c[fl]->c[1] : ptr->c[fl];
-    }
-    Node* lower_bound(T key){
-        Node* ptr = root;
-        int lb = W, rb = -1;
-        while(lb - rb > 1){
-            int mid = (lb + rb) >> 1;
-            bool fl;
-            Node* res;
+            mid = (lb + rb) >> 1;
             tie(res, fl) = hashmap[mid].find(key & ~((1LL << mid) - 1));
             if(fl)
                 ptr = res;
@@ -176,3 +161,4 @@ struct XFastTrie{
         return ptr;
     }
 };
+

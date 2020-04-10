@@ -10,7 +10,7 @@ struct HashMap{
     inline uint64_t hash(T key){return uint64_t((z * __int128_t(key)) >> (64 - d)) & ((1LL << d) - 1);}
 
     pair<U, bool> find(T x){
-        for(uint64_t i = hash(x); v[i].first != null; i = (i + 1 == (1 << d) ? 0 : i + 1))
+        for(uint64_t i = hash(x); v[i].first != null; i = (i + 1) & ((1 << d) - 1))
             if(v[i].first == x)
                 return make_pair(v[i].second, true);
         return make_pair(U(), false);
@@ -22,7 +22,7 @@ struct HashMap{
         if(((q + 1) << 1) > (1 << d))
             resize();
         uint64_t i = hash(x);
-        for(; v[i].first != null && v[i].first != del; i = (i + 1 == (1 << d) ? 0 : i + 1));
+        for(; v[i].first != null && v[i].first != del; i = (i + 1) & ((1 << d) - 1));
         q += (v[i].first == null);
         ++n;
         v[i] = make_pair(x, val);
@@ -31,7 +31,7 @@ struct HashMap{
 
     bool erase(T x){
         uint64_t i = hash(x);
-        for(; v[i].first != null && v[i].first != x; i = (i + 1 == (1 << d) ? 0 : i + 1));
+        for(; v[i].first != null && v[i].first != x; i = (i + 1) & ((1 << d) - 1));
         if(v[i].first == null)
             return false;
         --n;
@@ -50,3 +50,4 @@ struct HashMap{
                 add(old_table[i].first, old_table[i].second);
     }
 };
+

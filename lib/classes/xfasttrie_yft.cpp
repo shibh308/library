@@ -22,7 +22,7 @@ struct XFastTrie_yft{
     Node* back;
     array<HashMap<T, Node*, HASHMAP_NULL, HASHMAP_DEL>, W> hashmap;
 
-    XFastTrie_yft() : n(0){
+    XFastTrie_yft() : n(0), hashmap(){
         root = new Node(0);
         front = new Node(0);
         back = new Node(0);
@@ -162,12 +162,9 @@ struct XFastTrie_yft{
                 ptr = res;
             (fl ? lb : rb) = mid;
         }
-        if(lb){
-            if((key >> rb) & 1)
-                ptr = ptr->c[1]->c[1];
-            else
-                ptr = ptr->c[0];
-        }
-        return ptr;
+        if(!lb)return ptr;
+        int fl = (key >> rb) & 1;
+        return fl ? ptr->c[fl]->c[1] : ptr->c[fl];
     }
 };
+

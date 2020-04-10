@@ -12,7 +12,7 @@ struct YFastTrie{
 
     using SplayNode = typename SplayTree<T>::NodePtr;
     int n;
-    XFastTrie_yft<T, W> xft;
+    XFastTrie_yft<T, W, HASHMAP_NULL, HASHMAP_DEL> xft;
     SplayTree<T> splay;
 
     YFastTrie() : n(1), xft(), splay(){
@@ -28,7 +28,7 @@ struct YFastTrie{
 
     bool insert(T key){
         auto xft_ptr = xft.lower_bound(key);
-        pair<SplayNode , bool> res;
+         pair<SplayNode , bool> res;
         if(xft_ptr->val == key)
             return false;
         if(rnd() % W == 0){

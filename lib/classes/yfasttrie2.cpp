@@ -4,7 +4,7 @@ struct YFastTrie2{
 
     using SplayNode = typename SplayTree<T>::NodePtr;
     int n;
-    XFastTrie_yft<T, W> xft;
+    XFastTrie_yft<T, W, HASHMAP_NULL, HASHMAP_DEL> xft;
     SplayTree<T> splay;
 
     YFastTrie2() : n(1), xft(), splay(){
@@ -43,7 +43,7 @@ struct YFastTrie2{
         return res.second;
     }
 
-    void split(typename XFastTrie_yft<T>::Node* xft_node){
+    void split(typename XFastTrie_yft<T, W>::Node* xft_node){
         if(xft_node->node->size <= (W << 1))
             return;
         SplayNode l, r;
@@ -53,7 +53,7 @@ struct YFastTrie2{
         xft.insert(l);
     }
 
-    void merge(typename XFastTrie_yft<T>::Node* xft_ptr){
+    void merge(typename XFastTrie_yft<T, W>::Node* xft_ptr){
         if(xft_ptr->node->size >= (W >> 2))
             return;
         if(xft_ptr->c[0] != xft.front)
@@ -62,7 +62,7 @@ struct YFastTrie2{
             merge(xft_ptr, xft_ptr->c[1]);
     }
 
-    void merge(typename XFastTrie_yft<T>::Node* xft_l, typename XFastTrie_yft<T>::Node* xft_r){
+    void merge(typename XFastTrie_yft<T, W>::Node* xft_l, typename XFastTrie_yft<T, W>::Node* xft_r){
         xft_r->node = splay.merge(xft_l->node, xft_r->node);
         xft_l->node = nullptr;
         xft.erase(xft_l->val);

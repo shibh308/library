@@ -26,6 +26,7 @@
 "verify/skiplist_rmq_raq.test.cpp": "2020-04-06 15:54:14 +0900",
 "verify/skiplist_rsq_raq.test.cpp": "2020-04-06 15:54:14 +0900",
 "verify/skiplist_sset_dict.test.cpp": "2020-04-10 15:08:56 +0900",
+"verify/splay_sset_dict.test.cpp": "2020-04-10 15:18:07 +0900",
 "verify/static_rmq.test.cpp": "2019-12-04 00:43:23 +0900",
 "verify/static_rmq_wm.test.cpp": "2019-12-05 02:12:16 +0900",
 "verify/tangent_lines.test.cpp": "2020-02-25 16:29:27 +0900",

@@ -18,7 +18,7 @@ signed main(){
         int t, x;
         scanf("%d%d", &t, &x);
         if(t == 0){
-            root = s.insert(root, s)
+            root = s.insert(root, s).first;
             printf("%d\n", root->val);
         }
         else if(t == 2){
@@ -27,7 +27,7 @@ signed main(){
         else{
             auto res = s.lower_bound(s);
             root = res.first;
-            printf("%d\n", res.second && root->val == key);
+            printf("%d\n", res.second && root->val == x);
         }
     }
 }

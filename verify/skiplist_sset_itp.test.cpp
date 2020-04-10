@@ -25,7 +25,7 @@ signed main(){
         }
         else{
             auto ptr = s.lower_bound(s);
-            printf("%d\n", ptr != s.back && ptr->val == key);
+            printf("%d\n", ptr != s.back && ptr->val == x);
         }
     }
 }

@@ -174,7 +174,6 @@ struct SplayTree{
     }
 
     NodePtr merge(NodePtr p, NodePtr q){
-        assert(p != nil || q != nil);
         reroot(p);
         reroot(q);
         if(q == nil)

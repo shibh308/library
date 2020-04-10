@@ -18,14 +18,16 @@ signed main(){
         int t, x;
         scanf("%d%d", &t, &x);
         if(t == 0){
-            root = s.insert(root, s).first;
-            printf("%d\n", root->val);
+            root = s.lower_bound(root, x).first;
+            if(root == s.nil || root->val != x)
+                root = s.insert(root, x).first;
+            printf("%d\n", root->size);
         }
         else if(t == 2){
-            root = s.erase(root, x);
+            root = s.erase(root, x).first;
         }
         else{
-            auto res = s.lower_bound(s);
+            auto res = s.lower_bound(root, x);
             root = res.first;
             printf("%d\n", res.second && root->val == x);
         }

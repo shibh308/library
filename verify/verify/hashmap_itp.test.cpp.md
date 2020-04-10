@@ -25,16 +25,16 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/hashmap_dict.test.cpp
+# :heavy_check_mark: verify/hashmap_itp.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/hashmap_dict.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/hashmap_itp.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-04-11 00:06:22+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_4_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_4_C</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_7_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_7_B</a>
 
 
 ## Depends on
@@ -47,46 +47,37 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_4_C"
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_7_B"
 #include "bits/stdc++.h"
 
 using namespace std;
 
 using i64 = long long;
 
+
 #include "../lib/classes/hashmap.cpp"
 
 
+
 signed main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    int n;
-    cin >> n;
-    vector<int> type(n);
-    vector<int> v(n, 0);
-    string l = "0ACGT";
-    for(int i = 0; i < n; ++i){
-        string s, t;
-        cin >> s >> t;
-        type[i] = (s == "find");
-        int k = 1;
-        for(int j = 0; j < t.size(); ++j, k *= 5)
-            v[i] += l.find(t[j]) * k;
-    }
-
-    HashMap<int, int> h;
-
-    for(int i = 0; i < n; ++i){
-        if(type[i] == 0){
-            h.add(v[i], 1);
+    int q;
+    scanf("%d", &q);
+    HashMap<int,int> h;
+    for(int i = 0; i < q; ++i){
+        int t, x;
+        scanf("%d%d", &t, &x);
+        if(t == 0){
+            h.add(x, 1);
+            printf("%lu\n", h.n);
+        }
+        else if(t == 2){
+            h.erase(x);
         }
         else{
-            printf(h.find(v[i]).second ? "yes\n" : "no\n");
+            printf("%d\n", h.find(x).first);
         }
     }
 }
-
-
 
 ```
 {% endraw %}

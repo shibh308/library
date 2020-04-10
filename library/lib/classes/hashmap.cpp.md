@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/hashmap.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-10 22:13:43+09:00
+    - Last commit date: 2020-04-11 00:06:22+09:00
 
 
 
@@ -39,6 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/verify/hashmap_dict.test.cpp.html">verify/hashmap_dict.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/verify/hashmap_itp.test.cpp.html">verify/hashmap_itp.test.cpp</a>
 
 
 ## Code
@@ -67,7 +68,7 @@ struct HashMap{
     bool add(T x, U val){
         if(find(x).second)
             return false;
-        if(((q + 1) << 1) > (1 << d))
+        if(((q + 1) << 1) > (1 << d) && (1 << d) < 3 * n)
             resize();
         uint64_t i = hash(x);
         for(; v[i].first != null && v[i].first != del; i = (i + 1) & ((1 << d) - 1));
@@ -93,6 +94,7 @@ struct HashMap{
         q = n;
         swap(old_table, v);
         v.assign(1 << d, make_pair(null, U()));
+        n = 0;
         for(int i = 0; i < old_table.size(); ++i)
             if(old_table[i].first != null && old_table[i].first != del)
                 add(old_table[i].first, old_table[i].second);
@@ -128,7 +130,7 @@ struct HashMap{
     bool add(T x, U val){
         if(find(x).second)
             return false;
-        if(((q + 1) << 1) > (1 << d))
+        if(((q + 1) << 1) > (1 << d) && (1 << d) < 3 * n)
             resize();
         uint64_t i = hash(x);
         for(; v[i].first != null && v[i].first != del; i = (i + 1) & ((1 << d) - 1));
@@ -154,6 +156,7 @@ struct HashMap{
         q = n;
         swap(old_table, v);
         v.assign(1 << d, make_pair(null, U()));
+        n = 0;
         for(int i = 0; i < old_table.size(); ++i)
             if(old_table[i].first != null && old_table[i].first != del)
                 add(old_table[i].first, old_table[i].second);

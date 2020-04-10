@@ -55,7 +55,7 @@ layout: default
 * :heavy_check_mark: <a href="library/lib/classes/dynamiclazysegmenttree.cpp.html">lib/classes/dynamiclazysegmenttree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/dynamicsegmenttree.cpp.html">lib/classes/dynamicsegmenttree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/eulertour.cpp.html">lib/classes/eulertour.cpp</a>
-* :warning: <a href="library/lib/classes/hashmap.cpp.html">lib/classes/hashmap.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/hashmap.cpp.html">lib/classes/hashmap.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/heavylightdecomposition.cpp.html">lib/classes/heavylightdecomposition.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/lazysegtree.cpp.html">lib/classes/lazysegtree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/lazyskiplist.cpp.html">lib/classes/lazyskiplist.cpp</a>
@@ -71,13 +71,16 @@ layout: default
 * :warning: <a href="library/lib/classes/segmentset.cpp.html">lib/classes/segmentset.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/segtree.cpp.html">lib/classes/segtree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/skiplist.cpp.html">lib/classes/skiplist.cpp</a>
-* :warning: <a href="library/lib/classes/skiplist_sset.cpp.html">lib/classes/skiplist_sset.cpp</a>
-* :warning: <a href="library/lib/classes/splaytree_sset.cpp.html">lib/classes/splaytree_sset.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/skiplist_sset.cpp.html">lib/classes/skiplist_sset.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/splaytree_sset.cpp.html">lib/classes/splaytree_sset.cpp</a>
 * :warning: <a href="library/lib/classes/treap.cpp.html">lib/classes/treap.cpp</a>
 * :warning: <a href="library/lib/classes/trie.cpp.html">lib/classes/trie.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/unionfind.cpp.html">lib/classes/unionfind.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/waveletmatrix.cpp.html">lib/classes/waveletmatrix.cpp</a>
 * :warning: <a href="library/lib/classes/xfasttrie.cpp.html">lib/classes/xfasttrie.cpp</a>
+* :warning: <a href="library/lib/classes/xfasttrie_yft.cpp.html">lib/classes/xfasttrie_yft.cpp</a>
+* :warning: <a href="library/lib/classes/yfasttrie.cpp.html">lib/classes/yfasttrie.cpp</a>
+* :warning: <a href="library/lib/classes/yfasttrie2.cpp.html">lib/classes/yfasttrie2.cpp</a>
 
 
 <div id="abc4d0f7246596dc1cbcc6b77896a2fc"></div>
@@ -106,6 +109,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/2-sat.test.cpp.html">verify/2-sat.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/bipartitematching.test.cpp.html">verify/bipartitematching.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/eulertour.test.cpp.html">verify/eulertour.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/hashmap_dict.test.cpp.html">verify/hashmap_dict.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/hld_composite.test.cpp.html">verify/hld_composite.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/lca_binarylifting.test.cpp.html">verify/lca_binarylifting.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/lca_hld.test.cpp.html">verify/lca_hld.test.cpp</a>
@@ -128,6 +132,8 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/skiplist_composite.test.cpp.html">verify/skiplist_composite.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/skiplist_rmq_raq.test.cpp.html">verify/skiplist_rmq_raq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/skiplist_rsq_raq.test.cpp.html">verify/skiplist_rsq_raq.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/skiplist_sset_dict.test.cpp.html">verify/skiplist_sset_dict.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/splay_sset_dict.test.cpp.html">verify/splay_sset_dict.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/static_rmq.test.cpp.html">verify/static_rmq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/static_rmq_wm.test.cpp.html">verify/static_rmq_wm.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/tangent_lines.test.cpp.html">verify/tangent_lines.test.cpp</a>

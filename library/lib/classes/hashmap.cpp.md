@@ -25,15 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: lib/classes/hashmap.cpp
+# :heavy_check_mark: lib/classes/hashmap.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/hashmap.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-09 14:58:11+09:00
+    - Last commit date: 2020-04-10 15:05:36+09:00
 
 
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../../verify/verify/hashmap_dict.test.cpp.html">verify/hashmap_dict.test.cpp</a>
 
 
 ## Code
@@ -41,7 +46,7 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-template <typename T, typename U, i64 w = 64>
+template <typename T, typename U>
 struct HashMap{
     const __int128_t z = 0xf332ac987401cba5;
     uint64_t n, q, d;
@@ -104,7 +109,7 @@ struct HashMap{
 {% raw %}
 ```cpp
 #line 1 "lib/classes/hashmap.cpp"
-template <typename T, typename U, i64 w = 64>
+template <typename T, typename U>
 struct HashMap{
     const __int128_t z = 0xf332ac987401cba5;
     uint64_t n, q, d;

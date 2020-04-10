@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: lib/classes/skiplist_sset.cpp
+# :heavy_check_mark: lib/classes/skiplist_sset.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,11 @@ layout: default
     - Last commit date: 2020-04-09 14:57:53+09:00
 
 
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../../verify/verify/skiplist_sset_dict.test.cpp.html">verify/skiplist_sset_dict.test.cpp</a>
 
 
 ## Code

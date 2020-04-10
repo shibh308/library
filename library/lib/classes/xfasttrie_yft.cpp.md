@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: lib/classes/xfasttrie.cpp
+# :warning: lib/classes/xfasttrie_yft.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
-* <a href="{{ site.github.repository_url }}/blob/master/lib/classes/xfasttrie.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-09 20:15:38+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/lib/classes/xfasttrie_yft.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-04-10 15:05:51+09:00
 
 
 
@@ -41,13 +41,16 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
+// y-fast trie用のx-fast trie
 template <typename T, int W = 31, T HASHMAP_NULL = (1LL << W) - 1, T HASHMAP_DEL = (1LL << W) - 2>
-struct XFastTrie{
+struct XFastTrie_yft{
+    using SplayNode = typename SplayTree<T>::NodePtr;
     struct Node{
         T val;
         int exist;
         Node* c[2];
-        Node(T val) : val(val), exist(0){
+        SplayNode node;
+        Node(T val) : val(val), exist(0), node(nullptr){
             // 子が存在するなら子へのポインタを持つ
             // 葉なら左右はそれぞれprev,next
             // 左の子が存在しないなら左はprevへのショートカット
@@ -56,13 +59,13 @@ struct XFastTrie{
             c[1] = nullptr;
         }
     };
-	int n;
+    int n;
     Node* root;
     Node* front;
     Node* back;
     vector<HashMap<T, Node*>> hashmap;
 
-    XFastTrie() : n(0){
+    XFastTrie_yft() : n(0){
         root = new Node(0);
         front = new Node(0);
         back = new Node(0);
@@ -76,12 +79,14 @@ struct XFastTrie{
             hashmap.emplace_back(HASHMAP_DEL, HASHMAP_NULL);
     }
 
-    void insert(T key){
+    Node* insert(SplayNode node){
+        T key = node->val;
         // 存在しているノードは全部葉があると仮定する
         T val = 0;
         Node* ptr = root;
         Node* nex = nullptr;
         Node* pre = nullptr;
+        bool make_flag = false;
         for(int i = W - 1; i >= 0; --i){
             bool fl = (key >> i) & 1;
             bool exist = (ptr->exist >> fl) & 1;
@@ -98,6 +103,7 @@ struct XFastTrie{
                         pre = nex->c[0];
                     }
                 }
+                make_flag = true;
                 ptr->exist |= (1 << fl);
                 ptr->c[fl] = new Node(val);
                 hashmap[i].add(val, ptr->c[fl]);
@@ -106,11 +112,13 @@ struct XFastTrie{
             }
             ptr = ptr->c[fl];
         }
-        if(nex == nullptr)
-            return;
-		++n;
+        if(!make_flag)
+            return nullptr;
+        ++n;
         assert(nex == back || key < nex->val);
         assert(pre == front || pre->val < key);
+
+        ptr->node = node;
         pre->c[1] = ptr;
         ptr->c[1] = nex;
         nex->c[0] = ptr;
@@ -128,9 +136,10 @@ struct XFastTrie{
             }
             ptr = ptr->c[(key >> i) & 1];
         }
+        return new_node;
     }
 
-    void erase(T key){
+    bool erase(T key){
         Node* ptr = root;
         Node* cut_ptr = nullptr;
         bool cut_fl = false;
@@ -138,7 +147,7 @@ struct XFastTrie{
         for(int i = W - 1; i >= 0; --i){
             bool fl = (key >> i) & 1;
             if(!((ptr->exist >> fl) & 1))
-                return;
+                return false;
             if((ptr->exist >> (!fl)) & 1){
                 while(!node_stack.empty())node_stack.pop();
                 cut_ptr = ptr;
@@ -167,7 +176,8 @@ struct XFastTrie{
             cut_ptr->exist &= ~(1 << cut_fl);
         }
         ptr = root;
-        assert(target->val == key);
+        if(target->val != key)
+            return false;
         for(int i = W - 1; i >= 0; --i){
             bool fl = (key >> i) & 1;
             if(ptr->c[0] == target){
@@ -180,8 +190,9 @@ struct XFastTrie{
                 break;
             ptr = ptr->c[fl];
         }
-		--n;
+        --n;
         delete(target);
+        return true;
     }
 
     Node* lower_bound(T key){
@@ -208,14 +219,17 @@ struct XFastTrie{
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "lib/classes/xfasttrie.cpp"
+#line 1 "lib/classes/xfasttrie_yft.cpp"
+// y-fast trie用のx-fast trie
 template <typename T, int W = 31, T HASHMAP_NULL = (1LL << W) - 1, T HASHMAP_DEL = (1LL << W) - 2>
-struct XFastTrie{
+struct XFastTrie_yft{
+    using SplayNode = typename SplayTree<T>::NodePtr;
     struct Node{
         T val;
         int exist;
         Node* c[2];
-        Node(T val) : val(val), exist(0){
+        SplayNode node;
+        Node(T val) : val(val), exist(0), node(nullptr){
             // 子が存在するなら子へのポインタを持つ
             // 葉なら左右はそれぞれprev,next
             // 左の子が存在しないなら左はprevへのショートカット
@@ -224,13 +238,13 @@ struct XFastTrie{
             c[1] = nullptr;
         }
     };
-	int n;
+    int n;
     Node* root;
     Node* front;
     Node* back;
     vector<HashMap<T, Node*>> hashmap;
 
-    XFastTrie() : n(0){
+    XFastTrie_yft() : n(0){
         root = new Node(0);
         front = new Node(0);
         back = new Node(0);
@@ -244,12 +258,14 @@ struct XFastTrie{
             hashmap.emplace_back(HASHMAP_DEL, HASHMAP_NULL);
     }
 
-    void insert(T key){
+    Node* insert(SplayNode node){
+        T key = node->val;
         // 存在しているノードは全部葉があると仮定する
         T val = 0;
         Node* ptr = root;
         Node* nex = nullptr;
         Node* pre = nullptr;
+        bool make_flag = false;
         for(int i = W - 1; i >= 0; --i){
             bool fl = (key >> i) & 1;
             bool exist = (ptr->exist >> fl) & 1;
@@ -266,6 +282,7 @@ struct XFastTrie{
                         pre = nex->c[0];
                     }
                 }
+                make_flag = true;
                 ptr->exist |= (1 << fl);
                 ptr->c[fl] = new Node(val);
                 hashmap[i].add(val, ptr->c[fl]);
@@ -274,11 +291,13 @@ struct XFastTrie{
             }
             ptr = ptr->c[fl];
         }
-        if(nex == nullptr)
-            return;
-		++n;
+        if(!make_flag)
+            return nullptr;
+        ++n;
         assert(nex == back || key < nex->val);
         assert(pre == front || pre->val < key);
+
+        ptr->node = node;
         pre->c[1] = ptr;
         ptr->c[1] = nex;
         nex->c[0] = ptr;
@@ -296,9 +315,10 @@ struct XFastTrie{
             }
             ptr = ptr->c[(key >> i) & 1];
         }
+        return new_node;
     }
 
-    void erase(T key){
+    bool erase(T key){
         Node* ptr = root;
         Node* cut_ptr = nullptr;
         bool cut_fl = false;
@@ -306,7 +326,7 @@ struct XFastTrie{
         for(int i = W - 1; i >= 0; --i){
             bool fl = (key >> i) & 1;
             if(!((ptr->exist >> fl) & 1))
-                return;
+                return false;
             if((ptr->exist >> (!fl)) & 1){
                 while(!node_stack.empty())node_stack.pop();
                 cut_ptr = ptr;
@@ -335,7 +355,8 @@ struct XFastTrie{
             cut_ptr->exist &= ~(1 << cut_fl);
         }
         ptr = root;
-        assert(target->val == key);
+        if(target->val != key)
+            return false;
         for(int i = W - 1; i >= 0; --i){
             bool fl = (key >> i) & 1;
             if(ptr->c[0] == target){
@@ -348,8 +369,9 @@ struct XFastTrie{
                 break;
             ptr = ptr->c[fl];
         }
-		--n;
+        --n;
         delete(target);
+        return true;
     }
 
     Node* lower_bound(T key){

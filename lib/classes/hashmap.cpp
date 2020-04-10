@@ -19,7 +19,7 @@ struct HashMap{
     bool add(T x, U val){
         if(find(x).second)
             return false;
-        if(((q + 1) << 1) > (1 << d))
+        if(((q + 1) << 1) > (1 << d) && (1 << d) < 3 * n)
             resize();
         uint64_t i = hash(x);
         for(; v[i].first != null && v[i].first != del; i = (i + 1) & ((1 << d) - 1));
@@ -45,6 +45,7 @@ struct HashMap{
         q = n;
         swap(old_table, v);
         v.assign(1 << d, make_pair(null, U()));
+        n = 0;
         for(int i = 0; i < old_table.size(); ++i)
             if(old_table[i].first != null && old_table[i].first != del)
                 add(old_table[i].first, old_table[i].second);

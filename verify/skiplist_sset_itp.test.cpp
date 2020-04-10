@@ -17,14 +17,16 @@ signed main(){
         int t, x;
         scanf("%d%d", &t, &x);
         if(t == 0){
-            s.insert(x);
+            auto ptr = s.lower_bound(x);
+            if(ptr == s.back || ptr->val != x)
+                s.insert(x);
             printf("%d\n", s.size());
         }
         else if(t == 2){
-            s.erase(x);
+            s.erase_key(x);
         }
         else{
-            auto ptr = s.lower_bound(s);
+            auto ptr = s.lower_bound(x);
             printf("%d\n", ptr != s.back && ptr->val == x);
         }
     }

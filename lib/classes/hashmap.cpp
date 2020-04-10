@@ -1,4 +1,4 @@
-template <typename T, typename U, i64 w = 64>
+template <typename T, typename U>
 struct HashMap{
     const __int128_t z = 0xf332ac987401cba5;
     uint64_t n, q, d;

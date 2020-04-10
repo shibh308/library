@@ -17,7 +17,7 @@ struct XFastTrie{
     Node* root;
     Node* front;
     Node* back;
-    vector<HashMap<T, Node*>> hashmap;
+    array<HashMap<T, Node*, HASHMAP_NULL, HASHMAP_DEL>, W> hashmap;
 
     XFastTrie() : n(0){
         root = new Node(0);
@@ -29,8 +29,6 @@ struct XFastTrie{
         back->c[0] = front;
         root->c[0] = back;
         root->c[1] = front;
-        for(int i = 0; i < W; ++i)
-            hashmap.emplace_back(HASHMAP_DEL, HASHMAP_NULL);
     }
 
     void insert(T key){
@@ -156,5 +154,25 @@ struct XFastTrie{
         if(!lb)return ptr;
         int fl = (key >> rb) & 1;
         return fl ? ptr->c[fl]->c[1] : ptr->c[fl];
+    }
+    Node* lower_bound(T key){
+        Node* ptr = root;
+        int lb = W, rb = -1;
+        while(lb - rb > 1){
+            int mid = (lb + rb) >> 1;
+            bool fl;
+            Node* res;
+            tie(res, fl) = hashmap[mid].find(key & ~((1LL << mid) - 1));
+            if(fl)
+                ptr = res;
+            (fl ? lb : rb) = mid;
+        }
+        if(lb){
+            if((key >> rb) & 1)
+                ptr = ptr->c[1]->c[1];
+            else
+                ptr = ptr->c[0];
+        }
+        return ptr;
     }
 };

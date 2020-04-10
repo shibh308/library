@@ -1,19 +1,16 @@
-template <typename T, typename U>
+template <typename T, typename U, T del = numeric_limits<T>::max(), T null = numeric_limits<T>::max() - 1>
 struct HashMap{
     const __int128_t z = 0xf332ac987401cba5;
     uint64_t n, q, d;
 
     vector<pair<T, U>> v;
 
-    T del, null;
+    HashMap() : n(0), q(0), d(1),  v(2, make_pair(null, U())){}
 
-    HashMap(T del_flag, T null_flag) : n(0), q(0), d(1), del(del_flag), null(null_flag), v(1LL << d, make_pair(null_flag, U())){}
-
-    uint64_t hash(T key){return uint64_t((z * __int128_t(key)) >> (64 - d)) & ((1LL << d) - 1);}
+    inline uint64_t hash(T key){return uint64_t((z * __int128_t(key)) >> (64 - d)) & ((1LL << d) - 1);}
 
     pair<U, bool> find(T x){
-        int cnt = 0;
-        for(uint64_t i = hash(x); v[i].first != null; i = (i + 1 == (1 << d) ? 0 : i + 1), ++cnt)
+        for(uint64_t i = hash(x); v[i].first != null; i = (i + 1 == (1 << d) ? 0 : i + 1))
             if(v[i].first == x)
                 return make_pair(v[i].second, true);
         return make_pair(U(), false);

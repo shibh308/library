@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/hashmap.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-10 15:05:36+09:00
+    - Last commit date: 2020-04-10 22:13:43+09:00
 
 
 
@@ -46,22 +46,19 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-template <typename T, typename U>
+template <typename T, typename U, T del = numeric_limits<T>::max(), T null = numeric_limits<T>::max() - 1>
 struct HashMap{
     const __int128_t z = 0xf332ac987401cba5;
     uint64_t n, q, d;
 
     vector<pair<T, U>> v;
 
-    T del, null;
+    HashMap() : n(0), q(0), d(1),  v(2, make_pair(null, U())){}
 
-    HashMap(T del_flag, T null_flag) : n(0), q(0), d(1), del(del_flag), null(null_flag), v(1LL << d, make_pair(null_flag, U())){}
-
-    uint64_t hash(T key){return uint64_t((z * __int128_t(key)) >> (64 - d)) & ((1LL << d) - 1);}
+    inline uint64_t hash(T key){return uint64_t((z * __int128_t(key)) >> (64 - d)) & ((1LL << d) - 1);}
 
     pair<U, bool> find(T x){
-        int cnt = 0;
-        for(uint64_t i = hash(x); v[i].first != null; i = (i + 1 == (1 << d) ? 0 : i + 1), ++cnt)
+        for(uint64_t i = hash(x); v[i].first != null; i = (i + 1) & ((1 << d) - 1))
             if(v[i].first == x)
                 return make_pair(v[i].second, true);
         return make_pair(U(), false);
@@ -73,7 +70,7 @@ struct HashMap{
         if(((q + 1) << 1) > (1 << d))
             resize();
         uint64_t i = hash(x);
-        for(; v[i].first != null && v[i].first != del; i = (i + 1 == (1 << d) ? 0 : i + 1));
+        for(; v[i].first != null && v[i].first != del; i = (i + 1) & ((1 << d) - 1));
         q += (v[i].first == null);
         ++n;
         v[i] = make_pair(x, val);
@@ -82,7 +79,7 @@ struct HashMap{
 
     bool erase(T x){
         uint64_t i = hash(x);
-        for(; v[i].first != null && v[i].first != x; i = (i + 1 == (1 << d) ? 0 : i + 1));
+        for(; v[i].first != null && v[i].first != x; i = (i + 1) & ((1 << d) - 1));
         if(v[i].first == null)
             return false;
         --n;
@@ -101,6 +98,7 @@ struct HashMap{
                 add(old_table[i].first, old_table[i].second);
     }
 };
+
 
 ```
 {% endraw %}
@@ -109,22 +107,19 @@ struct HashMap{
 {% raw %}
 ```cpp
 #line 1 "lib/classes/hashmap.cpp"
-template <typename T, typename U>
+template <typename T, typename U, T del = numeric_limits<T>::max(), T null = numeric_limits<T>::max() - 1>
 struct HashMap{
     const __int128_t z = 0xf332ac987401cba5;
     uint64_t n, q, d;
 
     vector<pair<T, U>> v;
 
-    T del, null;
+    HashMap() : n(0), q(0), d(1),  v(2, make_pair(null, U())){}
 
-    HashMap(T del_flag, T null_flag) : n(0), q(0), d(1), del(del_flag), null(null_flag), v(1LL << d, make_pair(null_flag, U())){}
-
-    uint64_t hash(T key){return uint64_t((z * __int128_t(key)) >> (64 - d)) & ((1LL << d) - 1);}
+    inline uint64_t hash(T key){return uint64_t((z * __int128_t(key)) >> (64 - d)) & ((1LL << d) - 1);}
 
     pair<U, bool> find(T x){
-        int cnt = 0;
-        for(uint64_t i = hash(x); v[i].first != null; i = (i + 1 == (1 << d) ? 0 : i + 1), ++cnt)
+        for(uint64_t i = hash(x); v[i].first != null; i = (i + 1) & ((1 << d) - 1))
             if(v[i].first == x)
                 return make_pair(v[i].second, true);
         return make_pair(U(), false);
@@ -136,7 +131,7 @@ struct HashMap{
         if(((q + 1) << 1) > (1 << d))
             resize();
         uint64_t i = hash(x);
-        for(; v[i].first != null && v[i].first != del; i = (i + 1 == (1 << d) ? 0 : i + 1));
+        for(; v[i].first != null && v[i].first != del; i = (i + 1) & ((1 << d) - 1));
         q += (v[i].first == null);
         ++n;
         v[i] = make_pair(x, val);
@@ -145,7 +140,7 @@ struct HashMap{
 
     bool erase(T x){
         uint64_t i = hash(x);
-        for(; v[i].first != null && v[i].first != x; i = (i + 1 == (1 << d) ? 0 : i + 1));
+        for(; v[i].first != null && v[i].first != x; i = (i + 1) & ((1 << d) - 1));
         if(v[i].first == null)
             return false;
         --n;
@@ -164,6 +159,7 @@ struct HashMap{
                 add(old_table[i].first, old_table[i].second);
     }
 };
+
 
 ```
 {% endraw %}

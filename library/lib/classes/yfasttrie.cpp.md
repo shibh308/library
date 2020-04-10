@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/yfasttrie.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-10 15:05:51+09:00
+    - Last commit date: 2020-04-10 22:13:43+09:00
 
 
 
@@ -55,7 +55,7 @@ struct YFastTrie{
 
     using SplayNode = typename SplayTree<T>::NodePtr;
     int n;
-    XFastTrie_yft<T, W> xft;
+    XFastTrie_yft<T, W, HASHMAP_NULL, HASHMAP_DEL> xft;
     SplayTree<T> splay;
 
     YFastTrie() : n(1), xft(), splay(){
@@ -71,7 +71,7 @@ struct YFastTrie{
 
     bool insert(T key){
         auto xft_ptr = xft.lower_bound(key);
-        pair<SplayNode , bool> res;
+         pair<SplayNode , bool> res;
         if(xft_ptr->val == key)
             return false;
         if(rnd() % W == 0){
@@ -137,7 +137,7 @@ struct YFastTrie{
 
     using SplayNode = typename SplayTree<T>::NodePtr;
     int n;
-    XFastTrie_yft<T, W> xft;
+    XFastTrie_yft<T, W, HASHMAP_NULL, HASHMAP_DEL> xft;
     SplayTree<T> splay;
 
     YFastTrie() : n(1), xft(), splay(){
@@ -153,7 +153,7 @@ struct YFastTrie{
 
     bool insert(T key){
         auto xft_ptr = xft.lower_bound(key);
-        pair<SplayNode , bool> res;
+         pair<SplayNode , bool> res;
         if(xft_ptr->val == key)
             return false;
         if(rnd() % W == 0){

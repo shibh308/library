@@ -39,6 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/verify/skiplist_sset_dict.test.cpp.html">verify/skiplist_sset_dict.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/verify/skiplist_sset_itp.test.cpp.html">verify/skiplist_sset_itp.test.cpp</a>
 
 
 ## Code

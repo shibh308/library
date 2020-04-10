@@ -133,7 +133,9 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/skiplist_rmq_raq.test.cpp.html">verify/skiplist_rmq_raq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/skiplist_rsq_raq.test.cpp.html">verify/skiplist_rsq_raq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/skiplist_sset_dict.test.cpp.html">verify/skiplist_sset_dict.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/skiplist_sset_itp.test.cpp.html">verify/skiplist_sset_itp.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/splay_sset_dict.test.cpp.html">verify/splay_sset_dict.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/splay_sset_itp.test.cpp.html">verify/splay_sset_itp.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/static_rmq.test.cpp.html">verify/static_rmq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/static_rmq_wm.test.cpp.html">verify/static_rmq_wm.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/tangent_lines.test.cpp.html">verify/tangent_lines.test.cpp</a>

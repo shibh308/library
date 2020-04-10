@@ -25,16 +25,16 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/splay_sset_dict.test.cpp
+# :heavy_check_mark: verify/splay_sset_itp.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/splay_sset_dict.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/splay_sset_itp.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-04-10 23:19:58+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_4_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_4_C</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_7_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_7_B</a>
 
 
 ## Depends on
@@ -47,50 +47,41 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_4_C"
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_7_B"
 #include "bits/stdc++.h"
 
 using namespace std;
 
+using i64 = long long;
+
+
 #include "../lib/classes/splaytree_sset.cpp"
 
+
 signed main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    int n;
-    cin >> n;
-    vector<int> type(n);
-    vector<int> v(n, 0);
-    string l = "0ACGT";
-    for(int i = 0; i < n; ++i){
-        string s, t;
-        cin >> s >> t;
-        type[i] = (s == "find");
-        int k = 1;
-        for(int j = 0; j < t.size(); ++j, k *= 5)
-            v[i] += l.find(t[j]) * k;
-    }
-
-    SplayTree<int> sp;
-    auto root = sp.nil;
-
-    for(int i = 0; i < n; ++i){
-        if(type[i] == 0){
-            root = sp.insert(root, v[i]).first;
+    int q;
+    scanf("%d", &q);
+    SplayTree<int> s;
+    auto root = s.nil;
+    for(int i = 0; i < q; ++i){
+        int t, x;
+        scanf("%d%d", &t, &x);
+        if(t == 0){
+            root = s.lower_bound(root, x).first;
+            if(root == s.nil || root->val != x)
+                root = s.insert(root, x).first;
+            printf("%d\n", root->size);
+        }
+        else if(t == 2){
+            root = s.erase(root, x).first;
         }
         else{
-            bool fl;
-            SplayTree<int>::NodePtr ptr;
-            tie(ptr, fl) = sp.lower_bound(root, v[i]);
-            if(fl)
-                root = ptr;
-            printf(fl && root->val == v[i] ? "yes\n" : "no\n");
+            auto res = s.lower_bound(root, x);
+            root = res.first;
+            printf("%d\n", res.second && root->val == x);
         }
     }
 }
-
-
-
 
 ```
 {% endraw %}

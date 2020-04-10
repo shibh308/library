@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/hashmap_dict.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-10 15:08:56+09:00
+    - Last commit date: 2020-04-10 22:50:20+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_4_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_4_C</a>
@@ -74,7 +74,7 @@ signed main(){
             v[i] += l.find(t[j]) * k;
     }
 
-    HashMap<int, int> h((1 << 30) - 1, (1 << 30) - 2);
+    HashMap<int, int> h;
 
     for(int i = 0; i < n; ++i){
         if(type[i] == 0){

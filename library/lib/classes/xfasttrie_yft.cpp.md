@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/xfasttrie_yft.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-10 15:05:51+09:00
+    - Last commit date: 2020-04-10 22:13:43+09:00
 
 
 
@@ -63,9 +63,9 @@ struct XFastTrie_yft{
     Node* root;
     Node* front;
     Node* back;
-    vector<HashMap<T, Node*>> hashmap;
+    array<HashMap<T, Node*, HASHMAP_NULL, HASHMAP_DEL>, W> hashmap;
 
-    XFastTrie_yft() : n(0){
+    XFastTrie_yft() : n(0), hashmap(){
         root = new Node(0);
         front = new Node(0);
         back = new Node(0);
@@ -75,8 +75,6 @@ struct XFastTrie_yft{
         back->c[0] = front;
         root->c[0] = back;
         root->c[1] = front;
-        for(int i = 0; i < W; ++i)
-            hashmap.emplace_back(HASHMAP_DEL, HASHMAP_NULL);
     }
 
     Node* insert(SplayNode node){
@@ -212,6 +210,7 @@ struct XFastTrie_yft{
         return fl ? ptr->c[fl]->c[1] : ptr->c[fl];
     }
 };
+
 
 ```
 {% endraw %}
@@ -242,9 +241,9 @@ struct XFastTrie_yft{
     Node* root;
     Node* front;
     Node* back;
-    vector<HashMap<T, Node*>> hashmap;
+    array<HashMap<T, Node*, HASHMAP_NULL, HASHMAP_DEL>, W> hashmap;
 
-    XFastTrie_yft() : n(0){
+    XFastTrie_yft() : n(0), hashmap(){
         root = new Node(0);
         front = new Node(0);
         back = new Node(0);
@@ -254,8 +253,6 @@ struct XFastTrie_yft{
         back->c[0] = front;
         root->c[0] = back;
         root->c[1] = front;
-        for(int i = 0; i < W; ++i)
-            hashmap.emplace_back(HASHMAP_DEL, HASHMAP_NULL);
     }
 
     Node* insert(SplayNode node){
@@ -391,6 +388,7 @@ struct XFastTrie_yft{
         return fl ? ptr->c[fl]->c[1] : ptr->c[fl];
     }
 };
+
 
 ```
 {% endraw %}

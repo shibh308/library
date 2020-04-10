@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/splaytree_sset.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-10 15:15:42+09:00
+    - Last commit date: 2020-04-10 23:19:58+09:00
 
 
 
@@ -39,6 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/verify/splay_sset_dict.test.cpp.html">verify/splay_sset_dict.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/verify/splay_sset_itp.test.cpp.html">verify/splay_sset_itp.test.cpp</a>
 
 
 ## Code
@@ -222,7 +223,6 @@ struct SplayTree{
     }
 
     NodePtr merge(NodePtr p, NodePtr q){
-        assert(p != nil || q != nil);
         reroot(p);
         reroot(q);
         if(q == nil)
@@ -439,7 +439,6 @@ struct SplayTree{
     }
 
     NodePtr merge(NodePtr p, NodePtr q){
-        assert(p != nil || q != nil);
         reroot(p);
         reroot(q);
         if(q == nil)

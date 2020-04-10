@@ -32,7 +32,7 @@ signed main(){
         else{
             bool fl;
             SplayTree<int>::NodePtr ptr;
-            tie(ptr, fl) = sp.lower_bound(root, v[i]);
+            tie(ptr, fl) = sp.lower_bound(root, v[i]).first;
             if(fl)
                 root = ptr;
             printf(fl && root->val == v[i] ? "yes\n" : "no\n");

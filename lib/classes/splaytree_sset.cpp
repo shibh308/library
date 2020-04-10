@@ -1,4 +1,3 @@
-// y-fast trie用のSplayTree
 template <typename T>
 struct SplayTree{
     struct Node{
@@ -90,21 +89,25 @@ struct SplayTree{
     }
 
     pair<NodePtr, bool> lower_bound(NodePtr p, T key){
-        assert(p != nil);
+        if(p == nil)
+            return make_pair(p, false);
         auto res = _lower_bound(p, key);
         reroot(res.first);
+        assert(res.first != nil);
         return res;
     }
 
     NodePtr access(NodePtr p, int idx){
+        if(p == nil)
+            return nil;
         while(p->c[0]->size != idx){
             if(p->c[0]->size < idx)
                 idx -= p->c[0]->size + 1, p = p->c[1];
             else
                 p = p->c[0];
-            assert(p != nil);
+            if(p == nil)
+                return nil;
         }
-        assert(p != nil);
         reroot(p);
         return p;
     }
@@ -114,9 +117,9 @@ struct SplayTree{
         p = p->c[1];
         while(p->c[0] != nil)
             p = p->c[0];
-       if(p != nil)
-           reroot(p);
-       return p;
+        if(p != nil)
+            reroot(p);
+        return p;
     }
 
     NodePtr prev(NodePtr p){
@@ -129,30 +132,33 @@ struct SplayTree{
         return p;
     }
 
-    NodePtr insert(NodePtr root, T key){
+    pair<NodePtr, bool> insert(NodePtr root, T key){
         if(root == nil)
-            return make(key);
+            return make_pair(make(key), true);
         NodePtr l, r, np;
         bool exist;
         // lower_boundの結果からsplitする時、lower_boundの結果がnilだとバグるので注意
         tie(np, exist) = lower_bound(root, key);
         if(exist){
+            if(np->val == key)
+                return make_pair(np, false);
             tie(l, r) = split(np);
-            return merge(merge(l, make(key)), r);
+            return make_pair(merge(merge(l, make(key)), r), true);
         }
         else{
-            return merge(np, make(key));
+            return make_pair(merge(np, make(key)), true);
         }
     }
 
-    NodePtr erase(NodePtr root, T key){
+    pair<NodePtr, bool> erase(NodePtr root, T key){
         NodePtr p = lower_bound(root, key).first;
-        assert(p != nil && p->val == key);
         reroot(p);
+        if(p == nil || p->val != key)
+            return make_pair(p, false);
         NodePtr l = p->c[0], r = p->c[1];
         l->par = r->par = nil;
         delete(p);
-        return merge(l, r);
+        return make_pair(merge(l, r), true);
     }
 
     // [0, p), [p, n)でsplist

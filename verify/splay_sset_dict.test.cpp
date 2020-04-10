@@ -27,12 +27,12 @@ signed main(){
 
     for(int i = 0; i < n; ++i){
         if(type[i] == 0){
-            root = sp.insert(root, v[i]);
+            root = sp.insert(root, v[i]).first;
         }
         else{
             bool fl;
             SplayTree<int>::NodePtr ptr;
-            tie(ptr, fl) = sp.lower_bound(root, v[i]).first;
+            tie(ptr, fl) = sp.lower_bound(root, v[i]);
             if(fl)
                 root = ptr;
             printf(fl && root->val == v[i] ? "yes\n" : "no\n");

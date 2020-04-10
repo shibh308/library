@@ -25,7 +25,7 @@ signed main(){
             v[i] += l.find(t[j]) * k;
     }
 
-    HashMap<int, int> h((1 << 30) - 1, (1 << 30) - 2);
+    HashMap<int, int> h;
 
     for(int i = 0; i < n; ++i){
         if(type[i] == 0){

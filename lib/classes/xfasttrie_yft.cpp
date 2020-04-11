@@ -108,9 +108,8 @@ struct XFastTrie_yft{
                 cut_ptr = ptr;
                 cut_fl = fl;
             }
-            else{
+            else if(i != W - 1)
                 node_stack.push(ptr);
-            }
             ptr = ptr->c[fl];
         }
         Node* target = ptr;
@@ -126,10 +125,12 @@ struct XFastTrie_yft{
             assert(node != target);
         }
         hashmap[0].erase(key);
-        if(cut_ptr){
-            cut_ptr->c[cut_fl] = cut_fl ? pre : nex;
-            cut_ptr->exist &= ~(1 << cut_fl);
+        if(!cut_ptr){
+            *this = XFastTrie_yft();
+            return true;
         }
+        cut_ptr->c[cut_fl] = cut_fl ? pre : nex;
+        cut_ptr->exist &= ~(1 << cut_fl);
         ptr = root;
         if(target->val != key)
             return false;

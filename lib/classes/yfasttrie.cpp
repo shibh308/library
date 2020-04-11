@@ -57,16 +57,15 @@ struct YFastTrie{
             auto r = xft_ptr->c[1];
             r->node = splay.merge(xft_ptr->node, r->node);
             res = splay.erase(r->node, key);
+            r->node = res.first;
             if(res.second){
-                r->node = res.first;
                 xft_ptr->node = nullptr;
                 xft.erase(xft_ptr->val);
             }
         }
         else{
             res = splay.erase(xft_ptr->node, key);
-            if(res.second)
-                xft_ptr->node = res.first;
+            xft_ptr->node = res.first;
         }
         n -= res.second;
         return res.second;

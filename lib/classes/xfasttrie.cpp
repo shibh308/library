@@ -119,7 +119,7 @@ struct XFastTrie{
         }
         hashmap[0].erase(key);
         if(!cut_ptr){
-            *this = XFastTrie<T, W>();
+            *this = XFastTrie();
             return;
         }
         cut_ptr->c[cut_fl] = cut_fl ? pre : nex;

@@ -99,14 +99,15 @@ struct XFastTrie{
                 cut_ptr = ptr;
                 cut_fl = fl;
             }
-            else{
+            else if(i != W - 1)
                 node_stack.push(ptr);
-            }
             ptr = ptr->c[fl];
         }
         Node* target = ptr;
         Node* pre = target->c[0];
         Node* nex = target->c[1];
+        if(nex == nullptr || target->val != key)
+            return;
         pre->c[1] = nex;
         nex->c[0] = pre;
         int h = 0;
@@ -117,12 +118,13 @@ struct XFastTrie{
             assert(node != target);
         }
         hashmap[0].erase(key);
-        if(cut_ptr){
-            cut_ptr->c[cut_fl] = cut_fl ? pre : nex;
-            cut_ptr->exist &= ~(1 << cut_fl);
+        if(!cut_ptr){
+            *this = XFastTrie<T, W>();
+            return;
         }
+        cut_ptr->c[cut_fl] = cut_fl ? pre : nex;
+        cut_ptr->exist &= ~(1 << cut_fl);
         ptr = root;
-        assert(target->val == key);
         for(int i = W - 1; i >= 0; --i){
             bool fl = (key >> i) & 1;
             if(ptr->c[0] == target){

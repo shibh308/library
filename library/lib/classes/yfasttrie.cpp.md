@@ -25,15 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: lib/classes/yfasttrie.cpp
+# :heavy_check_mark: lib/classes/yfasttrie.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/yfasttrie.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-10 22:13:43+09:00
+    - Last commit date: 2020-04-11 13:43:20+09:00
 
 
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../../verify/verify/yfastttrie_itp.test.cpp.html">verify/yfastttrie_itp.test.cpp</a>
 
 
 ## Code
@@ -100,16 +105,15 @@ struct YFastTrie{
             auto r = xft_ptr->c[1];
             r->node = splay.merge(xft_ptr->node, r->node);
             res = splay.erase(r->node, key);
+            r->node = res.first;
             if(res.second){
-                r->node = res.first;
                 xft_ptr->node = nullptr;
                 xft.erase(xft_ptr->val);
             }
         }
         else{
             res = splay.erase(xft_ptr->node, key);
-            if(res.second)
-                xft_ptr->node = res.first;
+            xft_ptr->node = res.first;
         }
         n -= res.second;
         return res.second;
@@ -182,16 +186,15 @@ struct YFastTrie{
             auto r = xft_ptr->c[1];
             r->node = splay.merge(xft_ptr->node, r->node);
             res = splay.erase(r->node, key);
+            r->node = res.first;
             if(res.second){
-                r->node = res.first;
                 xft_ptr->node = nullptr;
                 xft.erase(xft_ptr->val);
             }
         }
         else{
             res = splay.erase(xft_ptr->node, key);
-            if(res.second)
-                xft_ptr->node = res.first;
+            xft_ptr->node = res.first;
         }
         n -= res.second;
         return res.second;

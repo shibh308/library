@@ -41,6 +41,8 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/verify/hashmap_dict.test.cpp.html">verify/hashmap_dict.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/verify/hashmap_itp.test.cpp.html">verify/hashmap_itp.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/verify/xfastttrie_itp.test.cpp.html">verify/xfastttrie_itp.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/verify/yfastttrie2_itp.test.cpp.html">verify/yfastttrie2_itp.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/verify/yfastttrie_itp.test.cpp.html">verify/yfastttrie_itp.test.cpp</a>
 
 
 ## Code

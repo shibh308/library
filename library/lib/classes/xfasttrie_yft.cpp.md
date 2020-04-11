@@ -25,15 +25,21 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: lib/classes/xfasttrie_yft.cpp
+# :heavy_check_mark: lib/classes/xfasttrie_yft.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/xfasttrie_yft.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-10 22:13:43+09:00
+    - Last commit date: 2020-04-11 13:43:20+09:00
 
 
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../../verify/verify/yfastttrie2_itp.test.cpp.html">verify/yfastttrie2_itp.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/verify/yfastttrie_itp.test.cpp.html">verify/yfastttrie_itp.test.cpp</a>
 
 
 ## Code
@@ -151,9 +157,8 @@ struct XFastTrie_yft{
                 cut_ptr = ptr;
                 cut_fl = fl;
             }
-            else{
+            else if(i != W - 1)
                 node_stack.push(ptr);
-            }
             ptr = ptr->c[fl];
         }
         Node* target = ptr;
@@ -169,10 +174,12 @@ struct XFastTrie_yft{
             assert(node != target);
         }
         hashmap[0].erase(key);
-        if(cut_ptr){
-            cut_ptr->c[cut_fl] = cut_fl ? pre : nex;
-            cut_ptr->exist &= ~(1 << cut_fl);
+        if(!cut_ptr){
+            *this = XFastTrie_yft();
+            return true;
         }
+        cut_ptr->c[cut_fl] = cut_fl ? pre : nex;
+        cut_ptr->exist &= ~(1 << cut_fl);
         ptr = root;
         if(target->val != key)
             return false;
@@ -329,9 +336,8 @@ struct XFastTrie_yft{
                 cut_ptr = ptr;
                 cut_fl = fl;
             }
-            else{
+            else if(i != W - 1)
                 node_stack.push(ptr);
-            }
             ptr = ptr->c[fl];
         }
         Node* target = ptr;
@@ -347,10 +353,12 @@ struct XFastTrie_yft{
             assert(node != target);
         }
         hashmap[0].erase(key);
-        if(cut_ptr){
-            cut_ptr->c[cut_fl] = cut_fl ? pre : nex;
-            cut_ptr->exist &= ~(1 << cut_fl);
+        if(!cut_ptr){
+            *this = XFastTrie_yft();
+            return true;
         }
+        cut_ptr->c[cut_fl] = cut_fl ? pre : nex;
+        cut_ptr->exist &= ~(1 << cut_fl);
         ptr = root;
         if(target->val != key)
             return false;

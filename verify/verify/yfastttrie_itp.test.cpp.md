@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/xfastttrie_itp.test.cpp
+# :heavy_check_mark: verify/yfastttrie_itp.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/xfastttrie_itp.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/yfastttrie_itp.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-04-11 13:43:20+09:00
 
 
@@ -40,7 +40,9 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/lib/classes/hashmap.cpp.html">lib/classes/hashmap.cpp</a>
-* :heavy_check_mark: <a href="../../library/lib/classes/xfasttrie.cpp.html">lib/classes/xfasttrie.cpp</a>
+* :heavy_check_mark: <a href="../../library/lib/classes/splaytree_sset.cpp.html">lib/classes/splaytree_sset.cpp</a>
+* :heavy_check_mark: <a href="../../library/lib/classes/xfasttrie_yft.cpp.html">lib/classes/xfasttrie_yft.cpp</a>
+* :heavy_check_mark: <a href="../../library/lib/classes/yfasttrie.cpp.html">lib/classes/yfasttrie.cpp</a>
 
 
 ## Code
@@ -57,28 +59,30 @@ using i64 = long long;
 
 
 #include "../lib/classes/hashmap.cpp"
-#include "../lib/classes/xfasttrie.cpp"
+#include "../lib/classes/splaytree_sset.cpp"
+#include "../lib/classes/xfasttrie_yft.cpp"
+#include "../lib/classes/yfasttrie.cpp"
 
 
 signed main(){
     int q;
     scanf("%d", &q);
-    XFastTrie<int, 31> s;
+    YFastTrie<int, 31> s;
     for(int i = 0; i < q; ++i){
         int t, x;
         scanf("%d%d", &t, &x);
         if(t == 0){
             auto ptr = s.lower_bound(x);
-            if(ptr == s.back || ptr->val != x)
+            if(ptr == s.splay.nil || ptr->val != x)
                 s.insert(x);
-            printf("%d\n", s.n);
+            printf("%d\n", s.n - 1);
         }
         else if(t == 2){
             s.erase(x);
         }
         else{
             auto ptr = s.lower_bound(x);
-            printf("%d\n", ptr != s.back && ptr->val == x);
+            printf("%d\n", ptr != s.splay.nil && ptr->val == x);
         }
     }
 }

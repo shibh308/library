@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/xfasttrie.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-11 13:18:14+09:00
+    - Last commit date: 2020-04-11 13:43:20+09:00
 
 
 
@@ -167,7 +167,7 @@ struct XFastTrie{
         }
         hashmap[0].erase(key);
         if(!cut_ptr){
-            *this = XFastTrie<T, W>();
+            *this = XFastTrie();
             return;
         }
         cut_ptr->c[cut_fl] = cut_fl ? pre : nex;
@@ -341,7 +341,7 @@ struct XFastTrie{
         }
         hashmap[0].erase(key);
         if(!cut_ptr){
-            *this = XFastTrie<T, W>();
+            *this = XFastTrie();
             return;
         }
         cut_ptr->c[cut_fl] = cut_fl ? pre : nex;

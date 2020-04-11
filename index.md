@@ -77,7 +77,7 @@ layout: default
 * :warning: <a href="library/lib/classes/trie.cpp.html">lib/classes/trie.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/unionfind.cpp.html">lib/classes/unionfind.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/waveletmatrix.cpp.html">lib/classes/waveletmatrix.cpp</a>
-* :warning: <a href="library/lib/classes/xfasttrie.cpp.html">lib/classes/xfasttrie.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/xfasttrie.cpp.html">lib/classes/xfasttrie.cpp</a>
 * :warning: <a href="library/lib/classes/xfasttrie_yft.cpp.html">lib/classes/xfasttrie_yft.cpp</a>
 * :warning: <a href="library/lib/classes/yfasttrie.cpp.html">lib/classes/yfasttrie.cpp</a>
 * :warning: <a href="library/lib/classes/yfasttrie2.cpp.html">lib/classes/yfasttrie2.cpp</a>
@@ -143,5 +143,6 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/unionfind.test.cpp.html">verify/unionfind.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/vertex_and_path_sum.test.cpp.html">verify/vertex_and_path_sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/vertex_and_subtree_sum.test.cpp.html">verify/vertex_and_subtree_sum.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/xfastttrie_itp.test.cpp.html">verify/xfastttrie_itp.test.cpp</a>
 
 

@@ -25,15 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: lib/classes/xfasttrie.cpp
+# :heavy_check_mark: lib/classes/xfasttrie.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/xfasttrie.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-10 22:13:43+09:00
+    - Last commit date: 2020-04-11 13:18:14+09:00
 
 
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../../verify/verify/xfastttrie_itp.test.cpp.html">verify/xfastttrie_itp.test.cpp</a>
 
 
 ## Code
@@ -142,14 +147,15 @@ struct XFastTrie{
                 cut_ptr = ptr;
                 cut_fl = fl;
             }
-            else{
+            else if(i != W - 1)
                 node_stack.push(ptr);
-            }
             ptr = ptr->c[fl];
         }
         Node* target = ptr;
         Node* pre = target->c[0];
         Node* nex = target->c[1];
+        if(nex == nullptr || target->val != key)
+            return;
         pre->c[1] = nex;
         nex->c[0] = pre;
         int h = 0;
@@ -160,12 +166,13 @@ struct XFastTrie{
             assert(node != target);
         }
         hashmap[0].erase(key);
-        if(cut_ptr){
-            cut_ptr->c[cut_fl] = cut_fl ? pre : nex;
-            cut_ptr->exist &= ~(1 << cut_fl);
+        if(!cut_ptr){
+            *this = XFastTrie<T, W>();
+            return;
         }
+        cut_ptr->c[cut_fl] = cut_fl ? pre : nex;
+        cut_ptr->exist &= ~(1 << cut_fl);
         ptr = root;
-        assert(target->val == key);
         for(int i = W - 1; i >= 0; --i){
             bool fl = (key >> i) & 1;
             if(ptr->c[0] == target){
@@ -314,14 +321,15 @@ struct XFastTrie{
                 cut_ptr = ptr;
                 cut_fl = fl;
             }
-            else{
+            else if(i != W - 1)
                 node_stack.push(ptr);
-            }
             ptr = ptr->c[fl];
         }
         Node* target = ptr;
         Node* pre = target->c[0];
         Node* nex = target->c[1];
+        if(nex == nullptr || target->val != key)
+            return;
         pre->c[1] = nex;
         nex->c[0] = pre;
         int h = 0;
@@ -332,12 +340,13 @@ struct XFastTrie{
             assert(node != target);
         }
         hashmap[0].erase(key);
-        if(cut_ptr){
-            cut_ptr->c[cut_fl] = cut_fl ? pre : nex;
-            cut_ptr->exist &= ~(1 << cut_fl);
+        if(!cut_ptr){
+            *this = XFastTrie<T, W>();
+            return;
         }
+        cut_ptr->c[cut_fl] = cut_fl ? pre : nex;
+        cut_ptr->exist &= ~(1 << cut_fl);
         ptr = root;
-        assert(target->val == key);
         for(int i = W - 1; i >= 0; --i){
             bool fl = (key >> i) & 1;
             if(ptr->c[0] == target){

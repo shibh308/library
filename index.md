@@ -76,6 +76,7 @@ layout: default
 * :warning: <a href="library/lib/classes/treap.cpp.html">lib/classes/treap.cpp</a>
 * :warning: <a href="library/lib/classes/trie.cpp.html">lib/classes/trie.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/unionfind.cpp.html">lib/classes/unionfind.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/vanembeboastree.cpp.html">lib/classes/vanembeboastree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/waveletmatrix.cpp.html">lib/classes/waveletmatrix.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/xfasttrie.cpp.html">lib/classes/xfasttrie.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/xfasttrie_yft.cpp.html">lib/classes/xfasttrie_yft.cpp</a>
@@ -141,6 +142,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/static_rmq_wm.test.cpp.html">verify/static_rmq_wm.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/tangent_lines.test.cpp.html">verify/tangent_lines.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/unionfind.test.cpp.html">verify/unionfind.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/veb_set.test.cpp.html">verify/veb_set.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/vertex_and_path_sum.test.cpp.html">verify/vertex_and_path_sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/vertex_and_subtree_sum.test.cpp.html">verify/vertex_and_subtree_sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/xfastttrie_itp.test.cpp.html">verify/xfastttrie_itp.test.cpp</a>

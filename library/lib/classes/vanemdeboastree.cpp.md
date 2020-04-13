@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: lib/classes/vanembeboastree.cpp
+# :heavy_check_mark: lib/classes/vanemdeboastree.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
-* <a href="{{ site.github.repository_url }}/blob/master/lib/classes/vanembeboastree.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-13 20:12:26+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/lib/classes/vanemdeboastree.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-04-13 20:19:50+09:00
 
 
 
@@ -182,7 +182,7 @@ struct VanEmdeBoasTree{
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "lib/classes/vanembeboastree.cpp"
+#line 1 "lib/classes/vanemdeboastree.cpp"
 template <uint32_t W, uint32_t NULL_FLAG = ~0u>
 struct VanEmdeBoasTree{
 

@@ -76,7 +76,7 @@ layout: default
 * :warning: <a href="library/lib/classes/treap.cpp.html">lib/classes/treap.cpp</a>
 * :warning: <a href="library/lib/classes/trie.cpp.html">lib/classes/trie.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/unionfind.cpp.html">lib/classes/unionfind.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/vanembeboastree.cpp.html">lib/classes/vanembeboastree.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/vanemdeboastree.cpp.html">lib/classes/vanemdeboastree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/waveletmatrix.cpp.html">lib/classes/waveletmatrix.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/xfasttrie.cpp.html">lib/classes/xfasttrie.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/xfasttrie_yft.cpp.html">lib/classes/xfasttrie_yft.cpp</a>

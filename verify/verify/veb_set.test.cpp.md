@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/veb_set.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-13 20:12:26+09:00
+    - Last commit date: 2020-04-13 20:19:50+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_7_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_7_B</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/lib/classes/vanembeboastree.cpp.html">lib/classes/vanembeboastree.cpp</a>
+* :heavy_check_mark: <a href="../../library/lib/classes/vanemdeboastree.cpp.html">lib/classes/vanemdeboastree.cpp</a>
 
 
 ## Code
@@ -54,7 +54,7 @@ using namespace std;
 
 using i64 = long long;
 
-#include "../lib/classes/vanembeboastree.cpp"
+#include "../lib/classes/vanemdeboastree.cpp"
 
 signed main(){
     int n;
@@ -100,7 +100,7 @@ using namespace std;
 
 using i64 = long long;
 
-#line 1 "lib/classes/vanembeboastree.cpp"
+#line 1 "lib/classes/vanemdeboastree.cpp"
 template <uint32_t W, uint32_t NULL_FLAG = ~0u>
 struct VanEmdeBoasTree{
 

@@ -5,7 +5,7 @@ using namespace std;
 
 using i64 = long long;
 
-#include "../lib/classes/vanembeboastree.cpp"
+#include "../lib/classes/vanemdeboastree.cpp"
 
 signed main(){
     int n;

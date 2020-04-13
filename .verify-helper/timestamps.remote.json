@@ -34,6 +34,7 @@
 "verify/static_rmq_wm.test.cpp": "2019-12-05 02:12:16 +0900",
 "verify/tangent_lines.test.cpp": "2020-02-25 16:29:27 +0900",
 "verify/unionfind.test.cpp": "2019-12-04 00:43:23 +0900",
+"verify/veb_set.test.cpp": "2020-04-13 20:12:26 +0900",
 "verify/vertex_and_path_sum.test.cpp": "2020-03-14 13:41:21 +0900",
 "verify/vertex_and_subtree_sum.test.cpp": "2020-03-14 13:41:21 +0900",
 "verify/xfastttrie_itp.test.cpp": "2020-04-11 13:43:20 +0900",

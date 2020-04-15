@@ -48,6 +48,7 @@ layout: default
 * :heavy_check_mark: <a href="library/lib/classes/avl.cpp.html">lib/classes/avl.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/binaryindexedtree.cpp.html">lib/classes/binaryindexedtree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/binarylifting.cpp.html">lib/classes/binarylifting.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/bitvector.cpp.html">lib/classes/bitvector.cpp</a>
 * :warning: <a href="library/lib/classes/compression.cpp.html">lib/classes/compression.cpp</a>
 * :warning: <a href="library/lib/classes/convexhulltrick.cpp.html">lib/classes/convexhulltrick.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/dinic.cpp.html">lib/classes/dinic.cpp</a>
@@ -147,6 +148,9 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/veb_set.test.cpp.html">verify/veb_set.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/vertex_and_path_sum.test.cpp.html">verify/vertex_and_path_sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/vertex_and_subtree_sum.test.cpp.html">verify/vertex_and_subtree_sum.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/waveletmatrix_kthmin.test.cpp.html">verify/waveletmatrix_kthmin.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/waveletmatrix_lowerbound.test.cpp.html">verify/waveletmatrix_lowerbound.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/waveletmatrix_rangefreq.test.cpp.html">verify/waveletmatrix_rangefreq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/xfastttrie_itp.test.cpp.html">verify/xfastttrie_itp.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/yfastttrie2_itp.test.cpp.html">verify/yfastttrie2_itp.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/yfastttrie_itp.test.cpp.html">verify/yfastttrie_itp.test.cpp</a>

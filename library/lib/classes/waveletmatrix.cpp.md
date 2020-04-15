@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/waveletmatrix.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-12-05 02:12:16+09:00
+    - Last commit date: 2020-04-15 15:25:38+09:00
 
 
 
@@ -39,6 +39,9 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../../verify/verify/static_rmq_wm.test.cpp.html">verify/static_rmq_wm.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/verify/waveletmatrix_kthmin.test.cpp.html">verify/waveletmatrix_kthmin.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/verify/waveletmatrix_lowerbound.test.cpp.html">verify/waveletmatrix_lowerbound.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/verify/waveletmatrix_rangefreq.test.cpp.html">verify/waveletmatrix_rangefreq.test.cpp</a>
 
 
 ## Code
@@ -46,131 +49,102 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-
-struct BitVector{
-    int n, m;
-    vector<int> l;
-    vector<uint64_t> s;
-
-    BitVector(int n) : n(n){
-        m = (n + 63) >> 6;
-        l.assign(m, 0);
-        s.assign(m, 0);
-    }
-
-    void set(int i, bool flag = true){
-        if(flag)
-            s[i >> 6] |= (1uLL << (i & 63));
-        else
-            s[i >> 6] &= ~(1uLL << (i & 63));
-    }
-
-    void build(){
-        l[0] = 0;
-        for(int i = 1; i < m; ++i)
-            l[i] = l[i - 1] + __builtin_popcountll(s[i - 1]);
-    }
-
-    // [0, r) count flag
-    int rank(int r, bool flag = true){
-        if(flag)
-            return l[r >> 6] + __builtin_popcountll(s[r >> 6] & ((1uLL << (r & 63)) - 1));
-        else
-            return r - (l[r >> 6] + __builtin_popcountll(s[r >> 6] & ((1uLL << (r & 63)) - 1)));
-    }
-
-};
-
-template <typename T>
+template <typename T, int W>
 struct WaveletMatrix{
-    int n, m;
-    vector<BitVector> b;
-    vector<int> border;
-    WaveletMatrix(vector<T> a) : n(a.size()){
-        T max_val = *max_element(a.begin(), a.end());
-        m = (max_val == 0) ? 1 : 64 - __builtin_clzll(max_val);
-        b.resize(m, BitVector(n));
-        border.resize(m);
-        vector<vector<T>> v(2, vector<T>(n));
-        for(int j = m - 1; j >= 0; --j){
-            vector<int> cnt(2, 0);
-            for(int i = 0; i < n; ++i){
-                bool fl = ((a[i] >> j) & 1);
-                if(fl)
-                    b[j].set(i);
-                v[fl][cnt[fl]++] = a[i];
+
+    array<BitVector, W> bv;
+    array<int, W> zero_cnt;
+
+    WaveletMatrix(vector<T>& a){
+        int n = a.size();
+        vector<T> v(a);
+        for(int i = W - 1; i >= 0; --i){
+            vector<uint64_t> b((n >> 6) + 1, 0);
+            vector<T> v1, v2;
+            for(int j = 0; j < n; ++j){
+                ((v[j] >> i) & 1 ? v2 : v1).push_back(v[j]);
+                b[j >> 6] |= uint64_t((v[j] >> i) & 1) << (j & 63);
             }
-            swap(a, v[0]);
-            for(int i = 0; i < cnt[1]; ++i) {
-                a[i + cnt[0]] = v[1][i];
-            }
-            b[j].build();
-            border[j] = cnt[0];
+            for(int j = 0; j < v.size(); ++j)
+                v[j] = (j < v1.size() ? v1[j] : v2[j - v1.size()]);
+            bv[i].v = move(b);
+            bv[i].build();
+            zero_cnt[i] = bv[i].rank(n, 0);
         }
     }
 
-    // [l, r) count x
+    // [l, r)内のxの数
     int count(int l, int r, T x){
-        for(int j = m - 1; j >= 0; --j){
-            bool fl = (x >> j) & 1;
-            r = b[j].rank(r, fl) + (fl ? border[j] : 0);
-            l = b[j].rank(l, fl) + (fl ? border[j] : 0);
+        for(int i = W - 1; i >= 0; --i){
+            bool fl = (x >> i) & 1;
+            int st = bv[i].rank(l, fl);
+            int en = bv[i].rank(r, fl);
+            l = (fl ? zero_cnt[i] : 0) + st;
+            r = (fl ? zero_cnt[i] : 0) + en;
         }
         return r - l;
     }
 
-    // [l, r) count k (x <= k)
+    // [l, r)内で[0, x)を満たす値の数
     int count_lower(int l, int r, T x){
         int cnt = 0;
-        for(int j = m - 1; j >= 0; --j){
-            bool fl = (x >> j) & 1;
-            if(fl)
-                cnt += (l - r) - b[j].rank(l, 0);
-            r = b[j].rank(r, fl) + (fl ? border[j] : 0);
-            l = b[j].rank(l, fl) + (fl ? border[j] : 0);
-        }
-        return cnt + (r - l);
-    }
-
-    // [l, r) count k (x <= k < y)
-    int count_range(int l, int r, T x, T y){
-        return count_lower(l, r, y - 1) - count_lower(l, r, x - 1);
-    }
-
-    // [l, r) k-th min value (k: 0-indexed)
-    T kth_min(int l, int r, int k){
-        if(r - l < k)
-            return -1;
-        T ret = 0;
-        for(int j = m - 1; j >= 0; --j){
-            int x = b[j].rank(r, false) - b[j].rank(l, false);
-            bool fl = (k >= x);
+        for(int i = W - 1; i >= 0; --i){
+            bool fl = (x >> i) & 1;
+            int st = bv[i].rank(l, fl);
+            int en = bv[i].rank(r, fl);
             if(fl){
-                ret |= (1uLL << j);
-                k -= x;
+                st += zero_cnt[i];
+                en += zero_cnt[i];
+                cnt += (bv[i].rank(r, 0) - bv[i].rank(l, 0));
             }
-            r = b[j].rank(r, fl) + (fl ? border[j] : 0);
-            l = b[j].rank(l, fl) + (fl ? border[j] : 0);
+            l = st, r = en;
         }
-        return ret;
+        return cnt;
     }
 
-    // [l, r) k-th min value (k: 0-indexed)
-    T kth_max(int l, int r, int k){
-        return kth_min(l, r, (r - l - 1) - k);
+    // [l, r)内で[x, y)を満たす値の数
+    int count_range(int l, int r, T x, T y){
+        return count_lower(l, r, y) - count_lower(l, r, x);
     }
 
-    // [l, r) upper_bound(k) value
-    T next_value_T(int l, int r, T k){
-        return kth_min(count_lower(l, r, k) + 1);
+    // 0-indexedでk番目に小さいものを返す
+    T kth_min(int l, int r, int k){
+        T ans = 0;
+        for(int i = W - 1; i >= 0; --i){
+            int st = bv[i].rank(l, 0);
+            int en = bv[i].rank(r, 0);
+            if(en - st <= k){
+                k -= en - st;
+                l = zero_cnt[i] + bv[i].rank(l, 1);
+                r = zero_cnt[i] + bv[i].rank(r, 1);
+                ans |= (1uLL << i);
+            }
+            else{
+                l = st, r = en;
+            }
+        }
+        return ans;
     }
 
-    // [l, r) prev(lower_bound(k)) value
-    T prev_value(int l, int r, T k){
-        return kth_min(count_lower(l, r, k - 1));
+    // [l, r)でのx以上最小値
+    pair<T, bool> predecessor(int l, int r, T x){
+        int idx = count_lower(l, r, x);
+        if(idx == r - l){
+            return make_pair((1uLL << W) - 1, false);
+        }
+        return make_pair(kth_min(l, r, idx), true);
     }
 
+    // [l, r)でのx以下最大値
+    pair<T, bool> successor(int l, int r, T x){
+        int idx = count_lower(l, r, x + 1);
+        if(idx == 0)
+            return make_pair(0, false);
+        return make_pair(kth_min(l, r, idx - 1), true);
+    }
 };
+
+
 ```
 {% endraw %}
 
@@ -178,131 +152,101 @@ struct WaveletMatrix{
 {% raw %}
 ```cpp
 #line 1 "lib/classes/waveletmatrix.cpp"
-
-struct BitVector{
-    int n, m;
-    vector<int> l;
-    vector<uint64_t> s;
-
-    BitVector(int n) : n(n){
-        m = (n + 63) >> 6;
-        l.assign(m, 0);
-        s.assign(m, 0);
-    }
-
-    void set(int i, bool flag = true){
-        if(flag)
-            s[i >> 6] |= (1uLL << (i & 63));
-        else
-            s[i >> 6] &= ~(1uLL << (i & 63));
-    }
-
-    void build(){
-        l[0] = 0;
-        for(int i = 1; i < m; ++i)
-            l[i] = l[i - 1] + __builtin_popcountll(s[i - 1]);
-    }
-
-    // [0, r) count flag
-    int rank(int r, bool flag = true){
-        if(flag)
-            return l[r >> 6] + __builtin_popcountll(s[r >> 6] & ((1uLL << (r & 63)) - 1));
-        else
-            return r - (l[r >> 6] + __builtin_popcountll(s[r >> 6] & ((1uLL << (r & 63)) - 1)));
-    }
-
-};
-
-template <typename T>
+template <typename T, int W>
 struct WaveletMatrix{
-    int n, m;
-    vector<BitVector> b;
-    vector<int> border;
-    WaveletMatrix(vector<T> a) : n(a.size()){
-        T max_val = *max_element(a.begin(), a.end());
-        m = (max_val == 0) ? 1 : 64 - __builtin_clzll(max_val);
-        b.resize(m, BitVector(n));
-        border.resize(m);
-        vector<vector<T>> v(2, vector<T>(n));
-        for(int j = m - 1; j >= 0; --j){
-            vector<int> cnt(2, 0);
-            for(int i = 0; i < n; ++i){
-                bool fl = ((a[i] >> j) & 1);
-                if(fl)
-                    b[j].set(i);
-                v[fl][cnt[fl]++] = a[i];
+
+    array<BitVector, W> bv;
+    array<int, W> zero_cnt;
+
+    WaveletMatrix(vector<T>& a){
+        int n = a.size();
+        vector<T> v(a);
+        for(int i = W - 1; i >= 0; --i){
+            vector<uint64_t> b((n >> 6) + 1, 0);
+            vector<T> v1, v2;
+            for(int j = 0; j < n; ++j){
+                ((v[j] >> i) & 1 ? v2 : v1).push_back(v[j]);
+                b[j >> 6] |= uint64_t((v[j] >> i) & 1) << (j & 63);
             }
-            swap(a, v[0]);
-            for(int i = 0; i < cnt[1]; ++i) {
-                a[i + cnt[0]] = v[1][i];
-            }
-            b[j].build();
-            border[j] = cnt[0];
+            for(int j = 0; j < v.size(); ++j)
+                v[j] = (j < v1.size() ? v1[j] : v2[j - v1.size()]);
+            bv[i].v = move(b);
+            bv[i].build();
+            zero_cnt[i] = bv[i].rank(n, 0);
         }
     }
 
-    // [l, r) count x
+    // [l, r)内のxの数
     int count(int l, int r, T x){
-        for(int j = m - 1; j >= 0; --j){
-            bool fl = (x >> j) & 1;
-            r = b[j].rank(r, fl) + (fl ? border[j] : 0);
-            l = b[j].rank(l, fl) + (fl ? border[j] : 0);
+        for(int i = W - 1; i >= 0; --i){
+            bool fl = (x >> i) & 1;
+            int st = bv[i].rank(l, fl);
+            int en = bv[i].rank(r, fl);
+            l = (fl ? zero_cnt[i] : 0) + st;
+            r = (fl ? zero_cnt[i] : 0) + en;
         }
         return r - l;
     }
 
-    // [l, r) count k (x <= k)
+    // [l, r)内で[0, x)を満たす値の数
     int count_lower(int l, int r, T x){
         int cnt = 0;
-        for(int j = m - 1; j >= 0; --j){
-            bool fl = (x >> j) & 1;
-            if(fl)
-                cnt += (l - r) - b[j].rank(l, 0);
-            r = b[j].rank(r, fl) + (fl ? border[j] : 0);
-            l = b[j].rank(l, fl) + (fl ? border[j] : 0);
-        }
-        return cnt + (r - l);
-    }
-
-    // [l, r) count k (x <= k < y)
-    int count_range(int l, int r, T x, T y){
-        return count_lower(l, r, y - 1) - count_lower(l, r, x - 1);
-    }
-
-    // [l, r) k-th min value (k: 0-indexed)
-    T kth_min(int l, int r, int k){
-        if(r - l < k)
-            return -1;
-        T ret = 0;
-        for(int j = m - 1; j >= 0; --j){
-            int x = b[j].rank(r, false) - b[j].rank(l, false);
-            bool fl = (k >= x);
+        for(int i = W - 1; i >= 0; --i){
+            bool fl = (x >> i) & 1;
+            int st = bv[i].rank(l, fl);
+            int en = bv[i].rank(r, fl);
             if(fl){
-                ret |= (1uLL << j);
-                k -= x;
+                st += zero_cnt[i];
+                en += zero_cnt[i];
+                cnt += (bv[i].rank(r, 0) - bv[i].rank(l, 0));
             }
-            r = b[j].rank(r, fl) + (fl ? border[j] : 0);
-            l = b[j].rank(l, fl) + (fl ? border[j] : 0);
+            l = st, r = en;
         }
-        return ret;
+        return cnt;
     }
 
-    // [l, r) k-th min value (k: 0-indexed)
-    T kth_max(int l, int r, int k){
-        return kth_min(l, r, (r - l - 1) - k);
+    // [l, r)内で[x, y)を満たす値の数
+    int count_range(int l, int r, T x, T y){
+        return count_lower(l, r, y) - count_lower(l, r, x);
     }
 
-    // [l, r) upper_bound(k) value
-    T next_value_T(int l, int r, T k){
-        return kth_min(count_lower(l, r, k) + 1);
+    // 0-indexedでk番目に小さいものを返す
+    T kth_min(int l, int r, int k){
+        T ans = 0;
+        for(int i = W - 1; i >= 0; --i){
+            int st = bv[i].rank(l, 0);
+            int en = bv[i].rank(r, 0);
+            if(en - st <= k){
+                k -= en - st;
+                l = zero_cnt[i] + bv[i].rank(l, 1);
+                r = zero_cnt[i] + bv[i].rank(r, 1);
+                ans |= (1uLL << i);
+            }
+            else{
+                l = st, r = en;
+            }
+        }
+        return ans;
     }
 
-    // [l, r) prev(lower_bound(k)) value
-    T prev_value(int l, int r, T k){
-        return kth_min(count_lower(l, r, k - 1));
+    // [l, r)でのx以上最小値
+    pair<T, bool> predecessor(int l, int r, T x){
+        int idx = count_lower(l, r, x);
+        if(idx == r - l){
+            return make_pair((1uLL << W) - 1, false);
+        }
+        return make_pair(kth_min(l, r, idx), true);
     }
 
+    // [l, r)でのx以下最大値
+    pair<T, bool> successor(int l, int r, T x){
+        int idx = count_lower(l, r, x + 1);
+        if(idx == 0)
+            return make_pair(0, false);
+        return make_pair(kth_min(l, r, idx - 1), true);
+    }
 };
+
 
 ```
 {% endraw %}

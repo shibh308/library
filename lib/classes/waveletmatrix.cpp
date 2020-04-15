@@ -55,4 +55,24 @@ struct WaveletMatrix{
     int count_range(int l, int r, T x, T y){
         return count_lower(l, r, y) - count_lower(l, r, x);
     }
+
+    // 0-indexedでk番目に小さいものを返す
+    T kth_min(int l, int r, int k){
+        T ans = 0;
+        for(int i = W - 1; i >= 0; --i){
+            int st = bv[i].rank(l, 0);
+            int en = bv[i].rank(r, 0);
+            if(en - st <= k){
+                k -= en - st;
+                l = zero_cnt[i] + bv[i].rank(l, 1);
+                r = zero_cnt[i] + bv[i].rank(r, 1);
+                ans |= (1uLL << i);
+            }
+            else{
+                l = st, r = en;
+            }
+        }
+        return ans;
+    }
 };
+

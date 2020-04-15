@@ -74,5 +74,22 @@ struct WaveletMatrix{
         }
         return ans;
     }
+
+    // [l, r)でのx以上最小値
+    pair<T, bool> predecessor(int l, int r, T x){
+        int idx = count_lower(l, r, x);
+        if(idx == r - l){
+            return make_pair((1uLL << W) - 1, false);
+        }
+        return make_pair(kth_min(l, r, idx), true);
+    }
+
+    // [l, r)でのx以下最大値
+    pair<T, bool> successor(int l, int r, T x){
+        int idx = count_lower(l, r, x + 1);
+        if(idx == 0)
+            return make_pair(0, false);
+        return make_pair(kth_min(l, r, idx - 1), true);
+    }
 };
 

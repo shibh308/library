@@ -4,6 +4,7 @@
 using namespace std;
 using i64 = long;
 
+#include "../lib/classes/bitvector.cpp"
 #include "../lib/classes/waveletmatrix.cpp"
 
 
@@ -14,7 +15,7 @@ signed main() {
     vector<int> a(n);
     for(auto& x : a)
         cin >> x;
-    WaveletMatrix<int> wm(a);
+    WaveletMatrix<int, 31> wm(a);
     for(int i = 0; i < q; ++i){
         int l, r;
         cin >> l >> r;

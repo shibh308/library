@@ -189,15 +189,15 @@ struct RedBlackTree{
     }
 
     Index access(Index pi, int k){
-        auto& p = get(pi);
-        while(p.l != nil || p.r != nil){
+        while(get(pi).l != nil || get(pi).r != nil){
+            auto& p = get(pi);
             assert(p.l != nil && p.r != nil);
             if(get(p.l).siz <= k){
-                k -= p.l.siz;
-                p = p.r;
+                k -= get(p.l).siz;
+                pi = p.r;
             }
             else{
-                p = p.l;
+                pi = p.l;
             }
         }
         return pi;

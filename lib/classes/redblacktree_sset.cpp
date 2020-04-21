@@ -1,4 +1,3 @@
-// merge/split ベースの赤黒木(葉木)
 template <typename T>
 struct RedBlackTree{
 
@@ -7,11 +6,11 @@ struct RedBlackTree{
 
     struct Node{
         int siz, level;
-        T sum;
+        T key;
         bool red;
         typename MemoryPool<Node>::Index l, r;
         Node(){}
-        Node(T val, bool red, bool leaf, int li = -1, int ri = -1) : sum(val), siz(leaf), level(0), red(red){
+        Node(T val, bool red, bool leaf, int li = -1, int ri = -1) : key(val), siz(leaf), level(0), red(red){
             l = {li};
             r = {ri};
         }
@@ -19,17 +18,15 @@ struct RedBlackTree{
 
     MemoryPool<Node> pool;
     Index nil;
-    function<T(T, T)> f;
-    T op;
-    RedBlackTree(function<T(T, T)> f = [](auto x, auto y){return x + y;}, T op = T()) : f(f), op(op){
+    RedBlackTree(){
         nil = pool.alloc();
-        pool[nil] = Node(op, false, false);
+        pool[nil] = Node(T(), false, false);
         pool[nil].l = pool[nil].r = nil;
     }
 
     Index build(vector<T>& a){
         nil = pool.alloc();
-        pool[nil] = Node(op, false, false);
+        pool[nil] = Node(T(), false, false);
         pool[nil].l = pool[nil].r = nil;
         int siz = a.size();
         vector<Index> v(siz);
@@ -48,8 +45,6 @@ struct RedBlackTree{
         return v[0];
     }
 
-    Index index(int x){return {x};}
-
     void update(Index pi){
         if(pi == nil)
             return;
@@ -58,7 +53,7 @@ struct RedBlackTree{
         auto& r = get(p.r);
         p.siz = l.siz + r.siz;
         if(p.l != nil || p.r != nil)
-            p.sum = f(l.sum, r.sum);
+            p.key = l.key;
         p.level = l.level + !l.red;
         assert(p.level == r.level + !r.red);
     }
@@ -130,7 +125,7 @@ struct RedBlackTree{
             a.red = false;
             b.red = false;
             Index d = pool.alloc();
-            get(d) = Node(op, true, false, ai.idx, bi.idx);
+            get(d) = Node(T(), true, false, ai.idx, bi.idx);
             update(d);
             return d;
         }
@@ -169,45 +164,47 @@ struct RedBlackTree{
         }
     }
 
-    pair<T, Index> range_get(Index pi, int l, int r){
-        auto res = split(pi, r);
-        auto res2 = split(res.first, l);
-        T val = get(res2.second).sum;
-        return make_pair(val, merge(merge(res2.first, res2.second), res.second));
+    int lower_bound(Index pi, T x){
+        if(pi == nil)
+            return 0;
+        int k = 0;
+        while(get(pi).l != nil || get(pi).r != nil){
+            auto& p = get(pi);
+            assert(p.l != nil && p.r != nil);
+            if(x < get(p.r).key){
+                pi = p.l;
+            }
+            else{
+                k += get(p.l).siz;
+                pi = p.r;
+            }
+        }
+        return k + (get(pi).key < x);
     }
 
-    Index insert(Index pi, int k, T val){
+    Index insert(Index pi, T val){
+        int k = lower_bound(pi, val);
         auto res = split(pi, k);
         return merge(res.first, merge(make(val), res.second));
     }
 
-    Index erase(Index pi, int k){
+    Index erase_index(Index pi, int k){
         auto res = split(pi, k + 1);
         auto res2 = split(res.first, k);
         pool.free(res2.second);
         return merge(res2.first, res.second);
     }
 
-    Index access(Index pi, int k){
-        auto& p = get(pi);
-        while(p.l != nil || p.r != nil){
-            assert(p.l != nil && p.r != nil);
-            if(get(p.l).siz <= k){
-                k -= p.l.siz;
-                p = p.r;
-            }
-            else{
-                p = p.l;
-            }
-        }
-        return pi;
+    Index erase_key(Index pi, T x){
+        int k = lower_bound(pi, x);
+        if(k == get(pi).siz || get(access(pi, k)).key != x)
+            return pi;
+        return erase_index(pi, k);
     }
 
-    void set(Index pi, int k, T val, function<T(T, T)> g = [](T x, T y){return y;}){
-        stack<Index> st;
+    Index access(Index pi, int k){
         while(get(pi).l != nil || get(pi).r != nil){
             auto& p = get(pi);
-            st.push(pi);
             assert(p.l != nil && p.r != nil);
             if(get(p.l).siz <= k){
                 k -= get(p.l).siz;
@@ -217,12 +214,8 @@ struct RedBlackTree{
                 pi = p.l;
             }
         }
-        auto& p = get(pi);
-        p.sum = g(p.sum, val);
-        while(!st.empty()){
-            update(st.top());
-            st.pop();
-        }
+        assert(k == 0);
+        return pi;
     }
 
     Node& get(Index k){return pool[k];}

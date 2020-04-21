@@ -58,6 +58,12 @@ struct RedBlackTree{
         return g(p.sum, p.lazy, p.siz);
     }
 
+    T get_val(Index pi, int k){
+        pi = access(pi, k);
+        auto& p = get(pi);
+        return g(p.sum, p.lazy, p.siz);
+    }
+
     void eval(Index pi){
         if(pi == nil)
             return;

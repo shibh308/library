@@ -51,6 +51,14 @@ struct RedBlackTree{
         return v[0];
     }
 
+    Index clear(){
+        while(!pool.st.empty())
+            pool.st.pop();
+        for(int i = 1; i <= pool.idx; ++i)
+            pool.st.push(i);
+    }
+
+
     Index index(int x){return {x};}
 
     T get_val(Index pi){

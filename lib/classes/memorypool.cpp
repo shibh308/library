@@ -23,9 +23,9 @@ struct MemoryPool{
             resize();
         return {idx};
     }
-    void free(Index x){
-        st.push(x.idx);
-    }
+    void free(Index x){st.push(x.idx);}
+    int used(){return idx - st.size();}
+
     T& operator[](Index x){return pool[31 - __builtin_clz(x.idx)][x.idx & ~(1 << (31 - __builtin_clz(x.idx)))];}
 };
 

@@ -1,21 +1,24 @@
 template <typename T>
 struct TwoThreeTree{
+    struct Node;
+    using Index = typename MemoryPool<Node>::Index;
     struct Node{
         int siz;
         bool leaf;
         T mi;
         vector<T> v;
-        vector<int> c;
+        vector<Index> c;
         Node(T val) : siz(1), leaf(true), v(1, val), c(0), mi(val){}
         Node() : siz(0), leaf(false), v(0), c(0){}
     };
     MemoryPool<Node> pool;
-    int root;
-    TwoThreeTree() : root(-1){}
+    static constexpr Index nil = {-1};
+    Index root;
+    TwoThreeTree(){root = nil;}
 
-    int size(){return root == -1 ? 0 : pool[root].siz;}
+    int size(){return root == nil ? 0 : pool[root].siz;}
 
-    int insert(T x, int idx){
+    Index insert(T x, Index idx){
         Node& node = pool[idx];
         if(node.leaf){
             // 葉は無視するため
@@ -29,8 +32,8 @@ struct TwoThreeTree{
         else{
             int ins = 0;
             for(; node.v[ins] <= x && ins < node.v.size(); ++ins);
-            int ret = insert(x, node.c[ins]);
-            if(ret != -1){
+            Index ret = insert(x, node.c[ins]);
+            if(ret != nil){
                 T key = pool[ret].mi;
                 for(; ins < node.v.size(); ++ins){
                     swap(key, node.v[ins]);
@@ -45,7 +48,7 @@ struct TwoThreeTree{
         if(node.v.size() > 2){
             assert(node.v.size() == 3);
             assert(node.leaf || node.c.size() == 4);
-            int new_idx = pool.alloc();
+            Index new_idx = pool.alloc();
             auto& new_node = pool[new_idx];
             new_node.c.clear();
             new_node.c.shrink_to_fit();
@@ -71,19 +74,19 @@ struct TwoThreeTree{
             assert(!node.leaf || node.c.empty());
             return new_idx;
         }
-        return -1;
+        return nil;
     }
 
     void insert(T x){
-        if(root == -1){
+        if(root == nil){
             root = pool.alloc();
             pool[root] = Node(x);
             assert(pool[root].c.empty());
         }
         else{
-            int res = insert(x, root);
-            if(res != -1){
-                int new_idx = pool.alloc();
+            Index res = insert(x, root);
+            if(res != nil){
+                Index new_idx = pool.alloc();
                 auto& new_node = pool[new_idx];
                 new_node.leaf = false;
                 new_node.v = {pool[res].mi};
@@ -95,13 +98,13 @@ struct TwoThreeTree{
                 root = new_idx;
             }
         }
-        int idx = root;
+        Index idx = root;
         while(!pool[idx].leaf)
             idx = pool[idx].c[0];
     }
 
     // (削除できたか, 該当ノードが削除されたか)
-    short erase(T x, int idx){
+    short erase(T x, Index idx){
         Node& node = pool[idx];
         if(node.leaf){
             if(node.v.size() == 1){
@@ -237,7 +240,7 @@ struct TwoThreeTree{
                     Node& ch = pool[node.c[ins ^ 1]];
                     if(ch.v.size() == 2){
                         vector<int> vs = ch.v;
-                        vector<int> cs = ch.c;
+                        vector<Index> cs = ch.c;
                         pool[node.c[0]].siz = pool[node.c[1]].siz = 1;
                         pool[node.c[0]].v = {vs[0]};
                         pool[node.c[1]].v = {vs[1]};
@@ -263,26 +266,26 @@ struct TwoThreeTree{
     }
 
     bool erase(T x){
-        if(root == -1)
+        if(root == nil)
             return false;
         int res = erase(x, root);
         if(res == 2)
-            root = -1;
+            root = nil;
         if(res == 3){
             // 親を見る処理で詰まってる(高さが減る)
             assert(pool[root].v.size() == 1);
             assert(pool[root].c.size() == 1);
-            int new_root = pool[root].c[0];
+            Index new_root = pool[root].c[0];
             pool.free(root);
             root = new_root;
         }
         return res;
     }
 
-    pair<T, bool> lower_bound(T x, int idx = -1){
-        if(idx == -1)
+    pair<T, bool> lower_bound(T x, Index idx = nil){
+        if(idx == nil)
             idx = root;
-        if(root == -1)
+        if(root == nil)
             return make_pair(T(), false);
         bool fl = false;
         T nex_val;
@@ -305,10 +308,10 @@ struct TwoThreeTree{
         }
     }
 
-    void print(int idx = -1, int cnt = 0){
-        if(idx == -1)
+    void print(Index idx = nil, int cnt = 0){
+        if(idx == nil)
             idx = root;
-        if(idx == -1){
+        if(idx == nil){
             cout << "nil(0)[0]" << endl;
             return;
         }
@@ -325,11 +328,11 @@ struct TwoThreeTree{
             }
             if(i < node.v.size()){
                 if(i == 0){
-                    cout << cs << " " << node.v[i] << " (" << node.mi << "){" << node.siz << "}[" << idx << "]";
+                    cout << cs << " " << node.v[i] << " (" << node.mi << "){" << node.siz << "}[" << idx.idx << "]";
                     if(node.leaf){
                         cout << "[";
                         for(int i = 0; i < node.c.size(); ++i){
-                            cout << node.c[i];
+                            cout << node.c[i].idx;
                             if(i)
                                 cout << "/";
                         }
@@ -341,36 +344,6 @@ struct TwoThreeTree{
                 else
                     cout << cs << " " << node.v[i] << endl;
             }
-        }
-    }
-
-    void check(int idx = -2){
-        if(idx == -2){
-            idx = root;
-        }
-        if(idx == -1)
-            return;
-        Node& node = pool[idx];
-        if(!node.leaf){
-            int siz = 0;
-            assert(node.v.size() == 1 || node.v.size() == 2);
-            assert(node.v.size() + 1 == node.c.size());
-            T mi = pool[node.c[0]].mi;
-            for(int i = 0; i < node.c.size(); ++i){
-                int ch = node.c[i];
-                check(ch);
-                siz += pool[ch].siz;
-                assert(i == 0 || mi < pool[ch].mi);
-                mi = min(mi, pool[ch].mi);
-				assert(i - 1 >= node.v.size() || (i ? node.v[i - 1] : node.mi) <= pool[node.c[i]].mi);
-				assert(i >= node.v.size() || pool[node.c[i]].v.back() < node.v[i]);
-            }
-            assert(siz == node.siz);
-            assert(mi == node.mi);
-        }
-        else{
-            assert(node.c.empty());
-            assert(node.mi == node.v[0]);
         }
     }
 };

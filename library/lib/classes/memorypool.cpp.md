@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/memorypool.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-21 13:16:40+09:00
+    - Last commit date: 2020-04-21 23:33:35+09:00
 
 
 
@@ -74,9 +74,9 @@ struct MemoryPool{
             resize();
         return {idx};
     }
-    void free(Index x){
-        st.push(x.idx);
-    }
+    void free(Index x){st.push(x.idx);}
+    int used(){return idx - st.size();}
+
     T& operator[](Index x){return pool[31 - __builtin_clz(x.idx)][x.idx & ~(1 << (31 - __builtin_clz(x.idx)))];}
 };
 
@@ -113,9 +113,9 @@ struct MemoryPool{
             resize();
         return {idx};
     }
-    void free(Index x){
-        st.push(x.idx);
-    }
+    void free(Index x){st.push(x.idx);}
+    int used(){return idx - st.size();}
+
     T& operator[](Index x){return pool[31 - __builtin_clz(x.idx)][x.idx & ~(1 << (31 - __builtin_clz(x.idx)))];}
 };
 

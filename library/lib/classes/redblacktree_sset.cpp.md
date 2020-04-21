@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/redblacktree_sset.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-21 14:29:50+09:00
+    - Last commit date: 2020-04-21 23:33:53+09:00
 
 
 
@@ -91,6 +91,20 @@ struct RedBlackTree{
             v = move(nex);
         }
         return v[0];
+    }
+
+    Index clear(){
+        while(!pool.st.empty())
+            pool.st.pop();
+        for(int i = 1; i <= pool.idx; ++i)
+            pool.st.push(i);
+    }
+
+	Index index(int x){return {x};}
+
+    T get_val(Index pi, int k){
+        pi = access(pi, k);
+        return get(pi).sum;
     }
 
     void update(Index pi){
@@ -323,6 +337,20 @@ struct RedBlackTree{
             v = move(nex);
         }
         return v[0];
+    }
+
+    Index clear(){
+        while(!pool.st.empty())
+            pool.st.pop();
+        for(int i = 1; i <= pool.idx; ++i)
+            pool.st.push(i);
+    }
+
+	Index index(int x){return {x};}
+
+    T get_val(Index pi, int k){
+        pi = access(pi, k);
+        return get(pi).sum;
     }
 
     void update(Index pi){

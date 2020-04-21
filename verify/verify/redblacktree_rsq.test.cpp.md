@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/redblacktree_rsq.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-21 17:22:23+09:00
+    - Last commit date: 2020-04-21 23:33:53+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/point_add_range_sum">https://judge.yosupo.jp/problem/point_add_range_sum</a>

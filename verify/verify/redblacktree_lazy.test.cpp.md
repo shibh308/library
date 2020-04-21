@@ -25,22 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/redblacktree_rsq.test.cpp
+# :heavy_check_mark: verify/redblacktree_lazy.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/redblacktree_rsq.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-21 17:22:23+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/verify/redblacktree_lazy.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-04-21 17:24:38+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/point_add_range_sum">https://judge.yosupo.jp/problem/point_add_range_sum</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/lib/classes/memorypool.cpp.html">lib/classes/memorypool.cpp</a>
-* :heavy_check_mark: <a href="../../library/lib/classes/redblacktree.cpp.html">lib/classes/redblacktree.cpp</a>
+* :heavy_check_mark: <a href="../../library/lib/classes/redblacktree_lazy.cpp.html">lib/classes/redblacktree_lazy.cpp</a>
 
 
 ## Code
@@ -48,8 +48,9 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I"
 #include "bits/stdc++.h"
+
 
 using namespace std;
 
@@ -57,31 +58,36 @@ using i64 = long long;
 
 
 #include "../lib/classes/memorypool.cpp"
-#include "../lib/classes/redblacktree.cpp"
+#include "../lib/classes/redblacktree_lazy.cpp"
+
+
 
 
 signed main(){
-    RedBlackTree<i64> rb;
     int n, q;
-    cin >> n >> q;
-    auto root = rb.nil;
-    vector<i64> a(n);
+    scanf("%d%d", &n, &q);
+    RedBlackTree<int, int> s([](auto x, auto y){return x + y;}, [](auto x, auto y, int z){return y == 100000 ? x : y * z;}, [](auto x, auto y){return y == 100000 ? x : y;}, 0, 100000);
+    auto root = s.nil;
     for(int i = 0; i < n; ++i)
-        cin >> a[i];
-    root = rb.build(a);
+        root = s.insert(root, i, 0);
     for(int i = 0; i < q; ++i){
-        int t, k, x;
-        cin >> t >> k >> x;
+        int t;
+        scanf("%d", &t);
         if(t == 0){
-            rb.set(root, k, x, [](auto x, auto y){return x + y;});
+            int l, r, x;
+            scanf("%d%d%d", &l, &r, &x);
+            root = s.range_update(root, l, r + 1, x);
         }
         else{
-            auto res = rb.range_get(root, k, x);
+            int l, r;
+            scanf("%d%d", &l, &r);
+            auto res = s.range_get(root, l, r + 1);
             root = res.second;
-            printf("%lld\n", res.first);
+            printf("%d\n", res.first);
         }
     }
 }
+
 ```
 {% endraw %}
 

@@ -25,20 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: lib/classes/redblacktree.cpp
+# :heavy_check_mark: lib/classes/redblacktree_lazy.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
-* <a href="{{ site.github.repository_url }}/blob/master/lib/classes/redblacktree.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-21 17:22:23+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/lib/classes/redblacktree_lazy.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-04-21 17:24:38+09:00
 
 
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../../verify/verify/redblacktree_rsq.test.cpp.html">verify/redblacktree_rsq.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/verify/redblacktree_lazy.test.cpp.html">verify/redblacktree_lazy.test.cpp</a>
 
 
 ## Code
@@ -46,8 +46,7 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-// merge/split ベースの赤黒木(葉木)
-template <typename T>
+template <typename T, typename U>
 struct RedBlackTree{
 
     struct Node;
@@ -56,10 +55,11 @@ struct RedBlackTree{
     struct Node{
         int siz, level;
         T sum;
+        U lazy;
         bool red;
         typename MemoryPool<Node>::Index l, r;
         Node(){}
-        Node(T val, bool red, bool leaf, int li = -1, int ri = -1) : sum(val), siz(leaf), level(0), red(red){
+        Node(T val, U lazy, bool red, bool leaf, int li = -1, int ri = -1) : sum(val), lazy(lazy), siz(leaf), level(0), red(red){
             l = {li};
             r = {ri};
         }
@@ -68,16 +68,19 @@ struct RedBlackTree{
     MemoryPool<Node> pool;
     Index nil;
     function<T(T, T)> f;
-    T op;
-    RedBlackTree(function<T(T, T)> f = [](auto x, auto y){return x + y;}, T op = T()) : f(f), op(op){
+    function<T(T, U, int)> g;
+    function<U(U, U)> h;
+    T op_t;
+    U op_u;
+    RedBlackTree(function<T(T, T)> f, function<T(T, U, int)> g, function<U(U, U)> h, T op_t, U op_u) : f(f), g(g), h(h), op_t(op_t), op_u(op_u){
         nil = pool.alloc();
-        pool[nil] = Node(op, false, false);
+        pool[nil] = Node(op_t, op_u, false, false);
         pool[nil].l = pool[nil].r = nil;
     }
 
     Index build(vector<T>& a){
         nil = pool.alloc();
-        pool[nil] = Node(op, false, false);
+        pool[nil] = Node(op_t, op_u, false, false);
         pool[nil].l = pool[nil].r = nil;
         int siz = a.size();
         vector<Index> v(siz);
@@ -98,6 +101,27 @@ struct RedBlackTree{
 
     Index index(int x){return {x};}
 
+    T get_val(Index pi){
+        auto& p = get(pi);
+        return g(p.sum, p.lazy, p.siz);
+    }
+
+    void eval(Index pi){
+        if(pi == nil)
+            return;
+        auto& p = get(pi);
+        if(p.lazy == op_u)
+            return;
+        if(p.l != nil){
+            auto& l = get(p.l);
+            l.lazy = h(l.lazy, p.lazy);
+            auto& r = get(p.r);
+            r.lazy = h(r.lazy, p.lazy);
+        }
+        p.sum = get_val(pi);
+        p.lazy = op_u;
+    }
+
     void update(Index pi){
         if(pi == nil)
             return;
@@ -106,19 +130,21 @@ struct RedBlackTree{
         auto& r = get(p.r);
         p.siz = l.siz + r.siz;
         if(p.l != nil || p.r != nil)
-            p.sum = f(l.sum, r.sum);
+            p.sum = f(get_val(p.l), get_val(p.r));
         p.level = l.level + !l.red;
         assert(p.level == r.level + !r.red);
     }
 
     Index make(T val){
         Index idx = pool.alloc();
-        pool[idx] = Node(val, false, true, nil.idx, nil.idx);
+        pool[idx] = Node(val, op_u, false, true, nil.idx, nil.idx);
         pool[idx].level = 1;
         return idx;
     }
 
     Index mergeSub(Index ai, Index bi){
+        eval(ai);
+        eval(bi);
         auto& a = get(ai);
         auto& b = get(bi);
         assert(ai != nil && bi != nil);
@@ -178,7 +204,7 @@ struct RedBlackTree{
             a.red = false;
             b.red = false;
             Index d = pool.alloc();
-            get(d) = Node(op, true, false, ai.idx, bi.idx);
+            get(d) = Node(op_t, op_u, true, false, ai.idx, bi.idx);
             update(d);
             return d;
         }
@@ -195,6 +221,7 @@ struct RedBlackTree{
     }
 
     pair<Index, Index> split(Index ai, int k){
+        eval(ai);
         auto& a = get(ai);
         if(k == 0)
             return make_pair(nil, ai);
@@ -220,8 +247,19 @@ struct RedBlackTree{
     pair<T, Index> range_get(Index pi, int l, int r){
         auto res = split(pi, r);
         auto res2 = split(res.first, l);
-        T val = get(res2.second).sum;
+        T val = get_val(res2.second);
         return make_pair(val, merge(merge(res2.first, res2.second), res.second));
+    }
+
+    Index range_update(Index pi, int l, int r, U val){
+        if(l == r)
+            return pi;
+        auto res = split(pi, r);
+        auto res2 = split(res.first, l);
+        auto& mid = get(res2.second);
+        mid.lazy = h(mid.lazy, val);
+        eval(res2.second);
+        return merge(merge(res2.first, res2.second), res.second);
     }
 
     Index insert(Index pi, int k, T val){
@@ -238,6 +276,7 @@ struct RedBlackTree{
 
     Index access(Index pi, int k){
         while(get(pi).l != nil || get(pi).r != nil){
+            eval(pi);
             auto& p = get(pi);
             assert(p.l != nil && p.r != nil);
             if(get(p.l).siz <= k){
@@ -251,9 +290,10 @@ struct RedBlackTree{
         return pi;
     }
 
-    void set(Index pi, int k, T val, function<T(T, T)> g = [](T x, T y){return y;}){
+    void set(Index pi, int k, T val, function<T(T, T)> af = [](T x, T y){return y;}){
         stack<Index> st;
         while(get(pi).l != nil || get(pi).r != nil){
+            eval(pi);
             auto& p = get(pi);
             st.push(pi);
             assert(p.l != nil && p.r != nil);
@@ -266,7 +306,8 @@ struct RedBlackTree{
             }
         }
         auto& p = get(pi);
-        p.sum = g(p.sum, val);
+        eval(pi);
+        p.sum = af(p.sum, val);
         while(!st.empty()){
             update(st.top());
             st.pop();
@@ -284,9 +325,8 @@ struct RedBlackTree{
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "lib/classes/redblacktree.cpp"
-// merge/split ベースの赤黒木(葉木)
-template <typename T>
+#line 1 "lib/classes/redblacktree_lazy.cpp"
+template <typename T, typename U>
 struct RedBlackTree{
 
     struct Node;
@@ -295,10 +335,11 @@ struct RedBlackTree{
     struct Node{
         int siz, level;
         T sum;
+        U lazy;
         bool red;
         typename MemoryPool<Node>::Index l, r;
         Node(){}
-        Node(T val, bool red, bool leaf, int li = -1, int ri = -1) : sum(val), siz(leaf), level(0), red(red){
+        Node(T val, U lazy, bool red, bool leaf, int li = -1, int ri = -1) : sum(val), lazy(lazy), siz(leaf), level(0), red(red){
             l = {li};
             r = {ri};
         }
@@ -307,16 +348,19 @@ struct RedBlackTree{
     MemoryPool<Node> pool;
     Index nil;
     function<T(T, T)> f;
-    T op;
-    RedBlackTree(function<T(T, T)> f = [](auto x, auto y){return x + y;}, T op = T()) : f(f), op(op){
+    function<T(T, U, int)> g;
+    function<U(U, U)> h;
+    T op_t;
+    U op_u;
+    RedBlackTree(function<T(T, T)> f, function<T(T, U, int)> g, function<U(U, U)> h, T op_t, U op_u) : f(f), g(g), h(h), op_t(op_t), op_u(op_u){
         nil = pool.alloc();
-        pool[nil] = Node(op, false, false);
+        pool[nil] = Node(op_t, op_u, false, false);
         pool[nil].l = pool[nil].r = nil;
     }
 
     Index build(vector<T>& a){
         nil = pool.alloc();
-        pool[nil] = Node(op, false, false);
+        pool[nil] = Node(op_t, op_u, false, false);
         pool[nil].l = pool[nil].r = nil;
         int siz = a.size();
         vector<Index> v(siz);
@@ -337,6 +381,27 @@ struct RedBlackTree{
 
     Index index(int x){return {x};}
 
+    T get_val(Index pi){
+        auto& p = get(pi);
+        return g(p.sum, p.lazy, p.siz);
+    }
+
+    void eval(Index pi){
+        if(pi == nil)
+            return;
+        auto& p = get(pi);
+        if(p.lazy == op_u)
+            return;
+        if(p.l != nil){
+            auto& l = get(p.l);
+            l.lazy = h(l.lazy, p.lazy);
+            auto& r = get(p.r);
+            r.lazy = h(r.lazy, p.lazy);
+        }
+        p.sum = get_val(pi);
+        p.lazy = op_u;
+    }
+
     void update(Index pi){
         if(pi == nil)
             return;
@@ -345,19 +410,21 @@ struct RedBlackTree{
         auto& r = get(p.r);
         p.siz = l.siz + r.siz;
         if(p.l != nil || p.r != nil)
-            p.sum = f(l.sum, r.sum);
+            p.sum = f(get_val(p.l), get_val(p.r));
         p.level = l.level + !l.red;
         assert(p.level == r.level + !r.red);
     }
 
     Index make(T val){
         Index idx = pool.alloc();
-        pool[idx] = Node(val, false, true, nil.idx, nil.idx);
+        pool[idx] = Node(val, op_u, false, true, nil.idx, nil.idx);
         pool[idx].level = 1;
         return idx;
     }
 
     Index mergeSub(Index ai, Index bi){
+        eval(ai);
+        eval(bi);
         auto& a = get(ai);
         auto& b = get(bi);
         assert(ai != nil && bi != nil);
@@ -417,7 +484,7 @@ struct RedBlackTree{
             a.red = false;
             b.red = false;
             Index d = pool.alloc();
-            get(d) = Node(op, true, false, ai.idx, bi.idx);
+            get(d) = Node(op_t, op_u, true, false, ai.idx, bi.idx);
             update(d);
             return d;
         }
@@ -434,6 +501,7 @@ struct RedBlackTree{
     }
 
     pair<Index, Index> split(Index ai, int k){
+        eval(ai);
         auto& a = get(ai);
         if(k == 0)
             return make_pair(nil, ai);
@@ -459,8 +527,19 @@ struct RedBlackTree{
     pair<T, Index> range_get(Index pi, int l, int r){
         auto res = split(pi, r);
         auto res2 = split(res.first, l);
-        T val = get(res2.second).sum;
+        T val = get_val(res2.second);
         return make_pair(val, merge(merge(res2.first, res2.second), res.second));
+    }
+
+    Index range_update(Index pi, int l, int r, U val){
+        if(l == r)
+            return pi;
+        auto res = split(pi, r);
+        auto res2 = split(res.first, l);
+        auto& mid = get(res2.second);
+        mid.lazy = h(mid.lazy, val);
+        eval(res2.second);
+        return merge(merge(res2.first, res2.second), res.second);
     }
 
     Index insert(Index pi, int k, T val){
@@ -477,6 +556,7 @@ struct RedBlackTree{
 
     Index access(Index pi, int k){
         while(get(pi).l != nil || get(pi).r != nil){
+            eval(pi);
             auto& p = get(pi);
             assert(p.l != nil && p.r != nil);
             if(get(p.l).siz <= k){
@@ -490,9 +570,10 @@ struct RedBlackTree{
         return pi;
     }
 
-    void set(Index pi, int k, T val, function<T(T, T)> g = [](T x, T y){return y;}){
+    void set(Index pi, int k, T val, function<T(T, T)> af = [](T x, T y){return y;}){
         stack<Index> st;
         while(get(pi).l != nil || get(pi).r != nil){
+            eval(pi);
             auto& p = get(pi);
             st.push(pi);
             assert(p.l != nil && p.r != nil);
@@ -505,7 +586,8 @@ struct RedBlackTree{
             }
         }
         auto& p = get(pi);
-        p.sum = g(p.sum, val);
+        eval(pi);
+        p.sum = af(p.sum, val);
         while(!st.empty()){
             update(st.top());
             st.pop();

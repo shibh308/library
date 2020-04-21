@@ -70,6 +70,7 @@ layout: default
 * :warning: <a href="library/lib/classes/primaldual.cpp.html">lib/classes/primaldual.cpp</a>
 * :warning: <a href="library/lib/classes/rectanglesum.cpp.html">lib/classes/rectanglesum.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/redblacktree.cpp.html">lib/classes/redblacktree.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/redblacktree_sset.cpp.html">lib/classes/redblacktree_sset.cpp</a>
 * :warning: <a href="library/lib/classes/rollinghash.cpp.html">lib/classes/rollinghash.cpp</a>
 * :warning: <a href="library/lib/classes/segmentset.cpp.html">lib/classes/segmentset.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/segtree.cpp.html">lib/classes/segtree.cpp</a>
@@ -127,6 +128,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/mo_query.test.cpp.html">verify/mo_query.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/persistentunionfind.test.cpp.html">verify/persistentunionfind.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/redblacktree_rsq.test.cpp.html">verify/redblacktree_rsq.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/redblacktree_sset.test.cpp.html">verify/redblacktree_sset.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rerooting_diameter.test.cpp.html">verify/rerooting_diameter.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rmq_raq.test.cpp.html">verify/rmq_raq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/rmq_raq_dynamic.test.cpp.html">verify/rmq_raq_dynamic.test.cpp</a>

@@ -31,13 +31,14 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/memorypool.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-20 22:13:13+09:00
+    - Last commit date: 2020-04-21 13:16:40+09:00
 
 
 
 
 ## Verified with
 
+* :heavy_check_mark: <a href="../../../verify/verify/redblacktree_rsq.test.cpp.html">verify/redblacktree_rsq.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/verify/twothreetree.test.cpp.html">verify/twothreetree.test.cpp</a>
 
 
@@ -51,25 +52,30 @@ struct MemoryPool{
     int siz, idx;
     stack<int> st;
     vector<T*> pool;
+    struct Index{
+        int idx;
+        friend bool operator==(const Index& a, const Index& b){return a.idx == b.idx;}
+        friend bool operator!=(const Index& a, const Index& b){return a.idx != b.idx;}
+    };
     MemoryPool() : siz(1), idx(0){}
     void resize(){
         pool.emplace_back(new T[siz]);
         siz <<= 1;
     }
-    int alloc(){
+    Index alloc(){
         if(!st.empty()){
             int res = st.top();
             st.pop();
-            return res;
+            return {res};
         }
         if(++idx == siz)
             resize();
-        return idx;
+        return {idx};
     }
-    void free(int x){
-        st.push(x);
+    void free(Index x){
+        st.push(x.idx);
     }
-    T& operator[](int x){return pool[31 - __builtin_clz(x)][x & ~(1 << (31 - __builtin_clz(x)))];}
+    T& operator[](Index x){return pool[31 - __builtin_clz(x.idx)][x.idx & ~(1 << (31 - __builtin_clz(x.idx)))];}
 };
 
 
@@ -85,25 +91,30 @@ struct MemoryPool{
     int siz, idx;
     stack<int> st;
     vector<T*> pool;
+    struct Index{
+        int idx;
+        friend bool operator==(const Index& a, const Index& b){return a.idx == b.idx;}
+        friend bool operator!=(const Index& a, const Index& b){return a.idx != b.idx;}
+    };
     MemoryPool() : siz(1), idx(0){}
     void resize(){
         pool.emplace_back(new T[siz]);
         siz <<= 1;
     }
-    int alloc(){
+    Index alloc(){
         if(!st.empty()){
             int res = st.top();
             st.pop();
-            return res;
+            return {res};
         }
         if(++idx == siz)
             resize();
-        return idx;
+        return {idx};
     }
-    void free(int x){
-        st.push(x);
+    void free(Index x){
+        st.push(x.idx);
     }
-    T& operator[](int x){return pool[31 - __builtin_clz(x)][x & ~(1 << (31 - __builtin_clz(x)))];}
+    T& operator[](Index x){return pool[31 - __builtin_clz(x.idx)][x.idx & ~(1 << (31 - __builtin_clz(x.idx)))];}
 };
 
 

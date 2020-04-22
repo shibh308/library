@@ -51,7 +51,7 @@ struct RedBlackTree{
         return v[0];
     }
 
-    Index clear(){
+    clear(){
         while(!pool.st.empty())
             pool.st.pop();
         for(int i = 1; i <= pool.idx; ++i)

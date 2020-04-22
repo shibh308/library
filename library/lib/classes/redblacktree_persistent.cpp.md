@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/redblacktree_persistent.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-21 23:33:35+09:00
+    - Last commit date: 2020-04-22 12:46:51+09:00
 
 
 
@@ -92,7 +92,7 @@ struct RedBlackTree{
         return v[0];
     }
 
-    Index clear(){
+    void clear(){
         while(!pool.st.empty())
             pool.st.pop();
         for(int i = 1; i <= pool.idx; ++i)
@@ -264,6 +264,27 @@ struct RedBlackTree{
             st.pop();
         }
         return new_idx;
+    }
+
+    void dump(Index pi, vector<T>& v){
+        auto& p = get(pi);
+        if(p.l != nil)
+            dump(p.l, v);
+        v.emplace_back(get_val(pi));
+        if(p.r != nil)
+            dump(p.r, v);
+    }
+
+    vector<T> dump(Index pi){
+        vector<T> v;
+        dump(pi, v);
+        return v;
+    }
+
+    Index rebuild(Index pi){
+        auto v = dump(pi);
+        clear();
+        return build(v);
     }
 
     Node& get(Index k){return pool[k];}
@@ -329,7 +350,7 @@ struct RedBlackTree{
         return v[0];
     }
 
-    Index clear(){
+    void clear(){
         while(!pool.st.empty())
             pool.st.pop();
         for(int i = 1; i <= pool.idx; ++i)
@@ -501,6 +522,27 @@ struct RedBlackTree{
             st.pop();
         }
         return new_idx;
+    }
+
+    void dump(Index pi, vector<T>& v){
+        auto& p = get(pi);
+        if(p.l != nil)
+            dump(p.l, v);
+        v.emplace_back(get_val(pi));
+        if(p.r != nil)
+            dump(p.r, v);
+    }
+
+    vector<T> dump(Index pi){
+        vector<T> v;
+        dump(pi, v);
+        return v;
+    }
+
+    Index rebuild(Index pi){
+        auto v = dump(pi);
+        clear();
+        return build(v);
     }
 
     Node& get(Index k){return pool[k];}

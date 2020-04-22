@@ -25,20 +25,15 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: lib/classes/redblacktree_lazy.cpp
+# :warning: lib/classes/redblacktree_persistent_lazy.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
-* <a href="{{ site.github.repository_url }}/blob/master/lib/classes/redblacktree_lazy.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-22 14:31:46+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/lib/classes/redblacktree_persistent_lazy.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-04-22 12:46:51+09:00
 
 
-
-
-## Verified with
-
-* :heavy_check_mark: <a href="../../../verify/verify/redblacktree_lazy.test.cpp.html">verify/redblacktree_lazy.test.cpp</a>
 
 
 ## Code
@@ -46,6 +41,7 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
+// verify: https://atcoder.jp/contests/arc030/submissions/12211957/
 template <typename T, typename U>
 struct RedBlackTree{
 
@@ -63,12 +59,13 @@ struct RedBlackTree{
             l = {li};
             r = {ri};
         }
+        Node(T val, U lazy, bool red, bool leaf, Index l, Index r) : sum(val), lazy(lazy), siz(leaf), level(0), red(red), l(l), r(r){}
     };
 
     MemoryPool<Node> pool;
     Index nil;
     function<T(T, T)> f;
-    function<T(T, U, int)> g;
+    function<U(T, U, int)> g;
     function<U(U, U)> h;
     T op_t;
     U op_u;
@@ -106,7 +103,6 @@ struct RedBlackTree{
             pool.st.push(i);
     }
 
-
     Index index(int x){return {x};}
 
     T get_val(Index pi){
@@ -114,19 +110,22 @@ struct RedBlackTree{
         return g(p.sum, p.lazy, p.siz);
     }
 
-    T get_val(Index pi, int k){
-        pi = access(pi, k);
-        auto& p = get(pi);
-        return g(p.sum, p.lazy, p.siz);
+    pair<T, Index> get_val(Index pi, int k){
+        Index root;
+        tie(pi, root) = access(pi, k);
+        return make_pair(get_val(pi), root);
     }
 
-    void eval(Index pi){
+    pair<Index, bool> eval(Index pi){
         if(pi == nil)
-            return;
+            return {pi, false};
+        if(get(pi).lazy == op_u)
+            return {pi, false};
+        pi = clone(pi);
         auto& p = get(pi);
-        if(p.lazy == op_u)
-            return;
         if(p.l != nil){
+            p.l = clone(p.l);
+            p.r = clone(p.r);
             auto& l = get(p.l);
             l.lazy = h(l.lazy, p.lazy);
             auto& r = get(p.r);
@@ -134,31 +133,39 @@ struct RedBlackTree{
         }
         p.sum = get_val(pi);
         p.lazy = op_u;
-    }
-
-    void update(Index pi){
-        if(pi == nil)
-            return;
-        auto& p = get(pi);
-        auto& l = get(p.l);
-        auto& r = get(p.r);
-        p.siz = l.siz + r.siz;
-        if(p.l != nil || p.r != nil)
-            p.sum = f(get_val(p.l), get_val(p.r));
-        p.level = l.level + !l.red;
-        assert(p.level == r.level + !r.red);
+        return {pi, true};
     }
 
     Index make(T val){
         Index idx = pool.alloc();
-        pool[idx] = Node(val, op_u, false, true, nil.idx, nil.idx);
+        pool[idx] = Node(val, op_u, false, true, nil, nil);
         pool[idx].level = 1;
         return idx;
     }
 
+    Index clone(Index pi){
+        if(pi == nil)
+            return pi;
+        Index qi = pool.alloc();
+        auto& p = get(pi);
+        pool[qi] = Node(p.sum, p.lazy, p.red, false, p.l, p.r);
+        pool[qi].siz = (p.l == nil ? 1 : pool[p.l].siz + pool[p.r].siz);
+        pool[qi].level = pool[p.l].level + !pool[p.l].red;
+        return qi;
+    }
+
+    Index makeInternal(Index l, Index r, bool red){
+        Index idx = pool.alloc();
+        pool[idx] = Node(op_t, op_u, red, false, l, r);
+        pool[idx].sum = f(get_val(l), get_val(r));
+        pool[idx].siz = pool[l].siz + pool[r].siz;
+        pool[idx].level = pool[l].level + !pool[l].red;
+        return idx;
+    }
+
     Index mergeSub(Index ai, Index bi){
-        eval(ai);
-        eval(bi);
+        ai = eval(ai).first;
+        bi = eval(bi).first;
         auto& a = get(ai);
         auto& b = get(bi);
         assert(ai != nil && bi != nil);
@@ -166,61 +173,34 @@ struct RedBlackTree{
             Index ci = mergeSub(ai, b.l);
             auto& c = get(ci);
             if(!b.red && c.red && get(c.l).red){
-                if(!get(b.r).red){
-                    b.l = c.l;
-                    c.l = c.r;
-                    c.r = b.r;
-                    b.r = ci;
-                    update(ci);
-                    update(bi);
-                    return bi;
-                }
+                if(!get(b.r).red)
+                    return makeInternal(c.l, makeInternal(c.r, b.r, true), false);
                 else{
-                    b.l = ci;
-                    b.red ^= 1;
-                    get(b.l).red ^= 1;
-                    get(b.r).red ^= 1;
-                    update(bi);
-                    return bi;
+                    b.r = eval(b.r).first;
+                    return makeInternal(makeInternal(c.l, c.r, false), makeInternal(get(b.r).l, get(b.r).r, false), true);
                 }
             }
-            b.l = ci;
-            update(bi);
-            return bi;
+            return makeInternal(ci, b.r, b.red);
         }
         else if(a.level > b.level){
             Index ci = mergeSub(a.r, bi);
             auto& c = get(ci);
             if(!a.red && c.red && get(c.r).red){
-                if(!get(a.l).red){
-                    a.r = c.r;
-                    c.r = c.l;
-                    c.l = a.l;
-                    a.l = ci;
-                    update(ci);
-                    update(ai);
-                    return ai;
-                }
+                if(!get(a.l).red)
+                    return makeInternal(makeInternal(a.l, c.l, true), c.r, false);
                 else{
-                    a.r = ci;
-                    a.red ^= 1;
-                    get(a.l).red ^= 1;
-                    get(a.r).red ^= 1;
-                    update(ai);
-                    return ai;
+                    a.l = eval(a.l).first;
+                    return makeInternal(makeInternal(get(a.l).l, get(a.l).r, false), makeInternal(c.l, c.r, false), true);
                 }
             }
-            a.r = ci;
-            update(ai);
-            return ai;
+            return makeInternal(a.l, ci, a.red);
         }
         else{
-            a.red = false;
-            b.red = false;
-            Index d = pool.alloc();
-            get(d) = Node(op_t, op_u, true, false, ai.idx, bi.idx);
-            update(d);
-            return d;
+            if(a.red)
+                ai = makeInternal(a.l, a.r, false);
+            if(b.red)
+                bi = makeInternal(b.l, b.r, false);
+            return makeInternal(ai, bi, true);
         }
     }
 
@@ -230,14 +210,19 @@ struct RedBlackTree{
         if(bi == nil)
             return ai;
         Index ci = mergeSub(ai, bi);
-        get(ci).red = false;
+        auto& c = get(ci);
+        if(c.red){
+            pool.free(ci);
+            return makeInternal(c.l, c.r, false);
+        }
         return ci;
     }
 
     pair<Index, Index> split(Index ai, int k){
         if(ai == nil)
             return make_pair(nil, nil);
-        eval(ai);
+        bool fl;
+        tie(ai, fl) = eval(ai);
         auto& a = get(ai);
         if(k == 0)
             return make_pair(nil, ai);
@@ -245,8 +230,9 @@ struct RedBlackTree{
             return make_pair(ai, nil);
         Index li = a.l;
         Index ri = a.r;
+        if(fl)
+            pool.free(ai);
         auto& l = get(li);
-        pool.free(ai);
         if(k < l.siz){
             auto res = split(li, k);
             return make_pair(res.first, merge(res.second, ri));
@@ -272,10 +258,16 @@ struct RedBlackTree{
             return pi;
         auto res = split(pi, r);
         auto res2 = split(res.first, l);
-        auto& mid = get(res2.second);
+        Index mi = clone(res2.second);
+        auto& mid = get(mi);
         mid.lazy = h(mid.lazy, val);
-        eval(res2.second);
-        return merge(merge(res2.first, res2.second), res.second);
+        Index nex_mi;
+        bool fl;
+        tie(nex_mi, fl) = eval(mi);
+        if(fl)
+            pool.free(mi);
+
+        return merge(merge(res2.first, nex_mi), res.second);
     }
 
     Index insert(Index pi, int k, T val){
@@ -286,48 +278,44 @@ struct RedBlackTree{
     Index erase(Index pi, int k){
         auto res = split(pi, k + 1);
         auto res2 = split(res.first, k);
-        pool.free(res2.second);
         return merge(res2.first, res.second);
     }
 
-    Index access(Index pi, int k){
-        while(get(pi).l != nil || get(pi).r != nil){
-            eval(pi);
-            auto& p = get(pi);
-            assert(p.l != nil && p.r != nil);
-            if(get(p.l).siz <= k){
-                k -= get(p.l).siz;
-                pi = p.r;
-            }
-            else{
-                pi = p.l;
-            }
-        }
-        return pi;
+    pair<Index, Index> access(Index pi, int k){
+        auto res = split(pi, k + 1);
+        auto res2 = split(res.first, k);
+        return make_pair(res2.second, merge(merge(res2.first, res2.second), res.second));
     }
 
-    void set(Index pi, int k, T val, function<T(T, T)> af = [](T x, T y){return y;}){
-        stack<Index> st;
-        while(get(pi).l != nil || get(pi).r != nil){
-            eval(pi);
-            auto& p = get(pi);
-            st.push(pi);
-            assert(p.l != nil && p.r != nil);
-            if(get(p.l).siz <= k){
-                k -= get(p.l).siz;
-                pi = p.r;
-            }
-            else{
-                pi = p.l;
-            }
+    Index set(Index pi, int k, T val, function<T(T, T)> af = [](T x, T y){return y;}){
+        auto res = split(pi, k + 1);
+        auto res2 = split(res.first, k);
+        Index qi = eval(res2.second);
+        get(qi).sum = af(get_val(qi), val);
+        return make_pair(qi, merge(merge(res2.first, qi), res.second));
+    }
+
+    void dump(Index pi, vector<T>& v){
+        Index qi = eval(pi).first;
+        auto& q = get(qi);
+        if(q.l != nil){
+            dump(q.l, v);
+            dump(q.r, v);
         }
-        auto& p = get(pi);
-        eval(pi);
-        p.sum = af(p.sum, val);
-        while(!st.empty()){
-            update(st.top());
-            st.pop();
-        }
+        else
+            v.emplace_back(get_val(pi));
+    }
+
+    vector<T> dump(Index pi){
+        vector<T> v;
+        dump(pi, v);
+        return v;
+    }
+
+    Index rebuild(Index pi){
+        auto v = dump(pi);
+        clear();
+        return build(v);
     }
 
     Node& get(Index k){return pool[k];}
@@ -341,7 +329,8 @@ struct RedBlackTree{
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "lib/classes/redblacktree_lazy.cpp"
+#line 1 "lib/classes/redblacktree_persistent_lazy.cpp"
+// verify: https://atcoder.jp/contests/arc030/submissions/12211957/
 template <typename T, typename U>
 struct RedBlackTree{
 
@@ -359,12 +348,13 @@ struct RedBlackTree{
             l = {li};
             r = {ri};
         }
+        Node(T val, U lazy, bool red, bool leaf, Index l, Index r) : sum(val), lazy(lazy), siz(leaf), level(0), red(red), l(l), r(r){}
     };
 
     MemoryPool<Node> pool;
     Index nil;
     function<T(T, T)> f;
-    function<T(T, U, int)> g;
+    function<U(T, U, int)> g;
     function<U(U, U)> h;
     T op_t;
     U op_u;
@@ -402,7 +392,6 @@ struct RedBlackTree{
             pool.st.push(i);
     }
 
-
     Index index(int x){return {x};}
 
     T get_val(Index pi){
@@ -410,19 +399,22 @@ struct RedBlackTree{
         return g(p.sum, p.lazy, p.siz);
     }
 
-    T get_val(Index pi, int k){
-        pi = access(pi, k);
-        auto& p = get(pi);
-        return g(p.sum, p.lazy, p.siz);
+    pair<T, Index> get_val(Index pi, int k){
+        Index root;
+        tie(pi, root) = access(pi, k);
+        return make_pair(get_val(pi), root);
     }
 
-    void eval(Index pi){
+    pair<Index, bool> eval(Index pi){
         if(pi == nil)
-            return;
+            return {pi, false};
+        if(get(pi).lazy == op_u)
+            return {pi, false};
+        pi = clone(pi);
         auto& p = get(pi);
-        if(p.lazy == op_u)
-            return;
         if(p.l != nil){
+            p.l = clone(p.l);
+            p.r = clone(p.r);
             auto& l = get(p.l);
             l.lazy = h(l.lazy, p.lazy);
             auto& r = get(p.r);
@@ -430,31 +422,39 @@ struct RedBlackTree{
         }
         p.sum = get_val(pi);
         p.lazy = op_u;
-    }
-
-    void update(Index pi){
-        if(pi == nil)
-            return;
-        auto& p = get(pi);
-        auto& l = get(p.l);
-        auto& r = get(p.r);
-        p.siz = l.siz + r.siz;
-        if(p.l != nil || p.r != nil)
-            p.sum = f(get_val(p.l), get_val(p.r));
-        p.level = l.level + !l.red;
-        assert(p.level == r.level + !r.red);
+        return {pi, true};
     }
 
     Index make(T val){
         Index idx = pool.alloc();
-        pool[idx] = Node(val, op_u, false, true, nil.idx, nil.idx);
+        pool[idx] = Node(val, op_u, false, true, nil, nil);
         pool[idx].level = 1;
         return idx;
     }
 
+    Index clone(Index pi){
+        if(pi == nil)
+            return pi;
+        Index qi = pool.alloc();
+        auto& p = get(pi);
+        pool[qi] = Node(p.sum, p.lazy, p.red, false, p.l, p.r);
+        pool[qi].siz = (p.l == nil ? 1 : pool[p.l].siz + pool[p.r].siz);
+        pool[qi].level = pool[p.l].level + !pool[p.l].red;
+        return qi;
+    }
+
+    Index makeInternal(Index l, Index r, bool red){
+        Index idx = pool.alloc();
+        pool[idx] = Node(op_t, op_u, red, false, l, r);
+        pool[idx].sum = f(get_val(l), get_val(r));
+        pool[idx].siz = pool[l].siz + pool[r].siz;
+        pool[idx].level = pool[l].level + !pool[l].red;
+        return idx;
+    }
+
     Index mergeSub(Index ai, Index bi){
-        eval(ai);
-        eval(bi);
+        ai = eval(ai).first;
+        bi = eval(bi).first;
         auto& a = get(ai);
         auto& b = get(bi);
         assert(ai != nil && bi != nil);
@@ -462,61 +462,34 @@ struct RedBlackTree{
             Index ci = mergeSub(ai, b.l);
             auto& c = get(ci);
             if(!b.red && c.red && get(c.l).red){
-                if(!get(b.r).red){
-                    b.l = c.l;
-                    c.l = c.r;
-                    c.r = b.r;
-                    b.r = ci;
-                    update(ci);
-                    update(bi);
-                    return bi;
-                }
+                if(!get(b.r).red)
+                    return makeInternal(c.l, makeInternal(c.r, b.r, true), false);
                 else{
-                    b.l = ci;
-                    b.red ^= 1;
-                    get(b.l).red ^= 1;
-                    get(b.r).red ^= 1;
-                    update(bi);
-                    return bi;
+                    b.r = eval(b.r).first;
+                    return makeInternal(makeInternal(c.l, c.r, false), makeInternal(get(b.r).l, get(b.r).r, false), true);
                 }
             }
-            b.l = ci;
-            update(bi);
-            return bi;
+            return makeInternal(ci, b.r, b.red);
         }
         else if(a.level > b.level){
             Index ci = mergeSub(a.r, bi);
             auto& c = get(ci);
             if(!a.red && c.red && get(c.r).red){
-                if(!get(a.l).red){
-                    a.r = c.r;
-                    c.r = c.l;
-                    c.l = a.l;
-                    a.l = ci;
-                    update(ci);
-                    update(ai);
-                    return ai;
-                }
+                if(!get(a.l).red)
+                    return makeInternal(makeInternal(a.l, c.l, true), c.r, false);
                 else{
-                    a.r = ci;
-                    a.red ^= 1;
-                    get(a.l).red ^= 1;
-                    get(a.r).red ^= 1;
-                    update(ai);
-                    return ai;
+                    a.l = eval(a.l).first;
+                    return makeInternal(makeInternal(get(a.l).l, get(a.l).r, false), makeInternal(c.l, c.r, false), true);
                 }
             }
-            a.r = ci;
-            update(ai);
-            return ai;
+            return makeInternal(a.l, ci, a.red);
         }
         else{
-            a.red = false;
-            b.red = false;
-            Index d = pool.alloc();
-            get(d) = Node(op_t, op_u, true, false, ai.idx, bi.idx);
-            update(d);
-            return d;
+            if(a.red)
+                ai = makeInternal(a.l, a.r, false);
+            if(b.red)
+                bi = makeInternal(b.l, b.r, false);
+            return makeInternal(ai, bi, true);
         }
     }
 
@@ -526,14 +499,19 @@ struct RedBlackTree{
         if(bi == nil)
             return ai;
         Index ci = mergeSub(ai, bi);
-        get(ci).red = false;
+        auto& c = get(ci);
+        if(c.red){
+            pool.free(ci);
+            return makeInternal(c.l, c.r, false);
+        }
         return ci;
     }
 
     pair<Index, Index> split(Index ai, int k){
         if(ai == nil)
             return make_pair(nil, nil);
-        eval(ai);
+        bool fl;
+        tie(ai, fl) = eval(ai);
         auto& a = get(ai);
         if(k == 0)
             return make_pair(nil, ai);
@@ -541,8 +519,9 @@ struct RedBlackTree{
             return make_pair(ai, nil);
         Index li = a.l;
         Index ri = a.r;
+        if(fl)
+            pool.free(ai);
         auto& l = get(li);
-        pool.free(ai);
         if(k < l.siz){
             auto res = split(li, k);
             return make_pair(res.first, merge(res.second, ri));
@@ -568,10 +547,16 @@ struct RedBlackTree{
             return pi;
         auto res = split(pi, r);
         auto res2 = split(res.first, l);
-        auto& mid = get(res2.second);
+        Index mi = clone(res2.second);
+        auto& mid = get(mi);
         mid.lazy = h(mid.lazy, val);
-        eval(res2.second);
-        return merge(merge(res2.first, res2.second), res.second);
+        Index nex_mi;
+        bool fl;
+        tie(nex_mi, fl) = eval(mi);
+        if(fl)
+            pool.free(mi);
+
+        return merge(merge(res2.first, nex_mi), res.second);
     }
 
     Index insert(Index pi, int k, T val){
@@ -582,48 +567,44 @@ struct RedBlackTree{
     Index erase(Index pi, int k){
         auto res = split(pi, k + 1);
         auto res2 = split(res.first, k);
-        pool.free(res2.second);
         return merge(res2.first, res.second);
     }
 
-    Index access(Index pi, int k){
-        while(get(pi).l != nil || get(pi).r != nil){
-            eval(pi);
-            auto& p = get(pi);
-            assert(p.l != nil && p.r != nil);
-            if(get(p.l).siz <= k){
-                k -= get(p.l).siz;
-                pi = p.r;
-            }
-            else{
-                pi = p.l;
-            }
-        }
-        return pi;
+    pair<Index, Index> access(Index pi, int k){
+        auto res = split(pi, k + 1);
+        auto res2 = split(res.first, k);
+        return make_pair(res2.second, merge(merge(res2.first, res2.second), res.second));
     }
 
-    void set(Index pi, int k, T val, function<T(T, T)> af = [](T x, T y){return y;}){
-        stack<Index> st;
-        while(get(pi).l != nil || get(pi).r != nil){
-            eval(pi);
-            auto& p = get(pi);
-            st.push(pi);
-            assert(p.l != nil && p.r != nil);
-            if(get(p.l).siz <= k){
-                k -= get(p.l).siz;
-                pi = p.r;
-            }
-            else{
-                pi = p.l;
-            }
+    Index set(Index pi, int k, T val, function<T(T, T)> af = [](T x, T y){return y;}){
+        auto res = split(pi, k + 1);
+        auto res2 = split(res.first, k);
+        Index qi = eval(res2.second);
+        get(qi).sum = af(get_val(qi), val);
+        return make_pair(qi, merge(merge(res2.first, qi), res.second));
+    }
+
+    void dump(Index pi, vector<T>& v){
+        Index qi = eval(pi).first;
+        auto& q = get(qi);
+        if(q.l != nil){
+            dump(q.l, v);
+            dump(q.r, v);
         }
-        auto& p = get(pi);
-        eval(pi);
-        p.sum = af(p.sum, val);
-        while(!st.empty()){
-            update(st.top());
-            st.pop();
-        }
+        else
+            v.emplace_back(get_val(pi));
+    }
+
+    vector<T> dump(Index pi){
+        vector<T> v;
+        dump(pi, v);
+        return v;
+    }
+
+    Index rebuild(Index pi){
+        auto v = dump(pi);
+        clear();
+        return build(v);
     }
 
     Node& get(Index k){return pool[k];}

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/redblacktree_sset.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-21 23:33:53+09:00
+    - Last commit date: 2020-04-22 14:31:46+09:00
 
 
 
@@ -93,7 +93,7 @@ struct RedBlackTree{
         return v[0];
     }
 
-    Index clear(){
+    void clear(){
         while(!pool.st.empty())
             pool.st.pop();
         for(int i = 1; i <= pool.idx; ++i)
@@ -204,6 +204,8 @@ struct RedBlackTree{
     }
 
     pair<Index, Index> split(Index ai, int k){
+        if(ai == nil)
+            return make_pair(nil, nil);
         auto& a = get(ai);
         if(k == 0)
             return make_pair(nil, ai);
@@ -339,7 +341,7 @@ struct RedBlackTree{
         return v[0];
     }
 
-    Index clear(){
+    void clear(){
         while(!pool.st.empty())
             pool.st.pop();
         for(int i = 1; i <= pool.idx; ++i)
@@ -450,6 +452,8 @@ struct RedBlackTree{
     }
 
     pair<Index, Index> split(Index ai, int k){
+        if(ai == nil)
+            return make_pair(nil, nil);
         auto& a = get(ai);
         if(k == 0)
             return make_pair(nil, ai);

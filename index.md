@@ -72,6 +72,7 @@ layout: default
 * :heavy_check_mark: <a href="library/lib/classes/redblacktree.cpp.html">lib/classes/redblacktree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/redblacktree_lazy.cpp.html">lib/classes/redblacktree_lazy.cpp</a>
 * :warning: <a href="library/lib/classes/redblacktree_persistent.cpp.html">lib/classes/redblacktree_persistent.cpp</a>
+* :warning: <a href="library/lib/classes/redblacktree_persistent_lazy.cpp.html">lib/classes/redblacktree_persistent_lazy.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/redblacktree_sset.cpp.html">lib/classes/redblacktree_sset.cpp</a>
 * :warning: <a href="library/lib/classes/rollinghash.cpp.html">lib/classes/rollinghash.cpp</a>
 * :warning: <a href="library/lib/classes/segmentset.cpp.html">lib/classes/segmentset.cpp</a>

@@ -187,6 +187,8 @@ struct RedBlackTree{
     }
 
     pair<Index, Index> split(Index ai, int k){
+        if(ai == nil)
+            return make_pair(nil, nil);
         eval(ai);
         auto& a = get(ai);
         if(k == 0)

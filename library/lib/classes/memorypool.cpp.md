@@ -38,6 +38,8 @@ layout: default
 
 ## Verified with
 
+* :heavy_check_mark: <a href="../../../verify/verify/dynamicwaveletmatrix_kthmin.test.cpp.html">verify/dynamicwaveletmatrix_kthmin.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/verify/dynamicwaveletmatrix_rmq.test.cpp.html">verify/dynamicwaveletmatrix_rmq.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/verify/redblacktree_lazy.test.cpp.html">verify/redblacktree_lazy.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/verify/redblacktree_rsq.test.cpp.html">verify/redblacktree_rsq.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/verify/redblacktree_sset.test.cpp.html">verify/redblacktree_sset.test.cpp</a>

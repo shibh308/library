@@ -53,8 +53,10 @@ layout: default
 * :warning: <a href="library/lib/classes/convexhulltrick.cpp.html">lib/classes/convexhulltrick.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/dinic.cpp.html">lib/classes/dinic.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/disjointsparsetable.cpp.html">lib/classes/disjointsparsetable.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/dynamicbitvector.cpp.html">lib/classes/dynamicbitvector.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/dynamiclazysegmenttree.cpp.html">lib/classes/dynamiclazysegmenttree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/dynamicsegmenttree.cpp.html">lib/classes/dynamicsegmenttree.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/dynamicwaveletmatrix.cpp.html">lib/classes/dynamicwaveletmatrix.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/eulertour.cpp.html">lib/classes/eulertour.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/hashmap.cpp.html">lib/classes/hashmap.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/heavylightdecomposition.cpp.html">lib/classes/heavylightdecomposition.cpp</a>
@@ -118,6 +120,8 @@ layout: default
 
 * :heavy_check_mark: <a href="verify/verify/2-sat.test.cpp.html">verify/2-sat.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/bipartitematching.test.cpp.html">verify/bipartitematching.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/dynamicwaveletmatrix_kthmin.test.cpp.html">verify/dynamicwaveletmatrix_kthmin.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/dynamicwaveletmatrix_rmq.test.cpp.html">verify/dynamicwaveletmatrix_rmq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/eulertour.test.cpp.html">verify/eulertour.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/hashmap_dict.test.cpp.html">verify/hashmap_dict.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/hashmap_itp.test.cpp.html">verify/hashmap_itp.test.cpp</a>

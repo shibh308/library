@@ -10,8 +10,8 @@ const i64 MOD = i64(1e9) + 7;
 const i64 INF = i64(1e18) + 7;
 
 
-#include "library/lib/classes/memorypool.cpp"
-#include "library/lib/classes/zdd.cpp"
+#include "../lib/classes/memorypool.cpp"
+#include "../lib/classes/zdd.cpp"
 
 
 signed main(){

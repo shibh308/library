@@ -44,6 +44,7 @@ layout: default
 * :heavy_check_mark: <a href="../../../verify/verify/redblacktree_rsq.test.cpp.html">verify/redblacktree_rsq.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/verify/redblacktree_sset.test.cpp.html">verify/redblacktree_sset.test.cpp</a>
 * :heavy_check_mark: <a href="../../../verify/verify/twothreetree.test.cpp.html">verify/twothreetree.test.cpp</a>
+* :heavy_check_mark: <a href="../../../verify/verify/zdd_knapsack.test.cpp.html">verify/zdd_knapsack.test.cpp</a>
 
 
 ## Code

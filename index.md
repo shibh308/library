@@ -93,6 +93,7 @@ layout: default
 * :heavy_check_mark: <a href="library/lib/classes/xfasttrie_yft.cpp.html">lib/classes/xfasttrie_yft.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/yfasttrie.cpp.html">lib/classes/yfasttrie.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/yfasttrie2.cpp.html">lib/classes/yfasttrie2.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/zdd.cpp.html">lib/classes/zdd.cpp</a>
 
 
 <div id="abc4d0f7246596dc1cbcc6b77896a2fc"></div>
@@ -169,5 +170,6 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/xfastttrie_itp.test.cpp.html">verify/xfastttrie_itp.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/yfastttrie2_itp.test.cpp.html">verify/yfastttrie2_itp.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/yfastttrie_itp.test.cpp.html">verify/yfastttrie_itp.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/zdd_knapsack.test.cpp.html">verify/zdd_knapsack.test.cpp</a>
 
 

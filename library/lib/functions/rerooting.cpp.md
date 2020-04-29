@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: lib/functions/rerooting.cpp
+# :heavy_check_mark: lib/functions/rerooting.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -34,6 +34,11 @@ layout: default
     - Last commit date: 2020-03-30 02:03:55+09:00
 
 
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../../verify/verify/rerooting_diameter.test.cpp.html">verify/rerooting_diameter.test.cpp</a>
 
 
 ## Code

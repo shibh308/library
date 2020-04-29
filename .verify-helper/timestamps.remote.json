@@ -49,5 +49,6 @@
 "verify/waveletmatrix_rangefreq.test.cpp": "2020-04-15 15:25:38 +0900",
 "verify/xfastttrie_itp.test.cpp": "2020-04-11 13:43:20 +0900",
 "verify/yfastttrie2_itp.test.cpp": "2020-04-11 13:43:20 +0900",
-"verify/yfastttrie_itp.test.cpp": "2020-04-11 13:43:20 +0900"
+"verify/yfastttrie_itp.test.cpp": "2020-04-11 13:43:20 +0900",
+"verify/zdd_knapsack.test.cpp": "2020-04-29 13:59:55 +0900"
 }

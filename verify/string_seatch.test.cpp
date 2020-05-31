@@ -4,9 +4,9 @@
 using namespace std;
 
 
-#include "./library/lib/classes/sparsetable.cpp"
-#include "./library/lib/classes/lineartimesparsetable.cpp"
-#include "./library/lib/classes/substrmatching.cpp"
+#include "../lib/classes/sparsetable.cpp"
+#include "../lib/classes/lineartimesparsetable.cpp"
+#include "../lib/classes/substrmatching.cpp"
 
 
 signed main(){

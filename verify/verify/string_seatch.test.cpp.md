@@ -25,21 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/skiplist_sset_itp.test.cpp
+# :heavy_check_mark: verify/string_seatch.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/skiplist_sset_itp.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-04-10 22:58:43+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/verify/string_seatch.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-05-31 22:09:43+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_7_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_7_B</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/lib/classes/skiplist_sset.cpp.html">lib/classes/skiplist_sset.cpp</a>
+* :heavy_check_mark: <a href="../../library/lib/classes/lineartimesparsetable.cpp.html">lib/classes/lineartimesparsetable.cpp</a>
+* :heavy_check_mark: <a href="../../library/lib/classes/sparsetable.cpp.html">lib/classes/sparsetable.cpp</a>
+* :heavy_check_mark: <a href="../../library/lib/classes/substrmatching.cpp.html">lib/classes/substrmatching.cpp</a>
 
 
 ## Code
@@ -47,39 +49,33 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_7_B"
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
 #include "bits/stdc++.h"
 
 using namespace std;
 
-using i64 = long long;
 
-
-#include "../lib/classes/skiplist_sset.cpp"
+#include "../lib/classes/sparsetable.cpp"
+#include "../lib/classes/lineartimesparsetable.cpp"
+#include "../lib/classes/substrmatching.cpp"
 
 
 signed main(){
-    int q;
-    scanf("%d", &q);
-    SSet<int> s;
-    for(int i = 0; i < q; ++i){
-        int t, x;
-        scanf("%d%d", &t, &x);
-        if(t == 0){
-            auto ptr = s.lower_bound(x);
-            if(ptr == s.back || ptr->val != x)
-                s.insert(x);
-            printf("%d\n", s.size());
-        }
-        else if(t == 2){
-            s.erase_key(x);
-        }
-        else{
-            auto ptr = s.lower_bound(x);
-            printf("%d\n", ptr != s.back && ptr->val == x);
-        }
+    string s, t;
+    cin >> s;
+    SubstrMatching p(s);
+    cin >> t;
+    auto q = p.find(t);
+    vector<int> v;
+    for(int i = q.first; i < q.second; ++i){
+        v.emplace_back(p.sa[i]);
     }
+    sort(v.begin(), v.end());
+    for(auto x : v)
+        printf("%d\n", x);
 }
+
+
 
 ```
 {% endraw %}

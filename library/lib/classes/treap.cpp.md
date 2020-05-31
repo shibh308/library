@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/treap.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-11-30 20:08:52+09:00
+    - Last commit date: 2020-05-31 22:27:15+09:00
 
 
 
@@ -407,7 +407,6 @@ public:
         root = _erase(root, k);
     }
 
-    // 要素の全削除
     void clear(){
         if(root != nt::nil){
             _clear(root);
@@ -795,7 +794,6 @@ public:
         root = _erase(root, k);
     }
 
-    // 要素の全削除
     void clear(){
         if(root != nt::nil){
             _clear(root);

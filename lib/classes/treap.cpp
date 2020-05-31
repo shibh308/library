@@ -364,7 +364,6 @@ public:
         root = _erase(root, k);
     }
 
-    // 要素の全削除
     void clear(){
         if(root != nt::nil){
             _clear(root);

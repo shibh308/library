@@ -1,6 +1,5 @@
 template<typename T>
 struct LinearTimeSparseTable{
-    // 最小値を持つ<O(n), O(1)>のSparse Table
     int n, m;
     vector<T> a;
     SparseTable<T> b;

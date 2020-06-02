@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/substrmatching.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-05-31 19:48:42+09:00
+    - Last commit date: 2020-06-02 15:59:15+09:00
 
 
 
@@ -50,12 +50,10 @@ layout: default
 struct SubstrMatching{
     int n;
     string s;
-    vector<int> sa, lcp;
-    LinearTimeSparseTable<int> lcp_table;
-    SubstrMatching(string s) : s(s), n(s.size()), lcp_table(lcp){
+    vector<int> sa, lcp, lcp_table;
+    SubstrMatching(string s) : s(s), n(s.size()){
         sa_is();
         lcp_build();
-        lcp_table = LinearTimeSparseTable<int>(lcp);
     }
     vector<int> induced_sort(vector<int> v, int k){
         if(v.size() == k){
@@ -167,15 +165,27 @@ struct SubstrMatching{
             if(p > 0)
                 --p;
         }
+        int siz = 1;
+        for(; siz <= n; siz *= 2);
+        lcp_table.resize(2 * siz, -1);
+        for(int i = 0; i < n; ++i)
+            lcp_table[i + siz] = lcp[i];
+        for(int i = siz - 1; i > 0; --i)
+            lcp_table[i] = min(lcp_table[i << 1], lcp_table[(i << 1) | 1]);
     }
     int match_len(string& t){
-        int l = 0, r = sa.size();
+        int l = 0, r = lcp_table.size() / 2;
         int l_lcp = 0;
+        int idx = 1;
         while(r - l > 1){
             int mid = (l + r) >> 1;
-            int m_lcp = lcp_table.get(l, mid);
-            if(l_lcp < m_lcp)
+            int m_lcp = lcp_table[idx <<= 1];
+            if(m_lcp == lcp_table[0])
+                r = mid;
+            else if(l_lcp < m_lcp){
                 l = mid;
+                ++idx;
+            }
             else if(l_lcp > m_lcp)
                 r = mid;
             else{
@@ -183,8 +193,10 @@ struct SubstrMatching{
                 if(sa[mid] + m_lcp == s.size() || m_lcp == t.size() || s[sa[mid] + m_lcp] < t[m_lcp]){
                     l_lcp = m_lcp;
                     l = mid;
-                }else
+                    ++idx;
+                }else{
                     r = mid;
+                }
             }
         }
         return l_lcp;
@@ -193,13 +205,19 @@ struct SubstrMatching{
         return match_len(t) == t.size();
     }
     int lower_bound(string& t){
-        int l = 0, r = sa.size();
+        int l = 0, r = lcp_table.size() / 2;
         int l_lcp = 0;
+        int idx = 1;
         while(r - l > 1){
             int mid = (l + r) >> 1;
-            int m_lcp = lcp_table.get(l, mid);
-            if(l_lcp < m_lcp)
+            int m_lcp = lcp_table[idx <<= 1];
+
+            if(m_lcp == lcp_table[0])
+                r = mid;
+            else if(l_lcp < m_lcp){
                 l = mid;
+                ++idx;
+            }
             else if(l_lcp > m_lcp)
                 r = mid;
             else{
@@ -207,8 +225,10 @@ struct SubstrMatching{
                 if(sa[mid] + m_lcp == s.size() || m_lcp == t.size() || s[sa[mid] + m_lcp] < t[m_lcp]){
                     l_lcp = m_lcp;
                     l = mid;
-                }else
+                    ++idx;
+                }else{
                     r = mid;
+                }
             }
         }
         return r;
@@ -221,7 +241,6 @@ struct SubstrMatching{
         return make_pair(l, r);
     }
 };
-
 
 ```
 {% endraw %}
@@ -233,12 +252,10 @@ struct SubstrMatching{
 struct SubstrMatching{
     int n;
     string s;
-    vector<int> sa, lcp;
-    LinearTimeSparseTable<int> lcp_table;
-    SubstrMatching(string s) : s(s), n(s.size()), lcp_table(lcp){
+    vector<int> sa, lcp, lcp_table;
+    SubstrMatching(string s) : s(s), n(s.size()){
         sa_is();
         lcp_build();
-        lcp_table = LinearTimeSparseTable<int>(lcp);
     }
     vector<int> induced_sort(vector<int> v, int k){
         if(v.size() == k){
@@ -350,15 +367,27 @@ struct SubstrMatching{
             if(p > 0)
                 --p;
         }
+        int siz = 1;
+        for(; siz <= n; siz *= 2);
+        lcp_table.resize(2 * siz, -1);
+        for(int i = 0; i < n; ++i)
+            lcp_table[i + siz] = lcp[i];
+        for(int i = siz - 1; i > 0; --i)
+            lcp_table[i] = min(lcp_table[i << 1], lcp_table[(i << 1) | 1]);
     }
     int match_len(string& t){
-        int l = 0, r = sa.size();
+        int l = 0, r = lcp_table.size() / 2;
         int l_lcp = 0;
+        int idx = 1;
         while(r - l > 1){
             int mid = (l + r) >> 1;
-            int m_lcp = lcp_table.get(l, mid);
-            if(l_lcp < m_lcp)
+            int m_lcp = lcp_table[idx <<= 1];
+            if(m_lcp == lcp_table[0])
+                r = mid;
+            else if(l_lcp < m_lcp){
                 l = mid;
+                ++idx;
+            }
             else if(l_lcp > m_lcp)
                 r = mid;
             else{
@@ -366,8 +395,10 @@ struct SubstrMatching{
                 if(sa[mid] + m_lcp == s.size() || m_lcp == t.size() || s[sa[mid] + m_lcp] < t[m_lcp]){
                     l_lcp = m_lcp;
                     l = mid;
-                }else
+                    ++idx;
+                }else{
                     r = mid;
+                }
             }
         }
         return l_lcp;
@@ -376,13 +407,19 @@ struct SubstrMatching{
         return match_len(t) == t.size();
     }
     int lower_bound(string& t){
-        int l = 0, r = sa.size();
+        int l = 0, r = lcp_table.size() / 2;
         int l_lcp = 0;
+        int idx = 1;
         while(r - l > 1){
             int mid = (l + r) >> 1;
-            int m_lcp = lcp_table.get(l, mid);
-            if(l_lcp < m_lcp)
+            int m_lcp = lcp_table[idx <<= 1];
+
+            if(m_lcp == lcp_table[0])
+                r = mid;
+            else if(l_lcp < m_lcp){
                 l = mid;
+                ++idx;
+            }
             else if(l_lcp > m_lcp)
                 r = mid;
             else{
@@ -390,8 +427,10 @@ struct SubstrMatching{
                 if(sa[mid] + m_lcp == s.size() || m_lcp == t.size() || s[sa[mid] + m_lcp] < t[m_lcp]){
                     l_lcp = m_lcp;
                     l = mid;
-                }else
+                    ++idx;
+                }else{
                     r = mid;
+                }
             }
         }
         return r;
@@ -404,7 +443,6 @@ struct SubstrMatching{
         return make_pair(l, r);
     }
 };
-
 
 ```
 {% endraw %}

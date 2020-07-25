@@ -57,6 +57,7 @@ layout: default
 * :heavy_check_mark: <a href="library/lib/classes/dynamiclazysegmenttree.cpp.html">lib/classes/dynamiclazysegmenttree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/dynamicsegmenttree.cpp.html">lib/classes/dynamicsegmenttree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/dynamicwaveletmatrix.cpp.html">lib/classes/dynamicwaveletmatrix.cpp</a>
+* :warning: <a href="library/lib/classes/eertree.cpp.html">lib/classes/eertree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/eulertour.cpp.html">lib/classes/eulertour.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/hashmap.cpp.html">lib/classes/hashmap.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/heavylightdecomposition.cpp.html">lib/classes/heavylightdecomposition.cpp</a>

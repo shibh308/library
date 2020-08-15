@@ -42,7 +42,7 @@ struct EerTree{
         return par->ch[c];
     }
     void add(char c){
-        for(s += c; s[s.size() - active_point->len - 2] != c; active_point = active_point->slink);
+        for(s += c; int(s.size()) - active_point->len - 2 < 0 || s[s.size() - active_point->len - 2] != c; active_point = active_point->slink);
         active_point = make(active_point, c);
     }
 };

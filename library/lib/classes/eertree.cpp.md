@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/eertree.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 10:11:24+09:00
+    - Last commit date: 2020-08-15 20:44:23+09:00
 
 
 
@@ -85,7 +85,7 @@ struct EerTree{
         return par->ch[c];
     }
     void add(char c){
-        for(s += c; s[s.size() - active_point->len - 2] != c; active_point = active_point->slink);
+        for(s += c; int(s.size()) - active_point->len - 2 < 0 || s[s.size() - active_point->len - 2] != c; active_point = active_point->slink);
         active_point = make(active_point, c);
     }
 };
@@ -141,7 +141,7 @@ struct EerTree{
         return par->ch[c];
     }
     void add(char c){
-        for(s += c; s[s.size() - active_point->len - 2] != c; active_point = active_point->slink);
+        for(s += c; int(s.size()) - active_point->len - 2 < 0 || s[s.size() - active_point->len - 2] != c; active_point = active_point->slink);
         active_point = make(active_point, c);
     }
 };

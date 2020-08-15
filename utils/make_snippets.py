@@ -13,7 +13,7 @@ def create():
     for load_path in pathes:
         with open(load_path, 'r') as f:
             name = os.path.splitext(load_path.split('/')[-1])[0]
-            s = f.read()
+            s = '// doc: https://shibh308.github.io/library/library/{}.html\n'.format(load_path) + f.read()
             dics.append({"name": escape(name), "code": escape(s).replace('\n', '&#10;').replace('"', '&quot;')})
     
     with open(save_path, 'w') as f:

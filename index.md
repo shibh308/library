@@ -86,6 +86,7 @@ layout: default
 * :heavy_check_mark: <a href="library/lib/classes/sparsetable.cpp.html">lib/classes/sparsetable.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/splaytree_sset.cpp.html">lib/classes/splaytree_sset.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/substrmatching.cpp.html">lib/classes/substrmatching.cpp</a>
+* :warning: <a href="library/lib/classes/succinctbitvector.cpp.html">lib/classes/succinctbitvector.cpp</a>
 * :warning: <a href="library/lib/classes/treap.cpp.html">lib/classes/treap.cpp</a>
 * :warning: <a href="library/lib/classes/trie.cpp.html">lib/classes/trie.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/twothreetree.cpp.html">lib/classes/twothreetree.cpp</a>

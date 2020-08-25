@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/succinctbitvector.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-16 16:15:43+09:00
+    - Last commit date: 2020-08-25 14:12:39+09:00
 
 
 
@@ -49,26 +49,28 @@ struct FastSelect {
     static const int ss_size = 8;
 
     struct Table{
-        int l_table[m_size][m_size][m_size];
-        int s_table[m_size][ss_size];
+        uint16_t l_table[m_size][m_size][s_size];
+        uint32_t s_table[m_size];
         Table() : l_table(), s_table(){
             for(int i = 0; i < m_size; ++i)
-                for(int j = 0; j < m_size; ++j)
+                for(int j = 0; j < m_size; ++j){
+                    for(int k = 0; k < s_size; ++k)
+                        l_table[i][j][k] = 0;
                     for(int k = 0; k < m_size; ++k){
-                        if(k < i)
-                            l_table[i][j][k] = 0;
-                        else if(k < i + j)
-                            l_table[i][j][k] = 1;
-                        else
-                            l_table[i][j][k] = 2;
+                        if(k >= i && k < i + j)
+                            l_table[i][j][k >> 3] |= 1 << ((k & 7) * 2);
+                        else if(k >= i + j)
+                            l_table[i][j][k >> 3] |= 2 << ((k & 7) * 2);
                     }
+                }
             for(int i = 0; i < m_size; ++i){
+                s_table[i] = 0;
                 for(int j = 0; j < ss_size; ++j){
                     int c = 0;
                     for(int k = 0; k < ss_size; ++k){
                         c += bool(i & (1 << k));
                         if(j < c){
-                            s_table[i][j] = k;
+                            s_table[i] |= (k << (j * 4));
                             break;
                         }
                     }
@@ -135,7 +137,7 @@ struct FastSelect {
             int idx = siz[d];
             for(; d > 0; --d){
                 int ch = siz[d - 1] + (idx - siz[d]) * 4;
-                int res = tab.l_table[w[ch]][w[ch + 1]][x];
+                int res = (tab.l_table[w[ch]][w[ch + 1]][x >> 3] >> ((x & 7) * 2)) & 3;
                 if(res < 2){
                     if(res)
                         x -= w[ch];
@@ -143,14 +145,14 @@ struct FastSelect {
                 }
                 else{
                     x -= w[ch] + w[ch + 1];
-                    int res2 = tab.l_table[w[ch + 2]][w[ch + 3]][x];
+                    int res2 = (tab.l_table[w[ch + 2]][w[ch + 3]][x >> 3] >> ((x & 7) * 2)) & 3;
                     assert(res2 < 2);
                     if(res2)
                         x -= w[ch + 2];
                     idx = ch + 2 + res2;
                 }
             }
-            return idx * ss_size + tab.s_table[get(idx * ss_size) ^ (fl ? 0 : 255)][x];
+            return idx * ss_size + ((tab.s_table[get(idx * ss_size) ^ (fl ? 0 : 255)] >> (x * 4)) & 15);
         }
     };
 
@@ -252,26 +254,28 @@ struct FastSelect {
     static const int ss_size = 8;
 
     struct Table{
-        int l_table[m_size][m_size][m_size];
-        int s_table[m_size][ss_size];
+        uint16_t l_table[m_size][m_size][s_size];
+        uint32_t s_table[m_size];
         Table() : l_table(), s_table(){
             for(int i = 0; i < m_size; ++i)
-                for(int j = 0; j < m_size; ++j)
+                for(int j = 0; j < m_size; ++j){
+                    for(int k = 0; k < s_size; ++k)
+                        l_table[i][j][k] = 0;
                     for(int k = 0; k < m_size; ++k){
-                        if(k < i)
-                            l_table[i][j][k] = 0;
-                        else if(k < i + j)
-                            l_table[i][j][k] = 1;
-                        else
-                            l_table[i][j][k] = 2;
+                        if(k >= i && k < i + j)
+                            l_table[i][j][k >> 3] |= 1 << ((k & 7) * 2);
+                        else if(k >= i + j)
+                            l_table[i][j][k >> 3] |= 2 << ((k & 7) * 2);
                     }
+                }
             for(int i = 0; i < m_size; ++i){
+                s_table[i] = 0;
                 for(int j = 0; j < ss_size; ++j){
                     int c = 0;
                     for(int k = 0; k < ss_size; ++k){
                         c += bool(i & (1 << k));
                         if(j < c){
-                            s_table[i][j] = k;
+                            s_table[i] |= (k << (j * 4));
                             break;
                         }
                     }
@@ -338,7 +342,7 @@ struct FastSelect {
             int idx = siz[d];
             for(; d > 0; --d){
                 int ch = siz[d - 1] + (idx - siz[d]) * 4;
-                int res = tab.l_table[w[ch]][w[ch + 1]][x];
+                int res = (tab.l_table[w[ch]][w[ch + 1]][x >> 3] >> ((x & 7) * 2)) & 3;
                 if(res < 2){
                     if(res)
                         x -= w[ch];
@@ -346,14 +350,14 @@ struct FastSelect {
                 }
                 else{
                     x -= w[ch] + w[ch + 1];
-                    int res2 = tab.l_table[w[ch + 2]][w[ch + 3]][x];
+                    int res2 = (tab.l_table[w[ch + 2]][w[ch + 3]][x >> 3] >> ((x & 7) * 2)) & 3;
                     assert(res2 < 2);
                     if(res2)
                         x -= w[ch + 2];
                     idx = ch + 2 + res2;
                 }
             }
-            return idx * ss_size + tab.s_table[get(idx * ss_size) ^ (fl ? 0 : 255)][x];
+            return idx * ss_size + ((tab.s_table[get(idx * ss_size) ^ (fl ? 0 : 255)] >> (x * 4)) & 15);
         }
     };
 

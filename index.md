@@ -46,7 +46,7 @@ layout: default
 ### lib/classes
 
 * :heavy_check_mark: <a href="library/lib/classes/avl.cpp.html">lib/classes/avl.cpp</a>
-* :warning: <a href="library/lib/classes/avl_map.cpp.html">lib/classes/avl_map.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/avl_map.cpp.html">lib/classes/avl_map.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/binaryindexedtree.cpp.html">lib/classes/binaryindexedtree.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/binarylifting.cpp.html">lib/classes/binarylifting.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/bitvector.cpp.html">lib/classes/bitvector.cpp</a>
@@ -88,7 +88,7 @@ layout: default
 * :heavy_check_mark: <a href="library/lib/classes/splaytree_sset.cpp.html">lib/classes/splaytree_sset.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/substrmatching.cpp.html">lib/classes/substrmatching.cpp</a>
 * :warning: <a href="library/lib/classes/succinctbitvector.cpp.html">lib/classes/succinctbitvector.cpp</a>
-* :warning: <a href="library/lib/classes/suffixtree.cpp.html">lib/classes/suffixtree.cpp</a>
+* :heavy_check_mark: <a href="library/lib/classes/suffixtree.cpp.html">lib/classes/suffixtree.cpp</a>
 * :warning: <a href="library/lib/classes/treap.cpp.html">lib/classes/treap.cpp</a>
 * :warning: <a href="library/lib/classes/trie.cpp.html">lib/classes/trie.cpp</a>
 * :heavy_check_mark: <a href="library/lib/classes/twothreetree.cpp.html">lib/classes/twothreetree.cpp</a>
@@ -174,6 +174,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/static_rmq.test.cpp.html">verify/static_rmq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/static_rmq_wm.test.cpp.html">verify/static_rmq_wm.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/string_seatch.test.cpp.html">verify/string_seatch.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/suffixtree.test.cpp.html">verify/suffixtree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/tangent_lines.test.cpp.html">verify/tangent_lines.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/twothreetree.test.cpp.html">verify/twothreetree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/unionfind.test.cpp.html">verify/unionfind.test.cpp</a>

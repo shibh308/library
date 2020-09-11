@@ -8,23 +8,29 @@ struct SuffixTree{
     int n;
     string s;
     vector<Node> nodes;
-    vector<int> sa, sa_inv;
-    SuffixTree(string& _s) : n(_s.size() + 1), s(_s + "$"), nodes(_s.size() + 3), sa(n), sa_inv(n){
+    vector<int> sa, sa_inv, lcp;
+    SuffixTree(string& _s) : n(_s.size() + 1), s(_s + "$"), nodes(_s.size() + 3), sa(n), sa_inv(n), lcp(n){
         nodes[n].slink = n;
         nodes[n].par = n + 1;
         nodes[n].par_len = 1;
         for(int i = n - 1; i >= 0; --i)
             add(i);
         int cnt = 0;
-        make_sa(0, cnt);
+        int lca = 0;
+        make_sa(n, cnt, lca);
     }
-    void make_sa(int x, int& cnt){
+    void make_sa(int x, int& cnt, int& lca){
         if(x < n){
             sa[cnt] = x;
+            if(cnt > 0)
+                lcp[cnt - 1] = lca;
+            lca = nodes[x].dep;
             sa_inv[x] = cnt++;
         }
-        for(auto p : avl.list(nodes[x].child))
-            make_sa(p.second, cnt);
+        for(auto p : avl.list(nodes[x].child)){
+            lca = min(lca, nodes[x].dep);
+            make_sa(p.second, cnt, lca);
+        }
     }
     int child(int x, char c){
         auto res = avl.get(nodes[x].child, c);
@@ -121,4 +127,4 @@ struct SuffixTree{
         }
         return {x, 0};
     }
-};
+}

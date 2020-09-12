@@ -127,4 +127,4 @@ struct SuffixTree{
         }
         return {x, 0};
     }
-}
+};

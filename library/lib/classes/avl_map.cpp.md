@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#1a2816715ae26fbd9c4a8d3f916105a3">lib/classes</a>
 * <a href="{{ site.github.repository_url }}/blob/master/lib/classes/avl_map.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-09-09 21:11:14+09:00
+    - Last commit date: 2020-09-13 14:27:28+09:00
 
 
 
@@ -159,17 +159,24 @@ struct AVL_map{
             return get(nodes[x].c[1], key);
     }
     vector<pair<T, U>> list(int x){
-        if(x == 0)
-            return vector<pair<T, U>>();
         vector<pair<T, U>> v;
-        if(nodes[x].c[0]){
-            auto res = list(nodes[x].c[0]);
-            v.insert(v.end(), make_move_iterator(res.begin()), make_move_iterator(res.end()));
-        }
-        v.emplace_back(nodes[x].key, nodes[x].val);
-        if(nodes[x].c[1]){
-            auto res = list(nodes[x].c[1]);
-            v.insert(v.end(), make_move_iterator(res.begin()), make_move_iterator(res.end()));
+        stack<pair<int,bool>> sta;
+        sta.emplace(x, false);
+        bool add;
+        while(!sta.empty()){
+            tie(x, add) = sta.top();
+            sta.pop();
+            if(x == 0)
+                continue;
+            if(add)
+                v.emplace_back(nodes[x].key, nodes[x].val);
+            else{
+                if(nodes[x].c[1])
+                    sta.emplace(nodes[x].c[1], false);
+                sta.emplace(x, true);
+                if(nodes[x].c[0])
+                    sta.emplace(nodes[x].c[0], false);
+            }
         }
         return v;
     }
@@ -295,17 +302,24 @@ struct AVL_map{
             return get(nodes[x].c[1], key);
     }
     vector<pair<T, U>> list(int x){
-        if(x == 0)
-            return vector<pair<T, U>>();
         vector<pair<T, U>> v;
-        if(nodes[x].c[0]){
-            auto res = list(nodes[x].c[0]);
-            v.insert(v.end(), make_move_iterator(res.begin()), make_move_iterator(res.end()));
-        }
-        v.emplace_back(nodes[x].key, nodes[x].val);
-        if(nodes[x].c[1]){
-            auto res = list(nodes[x].c[1]);
-            v.insert(v.end(), make_move_iterator(res.begin()), make_move_iterator(res.end()));
+        stack<pair<int,bool>> sta;
+        sta.emplace(x, false);
+        bool add;
+        while(!sta.empty()){
+            tie(x, add) = sta.top();
+            sta.pop();
+            if(x == 0)
+                continue;
+            if(add)
+                v.emplace_back(nodes[x].key, nodes[x].val);
+            else{
+                if(nodes[x].c[1])
+                    sta.emplace(nodes[x].c[1], false);
+                sta.emplace(x, true);
+                if(nodes[x].c[0])
+                    sta.emplace(nodes[x].c[0], false);
+            }
         }
         return v;
     }

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/suffixtree.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-09-12 11:42:07+09:00
+    - Last commit date: 2020-09-13 14:27:28+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B</a>
@@ -214,17 +214,24 @@ struct AVL_map{
             return get(nodes[x].c[1], key);
     }
     vector<pair<T, U>> list(int x){
-        if(x == 0)
-            return vector<pair<T, U>>();
         vector<pair<T, U>> v;
-        if(nodes[x].c[0]){
-            auto res = list(nodes[x].c[0]);
-            v.insert(v.end(), make_move_iterator(res.begin()), make_move_iterator(res.end()));
-        }
-        v.emplace_back(nodes[x].key, nodes[x].val);
-        if(nodes[x].c[1]){
-            auto res = list(nodes[x].c[1]);
-            v.insert(v.end(), make_move_iterator(res.begin()), make_move_iterator(res.end()));
+        stack<pair<int,bool>> sta;
+        sta.emplace(x, false);
+        bool add;
+        while(!sta.empty()){
+            tie(x, add) = sta.top();
+            sta.pop();
+            if(x == 0)
+                continue;
+            if(add)
+                v.emplace_back(nodes[x].key, nodes[x].val);
+            else{
+                if(nodes[x].c[1])
+                    sta.emplace(nodes[x].c[1], false);
+                sta.emplace(x, true);
+                if(nodes[x].c[0])
+                    sta.emplace(nodes[x].c[0], false);
+            }
         }
         return v;
     }
@@ -247,21 +254,34 @@ struct SuffixTree{
         nodes[n].par_len = 1;
         for(int i = n - 1; i >= 0; --i)
             add(i);
+        make_sa();
+    }
+    void make_sa(){
+        stack<pair<int,bool>> sta;
         int cnt = 0;
         int lca = 0;
-        make_sa(n, cnt, lca);
-    }
-    void make_sa(int x, int& cnt, int& lca){
-        if(x < n){
-            sa[cnt] = x;
-            if(cnt > 0)
-                lcp[cnt - 1] = lca;
-            lca = nodes[x].dep;
-            sa_inv[x] = cnt++;
-        }
-        for(auto p : avl.list(nodes[x].child)){
-            lca = min(lca, nodes[x].dep);
-            make_sa(p.second, cnt, lca);
+        sta.emplace(n, false);
+        int x;
+        bool is_lca;
+        while(!sta.empty()){
+            tie(x, is_lca) = sta.top();
+            sta.pop();
+            if(is_lca){
+                lca = min(lca, x);
+                continue;
+            }
+            if(x < n){
+                sa[cnt] = x;
+                if(cnt > 0)
+                    lcp[cnt - 1] = lca;
+                lca = nodes[x].dep;
+                sa_inv[x] = cnt++;
+            }
+            auto chi = avl.list(nodes[x].child);
+            for(int i = chi.size() - 1; i >= 0; --i){
+                sta.emplace(nodes[x].dep, true);
+                sta.emplace(chi[i].second, false);
+            }
         }
     }
     int child(int x, char c){

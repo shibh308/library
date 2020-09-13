@@ -15,21 +15,34 @@ struct SuffixTree{
         nodes[n].par_len = 1;
         for(int i = n - 1; i >= 0; --i)
             add(i);
+        make_sa();
+    }
+    void make_sa(){
+        stack<pair<int,bool>> sta;
         int cnt = 0;
         int lca = 0;
-        make_sa(n, cnt, lca);
-    }
-    void make_sa(int x, int& cnt, int& lca){
-        if(x < n){
-            sa[cnt] = x;
-            if(cnt > 0)
-                lcp[cnt - 1] = lca;
-            lca = nodes[x].dep;
-            sa_inv[x] = cnt++;
-        }
-        for(auto p : avl.list(nodes[x].child)){
-            lca = min(lca, nodes[x].dep);
-            make_sa(p.second, cnt, lca);
+        sta.emplace(n, false);
+        int x;
+        bool is_lca;
+        while(!sta.empty()){
+            tie(x, is_lca) = sta.top();
+            sta.pop();
+            if(is_lca){
+                lca = min(lca, x);
+                continue;
+            }
+            if(x < n){
+                sa[cnt] = x;
+                if(cnt > 0)
+                    lcp[cnt - 1] = lca;
+                lca = nodes[x].dep;
+                sa_inv[x] = cnt++;
+            }
+            auto chi = avl.list(nodes[x].child);
+            for(int i = chi.size() - 1; i >= 0; --i){
+                sta.emplace(nodes[x].dep, true);
+                sta.emplace(chi[i].second, false);
+            }
         }
     }
     int child(int x, char c){

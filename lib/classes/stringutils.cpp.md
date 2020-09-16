@@ -30,9 +30,7 @@ data:
     \  sa[sa_inv[i]] = i;\n        }\n        int h = 0;\n        for(int i = 0; i\
     \ < n - 1; ++i){\n            int j = sa[sa_inv[i] + 1];\n            if(h)\n\
     \                --h;\n            for(; i + h < n && j + h < n && s[i + h] ==\
-    \ s[j + h]; ++h);\n            lcp[sa_inv[i]] = h;\n        }\n        for(int\
-    \ i = 0; i < n; ++i)\n            printf(\"%2d %2d: %s\\n\", sa[i], lcp[i], s.substr(sa[i]).c_str());\n\
-    \        cout << endl;\n    }\n};\n"
+    \ s[j + h]; ++h);\n            lcp[sa_inv[i]] = h;\n        }\n    }\n};\n"
   code: "struct StringUtils{\n    int n;\n    string s;\n    vector<int> sa, sa_inv,\
     \ lcp;\n    StringUtils(string _s) : n(_s.size() + 1), s(_s + \"$\"), sa_inv(s.begin(),\
     \ s.end()), sa(n), lcp(n, 0){\n        vector<int> comp(sa_inv);\n        sort(comp.begin(),\
@@ -55,14 +53,12 @@ data:
     \      }\n        int h = 0;\n        for(int i = 0; i < n - 1; ++i){\n      \
     \      int j = sa[sa_inv[i] + 1];\n            if(h)\n                --h;\n \
     \           for(; i + h < n && j + h < n && s[i + h] == s[j + h]; ++h);\n    \
-    \        lcp[sa_inv[i]] = h;\n        }\n        for(int i = 0; i < n; ++i)\n\
-    \            printf(\"%2d %2d: %s\\n\", sa[i], lcp[i], s.substr(sa[i]).c_str());\n\
-    \        cout << endl;\n    }\n};\n"
+    \        lcp[sa_inv[i]] = h;\n        }\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: lib/classes/stringutils.cpp
   requiredBy: []
-  timestamp: '2020-09-16 19:44:45+09:00'
+  timestamp: '2020-09-16 19:47:01+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: lib/classes/stringutils.cpp

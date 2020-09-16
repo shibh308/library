@@ -4,8 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/suffixarray_util.test.cpp
-    title: verify/suffixarray_util.test.cpp
+    path: verify/suffixarray_utils.test.cpp
+    title: verify/suffixarray_utils.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/zalgo_utils.test.cpp
+    title: verify/zalgo_utils.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/number_substr_utils.test.cpp
+    title: verify/number_substr_utils.test.cpp
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -31,17 +37,18 @@ data:
     \           pre = p;\n                    }\n                    nex[idx] = m;\n\
     \                }\n            sa_inv = move(nex);\n            m++;\n      \
     \  }\n        for(int i = 0; i < n; ++i){\n            sa[sa_inv[i]] = i;\n  \
-    \      }\n        int h = 0;\n        for(int i = 0; i < n - 1; ++i){\n      \
-    \      int j = sa[sa_inv[i] + 1];\n            if(h)\n                --h;\n \
-    \           for(; i + h < n && j + h < n && s[i + h] == s[j + h]; ++h);\n    \
-    \        lcp[sa_inv[i]] = h;\n        }\n\n        lcp_arr.emplace_back(lcp);\n\
+    \      }\n        int h = 0;\n        for(int i = 0; i < n; ++i){\n          \
+    \  int j = (sa_inv[i] + 1 == n ? n : sa[sa_inv[i] + 1]);\n            if(h)\n\
+    \                --h;\n            for(; i + h < n && j + h < n && s[i + h] ==\
+    \ s[j + h]; ++h);\n            lcp[sa_inv[i]] = h;\n        }\n        lcp_arr.emplace_back(lcp);\n\
     \        for(int j = 0; (1 << j) < n; ++j){\n            lcp_arr.emplace_back(n);\n\
     \            for(int i = 0; i < n; ++i)\n                lcp_arr[j + 1][i] = (i\
     \ + (1 << j) < n ? min(lcp_arr[j][i], lcp_arr[j][i + (1 << j)]) : lcp_arr[j][i]);\n\
     \        }\n        for(int i = 2; i <= n; ++i)\n            tab_len[i] = tab_len[i\
-    \ >> 1]+ 1;\n    }\n    int get_lcp(int l, int r){\n        int siz = r - l;\n\
-    \        return min(lcp_arr[tab_len[siz]][l], lcp_arr[tab_len[siz]][r - (1 <<\
-    \ tab_len[siz])]);\n    }\n};\n\n"
+    \ >> 1]+ 1;\n    }\n    int get_lcp(int l, int r){\n        if(l > r)\n      \
+    \      swap(l, r);\n        else if(l == r){\n            return n - sa[l] - 1;\n\
+    \        }\n        int siz = r - l;\n        return min(lcp_arr[tab_len[siz]][l],\
+    \ lcp_arr[tab_len[siz]][r - (1 << tab_len[siz])]);\n    }\n};\n"
   code: "struct StringUtils{\n    int n;\n    string s;\n    vector<int> sa, sa_inv,\
     \ lcp, tab_len;\n    vector<vector<int>> lcp_arr;\n    StringUtils(string _s)\
     \ : n(_s.size() + 1), s(_s + \"$\"), sa_inv(s.begin(), s.end()), sa(n), lcp(n,\
@@ -62,25 +69,28 @@ data:
     \           pre = p;\n                    }\n                    nex[idx] = m;\n\
     \                }\n            sa_inv = move(nex);\n            m++;\n      \
     \  }\n        for(int i = 0; i < n; ++i){\n            sa[sa_inv[i]] = i;\n  \
-    \      }\n        int h = 0;\n        for(int i = 0; i < n - 1; ++i){\n      \
-    \      int j = sa[sa_inv[i] + 1];\n            if(h)\n                --h;\n \
-    \           for(; i + h < n && j + h < n && s[i + h] == s[j + h]; ++h);\n    \
-    \        lcp[sa_inv[i]] = h;\n        }\n\n        lcp_arr.emplace_back(lcp);\n\
+    \      }\n        int h = 0;\n        for(int i = 0; i < n; ++i){\n          \
+    \  int j = (sa_inv[i] + 1 == n ? n : sa[sa_inv[i] + 1]);\n            if(h)\n\
+    \                --h;\n            for(; i + h < n && j + h < n && s[i + h] ==\
+    \ s[j + h]; ++h);\n            lcp[sa_inv[i]] = h;\n        }\n        lcp_arr.emplace_back(lcp);\n\
     \        for(int j = 0; (1 << j) < n; ++j){\n            lcp_arr.emplace_back(n);\n\
     \            for(int i = 0; i < n; ++i)\n                lcp_arr[j + 1][i] = (i\
     \ + (1 << j) < n ? min(lcp_arr[j][i], lcp_arr[j][i + (1 << j)]) : lcp_arr[j][i]);\n\
     \        }\n        for(int i = 2; i <= n; ++i)\n            tab_len[i] = tab_len[i\
-    \ >> 1]+ 1;\n    }\n    int get_lcp(int l, int r){\n        int siz = r - l;\n\
-    \        return min(lcp_arr[tab_len[siz]][l], lcp_arr[tab_len[siz]][r - (1 <<\
-    \ tab_len[siz])]);\n    }\n};\n\n"
+    \ >> 1]+ 1;\n    }\n    int get_lcp(int l, int r){\n        if(l > r)\n      \
+    \      swap(l, r);\n        else if(l == r){\n            return n - sa[l] - 1;\n\
+    \        }\n        int siz = r - l;\n        return min(lcp_arr[tab_len[siz]][l],\
+    \ lcp_arr[tab_len[siz]][r - (1 << tab_len[siz])]);\n    }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: lib/classes/stringutils.cpp
   requiredBy: []
-  timestamp: '2020-09-16 20:22:56+09:00'
+  timestamp: '2020-09-16 22:48:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/suffixarray_util.test.cpp
+  - verify/suffixarray_utils.test.cpp
+  - verify/zalgo_utils.test.cpp
+  - verify/number_substr_utils.test.cpp
 documentation_of: lib/classes/stringutils.cpp
 layout: document
 redirect_from:

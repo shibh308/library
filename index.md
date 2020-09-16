@@ -286,6 +286,9 @@ data:
       path: verify/multi_str_matching.test.cpp
       title: verify/multi_str_matching.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/number_substr_utils.test.cpp
+      title: verify/number_substr_utils.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/persistentunionfind.test.cpp
       title: verify/persistentunionfind.test.cpp
     - icon: ':heavy_check_mark:'
@@ -358,8 +361,8 @@ data:
       path: verify/string_seatch.test.cpp
       title: verify/string_seatch.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verify/suffixarray_util.test.cpp
-      title: verify/suffixarray_util.test.cpp
+      path: verify/suffixarray_utils.test.cpp
+      title: verify/suffixarray_utils.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/suffixtree.test.cpp
       title: verify/suffixtree.test.cpp
@@ -402,6 +405,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/yfastttrie_itp.test.cpp
       title: verify/yfastttrie_itp.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/zalgo_utils.test.cpp
+      title: verify/zalgo_utils.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/zdd_knapsack.test.cpp
       title: verify/zdd_knapsack.test.cpp

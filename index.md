@@ -126,7 +126,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: lib/classes/splaytree_sset.cpp
       title: lib/classes/splaytree_sset.cpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: lib/classes/stringutils.cpp
       title: lib/classes/stringutils.cpp
     - icon: ':heavy_check_mark:'
@@ -357,6 +357,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/string_seatch.test.cpp
       title: verify/string_seatch.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/suffixarray_util.test.cpp
+      title: verify/suffixarray_util.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/suffixtree.test.cpp
       title: verify/suffixtree.test.cpp

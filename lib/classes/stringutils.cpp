@@ -47,8 +47,5 @@ struct StringUtils{
             for(; i + h < n && j + h < n && s[i + h] == s[j + h]; ++h);
             lcp[sa_inv[i]] = h;
         }
-        for(int i = 0; i < n; ++i)
-            printf("%2d %2d: %s\n", sa[i], lcp[i], s.substr(sa[i]).c_str());
-        cout << endl;
     }
 };

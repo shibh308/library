@@ -1,193 +1,406 @@
 ---
-layout: default
+data:
+  libraryCategories:
+  - name: lib/classes
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/avl.cpp
+      title: lib/classes/avl.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/avl_map.cpp
+      title: lib/classes/avl_map.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/binaryindexedtree.cpp
+      title: lib/classes/binaryindexedtree.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/binarylifting.cpp
+      title: lib/classes/binarylifting.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/bitvector.cpp
+      title: lib/classes/bitvector.cpp
+    - icon: ':warning:'
+      path: lib/classes/compression.cpp
+      title: lib/classes/compression.cpp
+    - icon: ':warning:'
+      path: lib/classes/convexhulltrick.cpp
+      title: lib/classes/convexhulltrick.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/dinic.cpp
+      title: lib/classes/dinic.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/disjointsparsetable.cpp
+      title: lib/classes/disjointsparsetable.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/dynamicbitvector.cpp
+      title: lib/classes/dynamicbitvector.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/dynamiclazysegmenttree.cpp
+      title: lib/classes/dynamiclazysegmenttree.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/dynamicsegmenttree.cpp
+      title: lib/classes/dynamicsegmenttree.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/dynamicwaveletmatrix.cpp
+      title: lib/classes/dynamicwaveletmatrix.cpp
+    - icon: ':warning:'
+      path: lib/classes/eertree.cpp
+      title: lib/classes/eertree.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/eulertour.cpp
+      title: lib/classes/eulertour.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/hashmap.cpp
+      title: lib/classes/hashmap.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/heavylightdecomposition.cpp
+      title: lib/classes/heavylightdecomposition.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/lazysegtree.cpp
+      title: lib/classes/lazysegtree.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/lazyskiplist.cpp
+      title: lib/classes/lazyskiplist.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/lineartimesparsetable.cpp
+      title: lib/classes/lineartimesparsetable.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/lowlink.cpp
+      title: lib/classes/lowlink.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/matrix.cpp
+      title: lib/classes/matrix.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/memorypool.cpp
+      title: lib/classes/memorypool.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/mo.cpp
+      title: lib/classes/mo.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/modint.cpp
+      title: lib/classes/modint.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/persistentdynamiclazysegmenttree.cpp
+      title: lib/classes/persistentdynamiclazysegmenttree.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/persistentunionfind.cpp
+      title: lib/classes/persistentunionfind.cpp
+    - icon: ':warning:'
+      path: lib/classes/primaldual.cpp
+      title: lib/classes/primaldual.cpp
+    - icon: ':warning:'
+      path: lib/classes/rectanglesum.cpp
+      title: lib/classes/rectanglesum.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/redblacktree.cpp
+      title: lib/classes/redblacktree.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/redblacktree_lazy.cpp
+      title: lib/classes/redblacktree_lazy.cpp
+    - icon: ':warning:'
+      path: lib/classes/redblacktree_persistent.cpp
+      title: lib/classes/redblacktree_persistent.cpp
+    - icon: ':warning:'
+      path: lib/classes/redblacktree_persistent_lazy.cpp
+      title: lib/classes/redblacktree_persistent_lazy.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/redblacktree_sset.cpp
+      title: lib/classes/redblacktree_sset.cpp
+    - icon: ':warning:'
+      path: lib/classes/rollinghash.cpp
+      title: lib/classes/rollinghash.cpp
+    - icon: ':warning:'
+      path: lib/classes/segmentset.cpp
+      title: lib/classes/segmentset.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/segtree.cpp
+      title: lib/classes/segtree.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/skiplist.cpp
+      title: lib/classes/skiplist.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/skiplist_sset.cpp
+      title: lib/classes/skiplist_sset.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/sparsetable.cpp
+      title: lib/classes/sparsetable.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/splaytree_sset.cpp
+      title: lib/classes/splaytree_sset.cpp
+    - icon: ':warning:'
+      path: lib/classes/stringutils.cpp
+      title: lib/classes/stringutils.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/substrmatching.cpp
+      title: lib/classes/substrmatching.cpp
+    - icon: ':warning:'
+      path: lib/classes/succinctbitvector.cpp
+      title: lib/classes/succinctbitvector.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/suffixtree.cpp
+      title: lib/classes/suffixtree.cpp
+    - icon: ':warning:'
+      path: lib/classes/treap.cpp
+      title: lib/classes/treap.cpp
+    - icon: ':warning:'
+      path: lib/classes/trie.cpp
+      title: lib/classes/trie.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/twothreetree.cpp
+      title: lib/classes/twothreetree.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/unionfind.cpp
+      title: lib/classes/unionfind.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/vanemdeboastree.cpp
+      title: lib/classes/vanemdeboastree.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/vanemdeboastree2.cpp
+      title: lib/classes/vanemdeboastree2.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/waveletmatrix.cpp
+      title: lib/classes/waveletmatrix.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/xfasttrie.cpp
+      title: lib/classes/xfasttrie.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/xfasttrie_yft.cpp
+      title: lib/classes/xfasttrie_yft.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/yfasttrie.cpp
+      title: lib/classes/yfasttrie.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/yfasttrie2.cpp
+      title: lib/classes/yfasttrie2.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/zdd.cpp
+      title: lib/classes/zdd.cpp
+  - name: lib/functions
+    pages:
+    - icon: ':warning:'
+      path: lib/functions/calc_fact.cpp
+      title: lib/functions/calc_fact.cpp
+    - icon: ':warning:'
+      path: lib/functions/divisor.cpp
+      title: lib/functions/divisor.cpp
+    - icon: ':warning:'
+      path: lib/functions/eratisthenes.cpp
+      title: lib/functions/eratisthenes.cpp
+    - icon: ':warning:'
+      path: lib/functions/factoring.cpp
+      title: lib/functions/factoring.cpp
+    - icon: ':warning:'
+      path: lib/functions/gcd.cpp
+      title: lib/functions/gcd.cpp
+    - icon: ':warning:'
+      path: lib/functions/lcm.cpp
+      title: lib/functions/lcm.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/functions/mo_query.cpp
+      title: lib/functions/mo_query.cpp
+    - icon: ':warning:'
+      path: lib/functions/modpow.cpp
+      title: lib/functions/modpow.cpp
+    - icon: ':warning:'
+      path: lib/functions/ncr.cpp
+      title: lib/functions/ncr.cpp
+    - icon: ':warning:'
+      path: lib/functions/nhr.cpp
+      title: lib/functions/nhr.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/functions/rerooting.cpp
+      title: lib/functions/rerooting.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/functions/scc.cpp
+      title: lib/functions/scc.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/functions/scc_dag.cpp
+      title: lib/functions/scc_dag.cpp
+    - icon: ':warning:'
+      path: lib/functions/simple_graph.cpp
+      title: lib/functions/simple_graph.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/functions/twoedgeconnectedcomponents_tree.cpp
+      title: lib/functions/twoedgeconnectedcomponents_tree.cpp
+  - name: lib
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: lib/geometry.cpp
+      title: lib/geometry.cpp
+  - name: utils
+    pages:
+    - icon: ':warning:'
+      path: utils/include_expand.py
+      title: utils/include_expand.py
+    - icon: ':warning:'
+      path: utils/make_snippets.py
+      title: utils/make_snippets.py
+  verificationCategories:
+  - name: verify
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/2-sat.test.cpp
+      title: verify/2-sat.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/bipartitematching.test.cpp
+      title: verify/bipartitematching.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/dynamicwaveletmatrix_kthmin.test.cpp
+      title: verify/dynamicwaveletmatrix_kthmin.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/dynamicwaveletmatrix_rmq.test.cpp
+      title: verify/dynamicwaveletmatrix_rmq.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/eulertour.test.cpp
+      title: verify/eulertour.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/hashmap_dict.test.cpp
+      title: verify/hashmap_dict.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/hashmap_itp.test.cpp
+      title: verify/hashmap_itp.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/hld_composite.test.cpp
+      title: verify/hld_composite.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/lca_binarylifting.test.cpp
+      title: verify/lca_binarylifting.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/lca_hld.test.cpp
+      title: verify/lca_hld.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/lowlink.test.cpp
+      title: verify/lowlink.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/lowlink_tree.test.cpp
+      title: verify/lowlink_tree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/matrix.test.cpp
+      title: verify/matrix.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/mo.test.cpp
+      title: verify/mo.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/mo_query.test.cpp
+      title: verify/mo_query.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/multi_str_matching.test.cpp
+      title: verify/multi_str_matching.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/persistentunionfind.test.cpp
+      title: verify/persistentunionfind.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/redblacktree_lazy.test.cpp
+      title: verify/redblacktree_lazy.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/redblacktree_rsq.test.cpp
+      title: verify/redblacktree_rsq.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/redblacktree_sset.test.cpp
+      title: verify/redblacktree_sset.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/rerooting_diameter.test.cpp
+      title: verify/rerooting_diameter.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/rmq_raq.test.cpp
+      title: verify/rmq_raq.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/rmq_raq_dynamic.test.cpp
+      title: verify/rmq_raq_dynamic.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/rmq_raq_persistent.test.cpp
+      title: verify/rmq_raq_persistent.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/rsq_avl.test.cpp
+      title: verify/rsq_avl.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/rsq_avl_erase.test.cpp
+      title: verify/rsq_avl_erase.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/rsq_bit.test.cpp
+      title: verify/rsq_bit.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/rsq_dynamic.test.cpp
+      title: verify/rsq_dynamic.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/scc_dag.test.cpp
+      title: verify/scc_dag.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/segtree_composite.test.cpp
+      title: verify/segtree_composite.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/skiplist_composite.test.cpp
+      title: verify/skiplist_composite.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/skiplist_rmq_raq.test.cpp
+      title: verify/skiplist_rmq_raq.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/skiplist_rsq_raq.test.cpp
+      title: verify/skiplist_rsq_raq.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/skiplist_sset_dict.test.cpp
+      title: verify/skiplist_sset_dict.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/skiplist_sset_itp.test.cpp
+      title: verify/skiplist_sset_itp.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/splay_sset_dict.test.cpp
+      title: verify/splay_sset_dict.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/splay_sset_itp.test.cpp
+      title: verify/splay_sset_itp.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/static_rmq.test.cpp
+      title: verify/static_rmq.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/static_rmq_wm.test.cpp
+      title: verify/static_rmq_wm.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/string_seatch.test.cpp
+      title: verify/string_seatch.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/suffixtree.test.cpp
+      title: verify/suffixtree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/tangent_lines.test.cpp
+      title: verify/tangent_lines.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/twothreetree.test.cpp
+      title: verify/twothreetree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/unionfind.test.cpp
+      title: verify/unionfind.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/veb2_set.test.cpp
+      title: verify/veb2_set.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/veb_set.test.cpp
+      title: verify/veb_set.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/vertex_and_path_sum.test.cpp
+      title: verify/vertex_and_path_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/vertex_and_subtree_sum.test.cpp
+      title: verify/vertex_and_subtree_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/waveletmatrix_kthmin.test.cpp
+      title: verify/waveletmatrix_kthmin.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/waveletmatrix_lowerbound.test.cpp
+      title: verify/waveletmatrix_lowerbound.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/waveletmatrix_rangefreq.test.cpp
+      title: verify/waveletmatrix_rangefreq.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/xfastttrie_itp.test.cpp
+      title: verify/xfastttrie_itp.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/yfastttrie2_itp.test.cpp
+      title: verify/yfastttrie2_itp.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/yfastttrie_itp.test.cpp
+      title: verify/yfastttrie_itp.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/zdd_knapsack.test.cpp
+      title: verify/zdd_knapsack.test.cpp
+layout: toppage
 ---
-
-<!-- mathjax config similar to math.stackexchange -->
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    TeX: { equationNumbers: { autoNumber: "AMS" }},
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      processEscapes: true
-    },
-    "HTML-CSS": { matchFontHeight: false },
-    displayAlign: "left",
-    displayIndent: "2em"
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="assets/css/copy-button.css" />
-
-
-# {{ site.title }}
-
-[![Actions Status]({{ site.github.repository_url }}/workflows/verify/badge.svg)]({{ site.github.repository_url }}/actions)
-<a href="{{ site.github.repository_url }}"><img src="https://img.shields.io/github/last-commit/{{ site.github.owner_name }}/{{ site.github.repository_name }}" /></a>
-
-{% if site.github.project_tagline %}{{ site.github.project_tagline }}{% else %}This documentation is automatically generated by <a href="https://github.com/online-judge-tools/verification-helper">online-judge-tools/verification-helper</a>.{% endif %}
-
-## Library Files
-
-<div id="e8acc63b1e238f3255c900eed37254b8"></div>
-
-### lib
-
-* :heavy_check_mark: <a href="library/lib/geometry.cpp.html">lib/geometry.cpp</a>
-
-
-<div id="1a2816715ae26fbd9c4a8d3f916105a3"></div>
-
-### lib/classes
-
-* :heavy_check_mark: <a href="library/lib/classes/avl.cpp.html">lib/classes/avl.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/avl_map.cpp.html">lib/classes/avl_map.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/binaryindexedtree.cpp.html">lib/classes/binaryindexedtree.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/binarylifting.cpp.html">lib/classes/binarylifting.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/bitvector.cpp.html">lib/classes/bitvector.cpp</a>
-* :warning: <a href="library/lib/classes/compression.cpp.html">lib/classes/compression.cpp</a>
-* :warning: <a href="library/lib/classes/convexhulltrick.cpp.html">lib/classes/convexhulltrick.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/dinic.cpp.html">lib/classes/dinic.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/disjointsparsetable.cpp.html">lib/classes/disjointsparsetable.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/dynamicbitvector.cpp.html">lib/classes/dynamicbitvector.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/dynamiclazysegmenttree.cpp.html">lib/classes/dynamiclazysegmenttree.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/dynamicsegmenttree.cpp.html">lib/classes/dynamicsegmenttree.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/dynamicwaveletmatrix.cpp.html">lib/classes/dynamicwaveletmatrix.cpp</a>
-* :warning: <a href="library/lib/classes/eertree.cpp.html">lib/classes/eertree.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/eulertour.cpp.html">lib/classes/eulertour.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/hashmap.cpp.html">lib/classes/hashmap.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/heavylightdecomposition.cpp.html">lib/classes/heavylightdecomposition.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/lazysegtree.cpp.html">lib/classes/lazysegtree.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/lazyskiplist.cpp.html">lib/classes/lazyskiplist.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/lineartimesparsetable.cpp.html">lib/classes/lineartimesparsetable.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/lowlink.cpp.html">lib/classes/lowlink.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/matrix.cpp.html">lib/classes/matrix.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/memorypool.cpp.html">lib/classes/memorypool.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/mo.cpp.html">lib/classes/mo.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/modint.cpp.html">lib/classes/modint.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/persistentdynamiclazysegmenttree.cpp.html">lib/classes/persistentdynamiclazysegmenttree.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/persistentunionfind.cpp.html">lib/classes/persistentunionfind.cpp</a>
-* :warning: <a href="library/lib/classes/primaldual.cpp.html">lib/classes/primaldual.cpp</a>
-* :warning: <a href="library/lib/classes/rectanglesum.cpp.html">lib/classes/rectanglesum.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/redblacktree.cpp.html">lib/classes/redblacktree.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/redblacktree_lazy.cpp.html">lib/classes/redblacktree_lazy.cpp</a>
-* :warning: <a href="library/lib/classes/redblacktree_persistent.cpp.html">lib/classes/redblacktree_persistent.cpp</a>
-* :warning: <a href="library/lib/classes/redblacktree_persistent_lazy.cpp.html">lib/classes/redblacktree_persistent_lazy.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/redblacktree_sset.cpp.html">lib/classes/redblacktree_sset.cpp</a>
-* :warning: <a href="library/lib/classes/rollinghash.cpp.html">lib/classes/rollinghash.cpp</a>
-* :warning: <a href="library/lib/classes/segmentset.cpp.html">lib/classes/segmentset.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/segtree.cpp.html">lib/classes/segtree.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/skiplist.cpp.html">lib/classes/skiplist.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/skiplist_sset.cpp.html">lib/classes/skiplist_sset.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/sparsetable.cpp.html">lib/classes/sparsetable.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/splaytree_sset.cpp.html">lib/classes/splaytree_sset.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/substrmatching.cpp.html">lib/classes/substrmatching.cpp</a>
-* :warning: <a href="library/lib/classes/succinctbitvector.cpp.html">lib/classes/succinctbitvector.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/suffixtree.cpp.html">lib/classes/suffixtree.cpp</a>
-* :warning: <a href="library/lib/classes/treap.cpp.html">lib/classes/treap.cpp</a>
-* :warning: <a href="library/lib/classes/trie.cpp.html">lib/classes/trie.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/twothreetree.cpp.html">lib/classes/twothreetree.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/unionfind.cpp.html">lib/classes/unionfind.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/vanemdeboastree.cpp.html">lib/classes/vanemdeboastree.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/vanemdeboastree2.cpp.html">lib/classes/vanemdeboastree2.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/waveletmatrix.cpp.html">lib/classes/waveletmatrix.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/xfasttrie.cpp.html">lib/classes/xfasttrie.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/xfasttrie_yft.cpp.html">lib/classes/xfasttrie_yft.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/yfasttrie.cpp.html">lib/classes/yfasttrie.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/yfasttrie2.cpp.html">lib/classes/yfasttrie2.cpp</a>
-* :heavy_check_mark: <a href="library/lib/classes/zdd.cpp.html">lib/classes/zdd.cpp</a>
-
-
-<div id="abc4d0f7246596dc1cbcc6b77896a2fc"></div>
-
-### lib/functions
-
-* :warning: <a href="library/lib/functions/calc_fact.cpp.html">lib/functions/calc_fact.cpp</a>
-* :warning: <a href="library/lib/functions/divisor.cpp.html">lib/functions/divisor.cpp</a>
-* :warning: <a href="library/lib/functions/eratisthenes.cpp.html">lib/functions/eratisthenes.cpp</a>
-* :warning: <a href="library/lib/functions/factoring.cpp.html">lib/functions/factoring.cpp</a>
-* :warning: <a href="library/lib/functions/gcd.cpp.html">lib/functions/gcd.cpp</a>
-* :warning: <a href="library/lib/functions/lcm.cpp.html">lib/functions/lcm.cpp</a>
-* :heavy_check_mark: <a href="library/lib/functions/mo_query.cpp.html">lib/functions/mo_query.cpp</a>
-* :warning: <a href="library/lib/functions/modpow.cpp.html">lib/functions/modpow.cpp</a>
-* :warning: <a href="library/lib/functions/ncr.cpp.html">lib/functions/ncr.cpp</a>
-* :warning: <a href="library/lib/functions/nhr.cpp.html">lib/functions/nhr.cpp</a>
-* :heavy_check_mark: <a href="library/lib/functions/rerooting.cpp.html">lib/functions/rerooting.cpp</a>
-* :heavy_check_mark: <a href="library/lib/functions/scc.cpp.html">lib/functions/scc.cpp</a>
-* :heavy_check_mark: <a href="library/lib/functions/scc_dag.cpp.html">lib/functions/scc_dag.cpp</a>
-* :warning: <a href="library/lib/functions/simple_graph.cpp.html">lib/functions/simple_graph.cpp</a>
-* :heavy_check_mark: <a href="library/lib/functions/twoedgeconnectedcomponents_tree.cpp.html">lib/functions/twoedgeconnectedcomponents_tree.cpp</a>
-
-
-<div id="2b3583e6e17721c54496bd04e57a0c15"></div>
-
-### utils
-
-* :warning: <a href="library/utils/include_expand.py.html">utils/include_expand.py</a>
-* :warning: <a href="library/utils/make_snippets.py.html">utils/make_snippets.py</a>
-
-
-## Verify Files
-
-* :heavy_check_mark: <a href="verify/verify/2-sat.test.cpp.html">verify/2-sat.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/bipartitematching.test.cpp.html">verify/bipartitematching.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/dynamicwaveletmatrix_kthmin.test.cpp.html">verify/dynamicwaveletmatrix_kthmin.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/dynamicwaveletmatrix_rmq.test.cpp.html">verify/dynamicwaveletmatrix_rmq.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/eulertour.test.cpp.html">verify/eulertour.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/hashmap_dict.test.cpp.html">verify/hashmap_dict.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/hashmap_itp.test.cpp.html">verify/hashmap_itp.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/hld_composite.test.cpp.html">verify/hld_composite.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/lca_binarylifting.test.cpp.html">verify/lca_binarylifting.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/lca_hld.test.cpp.html">verify/lca_hld.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/lowlink.test.cpp.html">verify/lowlink.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/lowlink_tree.test.cpp.html">verify/lowlink_tree.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/matrix.test.cpp.html">verify/matrix.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/mo.test.cpp.html">verify/mo.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/mo_query.test.cpp.html">verify/mo_query.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/multi_str_matching.test.cpp.html">verify/multi_str_matching.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/persistentunionfind.test.cpp.html">verify/persistentunionfind.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/redblacktree_lazy.test.cpp.html">verify/redblacktree_lazy.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/redblacktree_rsq.test.cpp.html">verify/redblacktree_rsq.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/redblacktree_sset.test.cpp.html">verify/redblacktree_sset.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/rerooting_diameter.test.cpp.html">verify/rerooting_diameter.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/rmq_raq.test.cpp.html">verify/rmq_raq.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/rmq_raq_dynamic.test.cpp.html">verify/rmq_raq_dynamic.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/rmq_raq_persistent.test.cpp.html">verify/rmq_raq_persistent.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/rsq_avl.test.cpp.html">verify/rsq_avl.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/rsq_avl_erase.test.cpp.html">verify/rsq_avl_erase.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/rsq_bit.test.cpp.html">verify/rsq_bit.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/rsq_dynamic.test.cpp.html">verify/rsq_dynamic.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/scc_dag.test.cpp.html">verify/scc_dag.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/segtree_composite.test.cpp.html">verify/segtree_composite.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/skiplist_composite.test.cpp.html">verify/skiplist_composite.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/skiplist_rmq_raq.test.cpp.html">verify/skiplist_rmq_raq.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/skiplist_rsq_raq.test.cpp.html">verify/skiplist_rsq_raq.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/skiplist_sset_dict.test.cpp.html">verify/skiplist_sset_dict.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/skiplist_sset_itp.test.cpp.html">verify/skiplist_sset_itp.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/splay_sset_dict.test.cpp.html">verify/splay_sset_dict.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/splay_sset_itp.test.cpp.html">verify/splay_sset_itp.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/static_rmq.test.cpp.html">verify/static_rmq.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/static_rmq_wm.test.cpp.html">verify/static_rmq_wm.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/string_seatch.test.cpp.html">verify/string_seatch.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/suffixtree.test.cpp.html">verify/suffixtree.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/tangent_lines.test.cpp.html">verify/tangent_lines.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/twothreetree.test.cpp.html">verify/twothreetree.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/unionfind.test.cpp.html">verify/unionfind.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/veb2_set.test.cpp.html">verify/veb2_set.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/veb_set.test.cpp.html">verify/veb_set.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/vertex_and_path_sum.test.cpp.html">verify/vertex_and_path_sum.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/vertex_and_subtree_sum.test.cpp.html">verify/vertex_and_subtree_sum.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/waveletmatrix_kthmin.test.cpp.html">verify/waveletmatrix_kthmin.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/waveletmatrix_lowerbound.test.cpp.html">verify/waveletmatrix_lowerbound.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/waveletmatrix_rangefreq.test.cpp.html">verify/waveletmatrix_rangefreq.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/xfastttrie_itp.test.cpp.html">verify/xfastttrie_itp.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/yfastttrie2_itp.test.cpp.html">verify/yfastttrie2_itp.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/yfastttrie_itp.test.cpp.html">verify/yfastttrie_itp.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/zdd_knapsack.test.cpp.html">verify/zdd_knapsack.test.cpp</a>
-
-

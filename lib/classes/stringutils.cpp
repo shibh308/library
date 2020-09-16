@@ -1,10 +1,13 @@
 struct StringUtils{
     int n;
-    string s;
+    vector<int> s;
     vector<int> sa, sa_inv, lcp, tab_len;
     vector<vector<int>> lcp_arr;
-    StringUtils(string _s) : n(_s.size() + 1), s(_s + "$"), sa_inv(s.begin(), s.end()), sa(n), lcp(n, 0), tab_len(n + 1, 0){
-        vector<int> comp(sa_inv);
+    StringUtils(string _s) : StringUtils(vector<int>(_s.begin(), _s.end())){}
+    StringUtils(vector<int> _s) : n(_s.size() + 1), s(_s), sa(n), lcp(n, 0), tab_len(n + 1, 0){
+        s.emplace_back(numeric_limits<int>::min());
+        sa_inv = s;
+        vector<int> comp(s);
         sort(comp.begin(), comp.end());
         comp.erase(unique(comp.begin(), comp.end()), comp.end());
         for(int i = 0; i < n; ++i)
@@ -56,7 +59,18 @@ struct StringUtils{
         for(int i = 2; i <= n; ++i)
             tab_len[i] = tab_len[i >> 1]+ 1;
     }
+    // [l1, r1) < [l2, r2)
+    bool le(int l1, int r1, int l2, int r2){
+        int len1 = r1 - l1;
+        int len2 = r2 - l2;
+        if(get_lcp(l1, l2) >= min(len1, len2))
+            return len1 < len2;
+        else
+            return sa_inv[l1] < sa_inv[l2];
+    }
     int get_lcp(int l, int r){
+        l = sa_inv[l];
+        r = sa_inv[r];
         if(l > r)
             swap(l, r);
         else if(l == r){
@@ -66,3 +80,4 @@ struct StringUtils{
         return min(lcp_arr[tab_len[siz]][l], lcp_arr[tab_len[siz]][r - (1 << tab_len[siz])]);
     }
 };
+

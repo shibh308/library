@@ -13,7 +13,7 @@ signed main(){
     cin >> s;
     StringUtils su(s);
     for(int i = 0; i < s.size(); ++i){
-        cout << su.get_lcp(su.sa_inv[0], su.sa_inv[i]) << " \n"[i == s.size() - 1];
+        cout << su.get_lcp(0, i) << " \n"[i == s.size() - 1];
     }
 }
 

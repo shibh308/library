@@ -57,7 +57,7 @@ struct StringUtils{
                 lcp_arr[j + 1][i] = (i + (1 << j) < n ? min(lcp_arr[j][i], lcp_arr[j][i + (1 << j)]) : lcp_arr[j][i]);
         }
         for(int i = 2; i <= n; ++i)
-            tab_len[i] = tab_len[i >> 1]+ 1;
+            tab_len[i] = tab_len[i >> 1] + 1;
     }
     // [l1, r1) < [l2, r2)
     bool le(int l1, int r1, int l2, int r2){

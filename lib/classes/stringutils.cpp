@@ -40,14 +40,13 @@ struct StringUtils{
             sa[sa_inv[i]] = i;
         }
         int h = 0;
-        for(int i = 0; i < n - 1; ++i){
-            int j = sa[sa_inv[i] + 1];
+        for(int i = 0; i < n; ++i){
+            int j = (sa_inv[i] + 1 == n ? n : sa[sa_inv[i] + 1]);
             if(h)
                 --h;
             for(; i + h < n && j + h < n && s[i + h] == s[j + h]; ++h);
             lcp[sa_inv[i]] = h;
         }
-
         lcp_arr.emplace_back(lcp);
         for(int j = 0; (1 << j) < n; ++j){
             lcp_arr.emplace_back(n);
@@ -58,8 +57,12 @@ struct StringUtils{
             tab_len[i] = tab_len[i >> 1]+ 1;
     }
     int get_lcp(int l, int r){
+        if(l > r)
+            swap(l, r);
+        else if(l == r){
+            return n - sa[l] - 1;
+        }
         int siz = r - l;
         return min(lcp_arr[tab_len[siz]][l], lcp_arr[tab_len[siz]][r - (1 << tab_len[siz])]);
     }
 };
-

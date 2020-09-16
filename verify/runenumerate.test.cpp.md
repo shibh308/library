@@ -4,17 +4,20 @@ data:
   - icon: ':heavy_check_mark:'
     path: lib/classes/stringutils.cpp
     title: lib/classes/stringutils.cpp
+  - icon: ':heavy_check_mark:'
+    path: lib/functions/run.cpp
+    title: lib/functions/run.cpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/zalgorithm
+    PROBLEM: https://judge.yosupo.jp/problem/runenumerate
     links:
-    - https://judge.yosupo.jp/problem/zalgorithm
-  bundledCode: "#line 1 \"verify/zalgo_utils.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\
-    \n\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\n#line 1 \"lib/classes/stringutils.cpp\"\
+    - https://judge.yosupo.jp/problem/runenumerate
+  bundledCode: "#line 1 \"verify/runenumerate.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/runenumerate\"\
+    \n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\n#line 1 \"lib/classes/stringutils.cpp\"\
     \nstruct StringUtils{\n    int n;\n    vector<int> s;\n    vector<int> sa, sa_inv,\
     \ lcp, tab_len;\n    vector<vector<int>> lcp_arr;\n    StringUtils(string _s)\
     \ : StringUtils(vector<int>(_s.begin(), _s.end())){}\n    StringUtils(vector<int>\
@@ -51,27 +54,53 @@ data:
     \ l, int r){\n        l = sa_inv[l];\n        r = sa_inv[r];\n        if(l > r)\n\
     \            swap(l, r);\n        else if(l == r){\n            return n - sa[l]\
     \ - 1;\n        }\n        int siz = r - l;\n        return min(lcp_arr[tab_len[siz]][l],\
-    \ lcp_arr[tab_len[siz]][r - (1 << tab_len[siz])]);\n    }\n};\n\n#line 9 \"verify/zalgo_utils.test.cpp\"\
-    \n\n\nsigned main(){\n    string s;\n    cin >> s;\n    StringUtils su(s);\n \
-    \   for(int i = 0; i < s.size(); ++i){\n        cout << su.get_lcp(0, i) << \"\
-    \ \\n\"[i == s.size() - 1];\n    }\n}\n\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\n\n#include\
+    \ lcp_arr[tab_len[siz]][r - (1 << tab_len[siz])]);\n    }\n};\n\n#line 1 \"lib/functions/run.cpp\"\
+    \nstruct RunInfo{\n    // (t, l, r) \u306E\u5F62\u3067\u8FD4\u3059 t\u306F\u6700\
+    \u5C0F\u5468\u671F\u30670-indexed\u534A\u958B\u533A\u9593\n    set<tuple<int,int,int>>\
+    \ run;\n    // \u6700\u5927\u306ELyndon word\u3092\u6301\u3064 [2][n]\u30671\u5074\
+    \u304C\u53CD\u8EE2\n    vector<vector<int>> l;\n    // Lyndon Factorization (\u958B\
+    \u59CB\u4F4D\u7F6E\u5217\u6319)\n    vector<int> lyndon_fac;\n};\n\nRunInfo getRunInfo(string\
+    \ s){\n    vector<StringUtils> su;\n    int n = s.size();\n    s += \"$\" + string(s.rbegin(),\
+    \ s.rend());\n    vector<int> v(s.begin(), s.end());\n    su.emplace_back(v);\n\
+    \    for(int i = 0; i < s.size(); ++i)\n        v[i] *= -1;\n    su.emplace_back(v);\n\
+    \    vector<vector<int>> l(2, vector<int>(n, 0));\n    for(int fl = 0; fl < 2;\
+    \ ++fl){\n        stack<pair<int,int>> st;\n        for(int i = n - 1; i >= 0;\
+    \ --i){\n            int j = i + 1;\n            while(!st.empty()){\n       \
+    \         int x, y;\n                tie(x, y) = st.top();\n                if(!su[fl].le(i,\
+    \ j, x, y))\n                    break;\n                j = y;\n            \
+    \    st.pop();\n            }\n            l[fl][i] = j;\n            st.emplace(i,\
+    \ j);\n        }\n    }\n    set<tuple<int,int,int>> run;\n    for(int fl = 0;\
+    \ fl < 2; ++fl){\n        for(int i = 0; i < n; ++i){\n            int j = l[fl][i];\n\
+    \            int t = j - i;\n            int l_lcp = su[fl].get_lcp(s.size() -\
+    \ j, s.size() - i);\n            int r_lcp = su[fl].get_lcp(i, j);\n         \
+    \   int ii = i - l_lcp;\n            int jj = j + r_lcp;\n            if(jj -\
+    \ ii >= 2 * t)\n                run.emplace(t, ii, jj);\n        }\n    }\n  \
+    \  vector<int> dec;\n    for(int i = 0; i < n; i = l[0][i])\n        dec.emplace_back(i);\n\
+    \    return RunInfo{run, l, dec};\n}\n#line 9 \"verify/runenumerate.test.cpp\"\
+    \n\n\nsigned main(){\n    string s;\n    cin >> s;\n    set<tuple<int,int,int>>\
+    \ v = getRunInfo(s).run;\n    cout << v.size() << endl;\n    for(auto x : v){\n\
+    \        int t, l, r;\n        tie(t, l, r) = x;\n        cout << t << \" \" <<\
+    \ l << \" \" << r << endl;\n    }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/runenumerate\"\n#include\
     \ <bits/stdc++.h>\n\nusing namespace std;\n\n\n#include \"../lib/classes/stringutils.cpp\"\
-    \n\n\nsigned main(){\n    string s;\n    cin >> s;\n    StringUtils su(s);\n \
-    \   for(int i = 0; i < s.size(); ++i){\n        cout << su.get_lcp(0, i) << \"\
-    \ \\n\"[i == s.size() - 1];\n    }\n}\n\n"
+    \n#include \"../lib/functions/run.cpp\"\n\n\nsigned main(){\n    string s;\n \
+    \   cin >> s;\n    set<tuple<int,int,int>> v = getRunInfo(s).run;\n    cout <<\
+    \ v.size() << endl;\n    for(auto x : v){\n        int t, l, r;\n        tie(t,\
+    \ l, r) = x;\n        cout << t << \" \" << l << \" \" << r << endl;\n    }\n\
+    }\n"
   dependsOn:
   - lib/classes/stringutils.cpp
+  - lib/functions/run.cpp
   isVerificationFile: true
-  path: verify/zalgo_utils.test.cpp
+  path: verify/runenumerate.test.cpp
   requiredBy: []
   timestamp: '2020-09-17 02:54:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/zalgo_utils.test.cpp
+documentation_of: verify/runenumerate.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/zalgo_utils.test.cpp
-- /verify/verify/zalgo_utils.test.cpp.html
-title: verify/zalgo_utils.test.cpp
+- /verify/verify/runenumerate.test.cpp
+- /verify/verify/runenumerate.test.cpp.html
+title: verify/runenumerate.test.cpp
 ---

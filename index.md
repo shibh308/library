@@ -210,6 +210,9 @@ data:
       path: lib/functions/rerooting.cpp
       title: lib/functions/rerooting.cpp
     - icon: ':heavy_check_mark:'
+      path: lib/functions/run.cpp
+      title: lib/functions/run.cpp
+    - icon: ':heavy_check_mark:'
       path: lib/functions/scc.cpp
       title: lib/functions/scc.cpp
     - icon: ':heavy_check_mark:'
@@ -324,6 +327,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/rsq_dynamic.test.cpp
       title: verify/rsq_dynamic.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/runenumerate.test.cpp
+      title: verify/runenumerate.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/scc_dag.test.cpp
       title: verify/scc_dag.test.cpp

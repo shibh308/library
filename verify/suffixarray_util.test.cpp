@@ -4,7 +4,7 @@
 using namespace std;
 using i64 = long;
 
-#include "../lib/functions/stringutils.cpp"
+#include "../lib/classes/stringutils.cpp"
 
 
 signed main() {

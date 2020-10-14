@@ -38,6 +38,11 @@ struct Segtree{
         }
     }
 
+    void update(int x, T val){
+        x += n;
+        elm[x + n] = f(elm[x + n], val);
+    }
+
     T get(int x){
         x += n;
         T val = elm[x];

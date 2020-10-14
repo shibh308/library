@@ -4,21 +4,20 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/hld_composite.test.cpp
+    title: verify/hld_composite.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/lca_hld.test.cpp
     title: verify/lca_hld.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/vertex_and_path_sum.test.cpp
     title: verify/vertex_and_path_sum.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/hld_composite.test.cpp
-    title: verify/hld_composite.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/vertex_and_subtree_sum.test.cpp
     title: verify/vertex_and_subtree_sum.test.cpp
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/heavylightdecomposition.cpp\"\nstruct HeavyLightDecomposition{\n\
     \    int n;\n    vector<int> size, par, in, in_rev, heavy_root, depth, heavy_depth,\
@@ -122,10 +121,10 @@ data:
   timestamp: '2020-03-14 13:31:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/lca_hld.test.cpp
-  - verify/vertex_and_path_sum.test.cpp
-  - verify/hld_composite.test.cpp
   - verify/vertex_and_subtree_sum.test.cpp
+  - verify/lca_hld.test.cpp
+  - verify/hld_composite.test.cpp
+  - verify/vertex_and_path_sum.test.cpp
 documentation_of: lib/classes/heavylightdecomposition.cpp
 layout: document
 redirect_from:

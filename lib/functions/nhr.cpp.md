@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/functions/nhr.cpp\"\nauto nhr = [ncr](int n, int r){\n\
     \treturn ncr(n + r - 1, r);\n};\n\n"

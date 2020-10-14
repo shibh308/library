@@ -4,15 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/mo_query.test.cpp
-    title: verify/mo_query.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/mo.test.cpp
     title: verify/mo.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/mo_query.test.cpp
+    title: verify/mo_query.test.cpp
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/mo.cpp\"\nstruct Mo{\n    int l, r;\n    function<void(int)>\
     \ left_add, left_erase, right_add, right_erase;\n    Mo(function<void(int)> left_add,\

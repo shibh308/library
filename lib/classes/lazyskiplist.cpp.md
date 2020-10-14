@@ -4,15 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/skiplist_rsq_raq.test.cpp
-    title: verify/skiplist_rsq_raq.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/skiplist_rmq_raq.test.cpp
     title: verify/skiplist_rmq_raq.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/skiplist_rsq_raq.test.cpp
+    title: verify/skiplist_rsq_raq.test.cpp
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/lazyskiplist.cpp\"\ntemplate <typename T, typename\
     \ U>\nstruct SkipList{\n\n    static uint32_t rnd(){\n        static uint32_t\
@@ -300,8 +299,8 @@ data:
   timestamp: '2020-04-06 15:54:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/skiplist_rsq_raq.test.cpp
   - verify/skiplist_rmq_raq.test.cpp
+  - verify/skiplist_rsq_raq.test.cpp
 documentation_of: lib/classes/lazyskiplist.cpp
 layout: document
 redirect_from:

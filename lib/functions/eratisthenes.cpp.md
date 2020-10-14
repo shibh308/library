@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/functions/eratisthenes.cpp\"\nauto eratosthenes = []{\n\
     \tconstexpr int N = 2e6;\n\tbitset<N> not_prime(3);\n\tfor(int i = 2; i < N; ++i)\n\

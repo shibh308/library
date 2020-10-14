@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/dynamicsegmenttree.cpp\"\ntemplate <typename\
     \ T>\nstruct Segtree{\n\n    struct SegNode;\n\n    struct SegNode{\n        T\

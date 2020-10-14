@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/functions/scc_dag.cpp\"\nstruct Result{\n    int dag_size;\n\
     \    vector<vector<int>> dag_graph;\n    // \u5143\u306E\u30B0\u30E9\u30D5\u3067\

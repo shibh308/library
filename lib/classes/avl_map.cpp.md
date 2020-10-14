@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/avl_map.cpp\"\ntemplate <typename T, typename\
     \ U>\nstruct AVL_map{\n    struct Node{\n        int height;\n        T key;\n\

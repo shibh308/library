@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/vanemdeboastree2.cpp\"\n// \u5FC5\u8981\u306A\
     \u6240\u3060\u3051\u4F5C\u308BvEB\u6728\ntemplate <uint32_t W, uint64_t NULL_FLAG\

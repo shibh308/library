@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/functions/calc_fact.cpp\"\nauto calc_fact = [mpow]{\n\
     \tconstexpr int N = 2e6;\n\tvector<mint> fact(N + 1, 1);\n\tvector<mint> inv(N\

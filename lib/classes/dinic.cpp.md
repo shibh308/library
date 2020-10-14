@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/dinic.cpp\"\ntemplate <typename T>\nstruct Dinic{\n\
     \    struct Edge{\n        int to, rev;\n        T cap;\n        Edge(int to,\

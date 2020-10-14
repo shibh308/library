@@ -12,7 +12,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/xfasttrie_yft.cpp\"\n// y-fast trie\u7528\u306E\
     x-fast trie\ntemplate <typename T, int W = 31, T HASHMAP_NULL = (1LL << W) - 1,\
@@ -163,8 +162,8 @@ data:
   timestamp: '2020-04-11 13:43:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yfastttrie2_itp.test.cpp
   - verify/yfastttrie_itp.test.cpp
+  - verify/yfastttrie2_itp.test.cpp
 documentation_of: lib/classes/xfasttrie_yft.cpp
 layout: document
 redirect_from:

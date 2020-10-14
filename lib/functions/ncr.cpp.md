@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/functions/ncr.cpp\"\nauto ncr = [&fact, &inv](int n,\
     \ int r){\n\tif(n < 0 || r < 0 || n < r)\n\t\treturn mint(0);\n\treturn fact[n]\

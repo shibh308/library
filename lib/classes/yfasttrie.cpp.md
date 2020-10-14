@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/yfasttrie.cpp\"\n// \u4E71\u629E\u3067\u633F\
     \u5165\u5148\u3092\u6C7A\u3081\u308By-fast trie\ntemplate <typename T, int W =\

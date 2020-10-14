@@ -12,7 +12,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/substrmatching.cpp\"\nstruct SubstrMatching{\n\
     \    int n;\n    string s;\n    vector<int> sa, lcp, lcp_table;\n    SubstrMatching(string\

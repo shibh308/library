@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/lazysegtree.cpp\"\ntemplate<typename T, typename\
     \ U>\nstruct Segtree{\n    int n;\n    T op_t;\n    U op_u;\n    vector<T> elm;\n\

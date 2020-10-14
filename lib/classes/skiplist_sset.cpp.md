@@ -4,15 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/skiplist_sset_itp.test.cpp
-    title: verify/skiplist_sset_itp.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/skiplist_sset_dict.test.cpp
     title: verify/skiplist_sset_dict.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/skiplist_sset_itp.test.cpp
+    title: verify/skiplist_sset_itp.test.cpp
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/skiplist_sset.cpp\"\ntemplate <typename T>\n\
     struct SSet{\n\n    static uint32_t rnd(){\n        static uint32_t x = 123456789,\

@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/eulertour.cpp\"\nstruct EulerTour{\n    int\
     \ n;\n    vector<int> in, out;\n    EulerTour(vector<vector<int>>& edges, int\

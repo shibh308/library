@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/vanemdeboastree.cpp\"\ntemplate <uint32_t W,\
     \ uint32_t NULL_FLAG = ~0u>\nstruct VanEmdeBoasTree{\n\n    // \u30B5\u30A4\u30BA\

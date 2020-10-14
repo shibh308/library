@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/functions/factoring.cpp\"\nauto factoring = [](i64 x){\n\
     \tint sq = sqrt(x) + 1;\n\tvector<int> ret;\n\tif(x == 1){\n\t\tret.emplace_back(1);\n\

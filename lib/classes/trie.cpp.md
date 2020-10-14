@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/trie.cpp\"\ntemplate <int size = 26, int start\
     \ = 'a'>\nstruct Trie{\n    struct Node{\n        // \u5024, prefix\u306B\u542B\

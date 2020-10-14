@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/segmentset.cpp\"\ntemplate <typename T>\nstruct\
     \ SegmentSet{\n    set<pair<T, T>> s;\n    set<pair<T, T>> s_rev;\n    SegmentSet(){}\n\

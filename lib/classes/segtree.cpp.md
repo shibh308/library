@@ -7,21 +7,20 @@ data:
     path: verify/eulertour.test.cpp
     title: verify/eulertour.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/vertex_and_path_sum.test.cpp
-    title: verify/vertex_and_path_sum.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/hld_composite.test.cpp
     title: verify/hld_composite.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/vertex_and_subtree_sum.test.cpp
-    title: verify/vertex_and_subtree_sum.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/segtree_composite.test.cpp
     title: verify/segtree_composite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/vertex_and_path_sum.test.cpp
+    title: verify/vertex_and_path_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/vertex_and_subtree_sum.test.cpp
+    title: verify/vertex_and_subtree_sum.test.cpp
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/segtree.cpp\"\ntemplate<typename T>\nstruct\
     \ Segtree{\n    int n;\n    T op;\n    vector<T> elm;\n    function<T(T, T)> f;\n\
@@ -65,11 +64,11 @@ data:
   timestamp: '2019-11-30 22:46:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/eulertour.test.cpp
-  - verify/vertex_and_path_sum.test.cpp
-  - verify/hld_composite.test.cpp
-  - verify/vertex_and_subtree_sum.test.cpp
   - verify/segtree_composite.test.cpp
+  - verify/vertex_and_subtree_sum.test.cpp
+  - verify/eulertour.test.cpp
+  - verify/hld_composite.test.cpp
+  - verify/vertex_and_path_sum.test.cpp
 documentation_of: lib/classes/segtree.cpp
 layout: document
 redirect_from:

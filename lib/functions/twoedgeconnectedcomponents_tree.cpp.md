@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/functions/twoedgeconnectedcomponents_tree.cpp\"\nstruct\
     \ Result{\n    int group_cnt;\n    vector<int> group;\n    vector<vector<int>>\

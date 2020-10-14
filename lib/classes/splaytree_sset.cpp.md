@@ -4,21 +4,20 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/yfastttrie2_itp.test.cpp
-    title: verify/yfastttrie2_itp.test.cpp
+    path: verify/splay_sset_dict.test.cpp
+    title: verify/splay_sset_dict.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/splay_sset_itp.test.cpp
     title: verify/splay_sset_itp.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/splay_sset_dict.test.cpp
-    title: verify/splay_sset_dict.test.cpp
+    path: verify/yfastttrie2_itp.test.cpp
+    title: verify/yfastttrie2_itp.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/yfastttrie_itp.test.cpp
     title: verify/yfastttrie_itp.test.cpp
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/splaytree_sset.cpp\"\ntemplate <typename T>\n\
     struct SplayTree{\n    struct Node{\n        int size;\n        T val;\n     \
@@ -179,10 +178,10 @@ data:
   timestamp: '2020-04-10 23:19:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yfastttrie2_itp.test.cpp
-  - verify/splay_sset_itp.test.cpp
-  - verify/splay_sset_dict.test.cpp
   - verify/yfastttrie_itp.test.cpp
+  - verify/yfastttrie2_itp.test.cpp
+  - verify/splay_sset_dict.test.cpp
+  - verify/splay_sset_itp.test.cpp
 documentation_of: lib/classes/splaytree_sset.cpp
 layout: document
 redirect_from:

@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/skiplist.cpp\"\ntemplate <typename T>\nstruct\
     \ SkipList{\n\n    static uint32_t rnd(){\n        static uint32_t x = 123456789,\

@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/functions/run.cpp\"\nstruct RunInfo{\n    // (t, l,\
     \ r) \u306E\u5F62\u3067\u8FD4\u3059 t\u306F\u6700\u5C0F\u5468\u671F\u30670-indexed\u534A\

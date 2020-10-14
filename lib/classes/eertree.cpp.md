@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://yukicoder.me/submissions/518134
   bundledCode: "#line 1 \"lib/classes/eertree.cpp\"\n// verify: https://yukicoder.me/submissions/518134\n\

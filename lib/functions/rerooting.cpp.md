@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/functions/rerooting.cpp\"\ntemplate <typename T>\n//\
     \ T f(T, T): \u5B50\u306E\u7D2F\u7A4D\u306B\u4F7F\u3046\u3082\u306E \u76F4\u5F84\

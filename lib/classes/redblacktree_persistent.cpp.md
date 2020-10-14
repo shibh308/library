@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://atcoder.jp/contests/joisc2012/submissions/12202620/
   bundledCode: "#line 1 \"lib/classes/redblacktree_persistent.cpp\"\n// verify: https://atcoder.jp/contests/joisc2012/submissions/12202620/\n\

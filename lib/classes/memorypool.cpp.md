@@ -4,30 +4,29 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/redblacktree_lazy.test.cpp
-    title: verify/redblacktree_lazy.test.cpp
+    path: verify/dynamicwaveletmatrix_kthmin.test.cpp
+    title: verify/dynamicwaveletmatrix_kthmin.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/dynamicwaveletmatrix_rmq.test.cpp
     title: verify/dynamicwaveletmatrix_rmq.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/zdd_knapsack.test.cpp
-    title: verify/zdd_knapsack.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/redblacktree_sset.test.cpp
-    title: verify/redblacktree_sset.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/dynamicwaveletmatrix_kthmin.test.cpp
-    title: verify/dynamicwaveletmatrix_kthmin.test.cpp
+    path: verify/redblacktree_lazy.test.cpp
+    title: verify/redblacktree_lazy.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/redblacktree_rsq.test.cpp
     title: verify/redblacktree_rsq.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/redblacktree_sset.test.cpp
+    title: verify/redblacktree_sset.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/twothreetree.test.cpp
     title: verify/twothreetree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/zdd_knapsack.test.cpp
+    title: verify/zdd_knapsack.test.cpp
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/memorypool.cpp\"\ntemplate <typename T>\nstruct\
     \ MemoryPool{\n    int siz, idx;\n    stack<int> st;\n    vector<T*> pool;\n \
@@ -63,10 +62,10 @@ data:
   - verify/redblacktree_lazy.test.cpp
   - verify/dynamicwaveletmatrix_rmq.test.cpp
   - verify/zdd_knapsack.test.cpp
-  - verify/redblacktree_sset.test.cpp
-  - verify/dynamicwaveletmatrix_kthmin.test.cpp
-  - verify/redblacktree_rsq.test.cpp
   - verify/twothreetree.test.cpp
+  - verify/dynamicwaveletmatrix_kthmin.test.cpp
+  - verify/redblacktree_sset.test.cpp
+  - verify/redblacktree_rsq.test.cpp
 documentation_of: lib/classes/memorypool.cpp
 layout: document
 redirect_from:

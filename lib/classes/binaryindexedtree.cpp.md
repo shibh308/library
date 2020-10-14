@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/binaryindexedtree.cpp\"\ntemplate <typename\
     \ T>\nstruct BIT{\n    vector<T> elm;\n    BIT(int n, T init = T()) : elm(n +\

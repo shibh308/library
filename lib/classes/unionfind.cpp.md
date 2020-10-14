@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/unionfind.cpp\"\nstruct UnionFind{\n    vector<int>\
     \ par;\n    int count;\n    UnionFind(int n) : par(n, -1), count(0){}\n    int\

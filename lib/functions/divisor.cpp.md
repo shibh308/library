@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/functions/divisor.cpp\"\nauto divisor = [](i64 x){\n\
     \tint sq = sqrt(x) + 1;\n\tvector<int> ret;\n\tfor(i64 i = 1; i < sq; ++i)\n\t\

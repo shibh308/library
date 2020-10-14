@@ -4,21 +4,20 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/waveletmatrix_rangefreq.test.cpp
-    title: verify/waveletmatrix_rangefreq.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/static_rmq_wm.test.cpp
     title: verify/static_rmq_wm.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/waveletmatrix_kthmin.test.cpp
+    title: verify/waveletmatrix_kthmin.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/waveletmatrix_lowerbound.test.cpp
     title: verify/waveletmatrix_lowerbound.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/waveletmatrix_kthmin.test.cpp
-    title: verify/waveletmatrix_kthmin.test.cpp
+    path: verify/waveletmatrix_rangefreq.test.cpp
+    title: verify/waveletmatrix_rangefreq.test.cpp
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/bitvector.cpp\"\nstruct BitVector{\n    vector<uint64_t>\
     \ v;\n    vector<int> r;\n    BitVector(){}\n    void build(){\n        r.assign(v.size()\
@@ -43,10 +42,10 @@ data:
   timestamp: '2020-04-15 14:51:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/waveletmatrix_rangefreq.test.cpp
-  - verify/static_rmq_wm.test.cpp
   - verify/waveletmatrix_lowerbound.test.cpp
   - verify/waveletmatrix_kthmin.test.cpp
+  - verify/static_rmq_wm.test.cpp
+  - verify/waveletmatrix_rangefreq.test.cpp
 documentation_of: lib/classes/bitvector.cpp
 layout: document
 redirect_from:

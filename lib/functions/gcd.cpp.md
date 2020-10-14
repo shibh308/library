@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/functions/gcd.cpp\"\nauto gcd = [](i64 x, i64 y){\n\t\
     while(y){\n\t\ti64 z = x % y;\n\t\tx = y;\n\t\ty = z;\n\t}\n\treturn x;\n};\n\n"

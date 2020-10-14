@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/rectanglesum.cpp\"\nstruct RectangleSum{//O(HW)\u3067\
     \u521D\u671F\u5316\u3057\u3066O(1)\u3067\u9577\u65B9\u5F62\u306E\u548C\u3092\u51FA\

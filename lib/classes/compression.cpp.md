@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/compression.cpp\"\ntemplate<typename T>\nstruct\
     \ Compression{\n    vector<T> compvec;\n    Compression(vector<T>& inp){//\u5727\

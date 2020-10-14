@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/redblacktree_sset.cpp\"\ntemplate <typename\
     \ T>\nstruct RedBlackTree{\n\n    struct Node;\n    using Index = typename MemoryPool<Node>::Index;\n\

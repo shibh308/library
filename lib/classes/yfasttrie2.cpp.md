@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/yfasttrie2.cpp\"\n// \u30B5\u30A4\u30BA\u3092\
     \u4FDD\u3064\u3088\u3046\u306Bsplit/merge\u3092\u3059\u308By-fast trie\ntemplate\

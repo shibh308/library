@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/redblacktree.cpp\"\n// merge/split \u30D9\u30FC\
     \u30B9\u306E\u8D64\u9ED2\u6728(\u8449\u6728)\ntemplate <typename T>\nstruct RedBlackTree{\n\

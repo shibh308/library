@@ -4,15 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/scc_dag.test.cpp
-    title: verify/scc_dag.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/2-sat.test.cpp
     title: verify/2-sat.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/scc_dag.test.cpp
+    title: verify/scc_dag.test.cpp
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/functions/scc.cpp\"\nvector<int> scc(vector<vector<int>>&\
     \ edges){\n    int n = edges.size();\n    vector<vector<int>> rev(n);\n\n    for(int\

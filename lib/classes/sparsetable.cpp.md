@@ -12,7 +12,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/sparsetable.cpp\"\ntemplate <typename T>\nstruct\
     \ SparseTable{\n    vector<int> len;\n    vector<vector<T>> v;\n    function<T(T,\

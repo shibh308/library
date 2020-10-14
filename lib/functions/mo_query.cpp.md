@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/functions/mo_query.cpp\"\ntemplate <typename ResultType>\n\
     vector<ResultType> mo_query(Mo& mo, vector<pair<int,int>>& queries, function<ResultType(int)>\

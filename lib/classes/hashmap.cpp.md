@@ -4,9 +4,6 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/yfastttrie2_itp.test.cpp
-    title: verify/yfastttrie2_itp.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/hashmap_dict.test.cpp
     title: verify/hashmap_dict.test.cpp
   - icon: ':heavy_check_mark:'
@@ -19,12 +16,14 @@ data:
     path: verify/xfastttrie_itp.test.cpp
     title: verify/xfastttrie_itp.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/yfastttrie2_itp.test.cpp
+    title: verify/yfastttrie2_itp.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/yfastttrie_itp.test.cpp
     title: verify/yfastttrie_itp.test.cpp
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/hashmap.cpp\"\ntemplate <typename T, typename\
     \ U, T del = numeric_limits<T>::max(), T null = numeric_limits<T>::max() - 1>\n\
@@ -78,12 +77,12 @@ data:
   timestamp: '2020-04-11 13:18:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/yfastttrie_itp.test.cpp
+  - verify/hashmap_itp.test.cpp
+  - verify/xfastttrie_itp.test.cpp
+  - verify/veb2_set.test.cpp
   - verify/yfastttrie2_itp.test.cpp
   - verify/hashmap_dict.test.cpp
-  - verify/hashmap_itp.test.cpp
-  - verify/veb2_set.test.cpp
-  - verify/xfastttrie_itp.test.cpp
-  - verify/yfastttrie_itp.test.cpp
 documentation_of: lib/classes/hashmap.cpp
 layout: document
 redirect_from:

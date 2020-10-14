@@ -12,7 +12,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/modint.cpp\"\ntemplate <i64 mod = MOD>\nstruct\
     \ ModInt{\n    i64 p;\n\n    ModInt() : p(0){}\n    ModInt(i64 x){p = x >= 0 ?\
@@ -59,8 +58,8 @@ data:
   timestamp: '2019-11-30 20:08:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/hld_composite.test.cpp
   - verify/segtree_composite.test.cpp
+  - verify/hld_composite.test.cpp
 documentation_of: lib/classes/modint.cpp
 layout: document
 redirect_from:

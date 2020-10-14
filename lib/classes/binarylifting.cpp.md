@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/binarylifting.cpp\"\nstruct BinaryLifting{\n\
     \    int n;\n    vector<vector<int>> next;\n    vector<int> par;\n    vector<vector<int>>\

@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/redblacktree_lazy.cpp\"\ntemplate <typename\
     \ T, typename U>\nstruct RedBlackTree{\n\n    struct Node;\n    using Index =\

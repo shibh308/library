@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/suffixtree.cpp\"\nstruct SuffixTree{\n    //\
     \ Weiner\u3067\u306E\u69CB\u7BC9 [0,n)\u304C\u8449 n\u304C\u6839 [n+1,)\u304C\u5185\

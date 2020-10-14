@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/geometry.cpp\"\nnamespace geometry{\n    using D = long\
     \ double;\n    constexpr D eps =1e-9;\n\n    struct Point;\n    bool near_eq(Point,\

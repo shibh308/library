@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/twothreetree.cpp\"\ntemplate <typename T>\n\
     struct TwoThreeTree{\n    struct Node;\n    using Index = typename MemoryPool<Node>::Index;\n\

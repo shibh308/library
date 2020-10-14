@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/functions/simple_graph.cpp\"\ntemplate <typename T =\
     \ pair<int,int>>\nvector<vector<int>> simple_graph(vector<vector<T>>& edges, function<int(T)>\

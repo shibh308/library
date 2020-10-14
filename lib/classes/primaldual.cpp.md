@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/primaldual.cpp\"\ntemplate <typename T, typename\
     \ U>\nstruct PrimalDual{\n    struct Edge{\n        int to, rev;\n        U cap;\n\

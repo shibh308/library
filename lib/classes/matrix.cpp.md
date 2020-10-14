@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/matrix.cpp\"\ntemplate <typename T>\nstruct\
     \ Matrix{\n    int h, w;\n    vector<T> v;\n\n    Matrix() : h(1), w(1), v(1,\

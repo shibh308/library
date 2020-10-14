@@ -12,7 +12,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/lineartimesparsetable.cpp\"\ntemplate<typename\
     \ T>\nstruct LinearTimeSparseTable{\n    int n, m;\n    vector<T> a;\n    SparseTable<T>\

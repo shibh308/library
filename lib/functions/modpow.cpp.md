@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/functions/modpow.cpp\"\nauto mpow = [](auto x, i64 y){\n\
     \tauto z = x;\n\tdecltype(x) val = y & 1 ? x : decltype(x)(1);\n\twhile(z *= z,\

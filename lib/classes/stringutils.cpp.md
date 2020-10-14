@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/number_substr_utils.test.cpp
+    title: verify/number_substr_utils.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/runenumerate.test.cpp
     title: verify/runenumerate.test.cpp
   - icon: ':heavy_check_mark:'
@@ -12,13 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/zalgo_utils.test.cpp
     title: verify/zalgo_utils.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/number_substr_utils.test.cpp
-    title: verify/number_substr_utils.test.cpp
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/stringutils.cpp\"\nstruct StringUtils{\n   \
     \ int n;\n    vector<int> s;\n    vector<int> sa, sa_inv, lcp, tab_len;\n    vector<vector<int>>\
@@ -104,8 +103,8 @@ data:
   verifiedWith:
   - verify/runenumerate.test.cpp
   - verify/suffixarray_utils.test.cpp
-  - verify/zalgo_utils.test.cpp
   - verify/number_substr_utils.test.cpp
+  - verify/zalgo_utils.test.cpp
 documentation_of: lib/classes/stringutils.cpp
 layout: document
 redirect_from:

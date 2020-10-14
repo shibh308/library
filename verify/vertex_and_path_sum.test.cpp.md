@@ -2,11 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: lib/classes/segtree.cpp
-    title: lib/classes/segtree.cpp
-  - icon: ':heavy_check_mark:'
     path: lib/classes/heavylightdecomposition.cpp
     title: lib/classes/heavylightdecomposition.cpp
+  - icon: ':heavy_check_mark:'
+    path: lib/classes/segtree.cpp
+    title: lib/classes/segtree.cpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

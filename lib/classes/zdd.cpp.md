@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/zdd.cpp\"\nstruct ZDD{\n    struct Node{\n \
     \       int label;\n        using Index = typename MemoryPool<Node>::Index;\n\

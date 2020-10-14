@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/lowlink.cpp\"\nstruct LowLink{\n    vector<vector<int>>&\
     \ edges;\n    // \u95A2\u7BC0\u70B9\n    vector<int> art;\n    vector<pair<int,int>>\

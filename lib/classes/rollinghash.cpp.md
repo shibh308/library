@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/rollinghash.cpp\"\ntemplate <i64 mod1 = MOD,\
     \ i64 mod2 = MOD + 2, i64 base = 10007, typename T = string>\nstruct RollingHash{\n\

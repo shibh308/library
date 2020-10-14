@@ -4,15 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/rsq_avl_erase.test.cpp
-    title: verify/rsq_avl_erase.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/rsq_avl.test.cpp
     title: verify/rsq_avl.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/rsq_avl_erase.test.cpp
+    title: verify/rsq_avl_erase.test.cpp
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/avl.cpp\"\ntemplate <typename T>\nstruct AVL{\n\
     \    template <typename U>\n    struct Node{\n        int size, height;\n    \

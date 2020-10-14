@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/functions/lcm.cpp\"\nauto lcm = [gcd](i64 x, i64 y){\n\
     \treturn x * y / gcd(x, y);\n};\n\n"

@@ -30,6 +30,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: lib/classes/disjointsparsetable.cpp
       title: lib/classes/disjointsparsetable.cpp
+    - icon: ':warning:'
+      path: lib/classes/dualsegtree.cpp
+      title: lib/classes/dualsegtree.cpp
     - icon: ':heavy_check_mark:'
       path: lib/classes/dynamicbitvector.cpp
       title: lib/classes/dynamicbitvector.cpp

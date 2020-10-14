@@ -6,7 +6,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/convexhulltrick.cpp\"\ntemplate <typename T,\
     \ typename U>\nstruct ConvexHullTrick{\n    // \u4EFB\u610F\u306E2\u95A2\u6570\

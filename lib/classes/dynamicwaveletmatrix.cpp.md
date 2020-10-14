@@ -4,15 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/dynamicwaveletmatrix_rmq.test.cpp
-    title: verify/dynamicwaveletmatrix_rmq.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/dynamicwaveletmatrix_kthmin.test.cpp
     title: verify/dynamicwaveletmatrix_kthmin.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/dynamicwaveletmatrix_rmq.test.cpp
+    title: verify/dynamicwaveletmatrix_rmq.test.cpp
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/dynamicwaveletmatrix.cpp\"\ntemplate <typename\
     \ T, int W>\nstruct WaveletMatrix{\n\n    array<DynamicBitVector, W> bv;\n\n \

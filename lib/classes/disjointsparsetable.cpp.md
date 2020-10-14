@@ -9,7 +9,6 @@ data:
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"lib/classes/disjointsparsetable.cpp\"\ntemplate <typename\
     \ T>\nstruct DisjointSparseTable{\n    function<T(T, T)> f;\n    vector<vector<T>>\

@@ -24,6 +24,7 @@
 "verify/rmq_raq.test.cpp": "2020-03-03 20:41:12 +0900",
 "verify/rmq_raq_dynamic.test.cpp": "2019-12-05 02:54:01 +0900",
 "verify/rmq_raq_persistent.test.cpp": "2019-12-05 02:54:01 +0900",
+"verify/rollighashmonoid.test.cpp": "2020-11-18 11:08:42 +0900",
 "verify/rsq_avl.test.cpp": "2020-02-26 07:59:33 +0900",
 "verify/rsq_avl_erase.test.cpp": "2020-02-26 07:59:33 +0900",
 "verify/rsq_bit.test.cpp": "2019-12-05 03:16:14 +0900",

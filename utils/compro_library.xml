@@ -199,6 +199,11 @@
       <option name="cpp" value="true" />
     </context>
   </template>
+  <template name="memorypool_fixed" value="// doc: https://shibh308.github.io/library/library/lib/classes/memorypool_fixed.cpp.html&#10;template &lt;typename T, int SIZE = 1000000&gt;&#10;struct MemoryPool{&#10;    int idx;&#10;    stack&lt;int&gt; st;&#10;    T pool[SIZE];&#10;    struct Index{&#10;        int idx;&#10;        friend bool operator==(const Index&amp; a, const Index&amp; b){return a.idx == b.idx;}&#10;        friend bool operator!=(const Index&amp; a, const Index&amp; b){return a.idx != b.idx;}&#10;    };&#10;    MemoryPool() : idx(0){}&#10;    Index alloc(){&#10;        if(!st.empty()){&#10;            int res = st.top();&#10;            st.pop();&#10;            return {res};&#10;        }&#10;        assert(++idx != SIZE);&#10;        return {idx};&#10;    }&#10;    void free(Index x){st.push(x.idx);}&#10;    int used(){return idx - st.size();}&#10;&#10;    T&amp; operator[](Index x){return pool[x.idx];}&#10;};&#10;" discription="" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="cpp" value="true" />
+    </context>
+  </template>
   <template name="mo" value="// doc: https://shibh308.github.io/library/library/lib/classes/mo.cpp.html&#10;struct Mo{&#10;    int l, r;&#10;    function&lt;void(int)&gt; left_add, left_erase, right_add, right_erase;&#10;    Mo(function&lt;void(int)&gt; left_add, function&lt;void(int)&gt; left_erase,&#10;       function&lt;void(int)&gt; right_add, function&lt;void(int)&gt; right_erase,&#10;       int sl = 0, int sr = 0) :&#10;       l(sl), r(sr), left_add(left_add), left_erase(left_erase), right_add(right_add), right_erase(right_erase){}&#10;    void move(int next_l, int next_r){&#10;        for(int i = l; i &lt; next_l; ++i)&#10;            left_erase(i);&#10;        for(int i = l - 1; i &gt;= next_l; --i)&#10;            left_add(i);&#10;        for(int i = r; i &lt; next_r; ++i)&#10;            right_add(i);&#10;        for(int i = r - 1; i &gt;= next_r; --i)&#10;            right_erase(i);&#10;        l = next_l, r = next_r;&#10;    }&#10;};&#10;&#10;" discription="" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="cpp" value="true" />

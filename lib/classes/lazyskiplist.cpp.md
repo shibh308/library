@@ -299,8 +299,8 @@ data:
   timestamp: '2020-04-06 15:54:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/skiplist_rmq_raq.test.cpp
   - verify/skiplist_rsq_raq.test.cpp
+  - verify/skiplist_rmq_raq.test.cpp
 documentation_of: lib/classes/lazyskiplist.cpp
 layout: document
 redirect_from:

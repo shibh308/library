@@ -178,10 +178,10 @@ data:
   timestamp: '2020-04-10 23:19:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yfastttrie_itp.test.cpp
-  - verify/yfastttrie2_itp.test.cpp
   - verify/splay_sset_dict.test.cpp
+  - verify/yfastttrie_itp.test.cpp
   - verify/splay_sset_itp.test.cpp
+  - verify/yfastttrie2_itp.test.cpp
 documentation_of: lib/classes/splaytree_sset.cpp
 layout: document
 redirect_from:

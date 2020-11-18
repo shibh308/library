@@ -64,10 +64,10 @@ data:
   timestamp: '2019-11-30 22:46:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/segtree_composite.test.cpp
-  - verify/vertex_and_subtree_sum.test.cpp
   - verify/eulertour.test.cpp
+  - verify/vertex_and_subtree_sum.test.cpp
   - verify/hld_composite.test.cpp
+  - verify/segtree_composite.test.cpp
   - verify/vertex_and_path_sum.test.cpp
 documentation_of: lib/classes/segtree.cpp
 layout: document

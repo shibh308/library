@@ -40,8 +40,8 @@ data:
   timestamp: '2020-03-03 14:01:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/mo_query.test.cpp
   - verify/mo.test.cpp
+  - verify/mo_query.test.cpp
 documentation_of: lib/classes/mo.cpp
 layout: document
 redirect_from:

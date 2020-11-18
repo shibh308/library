@@ -101,10 +101,10 @@ data:
   timestamp: '2020-09-17 02:54:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/runenumerate.test.cpp
+  - verify/zalgo_utils.test.cpp
   - verify/suffixarray_utils.test.cpp
   - verify/number_substr_utils.test.cpp
-  - verify/zalgo_utils.test.cpp
+  - verify/runenumerate.test.cpp
 documentation_of: lib/classes/stringutils.cpp
 layout: document
 redirect_from:

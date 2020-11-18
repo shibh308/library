@@ -59,13 +59,13 @@ data:
   timestamp: '2020-04-21 23:33:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/redblacktree_lazy.test.cpp
-  - verify/dynamicwaveletmatrix_rmq.test.cpp
-  - verify/zdd_knapsack.test.cpp
   - verify/twothreetree.test.cpp
-  - verify/dynamicwaveletmatrix_kthmin.test.cpp
   - verify/redblacktree_sset.test.cpp
   - verify/redblacktree_rsq.test.cpp
+  - verify/dynamicwaveletmatrix_rmq.test.cpp
+  - verify/redblacktree_lazy.test.cpp
+  - verify/dynamicwaveletmatrix_kthmin.test.cpp
+  - verify/zdd_knapsack.test.cpp
 documentation_of: lib/classes/memorypool.cpp
 layout: document
 redirect_from:

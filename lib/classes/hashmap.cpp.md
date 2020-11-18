@@ -77,12 +77,12 @@ data:
   timestamp: '2020-04-11 13:18:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/yfastttrie_itp.test.cpp
-  - verify/hashmap_itp.test.cpp
   - verify/xfastttrie_itp.test.cpp
-  - verify/veb2_set.test.cpp
-  - verify/yfastttrie2_itp.test.cpp
+  - verify/yfastttrie_itp.test.cpp
   - verify/hashmap_dict.test.cpp
+  - verify/veb2_set.test.cpp
+  - verify/hashmap_itp.test.cpp
+  - verify/yfastttrie2_itp.test.cpp
 documentation_of: lib/classes/hashmap.cpp
 layout: document
 redirect_from:

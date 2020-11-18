@@ -58,8 +58,8 @@ data:
   timestamp: '2019-11-30 20:08:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/segtree_composite.test.cpp
   - verify/hld_composite.test.cpp
+  - verify/segtree_composite.test.cpp
 documentation_of: lib/classes/modint.cpp
 layout: document
 redirect_from:

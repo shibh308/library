@@ -122,8 +122,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/vertex_and_subtree_sum.test.cpp
-  - verify/lca_hld.test.cpp
   - verify/hld_composite.test.cpp
+  - verify/lca_hld.test.cpp
   - verify/vertex_and_path_sum.test.cpp
 documentation_of: lib/classes/heavylightdecomposition.cpp
 layout: document

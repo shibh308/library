@@ -42,10 +42,10 @@ data:
   timestamp: '2020-04-15 14:51:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/waveletmatrix_lowerbound.test.cpp
-  - verify/waveletmatrix_kthmin.test.cpp
   - verify/static_rmq_wm.test.cpp
   - verify/waveletmatrix_rangefreq.test.cpp
+  - verify/waveletmatrix_kthmin.test.cpp
+  - verify/waveletmatrix_lowerbound.test.cpp
 documentation_of: lib/classes/bitvector.cpp
 layout: document
 redirect_from:

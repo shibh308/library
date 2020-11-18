@@ -75,6 +75,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: lib/classes/memorypool.cpp
       title: lib/classes/memorypool.cpp
+    - icon: ':warning:'
+      path: lib/classes/memorypool_fixed.cpp
+      title: lib/classes/memorypool_fixed.cpp
     - icon: ':heavy_check_mark:'
       path: lib/classes/mo.cpp
       title: lib/classes/mo.cpp
@@ -111,6 +114,9 @@ data:
     - icon: ':warning:'
       path: lib/classes/rollinghash.cpp
       title: lib/classes/rollinghash.cpp
+    - icon: ':heavy_check_mark:'
+      path: lib/classes/rollinghashmonoid.cpp
+      title: lib/classes/rollinghashmonoid.cpp
     - icon: ':warning:'
       path: lib/classes/segmentset.cpp
       title: lib/classes/segmentset.cpp
@@ -318,6 +324,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/rmq_raq_persistent.test.cpp
       title: verify/rmq_raq_persistent.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/rollighashmonoid.test.cpp
+      title: verify/rollighashmonoid.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/rsq_avl.test.cpp
       title: verify/rsq_avl.test.cpp

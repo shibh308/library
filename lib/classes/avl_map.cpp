@@ -76,7 +76,7 @@ struct AVL_map{
                 return y;
             }
         }
-		return -1;
+        return 0;
     }
     // 最小の要素をdstにコピーしてから削除する
     int _copy_erase(int x, int dst, bool del){

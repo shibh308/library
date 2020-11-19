@@ -162,4 +162,3 @@ struct HashPatriciaTree{
         return {fv, gv};
     }
 };
-

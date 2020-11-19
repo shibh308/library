@@ -52,4 +52,3 @@ struct HashMap{
                 add(old_table[i].first, old_table[i].second);
     }
 };
-

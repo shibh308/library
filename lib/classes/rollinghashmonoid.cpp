@@ -51,13 +51,13 @@ struct RollingHashMonoid{
         return RollingHashMonoid(
                 calc_mod(h + lshift(b.h, l)),
                 l + b.l
-                );
+        );
     }
     Hash sub(const Hash& b) const{
         return RollingHashMonoid(
                 calc_mod(rshift(h + mod - b.h, b.l)),
                 l - b.l
-                );
+        );
     }
 
     RollingHashMonoid() : h(0), l(0){}
@@ -85,9 +85,9 @@ struct RollingHashMonoid{
 
 namespace std{
 template<> struct hash<RollingHashMonoid>{
-size_t operator()(const RollingHashMonoid x) const noexcept{
-    return x.concat(x.l).h;
-}
+    size_t operator()(const RollingHashMonoid x) const noexcept{
+        return x.concat(x.l).h;
+    }
 };
 }
 

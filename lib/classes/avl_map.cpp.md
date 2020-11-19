@@ -40,13 +40,13 @@ data:
     \u9664\u3059\u308B\n    int _erase_top(int x, bool del){\n        for(int i =\
     \ 0; i < 2; ++i){\n            if(nodes[x].c[i] == 0){\n                int y\
     \ = nodes[x].c[i ^ 1];\n                if(del)\n                    st.push(x);\n\
-    \                return y;\n            }\n        }\n    }\n    // \u6700\u5C0F\
-    \u306E\u8981\u7D20\u3092dst\u306B\u30B3\u30D4\u30FC\u3057\u3066\u304B\u3089\u524A\
-    \u9664\u3059\u308B\n    int _copy_erase(int x, int dst, bool del){\n        if(nodes[x].c[0]\
-    \ == 0){\n            nodes[dst].val = nodes[x].val;\n            return _erase_top(x,\
-    \ del);\n        }\n        nodes[x].c[0] = _copy_erase(nodes[x].c[0], dst, del);\n\
-    \        x = balance(x);\n        return x;\n    }\n    int erase(int x, T key,\
-    \ bool del = true){\n        if(key < nodes[x].key)\n            nodes[x].c[0]\
+    \                return y;\n            }\n        }\n\t\treturn -1;\n    }\n\
+    \    // \u6700\u5C0F\u306E\u8981\u7D20\u3092dst\u306B\u30B3\u30D4\u30FC\u3057\u3066\
+    \u304B\u3089\u524A\u9664\u3059\u308B\n    int _copy_erase(int x, int dst, bool\
+    \ del){\n        if(nodes[x].c[0] == 0){\n            nodes[dst].val = nodes[x].val;\n\
+    \            return _erase_top(x, del);\n        }\n        nodes[x].c[0] = _copy_erase(nodes[x].c[0],\
+    \ dst, del);\n        x = balance(x);\n        return x;\n    }\n    int erase(int\
+    \ x, T key, bool del = true){\n        if(key < nodes[x].key)\n            nodes[x].c[0]\
     \ = erase(nodes[x].c[0], key, del);\n        else if(nodes[x].key < key)\n   \
     \         nodes[x].c[1] = erase(nodes[x].c[1], key, del);\n        else{\n   \
     \         if(nodes[x].c[0] == 0 || nodes[x].c[1] == 0)\n                return\
@@ -94,23 +94,23 @@ data:
     \ x, bool del){\n        for(int i = 0; i < 2; ++i){\n            if(nodes[x].c[i]\
     \ == 0){\n                int y = nodes[x].c[i ^ 1];\n                if(del)\n\
     \                    st.push(x);\n                return y;\n            }\n \
-    \       }\n    }\n    // \u6700\u5C0F\u306E\u8981\u7D20\u3092dst\u306B\u30B3\u30D4\
-    \u30FC\u3057\u3066\u304B\u3089\u524A\u9664\u3059\u308B\n    int _copy_erase(int\
-    \ x, int dst, bool del){\n        if(nodes[x].c[0] == 0){\n            nodes[dst].val\
-    \ = nodes[x].val;\n            return _erase_top(x, del);\n        }\n       \
-    \ nodes[x].c[0] = _copy_erase(nodes[x].c[0], dst, del);\n        x = balance(x);\n\
-    \        return x;\n    }\n    int erase(int x, T key, bool del = true){\n   \
-    \     if(key < nodes[x].key)\n            nodes[x].c[0] = erase(nodes[x].c[0],\
-    \ key, del);\n        else if(nodes[x].key < key)\n            nodes[x].c[1] =\
-    \ erase(nodes[x].c[1], key, del);\n        else{\n            if(nodes[x].c[0]\
-    \ == 0 || nodes[x].c[1] == 0)\n                return _erase_top(x, del);\n  \
-    \          nodes[x].c[1] = _copy_erase(nodes[x].c[1], x, del);\n        }\n  \
-    \      x = balance(x);\n        return x;\n    }\n    pair<U, bool> get(int x,\
-    \ T key){\n        if(x == 0)\n            return {U(), false};\n        else\
-    \ if(key == nodes[x].key)\n            return {nodes[x].val, true};\n        else\
-    \ if(key < nodes[x].key)\n            return get(nodes[x].c[0], key);\n      \
-    \  else\n            return get(nodes[x].c[1], key);\n    }\n    vector<pair<T,\
-    \ U>> list(int x){\n        vector<pair<T, U>> v;\n        stack<pair<int,bool>>\
+    \       }\n\t\treturn -1;\n    }\n    // \u6700\u5C0F\u306E\u8981\u7D20\u3092\
+    dst\u306B\u30B3\u30D4\u30FC\u3057\u3066\u304B\u3089\u524A\u9664\u3059\u308B\n\
+    \    int _copy_erase(int x, int dst, bool del){\n        if(nodes[x].c[0] == 0){\n\
+    \            nodes[dst].val = nodes[x].val;\n            return _erase_top(x,\
+    \ del);\n        }\n        nodes[x].c[0] = _copy_erase(nodes[x].c[0], dst, del);\n\
+    \        x = balance(x);\n        return x;\n    }\n    int erase(int x, T key,\
+    \ bool del = true){\n        if(key < nodes[x].key)\n            nodes[x].c[0]\
+    \ = erase(nodes[x].c[0], key, del);\n        else if(nodes[x].key < key)\n   \
+    \         nodes[x].c[1] = erase(nodes[x].c[1], key, del);\n        else{\n   \
+    \         if(nodes[x].c[0] == 0 || nodes[x].c[1] == 0)\n                return\
+    \ _erase_top(x, del);\n            nodes[x].c[1] = _copy_erase(nodes[x].c[1],\
+    \ x, del);\n        }\n        x = balance(x);\n        return x;\n    }\n   \
+    \ pair<U, bool> get(int x, T key){\n        if(x == 0)\n            return {U(),\
+    \ false};\n        else if(key == nodes[x].key)\n            return {nodes[x].val,\
+    \ true};\n        else if(key < nodes[x].key)\n            return get(nodes[x].c[0],\
+    \ key);\n        else\n            return get(nodes[x].c[1], key);\n    }\n  \
+    \  vector<pair<T, U>> list(int x){\n        vector<pair<T, U>> v;\n        stack<pair<int,bool>>\
     \ sta;\n        sta.emplace(x, false);\n        bool add;\n        while(!sta.empty()){\n\
     \            tie(x, add) = sta.top();\n            sta.pop();\n            if(x\
     \ == 0)\n                continue;\n            if(add)\n                v.emplace_back(nodes[x].key,\
@@ -122,7 +122,7 @@ data:
   isVerificationFile: false
   path: lib/classes/avl_map.cpp
   requiredBy: []
-  timestamp: '2020-09-13 14:27:28+09:00'
+  timestamp: '2020-11-19 11:57:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/suffixtree.test.cpp

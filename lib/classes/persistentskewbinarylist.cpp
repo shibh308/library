@@ -10,7 +10,7 @@ struct PersistentSkewBinaryList{
         Node(T x, Node *l, Node *r) : l(l), r(r), x(x), dep(l->dep + 1){}
     };
 
-    int siz;
+    long long siz;
     ListPtr nex;
     Node* node;
     PersistentSkewBinaryList() : nex(nullptr), siz(0), node(nullptr){}
@@ -28,8 +28,8 @@ struct PersistentSkewBinaryList{
             return new PersistentSkewBinaryList<T>(val, this);
         }
     }
-    T access(Node* x, int k) const{
-        int ch_siz = (1LL << (x->dep - 1)) - 1;
+    T access(Node* x, long long k) const{
+        long long ch_siz = (1LL << (x->dep - 1)) - 1;
         if(k == 0)
             return x->x;
         else if(k - 1 < ch_siz)
@@ -37,8 +37,8 @@ struct PersistentSkewBinaryList{
         else
             return access(x->r, k - 1 - ch_siz);
     }
-    T access(int k) const{
-        int node_siz = (1LL << node->dep) - 1;
+    T access(long long k) const{
+        long long node_siz = (1LL << node->dep) - 1;
         if(k < node_siz)
             return access(node, k);
         else

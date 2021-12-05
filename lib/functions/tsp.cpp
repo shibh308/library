@@ -54,8 +54,7 @@ vector<int> tsp(int n, vector<vector<T>> dist){
             swap(v[st % n], v[en % n]);
             ++st, --en;
         }
-
-		// バグが怖い時用
+        // バグが怖い時用
         // dist_check();
 
         return true;
@@ -128,6 +127,15 @@ vector<int> tsp(int n, vector<vector<T>> dist){
         while(neighbors_search());
         if(!chmin(best, make_pair(now_dist, v))){
             tie(now_dist, v) = best;
+        }
+    }
+    for(int i = 0; i < n; ++i){
+        if(v[i] == 0){
+            vector<int> res;
+            for(int j = 0; j < n; ++j){
+                res.emplace_back(v[(i + j) % n]);
+            }
+            return res;
         }
     }
     // return now_dist;

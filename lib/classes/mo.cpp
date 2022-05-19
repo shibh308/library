@@ -6,12 +6,12 @@ struct Mo{
        int sl = 0, int sr = 0) :
        l(sl), r(sr), left_add(left_add), left_erase(left_erase), right_add(right_add), right_erase(right_erase){}
     void move(int next_l, int next_r){
-        for(int i = l; i < next_l; ++i)
-            left_erase(i);
         for(int i = l - 1; i >= next_l; --i)
             left_add(i);
         for(int i = r; i < next_r; ++i)
             right_add(i);
+        for(int i = l; i < next_l; ++i)
+            left_erase(i);
         for(int i = r - 1; i >= next_r; --i)
             right_erase(i);
         l = next_l, r = next_r;
